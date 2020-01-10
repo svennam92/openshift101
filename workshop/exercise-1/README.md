@@ -127,7 +127,7 @@ There's many ways to create a new application in OpenShift. If you're already a 
         ```
     * This command created an ImageStream, Deployment, a Pod, and a Service resource for the `Example-Health` app,
 
-1. Reading the output, you'll notice that although a deployment and service is created, your application is not yet "exposed" to the outside world. To do so, wait about a minute and run the following command:
+1. Reading the output, you'll notice that although a deployment and service is created, your application is not yet "exposed" to the outside world. To do so, run the following command:
 
     ```console
     oc expose svc/node-s2i-openshift
@@ -140,7 +140,7 @@ There's many ways to create a new application in OpenShift. If you're already a 
 
 1. Run the `oc status` command to make sure everything started up correctly. This might take a couple minutes -- look for the `deployed` status. You can also launch the dashboard and track it there.
 
-    > To find the OpenShift dashboard URL again, run: `ic ks cluster get <cluster_name>`:
+    > To find the OpenShift dashboard URL again, run: `ic ks cluster get <cluster_name>`
 
     ```console
     oc status
@@ -157,8 +157,17 @@ There's many ways to create a new application in OpenShift. If you're already a 
 
     ```
 
-1. Finally, access your application with the URL from above:
+1. Finally, access your application with the URL from above -- it should look something like:
 
-    * Copy and browser to the URL, it should look something like: `http://node-s2i-openshift-example-health.<your_openshift_cluster>.us-south.stg.containers.appdomain.cloud`
+    `http://node-s2i-openshift-example-health.<your_openshift_cluster>.us-south.stg.containers.appdomain.cloud`
 
-That's it for the first exercise! In this exercise, you connected your local CLI to a running OpenShift cluster on IBM Cloud. You then deployed the "Example Health" Node.js application directly from GitHub into your cluster using the "Source to Image" strategy provided by OpenShift. Finally, OpenShift deployed an end-to-end pipeline for you -- this means that new commits that happen in GitHub can be pushed to your cluster with a simple build.
+You've completed the first exercise! Let's recap -- in this exercise, you:
+* Connected your local CLI to a running OpenShift cluster on IBM Cloud
+* Deployed the "Example Health" Node.js application directly from GitHub into your cluster 
+    * Used the "Source to Image" strategy provided by OpenShift
+* Deployed an end-to-end development pipeline 
+    * New commits that happen in GitHub can be pushed to your cluster with a simple (re)build
+
+## What's Next?
+
+Let's dive into some Day 1 OpenShift Operations tasks, starting with Monitoring and Logging
