@@ -24,38 +24,52 @@ Note: Retrieve the external URL from the OpenShift console, or from the URL of y
 
 ## OpenShift Logging
 
-Since we only created one pod, seeing our logs will be straight forward. Navigate to `Applications > Pods` menu on the left on the console. You'll see two pods here, one for the build \(that's already :heavy_check_mark: Completed\), and one for the pod that is running your application.
+Since we only created one pod, seeing our logs will be straight forward. Ensure that you're in the **Developer** view, and navigate to **Topology**. You should see a single deployment config. Click that to see your Pods, Builds, Services and Routes.
 
-![Pods](../.gitbook/assets/pods.png)
+* **Pods**: Your Node.js application containers
+* **Builds**: The auto-generated build that created a Docker image from your Node.js source code, deployed it to the OpenShift container registry, and kicked off your deployment config.
+* **Services**: Tells OpenShift how to access your Pods by grouping them together as a service and defining the port to listen to
+* **Routes**: Exposes your services to the outside world using the LoadBalancer provided by the IBM Cloud network
 
-Click into the `Running` pod and navigate to the `Logs` tab. You should see the Node.js application start-up logs, as well as periodic logs from your curl loop.
+![Topology Deployment Config](../.gitbook/assets/topology-dc.png)
 
-![Logs](../.gitbook/assets/logs.png)
+
+1. Click on "View Logs" next to your Pods to see streaming logs from your running application. If you're still generating traffic, you should see log messages for every request being made.
+
+    ![Pod Logs](../.gitbook/assets/podlogs.png)
+
+1. Click on "View Logs" next to your completed Build. This shows you the process that OpenShift took to install the dependencies for your Node.js application and build/push a Docker image.
+
+    ![Build Logs](../.gitbook/assets/buildlogs.png)
 
 ## OpenShift Terminal
 
-One of the great things about Kuberentes is the ability to quickly debug your application pods with SSH terminals. This is great for development, but generally is not recommended in production environments. OpenShift makes it even easier by allowing you to launch a terminal directly in the dashboard.
+One of the great things about Kubernetes is the ability to quickly debug your application pods with SSH terminals. This is great for development, but generally is not recommended in production environments. OpenShift makes it even easier by allowing you to launch a terminal directly in the dashboard.
 
-Switch to the `Terminal` tab, and run the following commands.
+1. Navigate to your Pod by clicking on your Deployment Config, then clicking the name of the Pod under **Pods**. 
 
-```bash
-# This command shows you the the project files.
-ls
-```
+    ![Navigate to Pod](../.gitbook/assets/podarrow.png)
 
-```bash
-# This command shows you the running processes.
-ps aux
-```
+1. Switch to the `Terminal` tab, and run the following commands.
+
+    > This command shows you the the project files.
+    ```console
+    ls
+    ```
+
+    > This command shows you the running processes.
+    ```console
+    ps aux
+    ```
 
 ![Terminal](../.gitbook/assets/terminal.png)
 
 ## OpenShift Monitoring
 
-When deploying new apps, making configuration changes, or simply inspecting the state of your cluster, the OpenShift monitoring dashboard gives you an overview of your running assets. Access the Dashboard now by going to the `Monitoring` tab on the left side menu.
+When deploying new apps, making configuration changes, or simply inspecting the state of your cluster, the OpenShift monitoring dashboard gives you an overview of your running assets. Access the **Project Details** now by going to the `Advanced > Project Details` tab on the left side menu.
 
-You can also dive in a bit deeper - the `Events` view is very useful for identifying the timeline of events and finding potential error messages. Hit the 'View Details' button on the top right.
+You can also dive in a bit deeper - the `Events` view is useful for identifying the timeline of events and finding potential error messages. Hit the 'View Details' button on the top right. When tracking the state of a new rollout, managing existing assets, or even something simple like exposing a route, the Events view is critical in identifying the timeline of activity. This becomes even more useful when considering that multiple operators may be working against a single cluster.
 
-![View Details](../.gitbook/assets/viewdetails.png)
+![View Details](../.gitbook/assets/projectevents.png)
 
 You'll want to refer to this view throughout the lab. Almost all actions we take in in OpenShift will result in an event being fired in this view. As it is updated real-time, it's a great way to track changes to state.
