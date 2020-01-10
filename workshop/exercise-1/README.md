@@ -1,137 +1,164 @@
 # Exercise 1: Deploying an application
 
-In this exercise, you'll deploy a simple Node.js Express application - "Example Health". Example Health is a simple UI for a patient health records system. We'll use this example to demonstrate key OpenShift features throughout this workshop. You can find the sample application GitHub repository here: [https://github.com/IBM/node-s2i-openshift](https://github.com/IBM/node-s2i-openshift)
+In this exercise, you'll deploy a simple Node.js Express application - "Example Health". Example Health features a modern UI for a patient health records system. We'll use this example to demonstrate key OpenShift features throughout this workshop. You can find the sample application GitHub repository here: [https://github.com/IBM/node-s2i-openshift](https://github.com/IBM/node-s2i-openshift)
 
-## Deploy Example Health
 
-Access your cluster on the [IBM Cloud clusters dashboard](https://cloud.ibm.com/kubernetes/clusters). Click the `OpenShift web console` button on the top-right. (This is a pop-up so you'll need to white list this site.)
+1. Test the `Example Health` app locally
 
-Create a project, you can title it whatever you like, we suggest "example-health."
+    * Clone the Example Health repo and `cd` to it:
+    
+        ```console
+        git clone https://github.com/IBM/node-s2i-openshift
+        cd node-s2i-openshift
+        ```
 
-![Create Project](../.gitbook/assets/createproject.png)
+    * The Node.js application is in the "site" directory. `cd` to it, install the `npm` dependencies, and run the `Health Example` app on the localhost:
 
-Click on your new project. You should see a view that looks like this:
+        ```console
+        cd site
+        npm install
+        npm start
+        ```
+    * To access the application, use the "Port" previewer and select `8080`:
+    
+        ![portpreview](../.gitbook/assets/port-preview.png)
 
-![Project View](../.gitbook/assets/projectview.png)
+    * You should see the Example Health application. Login with `admin:admin` and click around!
 
-Click on the browse catalog button and scroll down to the `Node.js` image. Click on that catalog button.
+        ![examplehealthlocalhost](../.gitbook/assets/examplehealth-localhost.png)
 
-![Node](../.gitbook/assets/node.png)
+    * Ctrl+C in the terminal to stop the application.
 
-Click through to the second step for configuration, and choose `advanced options`. \( a blue hyperlink on the bottom line \)
+1. Before we push this application into OpenShift, you'll need to configure your `oc` CLI to connect to your cluster.
 
-![Advanced](../.gitbook/assets/advanced.png)
+    * Run `ibmcloud ks clusters` to find the name of your cluster. Then, run the following command to get the URL to the dashboard:
+    
+        ```console
+        ibmcloud ks cluster get <your_cluster_name> | grep "Public Service Endpoint URL"
+        ```
 
-You'll see an advanced form like this:
+        Output:
+        ```console
+        Public Service Endpoint URL:    https://your_cluster_dashboard_url:32545   
+        ```
 
-![Node Advanced Form](../.gitbook/assets/node-advanced-form.png)
+    * Navigate to that URL in the same browser that you used to log-in to IBM Cloud, and you should see your OpenShift dashboard! Take a second to look around, and then copy the login command for the CLI:
 
-Enter the repository: `https://github.com/IBM/node-s2i-openshift` and `/site` for the 'Context Dir'. Click 'Create' at the bottom of the window to build and deploy the application.
+    ![copylogincommand](../.gitbook/assets/copylogincommand.png)
 
-Scroll through to watch the build deploying:
+    * Your login command should look something like:
 
-![Build](../.gitbook/assets/build.png)
+        ```console
+        oc login --token=WmBWdgg1eObMBIYOlQAafeDKdUUUwNDaRCR1Rf7YkVc0 --server=https://c100-e.containers.cloud.ibm.com:32545
+        ```
+    
+    * Navigate back to your terminal, and run that command.
 
-When the build has deployed, click the 'External Traffic Route', and you should see the login screen like the following:
+        Output:
+        ```console
+        Logged into "https://c100-e.containers.cloud.ibm.com:32545" as "IAM#svennam@us.ibm.com" using the token provided.
 
-![Login](../.gitbook/assets/login.png)
+        You have access to 55 projects, the list has been suppressed. You can list all projects with 'oc projects'
 
-You can enter any strings for username and password, for instance `test:test` because the app is running in demo mode.
+        Using project "default".
+        ```
 
-Congrats! You've deployed a `Node.js` app to Kubernetes using OpenShift Source-to-Image (S2I).
+    * Your CLI is now connected to your Red Hat OpenShift cluster running in IBM Cloud.
 
-## Understanding What Happened
+## Deploy Example Health into OpenShift
 
-[S2I](https://docs.openshift.com/container-platform/3.6/architecture/core_concepts/builds_and_image_streams.html#source-build) is a framework that creates container images from source code, then runs the assembled images as containers. It allows developers to build reproducible images easily, letting them spend time on what matters most, developing their code!
+There's many ways to create a new application in OpenShift. If you're already a Kubernetes expert, you can stick with what you know and use YAML deployment files. However, OpenShift has greatly simplified the process of deploying apps into a cluster. Today, we'll demonstrate the "s2i" or "source to image" builder. This builder allows you to go from source code on GitHub to a running deployment.
 
-## Git Webhooks
+1. Create a new project `example-health`:
 
-So far we have been doing alot of manual deployment. In cloud-native world we want to move away from manual work and move toward automation. Wouldn't it be nice if our application rebuilt on git push events? Git webhooks are the way its done and openshift comes bundled in with git webhooks. Let's set it up for our project.
+    ```console
+    oc new-project example-health
+    ```
 
-To be able to setup git webhooks, we need to have elevated permission to the project. We don't own the repo we have been using so far. But since its opensource we can easily fork it and make it our own.
+    Output:
+    ```console
+    Now using project "example-health" on server "https://c100-e.containers.cloud.ibm.com:32545".
 
-Fork the repo at [https://github.com/IBM/node-s2i-openshift](https://github.com/IBM/node-s2i-openshift)
+    You can add applications to this project with the 'new-app' command. For example, try:
 
-![Fork](../.gitbook/assets/fork.png)
+        oc new-app django-psql-example
 
-Now that I have forked the repo under my repo I have full admin priviledges. As you can see I now have a settings button that I can change the repo settings with.
+    to build a new example application in Python. Or use kubectl to deploy a simple Kubernetes application:
 
-![Forked Repo](../.gitbook/assets/forked-repo.png)
+        kubectl create deployment hello-node --image=gcr.io/hello-minikube-zero-install/hello-node
+    ```
 
-We will come back to this page in a moment. Lets change our git source to our repo.
+1. Next, deploy the application directly from GitHub into your cluster. This uses the OpenShift "s2i" or "source to image" strategy. Essentially, this build strategy combines a standard Node.js runtime (a base image) with your source code in GitHub. Our code needs a runtime to actually run -- the base image takes care of this. The base image exists on DockerHub, named `nodejs-10-centos7:latest`.
 
-From our openshift dashboard for our project. Select `Builds > Builds`
+    * Run the following command to build the Docker image. Note the `~` separator between the base image and source repository. The `--context-dir` flag is used to define the folder where the app exists:
+    
+        ```console
+        oc new-app centos/nodejs-10-centos7~https://github.com/IBM/node-s2i-openshift --context-dir='site'
+        ```
+    
+        Output:
+        ```console
+        --> Found Docker image 4028fd4 (3 weeks old) from Docker Hub for "centos/nodejs-10-centos7"
 
-![Goto Build](../.gitbook/assets/goto-build.png)
-
-Select the patientui build. As of now this should be the only build on screen.
-
-![Select Build](../.gitbook/assets/select-build.png)
-
-Click on `Action` on the right and then select `Edit`
-
-![Edit Build](../.gitbook/assets/edit-build.png)
-
-Change the `Git Repository URL` to our forked repository.
-
-Click Save in the bottom.
-
-![Update Build](../.gitbook/assets/update-build-src.png)
-
-You will see this will not result in a new build. If you want to start a manual build you can do so by clicking `Start Build`. We will skip this for now and move on to the webhook part.
-
-Click on `Configuration` tab.
-
-Copy the GitHub Webook URL.
-
-The webhook is in the structure
-
-```text
-https://c100-e.us-east.containers.cloud.ibm.com:31305/apis/build.openshift.io/v1/namespaces/example-health/buildconfigs/patientui/webhooks/<secret>/github
-```
-
-![Copy github webhook](../.gitbook/assets/copy-github-webhook.png)
-
-> There is also the generic webhook url. This also works for github. But the github webhook captures some additional data from github and is more specific. But if we were using some other git repo like bitbucket or gitlab we would use the generic one.
-
-In our github repo go to `Setting > Webhooks`. Then click `Add Webhook`
-
-![webhook page](../.gitbook/assets/webhook-page.png)
-
-In the Add Webhook page fill in the `Payload URL` with the url copied earlier from the build configuration. Change the `Content type` to `application/json`.
-
-> **NOTE**: The *Secret* field can remain empty.
-
-Right now just the push event is being sent which is fine for our use.
-
-Click on `Add webhook`
-
-![add webhook](../.gitbook/assets/add-webhook.png)
-
-If the webhook is reachable by github you will see a green check mark.
-
-Back in our openshift console we still would only see one build however. Because we added a webhook that sends us push events and we have no push event happening. Lets make one. The easiest way to do it is probably from the Github UI. Lets change some text in the login page.
-
-Path to this file is `site/public/login.html` from the root of the directory. On Github you can edit any file by clicking the Pencil icon on the top right corner.
-
-![edit page](../.gitbook/assets/edit-page.png)
-
-Let's change the name our application to `Demo Health` (Line 21, Line 22). Feel free to make any other UI changes you feel like.
-
-![changes](../.gitbook/assets/changes.png)
-
-Once done go to the bottom and click `commit changes`.
-
-Go to the openshift build page again. This happens quite fast so you might not see the running state. But the moment we made that commit a build was kicked off.
-
-![running build](../.gitbook/assets/running-build.png)
-
-In a moment it will show completed. Navigate to the overview page to find the route.
-
-![route](../.gitbook/assets/route.png)
-
-> You could also go to `Applications > Routes` to find the route for the application.
-
-If you go to your new route you will see your change.
-
-![UI](../.gitbook/assets/updated-ui.png)
+            Node.js 10 
+            ---------- 
+            Node.js 10 available as container is a base platform for building and running various Node.js 10 applications and frameworks. Node.js is a platform built on Chrome's JavaScript runtime for easily building fast, scalable network applications. Node.js uses an event-driven, non-blocking I/O model that makes it lightweight and efficient, perfect for data-intensive real-time applications that run across distributed devices.
+
+            Tags: builder, nodejs, nodejs10
+
+            * An image stream tag will be created as "nodejs-10-centos7:latest" that will track the source image
+            * A source build using source code from https://github.com/IBM/node-s2i-openshift will be created
+            * The resulting image will be pushed to image stream tag "node-s2i-openshift:latest"
+            * Every time "nodejs-10-centos7:latest" changes a new build will be triggered
+            * This image will be deployed in deployment config "node-s2i-openshift"
+            * Port 8080/tcp will be load balanced by service "node-s2i-openshift"
+            * Other containers can access this service through the hostname "node-s2i-openshift"
+
+        --> Creating resources ...
+            imagestream.image.openshift.io "node-s2i-openshift" created
+            buildconfig.build.openshift.io "node-s2i-openshift" created
+            deploymentconfig.apps.openshift.io "node-s2i-openshift" created
+            service "node-s2i-openshift" created
+        --> Success
+            Build scheduled, use 'oc logs -f bc/node-s2i-openshift' to track its progress.
+            Application is not exposed. You can expose services to the outside world by executing one or more of the commands below:
+            'oc expose svc/node-s2i-openshift' 
+            Run 'oc status' to view your app.
+        ```
+    * This command created an ImageStream, Deployment, a Pod, and a Service resource for the `Example-Health` app,
+
+1. Reading the output, you'll notice that although a deployment and service is created, your application is not yet "exposed" to the outside world. To do so, wait about a minute and run the following command:
+
+    ```console
+    oc expose svc/node-s2i-openshift
+    ```
+
+    Output:
+    ```console
+    route.route.openshift.io/node-s2i-openshift exposed
+    ```
+
+1. Run the `oc status` command to make sure everything started up correctly. This might take a couple minutes -- look for the `deployed` status. You can also launch the dashboard and track it there.
+
+    > To find the OpenShift dashboard URL again, run: `ic ks cluster get <cluster_name>`:
+
+    ```console
+    oc status
+    ```
+
+    Output:
+    ```console
+    In project example-health on server https://c100-e.containers.cloud.ibm.com:32545
+
+    http://node-s2i-openshift-example-health.<your_openshift_cluster>.us-south.stg.containers.appdomain.cloud to pod port 8080-tcp (svc/node-s2i-openshift)
+    dc/node-s2i-openshift deploys istag/node-s2i-openshift:latest <-
+        bc/node-s2i-openshift source builds https://github.com/ibm/node-s2i-openshift on istag/nodejs-10-centos7:latest 
+        deployment #1 deployed 21 minutes ago - 1 pod
+
+    ```
+
+1. Finally, access your application with the URL from above:
+
+    * Copy and browser to the URL, it should look something like: `http://node-s2i-openshift-example-health.<your_openshift_cluster>.us-south.stg.containers.appdomain.cloud`
+
+That's it for the first exercise! In this exercise, you connected your local CLI to a running OpenShift cluster on IBM Cloud. You then deployed the "Example Health" Node.js application directly from GitHub into your cluster using the "Source to Image" strategy provided by OpenShift. Finally, OpenShift deployed an end-to-end pipeline for you -- this means that new commits that happen in GitHub can be pushed to your cluster with a simple build.
