@@ -125,3 +125,61 @@ You can use the **Connection Table** dashboard to monitor how data flows between
     ![Explore image 6](images/explore-img-6.png)
 
 
+## Explore the cluster and the node capacity
+
+1. From the _Explore_ tab, select **Deployments and Pods.**
+
+2. Select the namespace where you deployed your sample app.
+
+    ![Explore image 2](images/explore-img-2.png)
+
+3. Select the *patientui* pod entry.
+
+    ![Explore image 3](images/explore-img-3.png)
+
+4. Select **Default Dashboards**.
+
+    ![Explore image 4](images/explore-img-4.png)
+
+5. Select **Kubernetes Cluster**. Then, select **Node capacity**.
+
+    ![Explore image 8](images/explore-img-8.png)
+
+    The view **Kubernetes Cluster and Node Capacity** opens.
+
+    ![Explore image 9](images/explore-img-9.png)
+
+    Check the **Total CPU Capacity**. This is the CPU capacity that has been reserved for the node including system daemons.
+
+    Check the **Total Allocatable CPU**. This is the CPU which is available for pods excluding system daemons.
+
+    Check the **Total Pod CPU limit**. It should be less than the allocatable CPU of the node or cluster.
+
+    Check the **Total Pod CPU Requested**. It is the amount of CPU that will be guaranteed for pods on the node or cluster.
+
+    Check the **Total Pod CPU Usage**. It is the total amount of CPU that is used by all Pods on the node or cluster.
+
+
+## Explore the Network
+
+1. From the _DASHBOARDS_ tab, select **My Dashboards**. Then, select **Network Overview**.
+
+    ![Dashboard image 1](images/dashboard-img-1.png)
+
+    The following dashboard is displayed. It shows information about all resources that are monitored thorugh the instance.
+
+    ![Dashboard image 2](images/dashboard-img-2.png)
+
+ 2. Change the scope of the dashboard to display information about your openshift cluster. Select **Edit scope**
+
+    ![Dashboard image 3](images/dashboard-img-3.png)
+
+    Change the scope.
+
+    ![Dashboard image 4](images/dashboard-img-4.png)
+
+    The dashboard shows information about the ibm-observe namespace.
+
+    ![Dashboard image 5](images/dashboard-img-5.png)
+
+    
