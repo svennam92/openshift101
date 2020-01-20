@@ -25,7 +25,7 @@ In this exercise, you'll deploy a simple Node.js Express application - "Example 
 
     * You should see the Example Health application. Login with `admin:admin` and click around!
 
-        ![portpreview](../.gitbook/assets/examplehealth-localhost.png)
+        ![examplehealthlocalhost](../.gitbook/assets/examplehealth-localhost.png)
 
 1. Run the Example Health app with Docker,
 
@@ -60,59 +60,116 @@ In this exercise, you'll deploy a simple Node.js Express application - "Example 
     * Run the app with Docker,
 
         ```console
-        docker stop example-health
-        docker rm example-health
-        docker build --no-cache -t example-health .
-        docker run -d --restart always --name example-health -p 3000:3000 example-health
-
-        da106f3b5a06a00ea8bf56c54e29f6e38405a77c6dec3e461e3062aa823d8a4f
+        docker build -t example-health .
+        docker run -d --name example-health -p 3000:3000 example-health
         ```
 
-1. Build and Push the Image to your public Docker Hub Registry.
+        You should see output like:
 
-    * Make sure to change the `<username>` by the username of your Docker Hub account,
+        ```console
+        4cfa29efa8697717372f932935de008f35bc11d57376b612340e61a9b9a7489e
+        ```
 
-    ```bash
-    docker build --no-cache -t example-health .
+    * Access your application listening on port 3000:
 
-    Sending build context to Docker daemon  8.229MB
-    Step 1/10 : FROM node:10-slim
-     ---> 8d33f30db9b5
-    ... and more
-    Successfully built aaf90ce81dd7
-    Successfully tagged example-health:latest
-    ```
+        ![portpreview3000](../.gitbook/assets/portpreview3000.png)
 
-    ```bash
-    docker tag example-health:latest <username>/example-health:1.0.0
-    ```
+    * Clean up the docker container
 
-    ```bash
-    docker login -u <username>
+        ```console
+        docker kill example-health
+        ```
 
-    Password:
-    Login Succeeded
-    ```
+1. Build and Push the Image to your IBM Cloud Container Registry.
 
-    ```bash
-    docker push <username>/example-health:1.0.0
+    * Create a new namespace with `ibmcloud cr namespace-add <unique_name>`, or check if you already have one with `ibmcloud cr namespace-list`
 
-    The push refers to repository [docker.io/<username>/example-health]
-    b33f2248b6f9: Pushed
-    195f723f9ebb: Pushed
-    0912774a40f4: Pushed
-    3558c6f90d27: Pushed
-    4d1d690b5181: Mounted from <username>/example-health
-    bc272904b2c4: Mounted from <username>/example-health
-    784c13bc7926: Mounted from <username>/example-health
-    0e0d79e2c080: Mounted from <username>/example-health
-    e9dc98463cd6: Mounted from <username>/example-health
-    1.0.0: digest: sha256:a329778ce422e3d25ac9ff70b5131a9de26184a1e94b6d08844ea4f361519fd7 size: 2205
-    ```
+        ```console
+        ibmcloud cr namespace-add <unique_name>
+        ```
 
-1. Login to the Remote OpenShift Cluster
+        Example Output:
+        ```console
+        Adding namespace 'saifaststart'...
+        Successfully added namespace 'saifaststart'
+        OK
+        ```
 
-    * Login to the OpenShift cluster web console,
+        Check your namespaces with the following command:
+        ```console
+        ibmcloud cr namespace-list
+        ```
+
+    * Log-in to the IBM Cloud Container Registry
+
+        ```console
+        ic cr login
+        ```
+
+        Output:
+        ```console
+        Logging in to 'registry.ng.bluemix.net'...
+        Logged in to 'registry.ng.bluemix.net'.
+
+        Logging in to 'us.icr.io'...
+        Logged in to 'us.icr.io'.
+        ```
+
+    * Note the region -- `<region>.icr.io`. This will be the region where you tag/push your Docker image. Tag your Docker Image to this registry, and then push it:
+
+        ```console
+        docker tag example-health <region>.icr.io/<namespace>/example-health:latest
+        docker push <region>.icr.io/<namespace>/example-health:latest
+        ```
+
+        Example Command and Output:
+        ```console
+        $ docker tag example-health us.icr.io/saifaststart/example-health:latest
+        $ docker push us.icr.io/saifaststart/example-health:latest
+        The push refers to repository [us.icr.io/saifaststart/example-health]
+        cb1a3936aacf: Pushed 
+        71a1fdd16f89: Pushed 
+        f1272de5a784: Pushed 
+        5cd86f8a23e9: Pushed 
+        56e59cd1a84a: Pushed 
+        3939db7805e0: Pushed 
+        32c382d9c13a: Pushed 
+        62dac45972d5: Pushed 
+        814c70fdae62: Pushed 
+        latest: digest: sha256:0cfec7de3aa068ce1468c871e682eef2107f3b0a83738cd7ab7850121a4416e6 size: 2205
+        ```
+
+1. You're now ready to push this application into OpenShift! First, you'll need to configure your `oc` CLI to connect to your cluster.
+
+    * Run `ibmcloud ks clusters` to find the name of your cluster. Then, run the following command to get the URL to the dashboard:
+    
+        ```console
+        ibmcloud ks cluster get <your_cluster_name> | grep "Public Service Endpoint URL"
+        ```
+
+        Output:
+        ```console
+        Public Service Endpoint URL:    https://your_cluster_dashboard_url:32545   
+        ```
+
+    * Navigate to that URL in the same browser that you used to log-in to IBM Cloud. You should see your OpenShift dashboard! Take a second to look around, and then copy the login command for the CLI:
+
+    ![copylogincommand](../.gitbook/assets/copylogincommand.png)
+
+    Your login command should look something like:
+
+        ```console
+        oc login --token=WmBWdgg1eObMBIYOlQAafeDKdUUUwNDaRCR1Rf7YkVc0 --server=https://c100-e.containers.cloud.ibm.com:32545
+        ```
+    
+    * Navigate back to your terminal, and run that command.
+
+    * That's it! Your CLI is now connected to your Red Hat OpenShift cluster running in IBM Cloud.
+
+1. Create a new project
+
+
+
     * From the logged in user drop down in the top right of the web console, select `Copy Login Command`,
     * The login command will be copied to the clipboard,
     * In your terminal, paste the login command, e.g.
