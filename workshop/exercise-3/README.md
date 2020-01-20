@@ -4,23 +4,23 @@ In this exercise, we'll explore the third-party monitoring and metrics dashboard
 
 ## Grafana
 
-Red Hat OpenShift on IBM Cloud comes with [Grafana](https://grafana.com/) preinstalled. Get started by switching to the `Cluster Console` view:
+Red Hat OpenShift on IBM Cloud comes with [Grafana](https://grafana.com/) preinstalled. Get started by switching to the `Administrator` perspective:
 
-![Cluster Console](../.gitbook/assets/clusterconsole.png)
+![Administrator Perspective](../.gitbook/assets/ocp43-adminview.png)
 
-Then Navigate to `Monitoring > Dashboards` in the left-hand bar. You'll be asked to login with OpenShift and then click through some permissions.
+Then Navigate to `Monitoring > Dashboards` in the left-hand bar. 
 
-![Monitoring Dashboards](../.gitbook/assets/monitoring-dashboard.png)
+![Monitoring Dashboards](../.gitbook/assets/ocp43-monitoring-dashboard.png)
 
-You should then see your Grafana dashboard. Hit `Home` on the top left, and choose `K8s / Compute Resources / Namespace`.
+You should then see your Grafana dashboard. Hit `Home` on the top left, and choose `Kubernetes / Compute Resources / Namespace (Pods)`.
 
-![Grafana](../.gitbook/assets/grafana1.png)
+![Grafana](../.gitbook/assets/ocp43-grafana.png)
 
 Choose the name of the project you created in [Step 1](exercise-2.md#deploy-example-health) - the same one that your application is running inside.
 
 You should be able to see the CPU and Memory usage for your application. In production environments, this is helpful for identifying the average amount of CPU or Memory your application uses, especially as it can fluctuate through the day. We'll use this information in the next exercise to set up auto-scaling for our pods.
 
-![Grafana also project](../.gitbook/assets/grafana2.png)
+![Grafana also project](../.gitbook/assets/ocp43-grafana-cpu.png)
 
 ## Prometheus and Alert Manager
 
@@ -29,7 +29,7 @@ Navigating back to the cluster console, you can also launch:
 * **[Prometheus](https://prometheus.io/)** - a monitoring system with an efficient time series database
 * **[Alertmanager](https://prometheus.io/docs/alerting/alertmanager/)** - an extension of Prometheus focused on managing alerts
 
-![Metrics, Alerts and Dashboards](../.gitbook/assets/monitoring-dashboard.png)
+![Metrics, Alerts and Dashboards](../.gitbook/assets/ocp43-monitoring-prometheus.png)
 
 ## Prometheus
 
