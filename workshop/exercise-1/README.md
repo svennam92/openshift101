@@ -93,7 +93,7 @@ There's many ways to create a new application in OpenShift. If you're already a 
     * Run the following command to build the Docker image. Note the `~` separator between the base image and source repository. The `--context-dir` flag is used to define the folder where the app exists:
     
         ```console
-        oc new-app centos/nodejs-10-centos7~https://github.com/IBM/node-s2i-openshift --context-dir='site'
+        oc new-app --name=patient-ui centos/nodejs-10-centos7~https://github.com/IBM/node-s2i-openshift --context-dir='site'
         ```
     
         Output:
@@ -108,21 +108,21 @@ There's many ways to create a new application in OpenShift. If you're already a 
 
             * An image stream tag will be created as "nodejs-10-centos7:latest" that will track the source image
             * A source build using source code from https://github.com/IBM/node-s2i-openshift will be created
-            * The resulting image will be pushed to image stream tag "node-s2i-openshift:latest"
+            * The resulting image will be pushed to image stream tag "patient-ui:latest"
             * Every time "nodejs-10-centos7:latest" changes a new build will be triggered
-            * This image will be deployed in deployment config "node-s2i-openshift"
-            * Port 8080/tcp will be load balanced by service "node-s2i-openshift"
-            * Other containers can access this service through the hostname "node-s2i-openshift"
+            * This image will be deployed in deployment config "patient-ui"
+            * Port 8080/tcp will be load balanced by service "patient-ui"
+            * Other containers can access this service through the hostname "patient-ui"
 
         --> Creating resources ...
-            imagestream.image.openshift.io "node-s2i-openshift" created
-            buildconfig.build.openshift.io "node-s2i-openshift" created
-            deploymentconfig.apps.openshift.io "node-s2i-openshift" created
-            service "node-s2i-openshift" created
+            imagestream.image.openshift.io "patient-ui" created
+            buildconfig.build.openshift.io "patient-ui" created
+            deploymentconfig.apps.openshift.io "patient-ui" created
+            service "patient-ui" created
         --> Success
-            Build scheduled, use 'oc logs -f bc/node-s2i-openshift' to track its progress.
+            Build scheduled, use 'oc logs -f bc/patient-ui' to track its progress.
             Application is not exposed. You can expose services to the outside world by executing one or more of the commands below:
-            'oc expose svc/node-s2i-openshift' 
+            'oc expose svc/patient-ui' 
             Run 'oc status' to view your app.
         ```
     * This command created an ImageStream, Deployment, a Pod, and a Service resource for the `Example-Health` app,
@@ -130,12 +130,12 @@ There's many ways to create a new application in OpenShift. If you're already a 
 1. Reading the output, you'll notice that although a deployment and service is created, your application is not yet "exposed" to the outside world. To do so, run the following command:
 
     ```console
-    oc expose svc/node-s2i-openshift
+    oc expose svc/patient-ui
     ```
 
     Output:
     ```console
-    route.route.openshift.io/node-s2i-openshift exposed
+    route.route.openshift.io/patient-ui exposed
     ```
 
 1. Run the `oc status` command to make sure everything started up correctly. This might take a couple minutes -- look for the `deployed` status. You can also launch the dashboard and track it there.
@@ -150,16 +150,16 @@ There's many ways to create a new application in OpenShift. If you're already a 
     ```console
     In project example-health on server https://c100-e.containers.cloud.ibm.com:32545
 
-    http://node-s2i-openshift-example-health.<your_openshift_cluster>.us-south.stg.containers.appdomain.cloud to pod port 8080-tcp (svc/node-s2i-openshift)
-    dc/node-s2i-openshift deploys istag/node-s2i-openshift:latest <-
-        bc/node-s2i-openshift source builds https://github.com/ibm/node-s2i-openshift on istag/nodejs-10-centos7:latest 
+    http://patient-ui-example-health.<your_openshift_cluster>.us-south.stg.containers.appdomain.cloud to pod port 8080-tcp (svc/patient-ui)
+    dc/patient-ui deploys istag/patient-ui:latest <-
+        bc/patient-ui source builds https://github.com/ibm/patient-ui on istag/nodejs-10-centos7:latest 
         deployment #1 deployed 21 minutes ago - 1 pod
 
     ```
 
 1. Finally, access your application with the URL from above -- it should look something like:
 
-    `http://node-s2i-openshift-example-health.<your_openshift_cluster>.us-south.stg.containers.appdomain.cloud`
+    `http://patient-ui-example-health.<your_openshift_cluster>.us-south.stg.containers.appdomain.cloud`
 
 You've completed the first exercise! Let's recap -- in this exercise, you:
 * Connected your local CLI to a running OpenShift cluster on IBM Cloud
