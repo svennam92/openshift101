@@ -19,7 +19,7 @@ while($true){curl <your_app_route>/info}
 {% hint style="info" %}
 Note: Retrieve the external URL from the OpenShift console, or from the URL of your Example Health application. Note that there may be an `/index.html` at the end that you need to replace with `/info`. We're hitting the /info endpoint which will trigger some logs from our app. For example:
 
-[`http://patientui-health-example.myopenshift-xxx.us-east.containers.appdomain.cloud/info`](http://patientui-health-example.myopenshift-341665-66631af3eb2bd8030c5bb56d415b8851-0001.us-east.containers.appdomain.cloud/jee.html)
+[`http://patient-ui-health-example.myopenshift-xxx.us-east.containers.appdomain.cloud/info`](http://patient-ui-health-example.myopenshift-341665-66631af3eb2bd8030c5bb56d415b8851-0001.us-east.containers.appdomain.cloud/jee.html)
 {% endhint %}
 
 ## OpenShift Logging
@@ -31,16 +31,16 @@ Since we only created one pod, seeing our logs will be straight forward. Ensure 
 * **Services**: Tells OpenShift how to access your Pods by grouping them together as a service and defining the port to listen to
 * **Routes**: Exposes your services to the outside world using the LoadBalancer provided by the IBM Cloud network
 
-![Topology Deployment Config](../.gitbook/assets/topology-dc.png)
+![Topology Deployment Config](../.gitbook/assets/ocp43-topology.png)
 
 
-1. Click on "View Logs" next to your Pods to see streaming logs from your running application. If you're still generating traffic, you should see log messages for every request being made.
+1. Click on **View Logs** next to your Pods to see streaming logs from your running application. If you're still generating traffic, you should see log messages for every request being made.
 
-    ![Pod Logs](../.gitbook/assets/podlogs.png)
+    ![Pod Logs](../.gitbook/assets/ocp43-pod-logs.png)
 
-1. Click on "View Logs" next to your completed Build. This shows you the process that OpenShift took to install the dependencies for your Node.js application and build/push a Docker image.
+1. Click on **View Logs** next to your completed Build. This shows you the process that OpenShift took to install the dependencies for your Node.js application and build/push a Docker image.
 
-    ![Build Logs](../.gitbook/assets/buildlogs.png)
+    ![Build Logs](../.gitbook/assets/ocp43-build-logs.png)
 
 ## OpenShift Terminal
 
@@ -48,7 +48,7 @@ One of the great things about Kubernetes is the ability to quickly debug your ap
 
 1. Navigate to your Pod by clicking on your Deployment Config, then clicking the name of the Pod under **Pods**. 
 
-    ![Navigate to Pod](../.gitbook/assets/podarrow.png)
+    ![Navigate to Pod](../.gitbook/assets/ocp43-pod-arrow.png)
 
 1. Switch to the `Terminal` tab, and run the following commands.
 
@@ -62,7 +62,7 @@ One of the great things about Kubernetes is the ability to quickly debug your ap
     ps aux
     ```
 
-![Terminal](../.gitbook/assets/terminal.png)
+    ![Terminal](../.gitbook/assets/ocp43-terminal.png)
 
 ## OpenShift Monitoring
 

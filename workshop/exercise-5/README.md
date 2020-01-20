@@ -9,21 +9,26 @@ For example, an application that is unhealthy and no longer responding to an API
 
 The `/info` endpoint on the Example Health application is a great way to check whether the application is running and responding to API calls -- it responds with a simple JSON payload.
 
-Navigate to `Workloads > Deployment Configs` in the left-hand bar. Then, choose `Actions > Edit Deployment Config`.
+1. Navigate to `Workloads > Deployment Configs` in the left-hand bar. Then, choose `Actions > Edit Deployment Config`.
 
-![Deployment Configs](../.gitbook/assets/ocp43-dc.png)
+    ![Deployment Configs](../.gitbook/assets/ocp43-dc.png)
 
-In the YAML editor, scroll down to the section `template > spec > containers` (line 62). Add the following resource limits into the empty resources.
+1. In the YAML editor, scroll down to the section `template > spec > containers` (line 62). Add the following resource limits into the empty resources.
 
-```yaml
-resources:
-  requests:
-    memory: 40Mi
-    cpu: 3m
-  limits:
-    memory: 100Mi
-    cpu: 30m
-```
+    ```yaml
+    readinessProbe:
+      httpGet:
+        path: /info
+        port: 8080
+      initialDelaySeconds: 5
+      periodSeconds: 2
+    readinessProbe:
+      httpGet:
+        path: /info
+        port: 8080
+      initialDelaySeconds: 5
+      periodSeconds: 2
+    ```
 
 Add a readiness probe:
 
