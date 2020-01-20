@@ -13,25 +13,23 @@ our CPU request, but to be safe, let's bump the higher-end up to 30 millicores. 
 addition, Grafana showed that the app consumes about `25`-`35` MB of RAM. Set the
 following resource limits for your deployment now.
 
-Navigate to `Workloads > Dashboards` in the left-hand bar, then choose your deployment config. Then, choose `Actions > Edit Deployment Config`.
+Navigate to `Workloads > Deployment Configs` in the left-hand bar. Then, choose `Actions > Edit Deployment Config`.
 
-![Deployment Configs](../.gitbook/assets/ocp43-deploymentconfigs.png)
+![Deployment Configs](../.gitbook/assets/ocp43-dc.png)
 
-In the YAML editor, scroll down to the section `template > spec > containers`, then add the following resource limits to the empty resources {}.
-
-![Resource Limits](../.gitbook/assets/ocp43-resource-limits-yaml.png)
-
-Copy paste the following yaml:
+In the YAML editor, scroll down to the section `template > spec > containers` (line 62). Add the following resource limits into the empty resources.
 
 ```yaml
 resources:
-    requests:
-      memory: 40Mi
-      cpu: 3m
-    limits:
-      memory: 100Mi
-      cpu: 30m
+  requests:
+    memory: 40Mi
+    cpu: 3m
+  limits:
+    memory: 100Mi
+    cpu: 30m
 ```
+
+![Resource Limits](../.gitbook/assets/ocp43-limits-yaml.png)
 
 {% hint style="info" %}
 Remember to set the correct unit -- millicores and MB \(not MiB\)
@@ -41,7 +39,7 @@ Hit `Reload` to see the new version.
 
 Verify that the replication controler has ben changed by navigating to **Events**
 
-![Resource Limits](../.gitbook/assets/ocp43-limit-event.png)
+![Resource Limits](../.gitbook/assets/ocp43-limits-event.png)
 
 
 ## Enable Autoscaler
@@ -58,7 +56,27 @@ since we are generating minimal load.
 
 Navite to `Workloads > Horizontal Pod Autoscalers`, then hit `Create Horizontal Pod Autoscaler`.
 
-![HPA](../.gitbook/assets/ocp43-hpa.png)
+![HPA](../.gitbook/assets/ocp43-autoscaler.png)
+
+```yaml
+apiVersion: autoscaling/v2beta1
+kind: HorizontalPodAutoscaler
+metadata:
+  name: patient-hpa
+  namespace: example-health
+spec:
+  scaleTargetRef:
+    apiVersion: apps.openshift.io/v1
+    kind: DeploymentConfig
+    name: patient-ui
+  minReplicas: 1
+  maxReplicas: 10
+  metrics:
+    - type: Resource
+      resource:
+        name: cpu
+        targetAverageUtilization: 1
+```
 
 Hit Create.
 
@@ -67,11 +85,11 @@ Hit Create.
 
 If you're not running the script from the [previous exercise](../exercise-2/README.md#simulate-load-on-the-application), the pods should stay at 1. Check by going to the Overview page of Deployment Configs.
 
-![Scaled to 1 pod](../.gitbook/assets/ocp43-hpa-before.png)
+![Scaled to 1 pod](../.gitbook/assets/ocp43-dc-pod.png)
 
 Start simulating load by hitting the page several times, or running the script. You'll see that it starts to scale up:
 
-![Scaled to 4/10 pods](../.gitbook/assets/ocp430-hpa-after.png)
+![Scaled to 4/10 pods](../.gitbook/assets/ocp43-autoscaler-after.png)
 
 That's it! You now have a highly available and automatically scaled front-end Node.js application. OpenShift is automatically scaling your application pods since the CPU usage of the pods greatly exceeded `1`% of the resource limit, `30` millicores.
 
@@ -79,5 +97,5 @@ That's it! You now have a highly available and automatically scaled front-end No
 
 If you're interested in setting up the CLI, [follow the steps here](../pre-work/SETUP_CLI.md). Then, run the following command in your CLI `oc get hpa` to get information about your horizontal pod autoscaler. Remember to switch to your project first with `oc project <project-name>`.
 
-You could have created the autoscaler with the command `oc autoscale dc/node-s2i-openshift --min 1 --max 10 --cpu-percent=1`.
+You could have created the autoscaler with the command `oc autoscale dc/patient-ui --min 1 --max 10 --cpu-percent=1`.
 

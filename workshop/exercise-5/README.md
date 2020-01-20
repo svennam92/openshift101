@@ -2,21 +2,28 @@
 
 In Kubernetes, liveness and readiness probes are essential for smoothly running applications.
 A probe is generally a REST `GET` call, but there are other types of probes available.
-Liveness probes are used to determine when to restart a container. For example, an
-application that is unhealthy and no longer responding to an API call would be
-restarted by OpenShift. Readiness probes determine when a container is ready to
-start receiving traffic. If a readiness probe fails, then the load balancer
-would deregister that service.
+Liveness probes are used to determine when to restart a container.
+For example, an application that is unhealthy and no longer responding to an API call would be restarted by OpenShift. Readiness probes determine when a container is ready to start receiving traffic. If a readiness probe fails, then the load balancer would deregister that service.
 
 ## Create Readiness and Liveness Probes
 
-The `/info` endpoint on the Example Health application is a great way to check
-whether the application is running and responding to API calls -- it responds
-with a simple JSON payload.
+The `/info` endpoint on the Example Health application is a great way to check whether the application is running and responding to API calls -- it responds with a simple JSON payload.
 
-Navigate to your deployment and choose `Actions > Edit Health Checks`.
+Navigate to `Workloads > Deployment Configs` in the left-hand bar. Then, choose `Actions > Edit Deployment Config`.
 
-![Health Checks](../.gitbook/assets/edit-health-checks.png)
+![Deployment Configs](../.gitbook/assets/ocp43-dc.png)
+
+In the YAML editor, scroll down to the section `template > spec > containers` (line 62). Add the following resource limits into the empty resources.
+
+```yaml
+resources:
+  requests:
+    memory: 40Mi
+    cpu: 3m
+  limits:
+    memory: 100Mi
+    cpu: 30m
+```
 
 Add a readiness probe:
 
