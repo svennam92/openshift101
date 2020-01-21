@@ -1,6 +1,6 @@
 # Exercise 1: Deploying an application
 
-In this exercise, you'll deploy a simple Node.js Express application - "Example Health". Example Health features a modern UI for a patient health records system. We'll use this example to demonstrate key OpenShift features throughout this workshop. You can find the sample application GitHub repository here: [https://github.com/IBM/node-s2i-openshift](https://github.com/IBM/node-s2i-openshift)
+In this exercise, you'll deploy a simple Node.js Express application - "Example Health". Example Health features a modern UI for a patient health records system. We'll use this example to demonstrate key OpenShift features throughout this workshop. You can find the sample application GitHub repository here: [https://github.com/svennam92/node-s2i-openshift](https://github.com/svennam92/node-s2i-openshift)
 
 
 1. Test the `Example Health` app locally
@@ -8,7 +8,7 @@ In this exercise, you'll deploy a simple Node.js Express application - "Example 
     * Clone the Example Health repo and `cd` to it:
     
         ```console
-        git clone https://github.com/IBM/node-s2i-openshift
+        git clone https://github.com/svennam92/node-s2i-openshift
         cd node-s2i-openshift
         ```
 
@@ -23,7 +23,7 @@ In this exercise, you'll deploy a simple Node.js Express application - "Example 
     
         ![portpreview](../.gitbook/assets/port-preview.png)
 
-    * You should see the Example Health application. Login with `admin:admin` and click around!
+    * You should see the Example Health application. Login with any credentials and click around!
 
         ![examplehealthlocalhost](../.gitbook/assets/examplehealth-localhost.png)
 
@@ -93,7 +93,7 @@ There's many ways to create a new application in OpenShift. If you're already a 
     * Run the following command to build the Docker image. Note the `~` separator between the base image and source repository. The `--context-dir` flag is used to define the folder where the app exists:
     
         ```console
-        oc new-app --name=patient-ui centos/nodejs-10-centos7~https://github.com/IBM/node-s2i-openshift --context-dir='site'
+        oc new-app --name=patient-ui centos/nodejs-10-centos7~https://github.com/svennam92/node-s2i-openshift --context-dir='site'
         ```
     
         Output:
