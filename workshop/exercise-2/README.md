@@ -31,7 +31,7 @@ Since we only created one pod, seeing our logs will be straight forward. Ensure 
 * **Services**: Tells OpenShift how to access your Pods by grouping them together as a service and defining the port to listen to
 * **Routes**: Exposes your services to the outside world using the LoadBalancer provided by the IBM Cloud network
 
-![Topology Deployment Config](../.gitbook/assets/ocp43-topology.png)
+    ![Topology Deployment Config](../.gitbook/assets/ocp43-topology.png)
 
 
 1. Click on **View Logs** next to your Pods to see streaming logs from your running application. If you're still generating traffic, you should see log messages for every request being made.
@@ -66,9 +66,11 @@ One of the great things about Kubernetes is the ability to quickly debug your ap
 
 ## OpenShift Monitoring
 
-When deploying new apps, making configuration changes, or simply inspecting the state of your cluster, the OpenShift monitoring dashboard gives you an overview of your running assets. Access the **Project Details** now by going to the `Advanced > Project Details` tab on the left side menu.
+When deploying new apps, making configuration changes, or simply inspecting the state of your cluster, the Project-scope Dashboard gives Developer Clear Insights. Access the **Dashboard** now by going to the `Advanced > Project Details` tab on the left side menu.
 
-You can also dive in a bit deeper - the `Events` view is useful for identifying the timeline of events and finding potential error messages. Hit the 'View Details' button on the top right. When tracking the state of a new rollout, managing existing assets, or even something simple like exposing a route, the Events view is critical in identifying the timeline of activity. This becomes even more useful when considering that multiple operators may be working against a single cluster.
+![View Details](../.gitbook/assets/ocp43-project-details.png)
+
+You can also dive in a bit deeper - the `Events` view is useful for identifying the timeline of events and finding potential error messages. When tracking the state of a new rollout, managing existing assets, or even something simple like exposing a route, the Events view is critical in identifying the timeline of activity. This becomes even more useful when considering that multiple operators may be working against a single cluster.
 
 ![View Details](../.gitbook/assets/projectevents.png)
 
