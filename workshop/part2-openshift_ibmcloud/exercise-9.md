@@ -221,7 +221,7 @@ Complete the following steps to jump to a specific time: 1. Launch the LogDNA we
 
 * Enter a relative time such as `1 min ago`.
 
-  ![Views image 16](https://github.com/svennam92/openshift101/tree/2b9df9bcc2717ae6785f501917c4313dd5d30c8e/workshop/part2-openshift_ibmcloud/fix_link)
+  ![Views image 16](../.gitbook/assets/FIXME.PNG)
 
   You can also enter a time range such as `yesterday 10am to yesterday 11am`, `last fri 4:30pm to 11/12 1 AM`, `last wed 4:30pm to 23/05 1 AM`, or `May 20 10am to May 22 10am`. Make sure to include `to` to separate the initial timestamp from the end timestamp.
 

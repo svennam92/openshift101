@@ -189,7 +189,7 @@ You launch the web UI within the context of an IBM Log Analysis with LogDNA inst
 
 Complete the following steps to launch the web UI:
 
-1. Click the **Menu** icon ![Menu icon](../icons/icon_hamburger.svg) &gt; **Observability**. 
+1. Click the **Menu** icon ![Menu icon](../.gitbook/assets/FIXME.PNG) &gt; **Observability**. 
 
 2. Select **Logging**. 
 
