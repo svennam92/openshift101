@@ -2,57 +2,48 @@
 
 To integrate your monitoring instance with your OpenShift cluster, you must run a script that creates a project and privileged service account for the Sysdig agent.
 
-## Prereq
+## Step 1. Access your cluster through the CLI
 
-To deploy the Sysdig agent in a cluster, you must have a user ID that has the following Sysdig IAM roles:
+[Access your cluster using the oc CLI](https://openshift4.gitbook.io/openshiftlab/getting-started/setup_cli#access-your-cluster-using-the-oc-cli).
 
-* **Administrator** Platform role, and **Manager** Service role to work with the Sysdig instance.
+## Step 2. Launch the Sysdig webUI
 
+You launch the web UI within the context of an IBM Cloud Monitoring with Sysdig instance, from the IBM Cloud UI. 
 
-## Step 2. Get your Sysdig instance access key
+Complete the following steps to launch the web UI:
+
+1. Click the **Menu** icon ![](../.gitbook/assets/admin.png) &gt; **Observability**. 
+
+2. Select **Monitoring**. 
+
+    The list of instances that are available on IBM Cloud is displayed.
+
+3. Select your instance. Check with the instructor which instance  you should use for the lab.
+
+4. Click **View Sysdig**.
+
+The Web UI opens.
+
+## Step 3. Get the access key for your Sysdig instance
 
 The Sysdig access key is used to open a secure web socket to the Sysdig ingestion server and to authenticate the monitoring agent with the monitoring service.
 
-1. Create a service key for your Sysdig instance.
+Comnplete the following steps:
 
-   Get the name of your Sysdig instance. Run the following command:
+1. In the Sysdig web UI, select the icon ![](../.gitbook/assets/config.png).
 
-   ```text
-   ibmcloud resource service-instances
-   ```
+2. Select **Settings**.
 
-   Then, run the following command:
+    ![](../.gitbook/assets/settings.png)
 
-   ```text
-   ibmcloud resource service-key-create <key_name> Administrator --instance-name <sysdig_instance_name>
-   ```
+3. Select **Agent installation**.
 
-2. Note the **Sysdig Access Key** and **Sysdig Collector Endpoint** of your service key.
+    ![](../.gitbook/assets/agent.png)
 
-   ```text
-   ibmcloud resource service-key <key_name>
-   ```
+4. Copy the access key that is displayed at the top of the page.
 
-   Example output:
 
-   ```text
-       Name:          <key_name>  
-       ID:            crn:v1:bluemix:public:sysdig-monitor:<region>:<ID_string>::    
-       Created At:    Thu Jun  6 21:31:25 UTC 2019   
-       State:         active   
-       Credentials:                                   
-                      Sysdig Access Key:           11a1aa11-aa1a-1a1a-a111-11a11aa1aa11      
-                      Sysdig Collector Endpoint:   ingest.<region>.monitoring.cloud.ibm.com      
-                      Sysdig Customer Id:          11111      
-                      Sysdig Endpoint:             https://<region>.monitoring.cloud.ibm.com  
-                      apikey:                   <api_key_value>      
-                      iam_apikey_description:   Auto-generated for key <ID>     
-                      iam_apikey_name:          <key_name>       
-                      iam_role_crn:             crn:v1:bluemix:public:iam::::role:Administrator      
-                      iam_serviceid_crn:        crn:v1:bluemix:public:iam-identity::<ID_string>
-   ```
-
-## Step 3. Deploy the Sysdig agent in the cluster
+## Step 4. Deploy the Sysdig agent in the cluster
 
 Run the script to set up an `ibm-observe` project with a privileged service account and a Kubernetes daemon set to deploy the Sysdig agent on every worker node of your Kubernetes cluster.
 
@@ -94,9 +85,9 @@ Example output:
     daemonset.extensions/sysdig-agent created
 ```
 
-## Step 4. Verify that the Sysdig agent is deployed successfully
+## Step 5. Verify that the Sysdig agent is deployed successfully
 
-Verify that the `sydig-agent` pods on each node show that **1/1** pods are ready and that each pod has a **Running** status.
+Verify that the `sydig-agent` pods on each node have a **Running** status.
 
 Run the following command:
 
@@ -112,7 +103,4 @@ Example output:
     sysdig-agent-rhrgz   1/1       Running   0          1m
 ```
 
-1. From the IBM Cloud [**Observability &gt; Monitoring** console](https://cloud.ibm.com/observe/logging), in the row for your monitoring instance, click **View Sysdig**. The Sysdig dashboard opens, and you can analyze your cluster metrics.
-
-For more information about how to use monitoring, see the [Next steps docs](../.gitbook/assets/FIXME.PNG).
 

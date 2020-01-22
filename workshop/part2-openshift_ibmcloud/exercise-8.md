@@ -6,13 +6,38 @@ To configure your Kubernetes cluster to send logs to your IBM Log Analysis with 
 
 To forward logs to your LogDNA instance, complete the following steps from the command line:
 
-## Prereq
+## Step 1. Access your cluster through the CLI
 
-To deploy the LogDNA agent in a cluster, you must have a user ID that has the following IAM roles:
-* **Administrator** platform role, and **Manager** service role to work with that cluster instance.
+[Access your cluster using the oc CLI](https://openshift4.gitbook.io/openshiftlab/getting-started/setup_cli#access-your-cluster-using-the-oc-cli). 
 
+## Launch the LogDNA webUI
 
-## Step 2. Store your LogDNA ingestion key as a Kubernetes secret
+You launch the web UI within the context of an IBM Log Analysis with LogDNA instance, from the IBM Cloud UI. 
+
+Complete the following steps to launch the web UI:
+
+1. Click the **Menu** icon ![](../.gitbook/assets/admin.png) &gt; **Observability**. 
+
+2. Select **Logging**. 
+
+    The list of instances that are available on IBM Cloud is displayed.
+
+3. Select your instance. Check with the instructor which instance  you should use for the lab.
+
+4. Click **View LogDNA**.
+
+The Web UI opens.
+
+## Step 3. Get the ingestion key for your LogDNA instance
+
+1. In the LogDNA web UI, select the **Settings** icon ![](../.gitbook/assets/admin.png). Then select **Organization**.
+2. Select **API keys**.
+
+    ![](../.gitbook/assets/screen-img-18.png)
+
+3. Copy the ingestion key.
+
+## Step 4. Store your LogDNA ingestion key as a Kubernetes secret
 
 You must create a Kubernetes secret to store your LogDNA ingestion key for your service instance. The LogDNA ingestion key is used to open a secure web socket to the LogDNA ingestion server and to authenticate the logging agent with the IBM Log Analysis with LogDNA service.
 
@@ -42,10 +67,10 @@ You must create a Kubernetes secret to store your LogDNA ingestion key for your 
     oc create secret generic logdna-agent-key --from-literal=logdna-agent-key=INGESTION_KEY -n ibm-observe 
     ```
 
-    Where `INGESTION_KEY` is the ingestion key for the LogDNA instance where you plan to forward and collect the cluster logs. To get the ingestion key, see [Get the ingestion key through the IBM Log Analysis with LogDNA web UI](../.gitbook/assets/FIXME.PNG).
+    Where `INGESTION_KEY` is the ingestion key for the LogDNA instance where you plan to forward and collect the cluster logs.
 
 
-## Step 3. Deploy the LogDNA agent in the cluster
+## Step 5. Deploy the LogDNA agent in the cluster
 
 Create a Kubernetes daemon set to deploy the LogDNA agent on every worker node of your Kubernetes cluster. 
 
@@ -58,7 +83,7 @@ oc create -f https://assets.us-south.logging.cloud.ibm.com/clients/logdna-agent-
 ```
 
 
-## Step 4. Verify that the LogDNA agent is deployed successfully
+## Step 6. Verify that the LogDNA agent is deployed successfully
 
 To verify that the LogDNA agent is deployed successfully, run the following command:
 
@@ -98,29 +123,8 @@ oc logs logdna-agent-xxxkz
 ```
 
 
-## Step 5. Launch the LogDNA webUI to verify that logs are being forwarded from the LogDNA agent
+## Step 7. Launch the LogDNA webUI to verify that logs are being forwarded from the LogDNA agent
 
-Next, launch the LogDNA web UI to verify that logs from the cluster are available through the UI. 
-
-The following table lists the minimum policies that your IBMid must have to be able to launch the web UI from the IBM Cloud Observability page, and view data in the LogDNA web UI:
-
-| Service                              | Role                      | Permission granted       |
-|--------------------------------------|---------------------------|---------------------|
-| `IBM Log Analysis with LogDNA` | Platform role: Viewer     | Allows the user to view the list of service instances in the Observability Logging dashboard. |
-| `IBM Log Analysis with LogDNA` | Service role: Reader      | Allows the user to launch the Web UI and view logs in the Web UI.    |
-{: caption="Table 1. IAM policies" caption-side="top"} 
+Next, go to the LogDNA web UI page in your browser to verify that logs from the cluster are available through the UI. 
 
 
-You launch the web UI within the context of an IBM Log Analysis with LogDNA instance, from the IBM Cloud UI. 
-
-Complete the following steps to launch the web UI:
-
-1. Click the **Menu** icon ![Menu icon](../.gitbook/assets/FIXME.PNG) &gt; **Observability**. 
-
-2. Select **Logging**. 
-
-    The list of instances that are available on IBM Cloud is displayed.
-
-3. Select your instance. Then, click **View LogDNA**.
-
-The Web UI opens.
