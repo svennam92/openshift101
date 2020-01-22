@@ -33,7 +33,7 @@ Notice that this step requires that you have logged in to the sample app at leas
 
    ![parsing image 2](../.gitbook/assets/parsing-img-2.png)
 
-4. Click **Query** to enter the following query: `namespace:demo AND app:patientui AND "endpoint for"`.
+4. Click **Query** to enter the following query: `namespace:example-health AND app:patient-ui AND "endpoint for"`.
 
    ![parsing image 3](../.gitbook/assets/parsing-img-3.png)
 
@@ -41,7 +41,7 @@ Notice that this step requires that you have logged in to the sample app at leas
 
    ![parsing image 4](../.gitbook/assets/parsing-img-4.png)
 
-5. Select **Build Parsing Template**. The _Parsing Template_ wizard opens.
+5. Scroll down, then Select **Build Parsing Template**. The _Parsing Template_ wizard opens.
 6. Choose the first criteria to parse the data.
 
    Click **Choose an extractor**. Then choose **Extract Values by Delimiter**.
@@ -219,7 +219,7 @@ Complete the following steps to jump to a specific time: 1. Launch the LogDNA we
 
   ![Views image 15](../.gitbook/assets/views-img-15.png)
 
-* Enter a relative time such as `1 min ago`.
+* Enter a relative time such as `1 min ago`.  LMA Image below is missing.
 
   ![Views image 16](../.gitbook/assets/FIXME.PNG)
 
