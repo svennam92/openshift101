@@ -16,7 +16,7 @@ You should then see your Grafana dashboard. Hit `Home` on the top left, and choo
 
 ![Grafana](../.gitbook/assets/ocp43-grafana.png)
 
-Choose the name of the project you created in [Step 1](https://github.com/svennam92/openshift101/tree/53e9a4199e235447a4a128841ee528898f061b7c/workshop/exercise-3/exercise-2.md#deploy-example-health) - the same one that your application is running inside.
+Choose the name of the project you created in Step 1 - the same one that your application is running inside.
 
 You should be able to see the CPU and Memory usage for your application. In production environments, this is helpful for identifying the average amount of CPU or Memory your application uses, especially as it can fluctuate through the day. We'll use this information in the next exercise to set up auto-scaling for our pods.
 

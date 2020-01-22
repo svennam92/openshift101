@@ -11,9 +11,9 @@ To deploy the Sysdig agent in a cluster, you must have a user ID that has the fo
 
 To configure the Sysdig agent in the cluster, you need the following CLIs:
 
-* The IBM Cloud CLI to log in to the IBM Cloud by using `ibmcloud` commands, and to manage the cluster by using `ibmcloud ks` commands. [Learn more](/docs/containers?topic=containers-cs_cli_install/README.md#cs_cli_install_steps).
-* The Kubernetes CLI to manage the cluster by using `kubectl` commands. [Learn more](/docs/containers?topic=containers-cs_cli_install/README.md#kubectl).
-* The Openshift CLI to login to the cluster from the command line and deploy the agent. [Learn more](/docs/openshift?topic=openshift-openshift-cli/README.md).
+* The IBM Cloud CLI to log in to the IBM Cloud by using `ibmcloud` commands, and to manage the cluster by using `ibmcloud ks` commands. [Learn more](../.gitbook/assets/FIXME.PNG).
+* The Kubernetes CLI to manage the cluster by using `kubectl` commands. [Learn more](../.gitbook/assets/FIXME.PNG).
+* The Openshift CLI to login to the cluster from the command line and deploy the agent. [Learn more](../.gitbook/assets/FIXME.PNG).
 
 ## Step 1. Set the cluster context and log in to the cluster
 
@@ -61,7 +61,7 @@ Complete the following steps:
 
    The behavior of the command `ibmcloud oc cluster config` in your current CLI version is deprecated, and becomes unsupported when CLI version 1.0 is released in March 2020. To use the new behavior now, you have set the 'IKS\_BETA\_VERSION' environment variable by running `export IKS_BETA_VERSION=1`. Note: Changing the beta version can include other breaking changes. For more information, see [Boost Your Productivity with a New CLI ](http://ibm.biz/iks-cli-v1).
 
-5. Log in to the cluster. Choose a method to login to an OpenShift cluster. [Learn more about the methods to login](/docs/openshift?topic=openshift-access_cluster/README.md#access_automation).
+5. Log in to the cluster. Choose a method to login to an OpenShift cluster. [Learn more about the methods to login](../.gitbook/assets/FIXME.PNG).
 
    For example, you can create an IBM Cloud IAM API key, and then use the API key to log in to an OpenShift cluster.
 
@@ -182,5 +182,5 @@ Example output:
 
 1. From the [IBM Cloud **Observability &gt; Monitoring** console](https://cloud.ibm.com/observe/logging), in the row for your monitoring instance, click **View Sysdig**. The Sysdig dashboard opens, and you can analyze your cluster metrics.
 
-For more information about how to use monitoring, see the [Next steps docs](/docs/services/Monitoring-with-Sysdig?topic=Sysdig-kubernetes_cluster/README.md#kubernetes_cluster_next_steps).
+For more information about how to use monitoring, see the [Next steps docs](../.gitbook/assets/FIXME.PNG).
 

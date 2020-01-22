@@ -1,8 +1,6 @@
 # Exercise 10: Monitor your Cluster with SysDig
 
-## Exercise 10: Monitor your cluster through the Sysdig web UI
-
-The IBM Cloud™ Monitoring with Sysdig service is a fully managed enterprise-grade monitoring service. You get deep container visibility, service-oriented views and comprehensive metrics. You can use this to gain operational visibility for your applications, services, and platform. Sysdig offers administrators, DevOps teams and developers advanced features to monitor and troubleshoot, define alerts, and design custom views.
+The IBM Cloud Monitoring with Sysdig service is a fully managed enterprise-grade monitoring service. You get deep container visibility, service-oriented views and comprehensive metrics. You can use this to gain operational visibility for your applications, services, and platform. Sysdig offers administrators, DevOps teams and developers advanced features to monitor and troubleshoot, define alerts, and design custom views.
 
 When you monitor an application, you should consider:
 
@@ -28,7 +26,7 @@ You launch the Web UI within the context of an Sysdig instance, from the IBM Clo
 
 Complete the following steps to launch the web UI:
 
-1. Click the **Menu** icon ![Menu icon](/workshop/icons/icon_hamburger.svg) &gt; **Observability**.
+1. Click the **Menu** icon ![Menu icon](../.gitbook/assets/fixme.PNG) &gt; **Observability**.
 2. Select **Monitoring**.
 
    The list of instances that are available is displayed.
@@ -45,13 +43,11 @@ The following table lists the different types of pre-defined dashboards:
 
 | Type | Description | More information |
 | :--- | :--- | :--- |
-| Applications | Dashboards that you can use to monitor your applications and infrastructure components. | [Application dashboards](/docs/services/Monitoring-with-Sysdig?topic=Sysdig-default_dashboards/README.md#default_dashboards_applications) |
-| Host and containers | Dashboards that you can use to monitor resource utilization and system activity on your hosts and in your containers. | [Host and container dashboards](/docs/services/Monitoring-with-Sysdig?topic=Sysdig-default_dashboards/README.md#default_dashboards_host_container) |
-| Network | Dashboards that you can use to monitor your network connections and activity. | [Network dashboards](/docs/services/Monitoring-with-Sysdig?topic=Sysdig-default_dashboards/README.md#default_dashboards_network) |
-| Service | Dashboards that you can use to monitor the performance of your services, even if those services are deployed in orchestrated containers. | [Service dashboards](/docs/services/Monitoring-with-Sysdig?topic=Sysdig-default_dashboards/README.md#default_dashboards_service) |
-| Topology | Dashboards that you can use to monitor the logical dependencies of your application tiers and overlay metrics. | [Topology dashboards](/docs/services/Monitoring-with-Sysdig?topic=Sysdig-default_dashboards/README.md#default_dashboards_topology) |
-
-{: caption="Table 1. List of pre-defined dashboards" caption-side="top"}
+| Applications | Dashboards that you can use to monitor your applications and infrastructure components. | [Application dashboards](../.gitbook/assets/FIXME.PNG) |
+| Host and containers | Dashboards that you can use to monitor resource utilization and system activity on your hosts and in your containers. | [Host and container dashboards](../.gitbook/assets/FIXME.PNG) |
+| Network | Dashboards that you can use to monitor your network connections and activity. | [Network dashboards](../.gitbook/assets/FIXME.PNG) |
+| Service | Dashboards that you can use to monitor the performance of your services, even if those services are deployed in orchestrated containers. | [Service dashboards](../.gitbook/assets/FIXME.PNG) |
+| Topology | Dashboards that you can use to monitor the logical dependencies of your application tiers and overlay metrics. | [Topology dashboards](../.gitbook/assets/FIXME.PNG) |
 
 Complete the following steps to view a Sysdig dashboard:
 
@@ -97,15 +93,15 @@ You can use the **Connection Table** dashboard to monitor how data flows between
 1. From the _Explore_ tab, select **Deployments and Pods.**
 2. Select the namespace where you deployed your sample app.
 
-   ![Explore image 2](../.gitbook/assets/explore-img-2.png)
+   ![Explore image 2](../.gitbook/assets/explore-img-2%20%281%29.png)
 
 3. Select the _patientui_ pod entry.
 
-   ![Explore image 3](../.gitbook/assets/explore-img-3.png)
+   ![Explore image 3](../.gitbook/assets/explore-img-3%20%281%29.png)
 
 4. Select **Default Dashboards**.
 
-   ![Explore image 4](../.gitbook/assets/explore-img-4.png)
+   ![Explore image 4](../.gitbook/assets/explore-img-4%20%281%29.png)
 
 5. Select **Hosts & Containers**. Then, select **Overview by Host**.
 

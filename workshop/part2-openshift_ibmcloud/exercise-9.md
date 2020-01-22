@@ -1,7 +1,5 @@
 # Exercise 9: Analyze your logs with LogDNA
 
-## Exercise 9: Analyze your logs through the LogDNA web UI
-
 In LogDNA, you can grant any of the following roles to users:
 
 * `Mamager` role: This role grants permissions to a user to perform all admin tasks. As a manager, a user can manage resources: configure/manage/delete views, alerts, dashboards, screens, keys, and exclusion rules; export data; search, filter, and view all data; and configure archiving.
@@ -26,7 +24,7 @@ Comnplete the following steps to create a custom field for a type of log record:
 
 Notice that this step requires that you have logged in to the sample app at least once.
 
-1. In the LogDNA web UI, select the **Settings** icon ![Admin icon](../.gitbook/assets/admin.png). Then select **Parsing**.
+1. In the LogDNA web UI, select the **Settings** icon ![Admin icon](../.gitbook/assets/admin%20%284%29.png). Then select **Parsing**.
 2. Select **Create Template**. The _Choose Log Line_ wizard opens.
 
    ![parsing image 1](../.gitbook/assets/parsing-img-1.png)
@@ -119,7 +117,7 @@ In the **USER PREFERENCES** section, you can modify the order of the data fields
 
 Complete the following steps to modify the format of a log line:
 
-1. Select the **Configuration** icon ![Admin icon](../.gitbook/assets/admin.png).
+1. Select the **Configuration** icon ![Admin icon](../.gitbook/assets/admin%20%281%29.png).
 2. Select **USER PREFERENCES**. A new window opens.
 3. Select **Log Format**.
 4. Modify the _Line Format_ section to match your requirements. Drag boxes around.
@@ -180,7 +178,7 @@ At any time, you can view each log line in context.
 
 Complete the following steps:
 
-1. Click the **Views** icon ![Configuration icon](../.gitbook/assets/views.png).
+1. Click the **Views** icon ![Configuration icon](../.gitbook/assets/views%20%282%29.png).
 2. Select **Everything** or a view.
 3. Identify a line in the log that you want to explore.
 4. Expand the log line.
@@ -215,7 +213,7 @@ In a view, you can search events that are displayed through a view for a specifi
 
 You can apply a timestamp by specifying an absolute time, a relative time, or a time range.
 
-Complete the following steps to jump to a specific time: 1. Launch the LogDNA web UI. 2. Click the **Views** icon ![Configuration icon](../.gitbook/assets/views.png). 3. Select your custom view. 4. Enter a time query. Choose any of the following options:
+Complete the following steps to jump to a specific time: 1. Launch the LogDNA web UI. 2. Click the **Views** icon ![Configuration icon](../.gitbook/assets/views%20%281%29.png). 3. Select your custom view. 4. Enter a time query. Choose any of the following options:
 
 * Enter an abosute time to jump to a point in time in your events such as `January 27 10:00am`.
 
@@ -223,11 +221,11 @@ Complete the following steps to jump to a specific time: 1. Launch the LogDNA we
 
 * Enter a relative time such as `1 min ago`.
 
-  ![Views image 16](fix_link)
+  ![Views image 16](https://github.com/svennam92/openshift101/tree/2b9df9bcc2717ae6785f501917c4313dd5d30c8e/workshop/part2-openshift_ibmcloud/fix_link)
 
   You can also enter a time range such as `yesterday 10am to yesterday 11am`, `last fri 4:30pm to 11/12 1 AM`, `last wed 4:30pm to 23/05 1 AM`, or `May 20 10am to May 22 10am`. Make sure to include `to` to separate the initial timestamp from the end timestamp.
 
-1. Click **ENTER**.
+* Click **ENTER**.
 
 You might get the error message: `Your request is taking longer than expected, try refreshing your browser in a bit as we try to catch up. Retry.` You might get this error when the timeframe that you have specified does not have any events available to show. Change the time query, and retry.
 
@@ -323,7 +321,7 @@ Complete the following steps to create a dashboard to monitor logs from the lab'
 
    Click **Add Widget**.
 
-   ![Screen image 2](../.gitbook/assets/screen-img-2.png)
+   ![Screen image 2](../.gitbook/assets/screen-img-2%20%282%29.png)
 
    Select **Count**.
 
@@ -349,7 +347,7 @@ Complete the following steps to create a dashboard to monitor logs from the lab'
 
    Click **Add Widget**.
 
-   ![Screen image 2](../.gitbook/assets/screen-img-2.png)
+   ![Screen image 2](../.gitbook/assets/screen-img-2%20%281%29.png)
 
    Select **Gauge**.
 
@@ -399,12 +397,12 @@ Complete the following steps to create a dashboard to monitor logs from the lab'
 
 ### Export resources for reuse in other LogDNA instances \(Optional\)
 
-To avoid recreating definitions of views, boards, parsing templates, and exclusion rules, you can export these resources from a  instance as a JSON file. Then, you can import the definitions into other LogDNA instances.
+To avoid recreating definitions of views, boards, parsing templates, and exclusion rules, you can export these resources from a instance as a JSON file. Then, you can import the definitions into other LogDNA instances.
 
 Complete the following steps to export the configuration of your resources:
 
 1. Launch the LogDNA web UI.
-2. Select the **Settings** icon ![Admin icon](../.gitbook/assets/admin.png). Then select **Organization**.
+2. Select the **Settings** icon ![Admin icon](../.gitbook/assets/admin%20%282%29.png). Then select **Organization**.
 3. Select **Account config**.
 4. In the _Export configuration_ section, select the types of resources that you want to export.
 
@@ -446,7 +444,7 @@ You will configure the rule so that you are not able to see excluded log data th
 
 Complete the following steps to define the exclusion rule:
 
-1. In the LogDNA web UI, select the **Settings** icon ![Admin icon](../.gitbook/assets/admin.png). Then select **Usage** &gt; **Exclusion Rules**.
+1. In the LogDNA web UI, select the **Settings** icon ![Admin icon](../.gitbook/assets/admin%20%283%29.png). Then select **Usage** &gt; **Exclusion Rules**.
 2. Select **Add Rule**. The **Create Rule** section opens.
 3. Enter a name for the rule in the section **What is this rule for?**. For example, enter _Exclude log records from the namespace kube-system except error ones_.
 4. Enter the exclusion criteria. You can select 1 or more sources, 1 or more apps, enter a query, or a combination of sources, apps and query.
