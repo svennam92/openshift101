@@ -4,78 +4,10 @@ To integrate your monitoring instance with your OpenShift cluster, you must run 
 
 ## Prereq
 
-To deploy the Sysdig agent in a cluster, you must have a user ID that has the following IAM roles:
+To deploy the Sysdig agent in a cluster, you must have a user ID that has the following Sysdig IAM roles:
 
-* **Viewer** platform role, and **Manager** service role to work with that cluster instance.
-* **Viewer** permissions on the resource group where the cluster is available.
+* **Administrator** Platform role, and **Manager** Service role to work with the Sysdig instance.
 
-To configure the Sysdig agent in the cluster, you need the following CLIs:
-
-* The IBM Cloud CLI to log in to the IBM Cloud by using `ibmcloud` commands, and to manage the cluster by using `ibmcloud ks` commands. [Learn more](../.gitbook/assets/FIXME.PNG).
-* The Kubernetes CLI to manage the cluster by using `kubectl` commands. [Learn more](../.gitbook/assets/FIXME.PNG).
-* The Openshift CLI to login to the cluster from the command line and deploy the agent. [Learn more](../.gitbook/assets/FIXME.PNG).
-
-## Step 1. Set the cluster context and log in to the cluster
-
-Complete the following steps:
-
-1. Open a terminal to log in to IBM Cloud.
-
-   ```text
-   ibmcloud login -a cloud.ibm.com
-   ```
-
-   Select the account where you provisioned the IBM Log Analysis with LogDNA instance.
-
-2. List the clusters to find out in which region and resource group the cluster is available.
-
-   ```text
-    ibmcloud oc clusters
-   ```
-
-3. Set the resource group and region.
-
-   ```text
-    ibmcloud target -g RESOURCE_GROUP -r REGION
-   ```
-
-   Where
-
-   `RESOURCE_GROUP` is the name of the resource group where the cluster is available, for example, `default`.
-
-   `REGION` is the region where the cluster is available, for example, `us-south`.
-
-4. Set the cluster context in your session.
-
-   Run the following command:
-
-   ```text
-    export IKS_BETA_VERSION=1
-   ```
-
-   Then, run:
-
-   ```text
-    ibmcloud oc cluster config --cluster <cluster_name_or_ID>
-   ```
-
-   The behavior of the command `ibmcloud oc cluster config` in your current CLI version is deprecated, and becomes unsupported when CLI version 1.0 is released in March 2020. To use the new behavior now, you have set the 'IKS\_BETA\_VERSION' environment variable by running `export IKS_BETA_VERSION=1`. Note: Changing the beta version can include other breaking changes. For more information, see [Boost Your Productivity with a New CLI ](http://ibm.biz/iks-cli-v1).
-
-5. Log in to the cluster. Choose a method to login to an OpenShift cluster. [Learn more about the methods to login](../.gitbook/assets/FIXME.PNG).
-
-   For example, you can create an IBM Cloud IAM API key, and then use the API key to log in to an OpenShift cluster.
-
-   Create an IBM Cloud API key.Save your API key in a secure location. You cannot retrieve the API key again. If you want to export the output to a file on your local machine, include the \`--file/\` flag.
-
-   ```text
-    ibmcloud iam api-key-create os-lab-apikey
-   ```
-
-   Then, use the API key to login:
-
-   ```text
-    oc login -u apikey -p <API_key>
-   ```
 
 ## Step 2. Get your Sysdig instance access key
 
@@ -180,7 +112,7 @@ Example output:
     sysdig-agent-rhrgz   1/1       Running   0          1m
 ```
 
-1. From the [IBM Cloud **Observability &gt; Monitoring** console](https://cloud.ibm.com/observe/logging), in the row for your monitoring instance, click **View Sysdig**. The Sysdig dashboard opens, and you can analyze your cluster metrics.
+1. From the IBM Cloud [**Observability &gt; Monitoring** console](https://cloud.ibm.com/observe/logging), in the row for your monitoring instance, click **View Sysdig**. The Sysdig dashboard opens, and you can analyze your cluster metrics.
 
 For more information about how to use monitoring, see the [Next steps docs](../.gitbook/assets/FIXME.PNG).
 
