@@ -20,7 +20,7 @@ Follow the instructions on the next page. You will be added to the IBM Workshop 
 
 ![Instructions to access cluster](../assets/access-clusters.png)
 
-Back in IBM Cloud, refresh the [IBM Cloud Dashboard](https://cloud.ibm.com). If required, switch to the **1840867-IBM** account by clicking on the account selection drop down in the top nav bar.
+Back in IBM Cloud, refresh the [IBM Cloud Dashboard](https://cloud.ibm.com). If required, switch to the **1860103 - IBM** account by clicking on the account selection drop down in the top nav bar.
 
 ![IBM Account](../assets/ibmaccount.png)
 
