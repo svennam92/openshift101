@@ -13,11 +13,11 @@
 * [Exercise 4: Scaling the application](part1-learn_openshift/exercise-4.md)
 
 ## Part 2 - OpenShift and IBM Cloud
-* [Exercise 6: Cloudant DB with IBM Cloud Operator](part2-openshift_ibmcloud/exercise-6.md)
-* [Exercise 7: Configure the Sysdig Agent](part2-openshift_ibmcloud/exercise-7.md)
-* [Exercise 8: Configure the LogDNA Agent](part2-openshift_ibmcloud/exercise-8.md)
-* [Exercise 9: Analyze your logs with LogDNA](part2-openshift_ibmcloud/exercise-9.md)
-* [Exercise 10: Monitor your Cluster with SysDig](part2-openshift_ibmcloud/exercise-10.md)
+* [Exercise 5: Cloudant DB with IBM Cloud Operator](part2-openshift_ibmcloud/exercise-5.md)
+* [Exercise 6: Configure the Sysdig Agent](part2-openshift_ibmcloud/exercise-6.md)
+* [Exercise 7: Configure the LogDNA Agent](part2-openshift_ibmcloud/exercise-7.md)
+* [Exercise 8: Analyze your logs with LogDNA](part2-openshift_ibmcloud/exercise-8.md)
+* [Exercise 9: Monitor your Cluster with SysDig](part2-openshift_ibmcloud/exercise-9.md)
 
 ## Resources
 * [IBM Developer](https://developer.ibm.com)

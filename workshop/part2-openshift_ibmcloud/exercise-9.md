@@ -1,507 +1,203 @@
-# Exercise 9: Analyze your logs with LogDNA
+# Exercise 10: Monitor your Cluster with SysDig
 
-IBM Log Analysis with LogDNA is a co-branded service that you can include as part of your IBM Cloud architecture to add log management capabilities. IBM Log Analysis with LogDNA is operated by LogDNA in partnership with IBM.
+IBM Cloud Monitoring with Sysdig is a co-branded cloud-native, and container- intelligence management system that you can include as part of your IBM Cloud architecture. Use it to gain operational visibility into the performance and health of your applications, services, and platforms. It offers administrators, DevOps teams, and developers full stack telemetry with advanced features to monitor and troubleshoot performance issues, define alerts, and design custom dashboards. IBM Cloud Monitoring with Sysdig is operated by Sysdig in partnership with IBM.
 
-You can use IBM Log Analysis with LogDNA to manage system and application logs in IBM Cloud.
+The following diagram shows the components overview for the IBM Cloud Monitoring with Sysdig service that is running on IBM Cloud:
 
-IBM Log Analysis with LogDNA offers administrators, DevOps teams, and developers advanced features to filter, search, and tail log data, define alerts, and design custom views to monitor application and system logs.
+![](../assets/monitoring_ov.png)
 
-The following figure shows the high level view for the IBM Log Analysis with LogDNA service that is running on IBM Cloud:
 
-![Components overview of IBM Log Analysis with LogDNA](../assets/logging_ov.png)
+When you monitor an application, you should consider:
+
+* Monitoring the health of the application
+
+  The health signals coming from hardware and software components
+
+  Utilization, Saturations and Errors \(USE\): resource usage and capacity limits, CPU, memory, disk I/O, network against host or container limits
+
+* Monitoring the golden signals that focus on perceived service quality
+
+  Latency of HTTP calls, both average and worst case ones
+
+  Traffic, that is, rate of requests per second
+
+  Errors and their frequency
 
 ## Features
 
-**Troubleshoot logs in real time to diagnose issues and identify problems.**
+**Accelerate the diagnosis and resolution of performance incidents.**
 
-By using the *live streaming tail* feature, developers and DevOps teams can diagnose issues, analyze stack traces and exceptions, identify the source of errors, and monitor different log sources through a single view. 
+IBM Cloud Monitoring with Sysdig offers deep visibility into your infrastructure and applications with the ability to troubleshoot from service level all the way down to the system level. Pre-defined dashboards and alerts simplify identification of potential threats or problems. By using IBM Cloud Monitoring with Sysdig, developers and DevOps teams monitor and troubleshoot performance issues in real-time, identify the source of errors, and eliminate problems.
 
-**Issue alerts to be notified of important actions.**
- 
-To act promptly on application and services events that you identify as critical or warning, DevOps teams can configure alert notification integrations to the following systems: email, Slack, webHook, and PagerDuty.
+**Control the cost of your monitoring infrastructure.**
 
-**Export logs to a local file for analysis or to an archive service to meet auditing requirements.**
+IBM Cloud Monitoring with Sysdig includes functionality that helps you to control the cost of your monitoring infrastructure in IBM Cloud. You can configure the metric sources for which you want to monitor performance. You can enable a pre-defined alert to warn you of usage changes that will impact your billing.
 
-Export specific log lines to a local copy or archive logs from IBM Log Analysis with LogDNA to IBM Cloud Object Storage.
-Log lines are exported in JSON line format. Logs are archived in JSON format and preserve the metadata that is associated with each line. 
+**Explore and visualize easily your entire environment.**
 
-**Control logging infrastructure costs by customizing what logs to manage through LogDNA.**
+IBM Cloud Monitoring with Sysdig makes it easier to visually explore your environment. Dynamic topology maps provide a view of dependencies between services. Multi- dimensional queries across high churn, high cardinality, high frequency metrics accelerate troubleshooting. Customizable dashboards allow you to visualize what matters most.
 
-Control the cost of your logging infrastructure in the IBM Cloud by configuring the log sources for which you want to collect and manage logs. 
+**Get critical Kubernetes and container insights for dynamic microservice monitoring.**
 
-## IAM roles
+IBM Cloud Monitoring with Sysdig auto-discovers Kubernetes environments and provides out-of-the-box dashboards and alerts for clusters, nodes, namespaces, services, deployments, pods, and more. A single agent per node dynamically discovers all microservices and auto-collects metrics and events from various sources including Kubernetes, hosts, networks, containers, processes, applications, and custom metrics like Prometheus, JMX, and StatsD.
 
-In LogDNA, you can grant any of the following service roles to users:
+**Mitigate the impact of abnormal situations with proactive notifications.**
 
-* `Mamager` role: This role grants permissions to a user to perform all admin tasks. As a manager, a user can manage resources: configure/manage/delete views, alerts, dashboards, screens, keys, and exclusion rules; export data; search, filter, and view all data; and configure archiving.
-* `Standard member` role: This role grants permissions to a user to perform some admin tasks. As a standard member, a user can configure/manage/delete views, alerts, dashboards and screens, export data, and search, filter, and view all data.
-* `Reader` role: This role grants permissions to a user to customize the UI, and view data only. As a reader, a user can perform read-only actions such as monitor data through views, dashboards, and screens.
+IBM Cloud Monitoring with Sysdig includes alerts and multi-channel notifications that you can use to reduce the impact on your day-to-day operations and accelerate your reaction and response time to anomalies, downtime, and performance degradation. Notification channels that you can easily configure
+include email, Slack, PagerDuty, webhooks, Opsgenie, and VictorOps.
 
-Your user has been granted manager permissions in the LogDNA instance that you are using in this lab so that you can complete all of the sections in the exercise.
 
-**IMPORTANT: Use Chrome to complete this exercise.**
 
-## Create a custom view
+In the next steps, you will learn how to use dashboards and metrics to monitor the health of your application.
 
-**In LogDNA, you can configure custom views to monitor a subset of data. You can also attach an alert to a view to be notified of the presence or absence of log lines.**
+### Launch the web UI
 
-When you launch the LogDNA web UI, log entries are displayed with a predefined format. You can modify in the **User Preferences** section how the information in each log line is displayed. You can also filter logs and modify search settings, then bookmark the result as a _view_. You can attach and detach one or more alerts to a view. You can define a custom format for how your lines are shown in the view. You can expand a log line and see the data parsed.
+You launch the Web UI within the context of an Sysdig instance, from the IBM Cloud UI.
 
-#### View events with the default format
+Complete the following steps to launch the web UI:
 
-1. In the LogDNA web UI, click the **Views** icon ![](../assets/views.png).
-2. Select **Everything** to see all the events.
+1. In the LogDNA web UI, click the **Views** icon ![](../assets/views.png) &gt; **Observability**.
 
-![](../assets/views-img-1.png)
+2. Select **Monitoring**.
 
-#### Customize your default view
+   The list of instances that are available is displayed.
 
-In the **USER PREFERENCES** section, you can modify the order of the data fields that are displayed per line.
+3. Select the instance that is allocated for your lab. Then, click **View Sysdig**.
 
-Complete the following steps to modify the format of a log line:
+The Web UI opens.
 
-1. Select the **Configuration** icon ![](../assets/admin.png).
-2. Select **USER PREFERENCES**. A new window opens.
-3. Select **Log Format**.
-4. Modify the _Line Format_ section to match your requirements. Drag boxes around.
+## View SysDig pre-defined views and dashboards
 
-#### Create a custom view to monitor logs from the sample app
+**Use views and dashboards to monitor your infrastructure, applications, and services. You can use pre-defined dashboards. You can also create custom dashboards through the Web UI or programmatically. You can backup and restore dashboards by using Python scripts.**
 
-You can select the events that are displayed through a view by applying a search query in the search bar, selecting values in the search area, or a combination of both. You can save that view for reuse later.
+The following table lists the different types of pre-defined dashboards:
 
-Complete the following steps:
+| Type | Description | 
+| :--- | :--- |
+| Applications | Dashboards that you can use to monitor your applications and infrastructure components. |
+| Host and containers | Dashboards that you can use to monitor resource utilization and system activity on your hosts and in your containers. |
+| Network | Dashboards that you can use to monitor your network connections and activity. | 
+| Service | Dashboards that you can use to monitor the performance of your services, even if those services are deployed in orchestrated containers. | 
+| Topology | Dashboards that you can use to monitor the logical dependencies of your application tiers and overlay metrics. | 
 
-1. In the LogDNA web UI, select **ALL Apps** in the search area.
+Complete the following steps to view a Sysdig dashboard:
 
-   ![](../assets/views-img-2.png)
+1. After you launch the Sysdig web UI, in the Sysdig Welcome wizard, select **Kubernetes** as the installation method.
 
-2. Select the app **patientui** which is the sample app that you have deployed in your cluster in the lab.
+   After 30 seconds or so, it should show one or more agents connected.
 
-   ![](../assets/views-img-3.png)
+   Select **GO TO NEXT STEP**.
 
-3. Filter out log lines to display only lines that tagged as debug lines. Enter in the search bar the following query: `level:debug`
+   Then select **LET'S GET STARTED**.
 
-   ![](../assets/views-img-4.png)
+2. Navigate the Sysdig console to get metrics on your Kubernetes cluster, nodes, deployments, pods, containers. Explore the following views:
+3. View raw metrics for all workloads running on the cluster.
 
-   Then, click enter. The view will show lines that meet the filtering and search criteria.
+   Under the _Explore_ section,
 
-   ![](../assets/views-img-5.png)
+   ![](../assets/explore.png)
 
-4. Save the custom view.
+   Select **Containerized Apps** to view raw metrics for all workloads running on the cluster.
 
-   Click **Unsaved view**. Select **Save view**.
+4. Get a global view of the cluster HTTP load.
 
-   ![](../assets/views-img-6.png)
+   Under Dashboard,
 
-   The following pop up opens:
+   ![](../assets/dashboards.png)
 
-   ![](../assets/views-img-7.png)
+   Select **My Dashboards**. Then select **HTTP Overview** to get a global view of the cluster HTTP load.
 
-   Enter the name of the view. Use the following format: `<Enter your user name> patientUI` For example, `marisa patientui`
+5. Check how nodes are currently performing.
 
-   Enter a category. Use the following format: `<Enter your user name>` For example, `marisa` Then click **Add new category**.
+   Under Dashboard, select **My Dashboards**. Then select **Overview by Host** to understand how nodes are currently performing.
 
-   Your configuration should look like the following sample:
+6. Check information about the sample app _patientui_.
 
-   ![](../assets/views-img-10.png)
+   Under _Explore_, select **Cluster and Nodes**. Expand the section **Entire Infrastructure**. Look for the partientui pod entry.
 
-   Click **Save view**.
+   ![](../assets/explore-img-1.png)
 
-A new category appears on the left navigation panel.
+### Explore the normal traffic flow of the application
 
-![](../assets/views-img-11.png)
+You can use the **Connection Table** dashboard to monitor how data flows between your application components.
 
-#### Analyze a log line
+1. From the _Explore_ tab, select **Deployments and Pods.**
+2. Select the namespace where you deployed your sample app.
 
-At any time, you can view each log line in context.
+   ![](../assets/explore-img-2.png)
 
-Complete the following steps:
+3. Select the _patientui_ pod entry.
 
-1. Click the **Views** icon ![](../assets/views.png).
-2. Select **Everything** or a view.
-3. Identify a line in the log that you want to explore.
-4. Expand the log line.
+   ![](../assets/explore-img-3.png)
 
-   Information about line identifiers, tags, and labels is displayed.
+4. Select **Default Dashboards**.
 
-5. Click **View in Context** to see the log line in context of other log lines from that host, app, or both. This is a very useful feature when you want to troubleshoot a problem.
+   ![](../assets/explore-img-4.png)
 
-   ![](../assets/views-img-12.png)
+5. Select **Hosts & Containers**. Then, select **Overview by Host**.
 
-   A new pop up window opens.
+   ![](../assets/explore-img-7.png)
 
-   ![](../assets/views-img-13.png)
+6. Select **Hosts & Containers**. Then, select **Overview by Container**.
 
-   Choose one of the following options:
+   ![](../assets/explore-img-5.png)
 
-   **By Everything** to see the log line in the context of all log records \(everything\) that are available in the LogDNA instance.
+   The **Overview by Container** view opens. Look at the different columns and the data.
 
-   **By source** to see the log line in the context of the log lines for the same source.
+   ![](../assets/explore-img-6.png)
 
-   **By App** to see the log line in the context of the log lines of the app.
+### Explore the cluster and the node capacity
 
-   **By Source and App** to see the log line in the combined context of the app and source.
+1. From the _Explore_ tab, select **Deployments and Pods.**
+2. Select the namespace where you deployed your sample app.
 
-   Then click **Continue in New Viewer** to get the view in a different page. You might need to scroll down to get this option.
+   ![](../assets/explore-img-2.png)
 
-   **Tip: Open a view per type of context to troubleshoot problems.**
+3. Select the _patientui_ pod entry.
 
-6. Click **Copy to clipboard** to copy the message field to the clipboard. 
+   ![](../assets/explore-img-3.png)
 
-    For example, the log record in the UI looks like:
+4. Select **Default Dashboards**.
 
-    ![](../assets/views-img-16.png)
+   ![](../assets/explore-img-4.png)
 
-    When you copy the record, you get:
+5. Select **Kubernetes Cluster**. Then, select **Node capacity**.
 
-    ```
-    [36m[2020-01-16T13:22:25.951] [DEBUG] default - [39mcalled the information endpoint for Marisa
-    ```
+   ![](../assets/explore-img-8.png)
 
-    Notice that when you copy the log record you get less information than what it is displayed in the view. To get a line with all the fields, you must export data from a custom view. 
+   The view **Kubernetes Cluster and Node Capacity** opens.
 
-When you are finished, close the line.
+   ![](../assets/explore-img-9.png)
 
-#### View a subset of the events by applying a timeframe
+   Check the **Total CPU Capacity**. This is the CPU capacity that has been reserved for the node including system daemons.
 
-In a view, you can search events that are displayed through a view for a specific timeframe.
+   Check the **Total Allocatable CPU**. This is the CPU which is available for pods excluding system daemons.
 
-You can apply a timestamp by specifying an absolute time, a relative time, or a time range.
+   Check the **Total Pod CPU limit**. It should be less than the allocatable CPU of the node or cluster.
 
-Complete the following steps to jump to a specific time: 
+   Check the **Total Pod CPU Requested**. It is the amount of CPU that will be guaranteed for pods on the node or cluster.
 
-1. Launch the LogDNA web UI. 
+   Check the **Total Pod CPU Usage**. It is the total amount of CPU that is used by all Pods on the node or cluster.
 
-2. Click the **Views** icon ![](../assets/views.png). 
+### Explore the Network
 
-3. Select your custom view. 
+1. From the _DASHBOARDS_ tab, select **My Dashboards**. Then, select **Network Overview**.
 
-4. Enter a time query. Choose any of the following options:
+   ![](../assets/dashboard-img-1.png)
 
-    Enter an absolute time to jump to a point in time in your events such as `January 27 10:00am`.
+   The following dashboard is displayed. It shows information about all resources that are monitored thorugh the instance.
 
-    ![](../assets/views-img-15.png)
+   ![](../assets/dashboard-img-2.png)
 
-    Enter a relative time such as `5 days ago`. 
+2. Change the scope of the dashboard to display information about your openshift cluster. Select **Edit scope**
 
-    ![](../assets/views-img-17.png)
+    ![](../assets/dashboard-img-3.png)
 
-    You can also enter a time range such as `yesterday 10am to yesterday 11am`, `last fri 4:30pm to 11/12 1 AM`, `last wed 4:30pm to 23/05 1 AM`, or `May 20 10am to May 22 10am`. Make sure to include `to` to separate the initial timestamp from the end timestamp.
+    Change the scope.
 
-    Click **ENTER**.
+    ![](../assets/dashboard-img-4.png)
 
-You might get the error message: `Your request is taking longer than expected, try refreshing your browser in a bit as we try to catch up. Retry.` You might get this error when the timeframe that you have specified does not have any events available to show. Change the time query, and retry.
+    The dashboard shows information about the ibm-observe namespace.
 
-### Create a dashboard
-
-**You can create a dashboard to monitor your app graphically through interactive graphs.**
-
-For example, you can use graphs to analyze patterns and trends over a period of time.
-
-Complete the following steps to create a dashboard to monitor logs from the lab's sample app:
-
-1. In the LogDNA web UI, click the **Boards** icon ![Dashboards icon](../assets/boards.png).
-2. Select **NEW BOARD** to create a new dashboard.
-
-   ![](../assets/board-img-1.png)
-
-3. Click **Add graph**.
-
-   ![](../assets/board-img-2.png)
-
-4. Select the field **app**.
-
-   ![](../assets/board-img-3.png)
-
-   Then, select the value **patientui**.
-
-   ![](../assets/board-img-4.png)
-
-   Click **Add graph**.
-
-   ![](../assets/board-img-5.png)
-
-5. Open a view that displays the logs for the patientui app. Click the graph in a peak of data at the time that you want to see logs, and then click **Show logs**.
-
-   ![](../assets/board-img-6.png)
-
-   A new page opens with the log entries.
-
-   ![](../assets/board-img-7.png)
-
-6. Add subplots to analyze the data by applying additonal filtering criteria.
-
-   ![](../assets/board-img-8.png)
-
-   Click **Show subplots**.
-
-   ![](../assets/board-img-9.png)
-
-   Select **Histogram**.
-
-   ![](../assets/board-img-10.png)
-
-   Select **level**.
-
-   ![](../assets/board-img-11.png)
-
-   Click **Add** to configure more subplots. For example, add a histogram for the custom field _patient_ that you configured earlier. \(Note that you might need to wait a bit longer and logout and login into the sample app for the custom field to be available for search after the parsing template is applied. Continue and retry this step later on.\)
-
-   ![](../assets/board-img-12.png)
-
-7. Name the dashboard.
-
-   Enter `patientui` as the name of the dashboard.
-
-   ![](../assets/board-img-13.png)
-
-   Enter a category. Use the following format: `<Enter your user name>` For example, `marisa` Then click **Add new category**.
-
-   ![](../assets/board-img-14.png)
-
-   Your configuration should look like the following sample:
-
-   ![](../assets/board-img-15.png)
-
-   Click **Save**.
-
-A new category appears on the left navigation panel.
-
-![](../assets/board-img-16.png)
-
-### Create a screen to monitor your app
-
-**You can create a screen to monitor your app graphically through metrics \(counters\), operational KPIs \(gauges\), tables, and time-shifted graphs \(graphs that you can use to analyze patterns and trends for comparison analysis\).**
-
-Complete the following steps to create a dashboard to monitor logs from the lab's sample app:
-
-1. In the LogDNA web UI, click the **screens** icon ![](../assets/screens.png).
-2. Select **NEW SCREEN**.
-
-   ![](../assets/screen-img-1.png)
-
-3. Add a counter.
-
-   Click **Add Widget**.
-
-   ![](../assets/screen-img-2.png)
-
-   Select **Count**.
-
-   ![](../assets/screen-img-3.png)
-
-   Click the widget. You will get the configuration fields for this widget.
-
-   ![](../assets/screen-img-4.png)
-
-   To configure the _Count_ widget to report on the log lines for the application patientui, you must select the field **app**, and set the value to **patientui**.
-
-   ![](../assets/screen-img-5.png)
-
-   You can also add a label, by entering a value for the _label_ field.
-
-   ![](../assets/screen-img-6.png)
-
-   The widget should look similar to the following one:
-
-   ![](../assets/screen-img-7.png)
-
-4. Add a gauge.
-
-   Click **Add Widget**.
-
-   ![](../assets/screen-img-2.png)
-
-   Select **Gauge**.
-
-   ![](../assets/screen-img-8.png)
-
-   Click the widget. You will get the configuration fields for this widget.
-
-   To configure the _Gauge_ widget to report on the debug log lines for the application patientui, you must select the field **level**, and set the value to **debug**. Then, set the advanced condition `app:patientui`. The duration is set to the default, last 1 day.
-
-   ![](../assets/screen-img-9.png)
-
-   Add a label, by entering a value for the _label_ field. Enter `PatientUI - INFO`. Add also the gauge limits.
-
-   ![](../assets/screen-img-10.png)
-
-   The widget should look similar to the following one:
-
-   ![](../assets/screen-img-11.png)
-
-5. Add a table.
-
-   Click **Add Widget**.
-
-   ![](../assets/screen-img-2.png)
-
-   Select **Table**.
-
-   ![](../assets/screen-img-12.png)
-
-   Click the widget. You will get the configuration fields for this widget.
-
-   To list the number of records in the last 24 hours for the cluster namespaces, you must set the field **namespace**.
-
-   ![](../assets/screen-img-13.png)
-
-   Change the default number of rows from 3 to 10.
-
-   ![](../assets/screen-img-14.png)
-
-   The widget should look similar to the following one:
-
-   ![](../assets/screen-img-15.png)
-
-6. Save the screen. Select **Save Screen**.
-
-   IMPORTANT: If you do not save the screen, you loose all your widgets.
-
-### Export resources for reuse in other LogDNA instances \(Optional\)
-
-To avoid recreating definitions of views, boards, parsing templates, and exclusion rules, you can export these resources from a instance as a JSON file. Then, you can import the definitions into other LogDNA instances.
-
-Complete the following steps to export the configuration of your resources:
-
-1. Launch the LogDNA web UI.
-2. Select the **Settings** icon ![](../assets/admin.png). Then select **Organization**.
-3. Select **Account config**.
-4. In the _Export configuration_ section, select the types of resources that you want to export.
-
-   Notice that options are disabled if you do not have definitions of this type of resource in your LogDNA instance.
-
-   You can export views and alerts, boards, parsing templates, and exclusion rules.
-
-5. Select **Export configuration** and save the file.
-
-The file that you save is a JSON file. You cannot modify it or you will break it.
-
-Notice that when you import this file into another LogDNA instance, you can choose to add or replace the existing resources.
-
-* When you choose the **add** option, you add assets to the existing ones.
-* When you choose the **replace** option, you remove all assets, and new ones are created. Watch out with this option since you may delete resources that you might want to keep.
-
-## Controlling data usage \(Optional\)
-
-you can control the data that is collected and available for analysis through a LogDNA instance. You can define exclusion rules in the UI that apply to data collected in that instance. You can also configure LogDNA agents and customize them to collect and forward specific log data. In addition, you can define an alert that is triggered when the data usage threshold that you define for that LogDNA instance is reached.
-
-#### Enable an email alert to notify of usage
-
-You can define an alert to notify when the data usage in the instance reaches the data usage threshold that you set for the instance.
-
-1. In the LogDNA web UI, select the **Settings** icon ![](../assets/admin.png). Then select **Usage**.
-
-   In the **Dashboard** section, you can see your data usage.
-
-2. Define a **Usage Alert** to set the threshold for data usage in the instance. When the threshold is reached, you are notified. Enter a value to set the data usage threshold.
-3. In the **Add recipient** section, enter one or more emails where the notification will be sent.
-
-#### Configure an exclusion rule to stop showing logs from a resource
-
-**A service administrator \(manager role\) can configure exclusion rules through the LogDNA web UI to stop logs from counting against your data usage quota and from being stored for search.**
-
-In this section, you will learn how to exclude kube-system data from the cluster while keeping entries that report errors only.
-
-You will configure the rule so that you are not able to see excluded log data through views.
-
-Complete the following steps to define the exclusion rule:
-
-1. In the LogDNA web UI, select the **Settings** icon ![](../assets/admin.png). Then select **Usage** &gt; **Exclusion Rules**.
-2. Select **Add Rule**. The **Create Rule** section opens.
-3. Enter a name for the rule in the section **What is this rule for?**. For example, enter _Exclude log records from the namespace kube-system except error ones_.
-4. Enter the exclusion criteria. You can select 1 or more sources, 1 or more apps, enter a query, or a combination of sources, apps and query.
-
-   In the Query section, enter **Namespace:kube-system -level:error** to exclude all lines except the ones that report an error.
-
-5. Leave unchecked the option **Preserve these lines for live-tail and alerting**.
-6. Click **Save**.
-
-### Create a custom parser (optional)
-
-**You can use the custom parser to extract additional information in custom fields that you can use to accelerate searches and enhance reporting in dashboards and screens.**
-
-There are 3 status types for parsing templates;
-
-* Active: Valid parsing templates that will be applied against log lines. Activated parsing templates are only applied to the lines that come in after the template has been enabled. All log lines that were ingested prior to the template becoming active are not parsed by the parsing template. 
-* Inactive: Valid parsing templates that will not be applied against log lines.
-* Draft: Invalid parsing templates. These are templates that are either incomplete, contain errors or have not yet been validated.
-
-Complete the following steps to create a custom field for a type of log record:
-
-Notice that this step requires that you have logged in to the sample app at least once.
-
-1. In the LogDNA web UI, select the **Settings** icon ![Admin icon](../assets/admin.png). Then select **Parsing**.
-2. Select **Create Template**. The _Choose Log Line_ wizard opens.
-
-   ![](../assets/parsing-img-1.png)
-
-3. Click **Select a method**. Choose **Find an existing log line**.
-
-   ![](../assets/parsing-img-2.png)
-
-4. Click **Query** to enter the following query: `namespace:example-health AND app:patient-ui AND "endpoint for"`.
-
-   ![](../assets/parsing-img-3.png)
-
-   Then, click enter. A subset of log lines that match that query are listed.
-
-   ![](../assets/parsing-img-4.png)
-
-5. Scroll down, then Select **Build Parsing Template**. The _Parsing Template_ wizard opens.
-6. Choose the first criteria to parse the data.
-
-   Click **Choose an extractor**. Then choose **Extract Values by Delimiter**.
-
-   ![](../assets/parsing-img-5.png)
-
-   Enter the following delimiter: **endpoint for**
-
-   ![](../assets/parsing-img-6.png)
-
-7. Choose the second criteria to parse the data.
-
-   Select the username that you used to log in.
-
-   ![](../assets/parsing-img-7.png)
-
-   Then, click **choose an operator** and select **Trim value**.
-
-   ![](../assets/parsing-img-8.png)
-
-   The trim configuration options are displayed:
-
-   ![](../assets/parsing-img-9.png)
-
-   Enter `0` and `1` to remove any non-wanted characters.
-
-   ![](../assets/parsing-img-10.png)
-
-8. Configure the custom field.
-
-   Click **Choose an extractor**. Then choose **Capture in Field**.
-
-   ![](../assets/parsing-img-11.png)
-
-   Enter the name of the custom field: **patient**
-
-   ![](../assets/parsing-img-12.png)
-
-9. Select **Proceed to validation**. The _Test and Verify_ wizard opens.
-
-   ![](../assets/parsing-img-13.png)
-
-   Check that all the lines set valid username values. Click **Validate All**.
-
-   Lines should change the status to **Validated**.
-
-   ![](../assets/parsing-img-14.png)
-
-   Then, click **Activate**. A new template is created.
-
-   ![](../assets/parsing-img-15.png)
-
-After 15 min, new log records that arrive to the LogDNA instance and match the query criteria will include a custom field **patient** that you can use for filtering data in views, dashboards, and screens.
-
-![](../assets/parsing-img-16.png)
+    ![](../assets/dashboard-img-5.png)
 

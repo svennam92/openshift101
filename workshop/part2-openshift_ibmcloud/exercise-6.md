@@ -1,202 +1,106 @@
-# Exercise 6: Cloudant DB with IBM Cloud Operator
+# Exercise 7: Configure the Sysdig Agent
 
-Currently, the Example Health `patient-ui` app is using a dummy in-memory patient. In this exercise, you'll create a Cloudant service in IBM Cloud and populate it with patient data. Cloudant is a NoSQL database-as-a-service, based on CouchDB.
+To integrate your monitoring instance with your OpenShift cluster, you must run a script that creates a project and privileged service account for the Sysdig agent.
 
-## Enable the IBM Cloud Operator
+## Step 1. Access your cluster through the CLI
 
-Let's understand exactly how Operators work. In the first exercise, you deployed a simple application using a DeploymentConfig and Pods -- these are "default resources" that come with OpenShift. A custom resource definition allows you to create resources that are not necessarily running within Kubernetes, such an IBM Cloud service. Operators manage the lifecycle of resources and create CRDs, allowing you to manage custom resources the native "Kubernetes" way.
+[Access your cluster using the oc CLI](../getting-started/setup_cli#access-your-cluster-using-the-oc-cli).
 
-1. Navigate to your OpenShift console, access the `Administrator` view, and click `Operators > OperatorHub`
+## Step 2. Launch the Sysdig webUI
 
-   ![OperatorHub](../assets/operatorhub.png)
+You launch the web UI within the context of an IBM Cloud Monitoring with Sysdig instance, from the IBM Cloud UI. 
 
-2. Find the "IBM Cloud Operator", and hit "Install"
+Complete the following steps to launch the web UI:
 
-   ![Operator Install](../assets/cloudoperatorinstall.png)
+1. Click the **Menu** icon ![](../assets/admin.png) &gt; **Observability**. 
 
-3. Keep the default options and hit `Subscribe`:
+2. Select **Monitoring**. 
 
-   ![Operator Subscribe](../assets/operatorsubscribe.png)
+    The list of instances that are available on IBM Cloud is displayed.
 
-4. You may need to wait a few seconds and refresh for the operator to show up as `Installed`:
+3. Select your instance. Check with the instructor which instance  you should use for the lab.
 
-   ![Installed Operators](../assets/installedoperators.png)
+4. Click **View Sysdig**.
 
-5. Next, you'll need to set your IBM Cloud credentials so that the Operator knows how/where to create your Cloudant service. The operator needs to create the service in your own account, rather than the shared IBM lab account.
+The Web UI opens.
 
-   ```text
-    ibmcloud login --sso
-   ```
+## Step 3. Get the access key for your Sysdig instance
 
-   Remember: Pick your own account, not IBM.
+The Sysdig access key is used to open a secure web socket to the Sysdig ingestion server and to authenticate the monitoring agent with the monitoring service.
 
-   ```text
-    Select an account:
-    1. Sai Vennam's Account (d815248d6ad0cc354df42d43db45ce09) <-> 1909673
-    2. IBM (3a4766a7bcab032d4ffc980d360fbf23) <-> 338150
-    Enter a number> 1
-   ```
+Comnplete the following steps:
 
-6. Next, set your CF org, space and resource group where the Cloudant service will be created. Resource group is usually named `default` or `Default` -- case-sensitive.
+1. In the Sysdig web UI, select the icon ![](../assets/config.png).
 
-   ```text
-    ibmcloud target --cf -g Default
-    or
-    ibmcloud target --cf -g default
-   ```
+2. Select **Settings**.
 
-7. Verify that all fields are set:
+    ![](../assets/settings.png)
 
-   ```text
-    ibmcloud target
-   ```
+3. Select **Agent installation**.
 
-   ```text
-    API endpoint:      https://cloud.ibm.com   
-    Region:            us-south   
-    User:              svennam@us.ibm.com   
-    Account:           Sai Vennam's Account (d815248d6ad0cc354df42d43db45ce09) <-> 1909673   
-    Resource group:    default   
-    CF API endpoint:   https://api.us-south.cf.cloud.ibm.com (API version: 2.144.0)   
-    Org:               svennam@us.ibm.com   
-    Space:             dev
-   ```
+    ![](../assets/agent.png)
 
-   If any of these fields are not set, the Operator will fail to create your service!
+4. Copy the access key that is displayed at the top of the page.
 
-8. Use the helper script provided by IBM to create a new API token, and register it as a secret in your OpenShift cluster:
 
-   ```text
-    curl -sL https://raw.githubusercontent.com/IBM/cloud-operators/master/hack/install-operator.sh | bash
-   ```
+## Step 4. Deploy the Sysdig agent in the cluster
 
-9. Verify that all the fields in `data` are set for the configmap \(`org`, `region`, `resourceGroup` and `space`\) and secret \(`api-key` and `region`\):
+Run the script to set up an `ibm-observe` project with a privileged service account and a Kubernetes daemon set to deploy the Sysdig agent on every worker node of your Kubernetes cluster.
 
-   ```text
-    oc get configmap/seed-defaults -o yaml -n default
-    oc get secret/seed-secret -o yaml -n default
-   ```
+The Sysdig agent collects metrics such as the worker node CPU usage, worker node memory usage, HTTP traffic to and from your containers, and data about several infrastructure components.
 
-   ```text
-    apiVersion: v1
-    data:
-        org: svennam@us.ibm.com
-        region: us-south
-        resourceGroup: default
-        space: dev
-    ...
+In the following command, replace `<sysdig_access_key>` and `<sysdig_collector_endpoint>` with the values from the service key that you created earlier. For `<tag>`, you can associate tags with your Sysdig agent, such as `role:service,location:us-south` to help you identify the environment that the metrics come from.
 
-    apiVersion: v1
-    data:
-        api-key: <PRIVATE_API_TOKEN>=
-        region: dXMtc291dGg=
-    ...
-   ```
+```text
+curl -sL https://ibm.biz/install-sysdig-k8s-agent | bash -s -- -a <sysdig_access_key> -c <sysdig_collector_endpoint> -t faststart,<Enter your name> -ac 'sysdig_capture_enabled: false' --openshift
+```
 
-## Create a Cloudant Service using the CRDs
+For example:
 
-1. Once the Operator is installed, the Custom Resource Definitions to create the Cloudant service are also available. Navigate to your OpenShift dashboard, ensure you're in the `Administrator` view, navigate to your `Installed Operators` and click the IBM Cloud Operator:
+```text
+curl -sL https://ibm.biz/install-sysdig-k8s-agent | bash -s -- -a <sysdig_access_key> -c <sysdig_collector_endpoint> -t faststart,marisa -ac 'sysdig_capture_enabled: false' --openshift
+```
 
-   ![IBM Cloud Operator](../assets/ibmcloudoperator.png)
+Example output:
 
-2. You'll see that there's two APIs available -- a Service and a Binding. A `Service` will allow us to create the actual Cloudant service itself -- do that first by clicking `Create Instance` under `Service`. Copy and replace the following YAML:
+```text
+    * Detecting operating system
+    * Downloading Sysdig cluster role yaml
+    * Downloading Sysdig config map yaml
+    * Downloading Sysdig daemonset v2 yaml
+    * Creating project: ibm-observe
+    * Creating sysdig-agent serviceaccount in project: ibm-observe
+    * Creating sysdig-agent access policies
+    * Creating sysdig-agent secret using the ACCESS_KEY provided
+    * Retreiving the IKS Cluster ID and Cluster Name
+    * Setting cluster name as <cluster_name>
+    * Setting ibm.containers-kubernetes.cluster.id 1fbd0c2ab7dd4c9bb1f2c2f7b36f5c47
+    * Updating agent configmap and applying to cluster
+    * Setting tags
+    * Setting collector endpoint
+    * Adding additional configuration to dragent.yaml
+    * Enabling Prometheus
+    configmap/sysdig-agent created
+    * Deploying the sysdig agent
+    daemonset.extensions/sysdig-agent created
+```
 
-   ```text
-    apiVersion: ibmcloud.ibm.com/v1alpha1
-    kind: Service
-    metadata:
-      name: cloudant-service
-    spec:
-      plan: lite
-      serviceClass: cloudantnosqldb
-   ```
+## Step 5. Verify that the Sysdig agent is deployed successfully
 
-   ![cloudantservice](../assets/cloudantservice.png)
+Verify that the `sydig-agent` pods on each node have a **Running** status.
 
-   Hit `Create`.
+Run the following command:
 
-3. Wait a couple minutes for the service to provision. You can check the status by clicking on your service, and looking for `Message: Online`:
+```text
+oc get pods -n ibm-observe
+```
 
-   You can also debug any potential issues here. If you already have a Cloudant "Lite" service, you won't be able to create another.
+Example output:
 
-   ![servicedone](../assets/servicedone.png)
+```text
+    NAME                 READY     STATUS    RESTARTS   AGE
+    sysdig-agent-qrbcq   1/1       Running   0          1m
+    sysdig-agent-rhrgz   1/1       Running   0          1m
+```
 
-4. After verifying that there's no bugs and the service is "online", double-check that the Cloudant service exists in your account: [https://cloud.ibm.com/resources](https://cloud.ibm.com/resources)
-
-   You may need to switch to your own account using the switcher on the top right.
-
-   ![resourcelist](../assets/resourcelist.png)
-
-5. Next, create the "binding" resource for your Operator \(instead of Service as you did above\):
-
-   ```text
-    apiVersion: ibmcloud.ibm.com/v1alpha1
-    kind: Binding
-    metadata:
-      name: cloudant-binding
-    spec:
-      serviceName: cloudant-service
-   ```
-
-   ![bindingresource](../assets/cloudantbinding.png)
-
-6. The binding should get created fairly quickly -- you can check the status by clicking on your binding, and looking for `Message: Online`. By navigating to the `Resources` tab, you can see that the `cloudant-binding` secret is created. Click that to see your credentials for accessing your Cloudant DB, stored securely in a secret:
-
-   ![binding secret](../assets/bindingsecret.png)
-
-## Deploy the Node.js Patient Database App
-
-Now you'll create the Node.js app that will populate your Cloudant DB with patient data. It will also serve data to the front-end application that we deployed in the first exercise.
-
-1. Run the following command to create this application:
-
-   ```text
-    oc new-app --name=patient-db centos/nodejs-10-centos7~https://github.com/svennam92/nodejs-patientdb-cloudant
-   ```
-
-2. The app will crash and fail to start repeatedly because the credentials to the Cloudant DB haven't been set yet.
-
-   ![Crashing](../assets/crashing.png)
-
-3. Let's fix this by setting the environment variable to the `cloudant-binding` secret we created earlier. Navigate to the deployment config for this app:
-
-   ![Deployment Config](../assets/deploymentconfig.png)
-
-4. Go to the `Environment` tab, click `Add from Config Map or Secret` and create a new environment variable named `CLOUDANT_URL`. Choose the `cloudant-binding` secret, then choose `url` for the Key. Hit the `Save` button.
-
-   ![Environment from Secret](../assets/envfromsecret.png)
-
-5. Go back to the `Topology` tab, and the `patient-db` should successfully start shortly.
-
-   ![Apps Running](../assets/runningapps.png)
-
-## Configure Front-End Patient Health App to use Cloudant Database Backend
-
-The `patient-ui` application has a configuration option for the backend database. To start using the database you configured above, follow the steps below to configure it.
-
-1. Access your `patient-ui` application again and click `Settings`.
-
-   To find your routes, you can use the OpenShift console or type `oc get routes`.
-
-   ![clicksettings](../assets/clicksettings.png)
-
-2. Input the route `http://patient-db:8080/` and hit the `node` OpenShift icon.
-
-   You won't need to expose this application with the `oc expose` command. This is because your frontend `patient-ui` application can talk to the backend `patient-db` without the network request leaving the cluster. Kubernetes keeps an internal DNS record of the services which resolve to the IPs of the running application.
-
-   ![inputurl](../assets/inputurl.png)
-
-Your application is now backed by the mock patient data in the Cloudant DB! You can log-in using any user-id/password in the Cloudant DB, for example "opall:opall".
-
-1. To find the complete set of users, navigate to your services in IBM Cloud: [IBM Cloud Resources](https://cloud.ibm.com/resources). Click `cloudant-service`.
-
-   ![cloudantdb](../assets/cloudantdb.png)
-
-2. Launch the Cloudant dashboard and click the `patients` db.
-
-   ![databases](../assets/databases.png)
-
-3. Click through the different patients you can log-in as.
-
-   ![credentials](../assets/credentials.png)
 

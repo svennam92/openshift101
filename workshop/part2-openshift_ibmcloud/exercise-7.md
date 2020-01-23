@@ -1,106 +1,130 @@
-# Exercise 7: Configure the Sysdig Agent
+# Exercise 7: Configuring a LogDNA agent for an OpenShift Kubernetes cluster
 
-To integrate your monitoring instance with your OpenShift cluster, you must run a script that creates a project and privileged service account for the Sysdig agent.
+The LogDNA agent is responsible for collecting and forwarding logs to your IBM Log Analysis with LogDNA instance. After you provision an instance of IBM Log Analysis with LogDNA, you must configure a LogDNA agent for each log source that you want to monitor.
+
+To configure your Kubernetes cluster to send logs to your IBM Log Analysis with LogDNA instance, you must install a *LogDNA-agent* pod on each node of your cluster. The LogDNA agent reads log files from the pod where it is installed, and forwards the log data to your LogDNA instance.
+
+To forward logs to your LogDNA instance, complete the following steps from the command line:
 
 ## Step 1. Access your cluster through the CLI
 
-[Access your cluster using the oc CLI](../getting-started/setup_cli#access-your-cluster-using-the-oc-cli).
+[Access your cluster using the oc CLI](../getting-started/setup_cli#access-your-cluster-using-the-oc-cli). 
 
-## Step 2. Launch the Sysdig webUI
+## Launch the LogDNA webUI
 
-You launch the web UI within the context of an IBM Cloud Monitoring with Sysdig instance, from the IBM Cloud UI. 
+You launch the web UI within the context of an IBM Log Analysis with LogDNA instance, from the IBM Cloud UI. 
 
 Complete the following steps to launch the web UI:
 
 1. Click the **Menu** icon ![](../assets/admin.png) &gt; **Observability**. 
 
-2. Select **Monitoring**. 
+2. Select **Logging**. 
 
     The list of instances that are available on IBM Cloud is displayed.
 
 3. Select your instance. Check with the instructor which instance  you should use for the lab.
 
-4. Click **View Sysdig**.
+4. Click **View LogDNA**.
 
 The Web UI opens.
 
-## Step 3. Get the access key for your Sysdig instance
+## Step 3. Get the ingestion key for your LogDNA instance
 
-The Sysdig access key is used to open a secure web socket to the Sysdig ingestion server and to authenticate the monitoring agent with the monitoring service.
+1. In the LogDNA web UI, select the **Settings** icon ![](../assets/admin.png). Then select **Organization**.
+2. Select **API keys**.
 
-Comnplete the following steps:
+    ![](../assets/screen-img-18.png)
 
-1. In the Sysdig web UI, select the icon ![](../assets/config.png).
+3. Copy the ingestion key.
 
-2. Select **Settings**.
+## Step 4. Store your LogDNA ingestion key as a Kubernetes secret
 
-    ![](../assets/settings.png)
+You must create a Kubernetes secret to store your LogDNA ingestion key for your service instance. The LogDNA ingestion key is used to open a secure web socket to the LogDNA ingestion server and to authenticate the logging agent with the IBM Log Analysis with LogDNA service.
 
-3. Select **Agent installation**.
+1. Create a project. A project is a namespace in a cluster.
 
-    ![](../assets/agent.png)
+    ```
+    oc adm new-project --node-selector='' ibm-observe
+    ```
 
-4. Copy the access key that is displayed at the top of the page.
+    Set `--node-selector=''` to disable the default project-wide node selector in your namespace and avoid pod recreates on the nodes that got unselected by the merged node selector.
+
+2. Create the service account **logdna-agent** in the cluster namespace **ibm-observe**. A service account is in Openshift what a service ID is in IBM Cloud. Run the following command:
+
+    ```
+    oc create serviceaccount logdna-agent -n ibm-observe
+    ```
+
+4. Grant the serviceaccount access to the **Privileged SCC** so the service account has permissions to create priviledged LogDNA pods. Run the following command:
+
+    ```
+    oc adm policy add-scc-to-user privileged system:serviceaccount:ibm-observe:logdna-agent
+    ```
+
+5. Add a secret. The secret sets the ingestion key that the LogDNA agent uses to send logs.
+
+    ```
+    oc create secret generic logdna-agent-key --from-literal=logdna-agent-key=INGESTION_KEY -n ibm-observe 
+    ```
+
+    Where `INGESTION_KEY` is the ingestion key for the LogDNA instance where you plan to forward and collect the cluster logs.
 
 
-## Step 4. Deploy the Sysdig agent in the cluster
+## Step 5. Deploy the LogDNA agent in the cluster
 
-Run the script to set up an `ibm-observe` project with a privileged service account and a Kubernetes daemon set to deploy the Sysdig agent on every worker node of your Kubernetes cluster.
+Create a Kubernetes daemon set to deploy the LogDNA agent on every worker node of your Kubernetes cluster. 
 
-The Sysdig agent collects metrics such as the worker node CPU usage, worker node memory usage, HTTP traffic to and from your containers, and data about several infrastructure components.
-
-In the following command, replace `<sysdig_access_key>` and `<sysdig_collector_endpoint>` with the values from the service key that you created earlier. For `<tag>`, you can associate tags with your Sysdig agent, such as `role:service,location:us-south` to help you identify the environment that the metrics come from.
-
-```text
-curl -sL https://ibm.biz/install-sysdig-k8s-agent | bash -s -- -a <sysdig_access_key> -c <sysdig_collector_endpoint> -t faststart,<Enter your name> -ac 'sysdig_capture_enabled: false' --openshift
-```
-
-For example:
-
-```text
-curl -sL https://ibm.biz/install-sysdig-k8s-agent | bash -s -- -a <sysdig_access_key> -c <sysdig_collector_endpoint> -t faststart,marisa -ac 'sysdig_capture_enabled: false' --openshift
-```
-
-Example output:
-
-```text
-    * Detecting operating system
-    * Downloading Sysdig cluster role yaml
-    * Downloading Sysdig config map yaml
-    * Downloading Sysdig daemonset v2 yaml
-    * Creating project: ibm-observe
-    * Creating sysdig-agent serviceaccount in project: ibm-observe
-    * Creating sysdig-agent access policies
-    * Creating sysdig-agent secret using the ACCESS_KEY provided
-    * Retreiving the IKS Cluster ID and Cluster Name
-    * Setting cluster name as <cluster_name>
-    * Setting ibm.containers-kubernetes.cluster.id 1fbd0c2ab7dd4c9bb1f2c2f7b36f5c47
-    * Updating agent configmap and applying to cluster
-    * Setting tags
-    * Setting collector endpoint
-    * Adding additional configuration to dragent.yaml
-    * Enabling Prometheus
-    configmap/sysdig-agent created
-    * Deploying the sysdig agent
-    daemonset.extensions/sysdig-agent created
-```
-
-## Step 5. Verify that the Sysdig agent is deployed successfully
-
-Verify that the `sydig-agent` pods on each node have a **Running** status.
+The LogDNA agent collects logs with the extension `*.log` and extensionsless files that are stored in the `/var/log` directory of your pod. By default, logs are collected from all namespaces, including `kube-system`, and automatically forwarded to the IBM Log Analysis with LogDNA service.
 
 Run the following command:
 
-```text
-oc get pods -n ibm-observe
+```
+oc create -f https://assets.us-south.logging.cloud.ibm.com/clients/logdna-agent-ds-os.yaml -n ibm-observe
 ```
 
-Example output:
 
-```text
-    NAME                 READY     STATUS    RESTARTS   AGE
-    sysdig-agent-qrbcq   1/1       Running   0          1m
-    sysdig-agent-rhrgz   1/1       Running   0          1m
+## Step 6. Verify that the LogDNA agent is deployed successfully
+
+To verify that the LogDNA agent is deployed successfully, run the following command:
+
+1. Target the project where the LogDNA agent is deployed.
+
+    ```
+    oc project ibm-observe
+    ```
+
+2. Verify that the `logdna-agent` pods on each node are in a **Running** status.
+
+    ```
+    oc get pods -n ibm-observe
+    ```
+
+
+The deployment is successful when you see one or more LogDNA pods.
+* **The number of LogDNA pods equals the number of worker nodes in your cluster.**
+* All pods must be in a `Running` state.
+* *Stdout* and *stderr* are automatically collected and forwarded from all containers. Log data includes application logs and worker logs.
+* By default, the LogDNA agent pod that runs on a worker collects logs from all namespaces on that node.
+
+After the agent is configured, you should start seeing logs from this cluster in the LogDNA web UI. If after a period of time you cannot see logs, check the agent logs.
+
+To check the logs that are generated by a LogDNA agent, run the following command:
+
 ```
+oc logs logdna-agent-<ID>
+```
+
+Where *ID* is the ID for a LogDNA agent pod. 
+
+For example, 
+
+```
+oc logs logdna-agent-xxxkz
+```
+
+
+## Step 7. Launch the LogDNA webUI to verify that logs are being forwarded from the LogDNA agent
+
+Next, go to the LogDNA web UI page in your browser to verify that logs from the cluster are available through the UI. 
 
 
