@@ -18,11 +18,9 @@ First, let's simulate some load on our application. Run the following script whi
 > while($true){curl <your_app_route>/info}
 > ```
 
-{% hint style="info" %}
 Note: Retrieve the external URL from the OpenShift console, or from the URL of your Example Health application. Note that there may be an `/index.html` at the end that you need to replace with `/info`. We're hitting the /info endpoint which will trigger some logs from our app. For example:
 
 [`http://patient-ui-health-example.myopenshift-xxx.us-east.containers.appdomain.cloud/info`](http://patient-ui-health-example.myopenshift-341665-66631af3eb2bd8030c5bb56d415b8851-0001.us-east.containers.appdomain.cloud/jee.html)
-{% endhint %}
 
 ## OpenShift Logging
 

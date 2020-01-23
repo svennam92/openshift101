@@ -1,33 +1,8 @@
 # Exercise 1: Deploying an application
 
-In this exercise, you'll deploy a simple Node.js Express application - "Example Health". Example Health features a modern UI for a patient health records system. We'll use this example to demonstrate key OpenShift features throughout this workshop. You can find the sample application GitHub repository here: [https://github.com/svennam92/node-s2i-openshift](https://github.com/svennam92/node-s2i-openshift)
+## Connect to OpenShift
 
-1. Test the `Example Health` app locally
-   * Clone the Example Health repo and `cd` to it:
-
-     ```text
-       git clone https://github.com/svennam92/node-s2i-openshift
-       cd node-s2i-openshift
-     ```
-
-   * The Node.js application is in the "site" directory. `cd` to it, install the `npm` dependencies, and run the `Health Example` app on the localhost:
-
-     ```text
-       cd site
-       npm install
-       npm start
-     ```
-
-   * To access the application, use the "Port" previewer and select `8080`:
-
-     ![portpreview](../assets/port-preview.png)
-
-   * You should see the Example Health application. Login with any credentials and click around!
-
-     ![examplehealthlocalhost](../assets/examplehealth-localhost.png)
-
-   * Ctrl+C in the terminal to stop the application.
-2. Before we push this application into OpenShift, you'll need to configure your `oc` CLI to connect to your cluster.
+1. Before we push this application into OpenShift, you'll need to configure your `oc` CLI to connect to your cluster.
    * Run `ibmcloud ks clusters` to find the name of your cluster. Then, run the following command to get the URL to the dashboard:
 
      ```text

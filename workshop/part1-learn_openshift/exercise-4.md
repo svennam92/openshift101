@@ -26,9 +26,7 @@ resources:
 
 ![Resource Limits](../assets/ocp43-limits-yaml.png)
 
-{% hint style="info" %}
-Remember to set the correct unit -- millicores and MB \(not MiB\)
-{% endhint %}
+> Remember to set the correct unit -- millicores and MB \(not MiB\)
 
 Hit `Reload` to see the new version.
 

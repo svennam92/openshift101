@@ -1,4 +1,4 @@
-# Exercise 6: Patient Database for Example Health
+# Exercise 6: Cloudant DB with IBM Cloud Operator
 
 Currently, the Example Health `patient-ui` app is using a dummy in-memory patient. In this exercise, you'll create a Cloudant service in IBM Cloud and populate it with patient data. Cloudant is a NoSQL database-as-a-service, based on CouchDB.
 
