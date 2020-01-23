@@ -133,9 +133,7 @@ There's many ways to create a new application in OpenShift. If you're already a 
         deployment #1 deployed 21 minutes ago - 1 pod
    ```
 
-5. Finally, access your application with the URL from above -- it should look something like:
-
-   `http://patient-ui-example-health.<your_openshift_cluster>.us-south.stg.containers.appdomain.cloud`
+5. Finally, open a browser and access your application with the URL from the resulting output in your terminal.
 
 You've completed the first exercise! Let's recap -- in this exercise, you:
 
