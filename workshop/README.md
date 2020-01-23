@@ -58,4 +58,6 @@ Many folks have contributed to help shape, test, and contribute the workshop.
 * [Ram Vennam](https://github.com/rvennam)
 * [Remko De Knikker](https://github.com/remkohdev)
 * [Alex Parker](https://github.com/ajp-io)
+* [Lionel Mace](https://github.com/lionelmace)
+* [Marisa Lopez de Silanes Ruiz](https://github.com/lopezdsr)
 
