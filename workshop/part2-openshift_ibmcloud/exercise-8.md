@@ -8,7 +8,7 @@ To forward logs to your LogDNA instance, complete the following steps from the c
 
 ## Step 1. Access your cluster through the CLI
 
-[Access your cluster using the oc CLI](https://openshift4.gitbook.io/openshiftlab/getting-started/setup_cli#access-your-cluster-using-the-oc-cli). 
+[Access your cluster using the oc CLI](../getting-started/setup_cli#access-your-cluster-using-the-oc-cli). 
 
 ## Launch the LogDNA webUI
 
@@ -16,7 +16,7 @@ You launch the web UI within the context of an IBM Log Analysis with LogDNA inst
 
 Complete the following steps to launch the web UI:
 
-1. Click the **Menu** icon ![](../.gitbook/assets/admin.png) &gt; **Observability**. 
+1. Click the **Menu** icon ![](../assets/admin.png) &gt; **Observability**. 
 
 2. Select **Logging**. 
 
@@ -30,10 +30,10 @@ The Web UI opens.
 
 ## Step 3. Get the ingestion key for your LogDNA instance
 
-1. In the LogDNA web UI, select the **Settings** icon ![](../.gitbook/assets/admin.png). Then select **Organization**.
+1. In the LogDNA web UI, select the **Settings** icon ![](../assets/admin.png). Then select **Organization**.
 2. Select **API keys**.
 
-    ![](../.gitbook/assets/screen-img-18.png)
+    ![](../assets/screen-img-18.png)
 
 3. Copy the ingestion key.
 

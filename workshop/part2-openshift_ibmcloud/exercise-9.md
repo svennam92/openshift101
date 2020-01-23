@@ -8,7 +8,7 @@ IBM Log Analysis with LogDNA offers administrators, DevOps teams, and developers
 
 The following figure shows the high level view for the IBM Log Analysis with LogDNA service that is running on IBM Cloud:
 
-![Components overview of IBM Log Analysis with LogDNA](../.gitbook/assets/logging_ov.png)
+![Components overview of IBM Log Analysis with LogDNA](../assets/logging_ov.png)
 
 ## Features
 
@@ -49,10 +49,10 @@ When you launch the LogDNA web UI, log entries are displayed with a predefined f
 
 #### View events with the default format
 
-1. In the LogDNA web UI, click the **Views** icon ![](../.gitbook/assets/views.png).
+1. In the LogDNA web UI, click the **Views** icon ![](../assets/views.png).
 2. Select **Everything** to see all the events.
 
-![](../.gitbook/assets/views-img-1.png)
+![](../assets/views-img-1.png)
 
 #### Customize your default view
 
@@ -60,7 +60,7 @@ In the **USER PREFERENCES** section, you can modify the order of the data fields
 
 Complete the following steps to modify the format of a log line:
 
-1. Select the **Configuration** icon ![](../.gitbook/assets/admin.png).
+1. Select the **Configuration** icon ![](../assets/admin.png).
 2. Select **USER PREFERENCES**. A new window opens.
 3. Select **Log Format**.
 4. Modify the _Line Format_ section to match your requirements. Drag boxes around.
@@ -73,29 +73,29 @@ Complete the following steps:
 
 1. In the LogDNA web UI, select **ALL Apps** in the search area.
 
-   ![](../.gitbook/assets/views-img-2.png)
+   ![](../assets/views-img-2.png)
 
 2. Select the app **patientui** which is the sample app that you have deployed in your cluster in the lab.
 
-   ![](../.gitbook/assets/views-img-3.png)
+   ![](../assets/views-img-3.png)
 
 3. Filter out log lines to display only lines that tagged as debug lines. Enter in the search bar the following query: `level:debug`
 
-   ![](../.gitbook/assets/views-img-4.png)
+   ![](../assets/views-img-4.png)
 
    Then, click enter. The view will show lines that meet the filtering and search criteria.
 
-   ![](../.gitbook/assets/views-img-5.png)
+   ![](../assets/views-img-5.png)
 
 4. Save the custom view.
 
    Click **Unsaved view**. Select **Save view**.
 
-   ![](../.gitbook/assets/views-img-6.png)
+   ![](../assets/views-img-6.png)
 
    The following pop up opens:
 
-   ![](../.gitbook/assets/views-img-7.png)
+   ![](../assets/views-img-7.png)
 
    Enter the name of the view. Use the following format: `<Enter your user name> patientUI` For example, `marisa patientui`
 
@@ -103,13 +103,13 @@ Complete the following steps:
 
    Your configuration should look like the following sample:
 
-   ![](../.gitbook/assets/views-img-10.png)
+   ![](../assets/views-img-10.png)
 
    Click **Save view**.
 
 A new category appears on the left navigation panel.
 
-![](../.gitbook/assets/views-img-11.png)
+![](../assets/views-img-11.png)
 
 #### Analyze a log line
 
@@ -117,7 +117,7 @@ At any time, you can view each log line in context.
 
 Complete the following steps:
 
-1. Click the **Views** icon ![](../.gitbook/assets/views.png).
+1. Click the **Views** icon ![](../assets/views.png).
 2. Select **Everything** or a view.
 3. Identify a line in the log that you want to explore.
 4. Expand the log line.
@@ -126,11 +126,11 @@ Complete the following steps:
 
 5. Click **View in Context** to see the log line in context of other log lines from that host, app, or both. This is a very useful feature when you want to troubleshoot a problem.
 
-   ![](../.gitbook/assets/views-img-12.png)
+   ![](../assets/views-img-12.png)
 
    A new pop up window opens.
 
-   ![](../.gitbook/assets/views-img-13.png)
+   ![](../assets/views-img-13.png)
 
    Choose one of the following options:
 
@@ -150,7 +150,7 @@ Complete the following steps:
 
     For example, the log record in the UI looks like:
 
-    ![](../.gitbook/assets/views-img-16.png)
+    ![](../assets/views-img-16.png)
 
     When you copy the record, you get:
 
@@ -172,7 +172,7 @@ Complete the following steps to jump to a specific time:
 
 1. Launch the LogDNA web UI. 
 
-2. Click the **Views** icon ![](../.gitbook/assets/views.png). 
+2. Click the **Views** icon ![](../assets/views.png). 
 
 3. Select your custom view. 
 
@@ -180,11 +180,11 @@ Complete the following steps to jump to a specific time:
 
     Enter an absolute time to jump to a point in time in your events such as `January 27 10:00am`.
 
-    ![](../.gitbook/assets/views-img-15.png)
+    ![](../assets/views-img-15.png)
 
     Enter a relative time such as `5 days ago`. 
 
-    ![](../.gitbook/assets/views-img-17.png)
+    ![](../assets/views-img-17.png)
 
     You can also enter a time range such as `yesterday 10am to yesterday 11am`, `last fri 4:30pm to 11/12 1 AM`, `last wed 4:30pm to 23/05 1 AM`, or `May 20 10am to May 22 10am`. Make sure to include `to` to separate the initial timestamp from the end timestamp.
 
@@ -200,74 +200,74 @@ For example, you can use graphs to analyze patterns and trends over a period of 
 
 Complete the following steps to create a dashboard to monitor logs from the lab's sample app:
 
-1. In the LogDNA web UI, click the **Boards** icon ![Dashboards icon](../.gitbook/assets/boards.png).
+1. In the LogDNA web UI, click the **Boards** icon ![Dashboards icon](../assets/boards.png).
 2. Select **NEW BOARD** to create a new dashboard.
 
-   ![](../.gitbook/assets/board-img-1.png)
+   ![](../assets/board-img-1.png)
 
 3. Click **Add graph**.
 
-   ![](../.gitbook/assets/board-img-2.png)
+   ![](../assets/board-img-2.png)
 
 4. Select the field **app**.
 
-   ![](../.gitbook/assets/board-img-3.png)
+   ![](../assets/board-img-3.png)
 
    Then, select the value **patientui**.
 
-   ![](../.gitbook/assets/board-img-4.png)
+   ![](../assets/board-img-4.png)
 
    Click **Add graph**.
 
-   ![](../.gitbook/assets/board-img-5.png)
+   ![](../assets/board-img-5.png)
 
 5. Open a view that displays the logs for the patientui app. Click the graph in a peak of data at the time that you want to see logs, and then click **Show logs**.
 
-   ![](../.gitbook/assets/board-img-6.png)
+   ![](../assets/board-img-6.png)
 
    A new page opens with the log entries.
 
-   ![](../.gitbook/assets/board-img-7.png)
+   ![](../assets/board-img-7.png)
 
 6. Add subplots to analyze the data by applying additonal filtering criteria.
 
-   ![](../.gitbook/assets/board-img-8.png)
+   ![](../assets/board-img-8.png)
 
    Click **Show subplots**.
 
-   ![](../.gitbook/assets/board-img-9.png)
+   ![](../assets/board-img-9.png)
 
    Select **Histogram**.
 
-   ![](../.gitbook/assets/board-img-10.png)
+   ![](../assets/board-img-10.png)
 
    Select **level**.
 
-   ![](../.gitbook/assets/board-img-11.png)
+   ![](../assets/board-img-11.png)
 
    Click **Add** to configure more subplots. For example, add a histogram for the custom field _patient_ that you configured earlier. \(Note that you might need to wait a bit longer and logout and login into the sample app for the custom field to be available for search after the parsing template is applied. Continue and retry this step later on.\)
 
-   ![](../.gitbook/assets/board-img-12.png)
+   ![](../assets/board-img-12.png)
 
 7. Name the dashboard.
 
    Enter `patientui` as the name of the dashboard.
 
-   ![](../.gitbook/assets/board-img-13.png)
+   ![](../assets/board-img-13.png)
 
    Enter a category. Use the following format: `<Enter your user name>` For example, `marisa` Then click **Add new category**.
 
-   ![](../.gitbook/assets/board-img-14.png)
+   ![](../assets/board-img-14.png)
 
    Your configuration should look like the following sample:
 
-   ![](../.gitbook/assets/board-img-15.png)
+   ![](../assets/board-img-15.png)
 
    Click **Save**.
 
 A new category appears on the left navigation panel.
 
-![](../.gitbook/assets/board-img-16.png)
+![](../assets/board-img-16.png)
 
 ### Create a screen to monitor your app
 
@@ -275,84 +275,84 @@ A new category appears on the left navigation panel.
 
 Complete the following steps to create a dashboard to monitor logs from the lab's sample app:
 
-1. In the LogDNA web UI, click the **screens** icon ![](../.gitbook/assets/screens.png).
+1. In the LogDNA web UI, click the **screens** icon ![](../assets/screens.png).
 2. Select **NEW SCREEN**.
 
-   ![](../.gitbook/assets/screen-img-1.png)
+   ![](../assets/screen-img-1.png)
 
 3. Add a counter.
 
    Click **Add Widget**.
 
-   ![](../.gitbook/assets/screen-img-2.png)
+   ![](../assets/screen-img-2.png)
 
    Select **Count**.
 
-   ![](../.gitbook/assets/screen-img-3.png)
+   ![](../assets/screen-img-3.png)
 
    Click the widget. You will get the configuration fields for this widget.
 
-   ![](../.gitbook/assets/screen-img-4.png)
+   ![](../assets/screen-img-4.png)
 
    To configure the _Count_ widget to report on the log lines for the application patientui, you must select the field **app**, and set the value to **patientui**.
 
-   ![](../.gitbook/assets/screen-img-5.png)
+   ![](../assets/screen-img-5.png)
 
    You can also add a label, by entering a value for the _label_ field.
 
-   ![](../.gitbook/assets/screen-img-6.png)
+   ![](../assets/screen-img-6.png)
 
    The widget should look similar to the following one:
 
-   ![](../.gitbook/assets/screen-img-7.png)
+   ![](../assets/screen-img-7.png)
 
 4. Add a gauge.
 
    Click **Add Widget**.
 
-   ![](../.gitbook/assets/screen-img-2.png)
+   ![](../assets/screen-img-2.png)
 
    Select **Gauge**.
 
-   ![](../.gitbook/assets/screen-img-8.png)
+   ![](../assets/screen-img-8.png)
 
    Click the widget. You will get the configuration fields for this widget.
 
    To configure the _Gauge_ widget to report on the debug log lines for the application patientui, you must select the field **level**, and set the value to **debug**. Then, set the advanced condition `app:patientui`. The duration is set to the default, last 1 day.
 
-   ![](../.gitbook/assets/screen-img-9.png)
+   ![](../assets/screen-img-9.png)
 
    Add a label, by entering a value for the _label_ field. Enter `PatientUI - INFO`. Add also the gauge limits.
 
-   ![](../.gitbook/assets/screen-img-10.png)
+   ![](../assets/screen-img-10.png)
 
    The widget should look similar to the following one:
 
-   ![](../.gitbook/assets/screen-img-11.png)
+   ![](../assets/screen-img-11.png)
 
 5. Add a table.
 
    Click **Add Widget**.
 
-   ![](../.gitbook/assets/screen-img-2.png)
+   ![](../assets/screen-img-2.png)
 
    Select **Table**.
 
-   ![](../.gitbook/assets/screen-img-12.png)
+   ![](../assets/screen-img-12.png)
 
    Click the widget. You will get the configuration fields for this widget.
 
    To list the number of records in the last 24 hours for the cluster namespaces, you must set the field **namespace**.
 
-   ![](../.gitbook/assets/screen-img-13.png)
+   ![](../assets/screen-img-13.png)
 
    Change the default number of rows from 3 to 10.
 
-   ![](../.gitbook/assets/screen-img-14.png)
+   ![](../assets/screen-img-14.png)
 
    The widget should look similar to the following one:
 
-   ![](../.gitbook/assets/screen-img-15.png)
+   ![](../assets/screen-img-15.png)
 
 6. Save the screen. Select **Save Screen**.
 
@@ -365,7 +365,7 @@ To avoid recreating definitions of views, boards, parsing templates, and exclusi
 Complete the following steps to export the configuration of your resources:
 
 1. Launch the LogDNA web UI.
-2. Select the **Settings** icon ![](../.gitbook/assets/admin.png). Then select **Organization**.
+2. Select the **Settings** icon ![](../assets/admin.png). Then select **Organization**.
 3. Select **Account config**.
 4. In the _Export configuration_ section, select the types of resources that you want to export.
 
@@ -390,7 +390,7 @@ you can control the data that is collected and available for analysis through a 
 
 You can define an alert to notify when the data usage in the instance reaches the data usage threshold that you set for the instance.
 
-1. In the LogDNA web UI, select the **Settings** icon ![](../.gitbook/assets/admin.png). Then select **Usage**.
+1. In the LogDNA web UI, select the **Settings** icon ![](../assets/admin.png). Then select **Usage**.
 
    In the **Dashboard** section, you can see your data usage.
 
@@ -407,7 +407,7 @@ You will configure the rule so that you are not able to see excluded log data th
 
 Complete the following steps to define the exclusion rule:
 
-1. In the LogDNA web UI, select the **Settings** icon ![](../.gitbook/assets/admin.png). Then select **Usage** &gt; **Exclusion Rules**.
+1. In the LogDNA web UI, select the **Settings** icon ![](../assets/admin.png). Then select **Usage** &gt; **Exclusion Rules**.
 2. Select **Add Rule**. The **Create Rule** section opens.
 3. Enter a name for the rule in the section **What is this rule for?**. For example, enter _Exclude log records from the namespace kube-system except error ones_.
 4. Enter the exclusion criteria. You can select 1 or more sources, 1 or more apps, enter a query, or a combination of sources, apps and query.
@@ -431,77 +431,77 @@ Complete the following steps to create a custom field for a type of log record:
 
 Notice that this step requires that you have logged in to the sample app at least once.
 
-1. In the LogDNA web UI, select the **Settings** icon ![Admin icon](../.gitbook/assets/admin.png). Then select **Parsing**.
+1. In the LogDNA web UI, select the **Settings** icon ![Admin icon](../assets/admin.png). Then select **Parsing**.
 2. Select **Create Template**. The _Choose Log Line_ wizard opens.
 
-   ![](../.gitbook/assets/parsing-img-1.png)
+   ![](../assets/parsing-img-1.png)
 
 3. Click **Select a method**. Choose **Find an existing log line**.
 
-   ![](../.gitbook/assets/parsing-img-2.png)
+   ![](../assets/parsing-img-2.png)
 
 4. Click **Query** to enter the following query: `namespace:example-health AND app:patient-ui AND "endpoint for"`.
 
-   ![](../.gitbook/assets/parsing-img-3.png)
+   ![](../assets/parsing-img-3.png)
 
    Then, click enter. A subset of log lines that match that query are listed.
 
-   ![](../.gitbook/assets/parsing-img-4.png)
+   ![](../assets/parsing-img-4.png)
 
 5. Scroll down, then Select **Build Parsing Template**. The _Parsing Template_ wizard opens.
 6. Choose the first criteria to parse the data.
 
    Click **Choose an extractor**. Then choose **Extract Values by Delimiter**.
 
-   ![](../.gitbook/assets/parsing-img-5.png)
+   ![](../assets/parsing-img-5.png)
 
    Enter the following delimiter: **endpoint for**
 
-   ![](../.gitbook/assets/parsing-img-6.png)
+   ![](../assets/parsing-img-6.png)
 
 7. Choose the second criteria to parse the data.
 
    Select the username that you used to log in.
 
-   ![](../.gitbook/assets/parsing-img-7.png)
+   ![](../assets/parsing-img-7.png)
 
    Then, click **choose an operator** and select **Trim value**.
 
-   ![](../.gitbook/assets/parsing-img-8.png)
+   ![](../assets/parsing-img-8.png)
 
    The trim configuration options are displayed:
 
-   ![](../.gitbook/assets/parsing-img-9.png)
+   ![](../assets/parsing-img-9.png)
 
    Enter `0` and `1` to remove any non-wanted characters.
 
-   ![](../.gitbook/assets/parsing-img-10.png)
+   ![](../assets/parsing-img-10.png)
 
 8. Configure the custom field.
 
    Click **Choose an extractor**. Then choose **Capture in Field**.
 
-   ![](../.gitbook/assets/parsing-img-11.png)
+   ![](../assets/parsing-img-11.png)
 
    Enter the name of the custom field: **patient**
 
-   ![](../.gitbook/assets/parsing-img-12.png)
+   ![](../assets/parsing-img-12.png)
 
 9. Select **Proceed to validation**. The _Test and Verify_ wizard opens.
 
-   ![](../.gitbook/assets/parsing-img-13.png)
+   ![](../assets/parsing-img-13.png)
 
    Check that all the lines set valid username values. Click **Validate All**.
 
    Lines should change the status to **Validated**.
 
-   ![](../.gitbook/assets/parsing-img-14.png)
+   ![](../assets/parsing-img-14.png)
 
    Then, click **Activate**. A new template is created.
 
-   ![](../.gitbook/assets/parsing-img-15.png)
+   ![](../assets/parsing-img-15.png)
 
 After 15 min, new log records that arrive to the LogDNA instance and match the query criteria will include a custom field **patient** that you can use for filtering data in views, dashboards, and screens.
 
-![](../.gitbook/assets/parsing-img-16.png)
+![](../assets/parsing-img-16.png)
 

@@ -4,7 +4,7 @@ IBM Cloud Monitoring with Sysdig is a co-branded cloud-native, and container- in
 
 The following diagram shows the components overview for the IBM Cloud Monitoring with Sysdig service that is running on IBM Cloud:
 
-![](../.gitbook/assets/monitoring_ov.png)
+![](../assets/monitoring_ov.png)
 
 
 When you monitor an application, you should consider:
@@ -56,7 +56,7 @@ You launch the Web UI within the context of an Sysdig instance, from the IBM Clo
 
 Complete the following steps to launch the web UI:
 
-1. In the LogDNA web UI, click the **Views** icon ![](../.gitbook/assets/views.png) &gt; **Observability**.
+1. In the LogDNA web UI, click the **Views** icon ![](../assets/views.png) &gt; **Observability**.
 
 2. Select **Monitoring**.
 
@@ -95,7 +95,7 @@ Complete the following steps to view a Sysdig dashboard:
 
    Under the _Explore_ section,
 
-   ![](../.gitbook/assets/explore.png)
+   ![](../assets/explore.png)
 
    Select **Containerized Apps** to view raw metrics for all workloads running on the cluster.
 
@@ -103,7 +103,7 @@ Complete the following steps to view a Sysdig dashboard:
 
    Under Dashboard,
 
-   ![](../.gitbook/assets/dashboards.png)
+   ![](../assets/dashboards.png)
 
    Select **My Dashboards**. Then select **HTTP Overview** to get a global view of the cluster HTTP load.
 
@@ -115,7 +115,7 @@ Complete the following steps to view a Sysdig dashboard:
 
    Under _Explore_, select **Cluster and Nodes**. Expand the section **Entire Infrastructure**. Look for the partientui pod entry.
 
-   ![](../.gitbook/assets/explore-img-1.png)
+   ![](../assets/explore-img-1.png)
 
 ### Explore the normal traffic flow of the application
 
@@ -124,50 +124,50 @@ You can use the **Connection Table** dashboard to monitor how data flows between
 1. From the _Explore_ tab, select **Deployments and Pods.**
 2. Select the namespace where you deployed your sample app.
 
-   ![](../.gitbook/assets/explore-img-2.png)
+   ![](../assets/explore-img-2.png)
 
 3. Select the _patientui_ pod entry.
 
-   ![](../.gitbook/assets/explore-img-3.png)
+   ![](../assets/explore-img-3.png)
 
 4. Select **Default Dashboards**.
 
-   ![](../.gitbook/assets/explore-img-4.png)
+   ![](../assets/explore-img-4.png)
 
 5. Select **Hosts & Containers**. Then, select **Overview by Host**.
 
-   ![](../.gitbook/assets/explore-img-7.png)
+   ![](../assets/explore-img-7.png)
 
 6. Select **Hosts & Containers**. Then, select **Overview by Container**.
 
-   ![](../.gitbook/assets/explore-img-5.png)
+   ![](../assets/explore-img-5.png)
 
    The **Overview by Container** view opens. Look at the different columns and the data.
 
-   ![](../.gitbook/assets/explore-img-6.png)
+   ![](../assets/explore-img-6.png)
 
 ### Explore the cluster and the node capacity
 
 1. From the _Explore_ tab, select **Deployments and Pods.**
 2. Select the namespace where you deployed your sample app.
 
-   ![](../.gitbook/assets/explore-img-2.png)
+   ![](../assets/explore-img-2.png)
 
 3. Select the _patientui_ pod entry.
 
-   ![](../.gitbook/assets/explore-img-3.png)
+   ![](../assets/explore-img-3.png)
 
 4. Select **Default Dashboards**.
 
-   ![](../.gitbook/assets/explore-img-4.png)
+   ![](../assets/explore-img-4.png)
 
 5. Select **Kubernetes Cluster**. Then, select **Node capacity**.
 
-   ![](../.gitbook/assets/explore-img-8.png)
+   ![](../assets/explore-img-8.png)
 
    The view **Kubernetes Cluster and Node Capacity** opens.
 
-   ![](../.gitbook/assets/explore-img-9.png)
+   ![](../assets/explore-img-9.png)
 
    Check the **Total CPU Capacity**. This is the CPU capacity that has been reserved for the node including system daemons.
 
@@ -183,21 +183,21 @@ You can use the **Connection Table** dashboard to monitor how data flows between
 
 1. From the _DASHBOARDS_ tab, select **My Dashboards**. Then, select **Network Overview**.
 
-   ![](../.gitbook/assets/dashboard-img-1.png)
+   ![](../assets/dashboard-img-1.png)
 
    The following dashboard is displayed. It shows information about all resources that are monitored thorugh the instance.
 
-   ![](../.gitbook/assets/dashboard-img-2.png)
+   ![](../assets/dashboard-img-2.png)
 
 2. Change the scope of the dashboard to display information about your openshift cluster. Select **Edit scope**
 
-    ![](../.gitbook/assets/dashboard-img-3.png)
+    ![](../assets/dashboard-img-3.png)
 
     Change the scope.
 
-    ![](../.gitbook/assets/dashboard-img-4.png)
+    ![](../assets/dashboard-img-4.png)
 
     The dashboard shows information about the ibm-observe namespace.
 
-    ![](../.gitbook/assets/dashboard-img-5.png)
+    ![](../assets/dashboard-img-5.png)
 

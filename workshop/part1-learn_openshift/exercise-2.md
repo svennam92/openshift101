@@ -33,15 +33,15 @@ Since we only created one pod, seeing our logs will be straight forward. Ensure 
 * **Services**: Tells OpenShift how to access your Pods by grouping them together as a service and defining the port to listen to
 * **Routes**: Exposes your services to the outside world using the LoadBalancer provided by the IBM Cloud network
 
-  ![Topology Deployment Config](../.gitbook/assets/ocp43-topology.png)
+  ![Topology Deployment Config](../assets/ocp43-topology.png)
 
 1. Click on **View Logs** next to your Pods to see streaming logs from your running application. If you're still generating traffic, you should see log messages for every request being made.
 
-   ![Pod Logs](../.gitbook/assets/ocp43-pod-logs.png)
+   ![Pod Logs](../assets/ocp43-pod-logs.png)
 
 2. Click on **View Logs** next to your completed Build. This shows you the process that OpenShift took to install the dependencies for your Node.js application and build/push a Docker image.
 
-   ![Build Logs](../.gitbook/assets/ocp43-build-logs.png)
+   ![Build Logs](../assets/ocp43-build-logs.png)
 
 ## OpenShift Terminal
 
@@ -49,7 +49,7 @@ One of the great things about Kubernetes is the ability to quickly debug your ap
 
 1. Navigate to your Pod by clicking on your Deployment Config, then clicking the name of the Pod under **Pods**.
 
-   ![Navigate to Pod](../.gitbook/assets/ocp43-pod-arrow.png)
+   ![Navigate to Pod](../assets/ocp43-pod-arrow.png)
 
 2. Switch to the `Terminal` tab, and run the following commands.
 
@@ -65,17 +65,17 @@ One of the great things about Kubernetes is the ability to quickly debug your ap
    >  ps aux
    > ```
 
-   ![Terminal](../.gitbook/assets/ocp43-terminal.png)
+   ![Terminal](../assets/ocp43-terminal.png)
 
 ## OpenShift Monitoring
 
 When deploying new apps, making configuration changes, or simply inspecting the state of your cluster, the Project-scope Dashboard gives Developer Clear Insights. Access the **Dashboard** now by going to the `Advanced > Project Details` tab on the left side menu.
 
-![View Details](../.gitbook/assets/ocp43-project-details.png)
+![View Details](../assets/ocp43-project-details.png)
 
 You can also dive in a bit deeper - the `Events` view is useful for identifying the timeline of events and finding potential error messages. When tracking the state of a new rollout, managing existing assets, or even something simple like exposing a route, the Events view is critical in identifying the timeline of activity. This becomes even more useful when considering that multiple operators may be working against a single cluster.
 
-![View Details](../.gitbook/assets/projectevents.png)
+![View Details](../assets/projectevents.png)
 
 You'll want to refer to this view throughout the lab. Almost all actions we take in in OpenShift will result in an event being fired in this view. As it is updated real-time, it's a great way to track changes to state.
 

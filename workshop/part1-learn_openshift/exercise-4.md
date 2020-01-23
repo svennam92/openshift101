@@ -10,7 +10,7 @@ Hopefully you have your running script simulating load \(if not go [here](exerci
 
 Navigate to `Workloads > Deployment Configs` in the left-hand bar. Then, choose `Actions > Edit Deployment Config`.
 
-![Deployment Configs](../.gitbook/assets/ocp43-dc.png)
+![Deployment Configs](../assets/ocp43-dc.png)
 
 In the YAML editor, scroll down to the section `template > spec > containers` \(line 62\). Add the following resource limits into the empty resources.
 
@@ -24,7 +24,7 @@ resources:
     cpu: 30m
 ```
 
-![Resource Limits](../.gitbook/assets/ocp43-limits-yaml.png)
+![Resource Limits](../assets/ocp43-limits-yaml.png)
 
 {% hint style="info" %}
 Remember to set the correct unit -- millicores and MB \(not MiB\)
@@ -34,7 +34,7 @@ Hit `Reload` to see the new version.
 
 Verify that the replication controler has ben changed by navigating to **Events**
 
-![Resource Limits](../.gitbook/assets/ocp43-limits-event.png)
+![Resource Limits](../assets/ocp43-limits-event.png)
 
 ## Enable Autoscaler
 
@@ -44,7 +44,7 @@ By default, the autoscaler allows you to scale based on CPU or Memory. The UI al
 
 Navite to `Workloads > Horizontal Pod Autoscalers`, then hit `Create Horizontal Pod Autoscaler`.
 
-![HPA](../.gitbook/assets/ocp43-autoscaler.png)
+![HPA](../assets/ocp43-autoscaler.png)
 
 ```yaml
 apiVersion: autoscaling/v2beta1
@@ -72,11 +72,11 @@ Hit Create.
 
 If you're not running the script from the [previous exercise](exercise-2.md#simulate-load-on-the-application), the pods should stay at 1. Check by going to the Overview page of Deployment Configs.
 
-![Scaled to 1 pod](../.gitbook/assets/ocp43-dc-pod.png)
+![Scaled to 1 pod](../assets/ocp43-dc-pod.png)
 
 Start simulating load by hitting the page several times, or running the script. You'll see that it starts to scale up:
 
-![Scaled to 4/10 pods](../.gitbook/assets/ocp43-autoscaler-after.png)
+![Scaled to 4/10 pods](../assets/ocp43-autoscaler-after.png)
 
 That's it! You now have a highly available and automatically scaled front-end Node.js application. OpenShift is automatically scaling your application pods since the CPU usage of the pods greatly exceeded `1`% of the resource limit, `30` millicores.
 

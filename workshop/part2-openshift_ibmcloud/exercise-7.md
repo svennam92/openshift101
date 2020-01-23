@@ -4,7 +4,7 @@ To integrate your monitoring instance with your OpenShift cluster, you must run 
 
 ## Step 1. Access your cluster through the CLI
 
-[Access your cluster using the oc CLI](https://openshift4.gitbook.io/openshiftlab/getting-started/setup_cli#access-your-cluster-using-the-oc-cli).
+[Access your cluster using the oc CLI](../getting-started/setup_cli#access-your-cluster-using-the-oc-cli).
 
 ## Step 2. Launch the Sysdig webUI
 
@@ -12,7 +12,7 @@ You launch the web UI within the context of an IBM Cloud Monitoring with Sysdig 
 
 Complete the following steps to launch the web UI:
 
-1. Click the **Menu** icon ![](../.gitbook/assets/admin.png) &gt; **Observability**. 
+1. Click the **Menu** icon ![](../assets/admin.png) &gt; **Observability**. 
 
 2. Select **Monitoring**. 
 
@@ -30,15 +30,15 @@ The Sysdig access key is used to open a secure web socket to the Sysdig ingestio
 
 Comnplete the following steps:
 
-1. In the Sysdig web UI, select the icon ![](../.gitbook/assets/config.png).
+1. In the Sysdig web UI, select the icon ![](../assets/config.png).
 
 2. Select **Settings**.
 
-    ![](../.gitbook/assets/settings.png)
+    ![](../assets/settings.png)
 
 3. Select **Agent installation**.
 
-    ![](../.gitbook/assets/agent.png)
+    ![](../assets/agent.png)
 
 4. Copy the access key that is displayed at the top of the page.
 

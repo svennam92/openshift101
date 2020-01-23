@@ -21,11 +21,11 @@ In this exercise, you'll deploy a simple Node.js Express application - "Example 
         ```
     * To access the application, use the "Port" previewer and select `8080`:
     
-        ![portpreview](../.gitbook/assets/port-preview.png)
+        ![portpreview](../assets/port-preview.png)
 
     * You should see the Example Health application. Login with `admin:admin` and click around!
 
-        ![examplehealthlocalhost](../.gitbook/assets/examplehealth-localhost.png)
+        ![examplehealthlocalhost](../assets/examplehealth-localhost.png)
 
 1. Run the Example Health app with Docker,
 
@@ -72,7 +72,7 @@ In this exercise, you'll deploy a simple Node.js Express application - "Example 
 
     * Access your application listening on port 3000:
 
-        ![portpreview3000](../.gitbook/assets/portpreview3000.png)
+        ![portpreview3000](../assets/portpreview3000.png)
 
     * Clean up the docker container
 
@@ -154,7 +154,7 @@ In this exercise, you'll deploy a simple Node.js Express application - "Example 
 
     * Navigate to that URL in the same browser that you used to log-in to IBM Cloud. You should see your OpenShift dashboard! Take a second to look around, and then copy the login command for the CLI:
 
-    ![copylogincommand](../.gitbook/assets/copylogincommand.png)
+    ![copylogincommand](../assets/copylogincommand.png)
 
     Your login command should look something like:
 
@@ -253,18 +253,18 @@ In this exercise, you'll deploy a simple Node.js Express application - "Example 
 
     * Go to `My Projects` via URI `/console/projects`,
 
-        ![My Projects](../.gitbook/assets/oc-my-projects.png)
+        ![My Projects](../assets/oc-my-projects.png)
 
     * Select the project `example-health-ns`, unfold the `DEPLOYMENT CONFIG` for `example-health` application details,
 
-        ![Example Health details](../.gitbook/assets/oc-example-health-details.png)
+        ![Example Health details](../assets/oc-example-health-details.png)
 
     * In the `NETWORKING` section, click the `Routes - External Traffic` link, e.g. `http://example-health-example-health-ns.cda-openshift-cluster-1c0e8bfb1c68214cf875a9ca7dd1e060-0001.us-south.containers.appdomain.cloud`
 
     * This opens the Example Health app in a new tab of your browser,
     * Login with `admin:test`,
 
-        ![Example Health details](../.gitbook/assets/example-health-app.png)
+        ![Example Health details](../assets/example-health-app.png)
 
 ## You're done
 
@@ -281,7 +281,7 @@ Access your cluster on the [IBM Cloud clusters dashboard](https://cloud.ibm.com/
 
 Once you're in the OpenShift dashboard, switch to the "Developer" view:
 
-![Choose Developer](../.gitbook/assets/choose-developer.png)
+![Choose Developer](../assets/choose-developer.png)
 
 
 oc create -f https://raw.githubusercontent.com/openshift/origin/master/examples/image-streams/image-streams-rhel7.json -n openshift
@@ -293,33 +293,33 @@ oc create -f https://raw.githubusercontent.com/openshift/origin/master/examples/
 
 Create a project, you can title it whatever you like, we suggest "example-health."
 
-![Create Project](../.gitbook/assets/createproject.png)
+![Create Project](../assets/createproject.png)
 
 Click on your new project. You should see a view that looks like this:
 
-![Project View](../.gitbook/assets/projectview.png)
+![Project View](../assets/projectview.png)
 
 Click on the browse catalog button and scroll down to the `Node.js` image. Click on that catalog button.
 
-![Node](../.gitbook/assets/node.png)
+![Node](../assets/node.png)
 
 Click through to the second step for configuration, and choose `advanced options`. \( a blue hyperlink on the bottom line \)
 
-![Advanced](../.gitbook/assets/advanced.png)
+![Advanced](../assets/advanced.png)
 
 You'll see an advanced form like this:
 
-![Node Advanced Form](../.gitbook/assets/node-advanced-form.png)
+![Node Advanced Form](../assets/node-advanced-form.png)
 
 Enter the repository: `https://github.com/IBM/node-s2i-openshift` and `/site` for the 'Context Dir'. Click 'Create' at the bottom of the window to build and deploy the application.
 
 Scroll through to watch the build deploying:
 
-![Build](../.gitbook/assets/build.png)
+![Build](../assets/build.png)
 
 When the build has deployed, click the 'External Traffic Route', and you should see the login screen like the following:
 
-![Login](../.gitbook/assets/login.png)
+![Login](../assets/login.png)
 
 You can enter any strings for username and password, for instance `test:test` because the app is running in demo mode.
 
@@ -337,31 +337,31 @@ To be able to setup git webhooks, we need to have elevated permission to the pro
 
 Fork the repo at [https://github.com/IBM/node-s2i-openshift](https://github.com/IBM/node-s2i-openshift)
 
-![Fork](../.gitbook/assets/fork.png)
+![Fork](../assets/fork.png)
 
 Now that I have forked the repo under my repo I have full admin priviledges. As you can see I now have a settings button that I can change the repo settings with.
 
-![Forked Repo](../.gitbook/assets/forked-repo.png)
+![Forked Repo](../assets/forked-repo.png)
 
 We will come back to this page in a moment. Lets change our git source to our repo.
 
 From our openshift dashboard for our project. Select `Builds > Builds`
 
-![Goto Build](../.gitbook/assets/goto-build.png)
+![Goto Build](../assets/goto-build.png)
 
 Select the patientui build. As of now this should be the only build on screen.
 
-![Select Build](../.gitbook/assets/select-build.png)
+![Select Build](../assets/select-build.png)
 
 Click on `Action` on the right and then select `Edit`
 
-![Edit Build](../.gitbook/assets/edit-build.png)
+![Edit Build](../assets/edit-build.png)
 
 Change the `Git Repository URL` to our forked repository.
 
 Click Save in the bottom.
 
-![Update Build](../.gitbook/assets/update-build-src.png)
+![Update Build](../assets/update-build-src.png)
 
 You will see this will not result in a new build. If you want to start a manual build you can do so by clicking `Start Build`. We will skip this for now and move on to the webhook part.
 
@@ -375,13 +375,13 @@ The webhook is in the structure
 https://c100-e.us-east.containers.cloud.ibm.com:31305/apis/build.openshift.io/v1/namespaces/example-health/buildconfigs/patientui/webhooks/<secret>/github
 ```
 
-![Copy github webhook](../.gitbook/assets/copy-github-webhook.png)
+![Copy github webhook](../assets/copy-github-webhook.png)
 
 > There is also the generic webhook url. This also works for github. But the github webhook captures some additional data from github and is more specific. But if we were using some other git repo like bitbucket or gitlab we would use the generic one.
 
 In our github repo go to `Setting > Webhooks`. Then click `Add Webhook`
 
-![webhook page](../.gitbook/assets/webhook-page.png)
+![webhook page](../assets/webhook-page.png)
 
 In the Add Webhook page fill in the `Payload URL` with the url copied earlier from the build configuration. Change the `Content type` to `application/json`.
 
@@ -391,7 +391,7 @@ Right now just the push event is being sent which is fine for our use.
 
 Click on `Add webhook`
 
-![add webhook](../.gitbook/assets/add-webhook.png)
+![add webhook](../assets/add-webhook.png)
 
 If the webhook is reachable by github you will see a green check mark.
 
@@ -399,24 +399,24 @@ Back in our openshift console we still would only see one build however. Because
 
 Path to this file is `site/public/login.html` from the root of the directory. On Github you can edit any file by clicking the Pencil icon on the top right corner.
 
-![edit page](../.gitbook/assets/edit-page.png)
+![edit page](../assets/edit-page.png)
 
 Let's change the name our application to `Demo Health` (Line 21, Line 22). Feel free to make any other UI changes you feel like.
 
-![changes](../.gitbook/assets/changes.png)
+![changes](../assets/changes.png)
 
 Once done go to the bottom and click `commit changes`.
 
 Go to the openshift build page again. This happens quite fast so you might not see the running state. But the moment we made that commit a build was kicked off.
 
-![running build](../.gitbook/assets/running-build.png)
+![running build](../assets/running-build.png)
 
 In a moment it will show completed. Navigate to the overview page to find the route.
 
-![route](../.gitbook/assets/route.png)
+![route](../assets/route.png)
 
 > You could also go to `Applications > Routes` to find the route for the application.
 
 If you go to your new route you will see your change.
 
-![UI](../.gitbook/assets/updated-ui.png)
+![UI](../assets/updated-ui.png)

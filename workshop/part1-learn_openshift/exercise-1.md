@@ -20,11 +20,11 @@ In this exercise, you'll deploy a simple Node.js Express application - "Example 
 
    * To access the application, use the "Port" previewer and select `8080`:
 
-     ![portpreview](../.gitbook/assets/port-preview.png)
+     ![portpreview](../assets/port-preview.png)
 
    * You should see the Example Health application. Login with any credentials and click around!
 
-     ![examplehealthlocalhost](../.gitbook/assets/examplehealth-localhost.png)
+     ![examplehealthlocalhost](../assets/examplehealth-localhost.png)
 
    * Ctrl+C in the terminal to stop the application.
 2. Before we push this application into OpenShift, you'll need to configure your `oc` CLI to connect to your cluster.
@@ -42,7 +42,7 @@ In this exercise, you'll deploy a simple Node.js Express application - "Example 
 
    * Navigate to that URL in the same browser that you used to log-in to IBM Cloud, and you should see your OpenShift dashboard! Take a second to look around, and then copy the login command for the CLI:
 
-     ![copylogincommand](../.gitbook/assets/copylogincommand.png)
+     ![copylogincommand](../assets/copylogincommand.png)
 
    * Your login command should look something like:
 

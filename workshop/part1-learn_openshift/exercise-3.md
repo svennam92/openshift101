@@ -6,21 +6,21 @@ In this exercise, we'll explore the third-party monitoring and metrics dashboard
 
 Red Hat OpenShift on IBM Cloud comes with [Grafana](https://grafana.com/) preinstalled. Get started by switching to the `Administrator` perspective:
 
-![Administrator Perspective](../.gitbook/assets/ocp43-adminview.png)
+![Administrator Perspective](../assets/ocp43-adminview.png)
 
 Then Navigate to `Monitoring > Dashboards` in the left-hand bar. You'll be asked to login with OpenShift and then click through some permissions.
 
-![Monitoring Dashboards](../.gitbook/assets/ocp43-monitoring-dashboard.png)
+![Monitoring Dashboards](../assets/ocp43-monitoring-dashboard.png)
 
 You should then see your Grafana dashboard. Hit `Home` on the top left, and choose `Kubernetes / Compute Resources / Namespace (Pods)`.
 
-![Grafana](../.gitbook/assets/ocp43-grafana.png)
+![Grafana](../assets/ocp43-grafana.png)
 
 Choose the name of the project you created in Step 1 - the same one that your application is running inside.
 
 You should be able to see the CPU and Memory usage for your application. In production environments, this is helpful for identifying the average amount of CPU or Memory your application uses, especially as it can fluctuate through the day. We'll use this information in the next exercise to set up auto-scaling for our pods.
 
-![Grafana also project](../.gitbook/assets/ocp43-grafana-cpu.png)
+![Grafana also project](../assets/ocp43-grafana-cpu.png)
 
 ## Prometheus and Alert Manager
 
@@ -35,11 +35,11 @@ OpenShift provides a web interface to Prometheus, which enables you to run Prome
 
 The Metrics page is accessible by clicking Monitoring → Metrics.
 
-![Metrics, Alerts and Dashboards](../.gitbook/assets/ocp43-monitoring-prometheus.png)
+![Metrics, Alerts and Dashboards](../assets/ocp43-monitoring-prometheus.png)
 
-![Prometheus](../.gitbook/assets/prometheus-time-series.png)
+![Prometheus](../assets/prometheus-time-series.png)
 
 ## Alertmanager
 
-![Alert Manager](../.gitbook/assets/alert-manager.png)
+![Alert Manager](../assets/alert-manager.png)
 

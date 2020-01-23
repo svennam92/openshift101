@@ -8,19 +8,19 @@ Let's understand exactly how Operators work. In the first exercise, you deployed
 
 1. Navigate to your OpenShift console, access the `Administrator` view, and click `Operators > OperatorHub`
 
-   ![OperatorHub](../.gitbook/assets/operatorhub.png)
+   ![OperatorHub](../assets/operatorhub.png)
 
 2. Find the "IBM Cloud Operator", and hit "Install"
 
-   ![Operator Install](../.gitbook/assets/cloudoperatorinstall.png)
+   ![Operator Install](../assets/cloudoperatorinstall.png)
 
 3. Keep the default options and hit `Subscribe`:
 
-   ![Operator Subscribe](../.gitbook/assets/operatorsubscribe.png)
+   ![Operator Subscribe](../assets/operatorsubscribe.png)
 
 4. You may need to wait a few seconds and refresh for the operator to show up as `Installed`:
 
-   ![Installed Operators](../.gitbook/assets/installedoperators.png)
+   ![Installed Operators](../assets/installedoperators.png)
 
 5. Next, you'll need to set your IBM Cloud credentials so that the Operator knows how/where to create your Cloudant service. The operator needs to create the service in your own account, rather than the shared IBM lab account.
 
@@ -97,7 +97,7 @@ Let's understand exactly how Operators work. In the first exercise, you deployed
 
 1. Once the Operator is installed, the Custom Resource Definitions to create the Cloudant service are also available. Navigate to your OpenShift dashboard, ensure you're in the `Administrator` view, navigate to your `Installed Operators` and click the IBM Cloud Operator:
 
-   ![IBM Cloud Operator](../.gitbook/assets/ibmcloudoperator.png)
+   ![IBM Cloud Operator](../assets/ibmcloudoperator.png)
 
 2. You'll see that there's two APIs available -- a Service and a Binding. A `Service` will allow us to create the actual Cloudant service itself -- do that first by clicking `Create Instance` under `Service`. Copy and replace the following YAML:
 
@@ -111,7 +111,7 @@ Let's understand exactly how Operators work. In the first exercise, you deployed
       serviceClass: cloudantnosqldb
    ```
 
-   ![cloudantservice](../.gitbook/assets/cloudantservice.png)
+   ![cloudantservice](../assets/cloudantservice.png)
 
    Hit `Create`.
 
@@ -119,13 +119,13 @@ Let's understand exactly how Operators work. In the first exercise, you deployed
 
    You can also debug any potential issues here. If you already have a Cloudant "Lite" service, you won't be able to create another.
 
-   ![servicedone](../.gitbook/assets/servicedone.png)
+   ![servicedone](../assets/servicedone.png)
 
 4. After verifying that there's no bugs and the service is "online", double-check that the Cloudant service exists in your account: [https://cloud.ibm.com/resources](https://cloud.ibm.com/resources)
 
    You may need to switch to your own account using the switcher on the top right.
 
-   ![resourcelist](../.gitbook/assets/resourcelist.png)
+   ![resourcelist](../assets/resourcelist.png)
 
 5. Next, create the "binding" resource for your Operator \(instead of Service as you did above\):
 
@@ -138,11 +138,11 @@ Let's understand exactly how Operators work. In the first exercise, you deployed
       serviceName: cloudant-service
    ```
 
-   ![bindingresource](../.gitbook/assets/cloudantbinding.png)
+   ![bindingresource](../assets/cloudantbinding.png)
 
 6. The binding should get created fairly quickly -- you can check the status by clicking on your binding, and looking for `Message: Online`. By navigating to the `Resources` tab, you can see that the `cloudant-binding` secret is created. Click that to see your credentials for accessing your Cloudant DB, stored securely in a secret:
 
-   ![binding secret](../.gitbook/assets/bindingsecret.png)
+   ![binding secret](../assets/bindingsecret.png)
 
 ## Deploy the Node.js Patient Database App
 
@@ -156,19 +156,19 @@ Now you'll create the Node.js app that will populate your Cloudant DB with patie
 
 2. The app will crash and fail to start repeatedly because the credentials to the Cloudant DB haven't been set yet.
 
-   ![Crashing](../.gitbook/assets/crashing.png)
+   ![Crashing](../assets/crashing.png)
 
 3. Let's fix this by setting the environment variable to the `cloudant-binding` secret we created earlier. Navigate to the deployment config for this app:
 
-   ![Deployment Config](../.gitbook/assets/deploymentconfig.png)
+   ![Deployment Config](../assets/deploymentconfig.png)
 
 4. Go to the `Environment` tab, click `Add from Config Map or Secret` and create a new environment variable named `CLOUDANT_URL`. Choose the `cloudant-binding` secret, then choose `url` for the Key. Hit the `Save` button.
 
-   ![Environment from Secret](../.gitbook/assets/envfromsecret.png)
+   ![Environment from Secret](../assets/envfromsecret.png)
 
 5. Go back to the `Topology` tab, and the `patient-db` should successfully start shortly.
 
-   ![Apps Running](../.gitbook/assets/runningapps.png)
+   ![Apps Running](../assets/runningapps.png)
 
 ## Configure Front-End Patient Health App to use Cloudant Database Backend
 
@@ -178,25 +178,25 @@ The `patient-ui` application has a configuration option for the backend database
 
    To find your routes, you can use the OpenShift console or type `oc get routes`.
 
-   ![clicksettings](../.gitbook/assets/clicksettings.png)
+   ![clicksettings](../assets/clicksettings.png)
 
 2. Input the route `http://patient-db:8080/` and hit the `node` OpenShift icon.
 
    You won't need to expose this application with the `oc expose` command. This is because your frontend `patient-ui` application can talk to the backend `patient-db` without the network request leaving the cluster. Kubernetes keeps an internal DNS record of the services which resolve to the IPs of the running application.
 
-   ![inputurl](../.gitbook/assets/inputurl.png)
+   ![inputurl](../assets/inputurl.png)
 
 Your application is now backed by the mock patient data in the Cloudant DB! You can log-in using any user-id/password in the Cloudant DB, for example "opall:opall".
 
 1. To find the complete set of users, navigate to your services in IBM Cloud: [IBM Cloud Resources](https://cloud.ibm.com/resources). Click `cloudant-service`.
 
-   ![cloudantdb](../.gitbook/assets/cloudantdb.png)
+   ![cloudantdb](../assets/cloudantdb.png)
 
 2. Launch the Cloudant dashboard and click the `patients` db.
 
-   ![databases](../.gitbook/assets/databases.png)
+   ![databases](../assets/databases.png)
 
 3. Click through the different patients you can log-in as.
 
-   ![credentials](../.gitbook/assets/credentials.png)
+   ![credentials](../assets/credentials.png)
 
