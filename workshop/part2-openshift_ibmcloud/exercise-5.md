@@ -39,19 +39,19 @@ Let's understand exactly how Operators work. In the first exercise, you deployed
 
 6. Next, set your CF org, space and resource group where the Cloudant service will be created. Resource group is usually named `default` or `Default` -- case-sensitive.
 
-   ```text
+    ```text
     ibmcloud target --cf -g Default
     or
     ibmcloud target --cf -g default
-   ```
+    ```
 
 7. Verify that all fields are set:
 
-   ```text
+    ```text
     ibmcloud target
-   ```
+    ```
 
-   ```text
+    ```text
     API endpoint:      https://cloud.ibm.com   
     Region:            us-south   
     User:              svennam@us.ibm.com   
@@ -60,7 +60,7 @@ Let's understand exactly how Operators work. In the first exercise, you deployed
     CF API endpoint:   https://api.us-south.cf.cloud.ibm.com (API version: 2.144.0)   
     Org:               svennam@us.ibm.com   
     Space:             dev
-   ```
+    ```
 
    If any of these fields are not set, the Operator will fail to create your service!
 
@@ -72,12 +72,12 @@ Let's understand exactly how Operators work. In the first exercise, you deployed
 
 9. Verify that all the fields in `data` are set for the configmap \(`org`, `region`, `resourceGroup` and `space`\) and secret \(`api-key` and `region`\):
 
-   ```text
+    ```text
     oc get configmap/seed-defaults -o yaml -n default
     oc get secret/seed-secret -o yaml -n default
-   ```
+    ```
 
-   ```text
+    ```text
     apiVersion: v1
     data:
         org: svennam@us.ibm.com
@@ -91,7 +91,7 @@ Let's understand exactly how Operators work. In the first exercise, you deployed
         api-key: <PRIVATE_API_TOKEN>=
         region: dXMtc291dGg=
     ...
-   ```
+    ```
 
 ## Create a Cloudant Service using the CRDs
 
@@ -101,7 +101,7 @@ Let's understand exactly how Operators work. In the first exercise, you deployed
 
 2. You'll see that there's two APIs available -- a Service and a Binding. A `Service` will allow us to create the actual Cloudant service itself -- do that first by clicking `Create Instance` under `Service`. Copy and replace the following YAML:
 
-   ```text
+    ```text
     apiVersion: ibmcloud.ibm.com/v1alpha1
     kind: Service
     metadata:
@@ -109,7 +109,7 @@ Let's understand exactly how Operators work. In the first exercise, you deployed
     spec:
       plan: lite
       serviceClass: cloudantnosqldb
-   ```
+    ```
 
    ![cloudantservice](../assets/cloudantservice.png)
 
@@ -129,14 +129,14 @@ Let's understand exactly how Operators work. In the first exercise, you deployed
 
 5. Next, create the "binding" resource for your Operator \(instead of Service as you did above\):
 
-   ```text
+    ```text
     apiVersion: ibmcloud.ibm.com/v1alpha1
     kind: Binding
     metadata:
       name: cloudant-binding
     spec:
       serviceName: cloudant-service
-   ```
+    ```
 
    ![bindingresource](../assets/cloudantbinding.png)
 
