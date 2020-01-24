@@ -2,7 +2,7 @@
 
 In this section, you will login to your own IBM Cloud account, and then get access to a IBM Cloud Lab account which contains pre-provisioned clusters. Each lab attendee will be granted access to one cluster.
 
-## Setting up your IBM Cloud ID
+## Set up your IBM Cloud ID
 
 * Log into IBM Cloud with an existing account: [https://cloud.ibm.com](https://cloud.ibm.com)
 
@@ -10,7 +10,7 @@ OR
 
 * Create your own: [http://cloud.ibm.com/registration](http://cloud.ibm.com/registration)
 
-## Accessing the Cluster
+## Access the Cluster using the Console
 
 Instructors will provide a URL to a web app. Enter your IBMid \(the email you used to sign up\) and the lab key \(also provided by the instructor\).
 
