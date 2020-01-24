@@ -39,11 +39,11 @@ In LogDNA, you can grant any of the following service roles to users:
 
 Your user has been granted manager permissions in the LogDNA instance that you are using in this lab so that you can complete all of the sections in the exercise.
 
-**IMPORTANT: Use Chrome to complete this exercise.**
+> **IMPORTANT: Use Chrome to complete this exercise.**
 
 ## Create a custom view
 
-**In LogDNA, you can configure custom views to monitor a subset of data. You can also attach an alert to a view to be notified of the presence or absence of log lines.**
+> **In LogDNA, you can configure custom views to monitor a subset of data. You can also attach an alert to a view to be notified of the presence or absence of log lines.**
 
 When you launch the LogDNA web UI, log entries are displayed with a predefined format. You can modify in the **User Preferences** section how the information in each log line is displayed. You can also filter logs and modify search settings, then bookmark the result as a _view_. You can attach and detach one or more alerts to a view. You can define a custom format for how your lines are shown in the view. You can expand a log line and see the data parsed.
 
@@ -56,7 +56,7 @@ When you launch the LogDNA web UI, log entries are displayed with a predefined f
 
 #### Customize your default view
 
-In the **USER PREFERENCES** section, you can modify the order of the data fields that are displayed per line.
+> In the **USER PREFERENCES** section, you can modify the order of the data fields that are displayed per line.
 
 Complete the following steps to modify the format of a log line:
 
@@ -72,7 +72,7 @@ Complete the following steps to modify the format of a log line:
 
 #### Create a custom view to monitor logs from the sample app
 
-You can select the events that are displayed through a view by applying a search query in the search bar, selecting values in the search area, or a combination of both. You can save that view for reuse later.
+> You can select the events that are displayed through a view by applying a search query in the search bar, selecting values in the search area, or a combination of both. You can save that view for reuse later.
 
 Complete the following steps:
 
@@ -84,7 +84,7 @@ Complete the following steps:
 
    ![](../assets/views-img-3.png)
 
-3. Filter out log lines to display only lines that tagged as debug lines. Enter in the search bar the following query: `level:debug`
+3. Filter out log lines to display only lines that are tagged as debug lines. Enter in the search bar the following query: `level:debug`
 
    ![](../assets/views-img-4.png)
 
@@ -115,6 +115,19 @@ Complete the following steps:
 A new category appears on the left navigation panel.
 
 ![](../assets/views-img-11.png)
+
+#### Generate application log data
+
+Generate logs:
+
+1. Run `oc status`.
+2. Get the application URL.
+
+    ![](../assets/views-img-20.png)
+
+3. Launch the application from a browser. Enter in the browser the application URL. Then, log in and log out with different names to see login entries for each user.
+
+    ![](../assets/views-img-21.png)
 
 #### Analyze a log line
 
@@ -149,7 +162,7 @@ Complete the following steps:
 
    Then click **Continue in New Viewer** to get the view in a different page. You might need to scroll down to get this option.
 
-   **Tip: Open a view per type of context to troubleshoot problems.**
+   > **Tip: Open a view per type of context to troubleshoot problems.**
 
 6. Click **Copy to clipboard** to copy the message field to the clipboard. 
 
