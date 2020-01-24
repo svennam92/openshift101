@@ -67,7 +67,7 @@ Let's understand exactly how Operators work. In the first exercise, you deployed
 8. Use the helper script provided by IBM to create a new API token, and register it as a secret in your OpenShift cluster:
 
    ```text
-    curl -sL https://raw.githubusercontent.com/IBM/cloud-operators/master/hack/install-operator.sh | bash
+    curl -sL https://raw.githubusercontent.com/IBM/cloud-operators/master/hack/config-operator.sh | bash
    ```
 
 9. Verify that all the fields in `data` are set for the configmap \(`org`, `region`, `resourceGroup` and `space`\) and secret \(`api-key` and `region`\):
