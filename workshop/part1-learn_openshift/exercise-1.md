@@ -1,44 +1,5 @@
 # Exercise 1: Deploying an application
 
-## Connect to OpenShift
-
-1. Before we push this application into OpenShift, you'll need to configure your `oc` CLI to connect to your cluster.
-   * Run `ibmcloud ks clusters` to find the name of your cluster. Then, run the following command to get the URL to the dashboard:
-
-     ```text
-       ibmcloud ks cluster get <your_cluster_name> | grep "Public Service Endpoint URL"
-     ```
-
-     Output:
-
-     ```text
-       Public Service Endpoint URL:    https://your_cluster_dashboard_url:32545
-     ```
-
-   * Navigate to that URL in the same browser that you used to log-in to IBM Cloud, and you should see your OpenShift dashboard! Take a second to look around, and then copy the login command for the CLI:
-
-     ![copylogincommand](../assets/copylogincommand.png)
-
-   * Your login command should look something like:
-
-     ```text
-       oc login --token=WmBWdgg1eObMBIYOlQAafeDKdUUUwNDaRCR1Rf7YkVc0 --server=https://c100-e.containers.cloud.ibm.com:32545
-     ```
-
-   * Navigate back to your terminal, and run that command.
-
-     Output:
-
-     ```text
-       Logged into "https://c100-e.containers.cloud.ibm.com:32545" as "IAM#svennam@us.ibm.com" using the token provided.
-
-       You have access to 55 projects, the list has been suppressed. You can list all projects with 'oc projects'
-
-       Using project "default".
-     ```
-
-   * Your CLI is now connected to your Red Hat OpenShift cluster running in IBM Cloud.
-
 ## Deploy Example Health into OpenShift
 
 There's many ways to create a new application in OpenShift. If you're already a Kubernetes expert, you can stick with what you know and use YAML deployment files. However, OpenShift has greatly simplified the process of deploying apps into a cluster. Today, we'll demonstrate the "s2i" or "source to image" builder. This builder allows you to go from source code on GitHub to a running deployment.
