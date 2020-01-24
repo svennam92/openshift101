@@ -33,7 +33,7 @@ Control the cost of your logging infrastructure in the IBM Cloud by configuring 
 
 In LogDNA, you can grant any of the following service roles to users:
 
-* `Mamager` role: This role grants permissions to a user to perform all admin tasks. As a manager, a user can manage resources: configure/manage/delete views, alerts, dashboards, screens, keys, and exclusion rules; export data; search, filter, and view all data; and configure archiving.
+* `Manager` role: This role grants permissions to a user to perform all admin tasks. As a manager, a user can manage resources: configure/manage/delete views, alerts, dashboards, screens, keys, and exclusion rules; export data; search, filter, and view all data; and configure archiving.
 * `Standard member` role: This role grants permissions to a user to perform some admin tasks. As a standard member, a user can configure/manage/delete views, alerts, dashboards and screens, export data, and search, filter, and view all data.
 * `Reader` role: This role grants permissions to a user to customize the UI, and view data only. As a reader, a user can perform read-only actions such as monitor data through views, dashboards, and screens.
 
@@ -63,7 +63,12 @@ Complete the following steps to modify the format of a log line:
 1. Select the **Configuration** icon ![](../assets/admin.png).
 2. Select **USER PREFERENCES**. A new window opens.
 3. Select **Log Format**.
-4. Modify the _Line Format_ section to match your requirements. Drag boxes around.
+4. Modify the _Line Format_ section to match your requirements. Drag boxes around. Click **Done**.
+
+    For example, add **%app** after the timestamp.
+
+    ![](../assets/views-img-19.png)
+
 
 #### Create a custom view to monitor logs from the sample app
 

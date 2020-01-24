@@ -22,6 +22,7 @@ When you monitor an application, you should consider:
   Traffic, that is, rate of requests per second
 
   Errors and their frequency
+  
 
 ## Features
 

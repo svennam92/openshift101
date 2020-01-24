@@ -24,22 +24,30 @@ Note: Retrieve the external URL from the OpenShift console, or from the URL of y
 
 ## OpenShift Logging
 
-Since we only created one pod, seeing our logs will be straight forward. Ensure that you're in the **Developer** view, and navigate to **Topology**. You should see a single deployment config. Click that to see your Pods, Builds, Services and Routes.
+Since we only created one pod, seeing our logs will be straight forward. Ensure that you're in the **Developer** view.
+
+![developer view](../assets/developer.png)
+
+Then, navigate to **Topology**. You should see a single deployment config. Click that to see your Pods, Builds, Services and Routes.
 
 * **Pods**: Your Node.js application containers
 * **Builds**: The auto-generated build that created a Docker image from your Node.js source code, deployed it to the OpenShift container registry, and kicked off your deployment config.
 * **Services**: Tells OpenShift how to access your Pods by grouping them together as a service and defining the port to listen to
 * **Routes**: Exposes your services to the outside world using the LoadBalancer provided by the IBM Cloud network
 
-  ![Topology Deployment Config](../assets/ocp43-topology.png)
+![Topology Deployment Config](../assets/ocp43-topology.png)
 
-1. Click on **View Logs** next to your Pods to see streaming logs from your running application. If you're still generating traffic, you should see log messages for every request being made.
+1. Navigate to your Pod by clicking on your Deployment Config, then clicking the name of the Pod under **Pods**.
 
-   ![Pod Logs](../assets/ocp43-pod-logs.png)
+    ![Navigate to Pod](../assets/ocp43-pod-arrow.png)
+   
+2. Click on **View Logs** next to your Pods to see streaming logs from your running application. If you're still generating traffic, you should see log messages for every request being made.
 
-2. Click on **View Logs** next to your completed Build. This shows you the process that OpenShift took to install the dependencies for your Node.js application and build/push a Docker image.
+    ![Pod Logs](../assets/ocp43-pod-logs.png)
 
-   ![Build Logs](../assets/ocp43-build-logs.png)
+3. Click on **View Logs** next to your completed Build. This shows you the process that OpenShift took to install the dependencies for your Node.js application and build/push a Docker image.
+
+    ![Build Logs](../assets/ocp43-build-logs.png)
 
 ## OpenShift Terminal
 

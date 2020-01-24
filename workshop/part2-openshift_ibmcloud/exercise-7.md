@@ -8,7 +8,7 @@ To forward logs to your LogDNA instance, complete the following steps from the c
 
 ## Step 1. Access your cluster through the CLI
 
-[Access your cluster using the oc CLI](../getting-started/setup_cli#access-your-cluster-using-the-oc-cli). 
+[Access your cluster using the oc CLI](https://openshift4.gitbook.io/openshiftlab/getting-started/setup_cli#access-your-cluster-using-the-oc-cli). 
 
 ## Launch the LogDNA webUI
 
@@ -33,7 +33,7 @@ The Web UI opens.
 1. In the LogDNA web UI, select the **Settings** icon ![](../assets/admin.png). Then select **Organization**.
 2. Select **API keys**.
 
-    ![](../assets/screen-img-18.png)
+    ![](../assets/views-img-18.png)
 
 3. Copy the ingestion key.
 
@@ -76,12 +76,17 @@ Create a Kubernetes daemon set to deploy the LogDNA agent on every worker node o
 
 The LogDNA agent collects logs with the extension `*.log` and extensionsless files that are stored in the `/var/log` directory of your pod. By default, logs are collected from all namespaces, including `kube-system`, and automatically forwarded to the IBM Log Analysis with LogDNA service.
 
-Run the following command:
+Run the following command if you are working on a LogDNA instance that is located in US-South:
 
 ```
 oc create -f https://assets.us-south.logging.cloud.ibm.com/clients/logdna-agent-ds-os.yaml -n ibm-observe
 ```
 
+Run the following command if you are working on a LogDNA instance that is located in Frankfurt:
+
+```
+oc create -f https://assets.eu-de.logging.cloud.ibm.com/clients/logdna-agent-ds-os.yaml -n ibm-observe
+```
 
 ## Step 6. Verify that the LogDNA agent is deployed successfully
 
@@ -125,6 +130,6 @@ oc logs logdna-agent-xxxkz
 
 ## Step 7. Launch the LogDNA webUI to verify that logs are being forwarded from the LogDNA agent
 
-Next, go to the LogDNA web UI page in your browser to verify that logs from the cluster are available through the UI. 
+Next, go to the LogDNA web UI. In the **Views** page, click **Everything** to verify that logs from the cluster are available through the UI. 
 
 
