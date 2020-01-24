@@ -231,7 +231,7 @@ Complete the following steps to create a dashboard to monitor logs from the lab'
 
    ![](../assets/board-img-3.png)
 
-   Then, select the value **patientui**.
+   Then, select the value **patient-ui**.
 
    ![](../assets/board-img-4.png)
 
