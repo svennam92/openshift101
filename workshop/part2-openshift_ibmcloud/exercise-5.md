@@ -10,19 +10,19 @@ Let's understand exactly how Operators work. In the first exercise, you deployed
 
    ![OperatorHub](../assets/operatorhub.png)
 
-2. Find the **IBM Cloud Operator**, and hit **Install**
+1. Find the **IBM Cloud Operator**, and hit **Install**
 
    ![Operator Install](../assets/cloudoperatorinstall.png)
 
-3. Keep the default options and hit `Subscribe`:
+1. Keep the default options and hit `Subscribe`:
 
    ![Operator Subscribe](../assets/operatorsubscribe.png)
 
-4. You may need to wait a few seconds and refresh for the operator to show up as `Installed`:
+1. You may need to wait a few seconds and refresh for the operator to show up as `Installed`:
 
    ![Installed Operators](../assets/installedoperators.png)
 
-5. Next, you'll need to set your IBM Cloud credentials so that the Operator knows how/where to create your Cloudant service. The operator needs to create the service in your own account, rather than the shared IBM lab account.
+1. Next, you'll need to set your IBM Cloud credentials so that the Operator knows how/where to create your Cloudant service. The operator needs to create the service in your own account, rather than the shared IBM lab account.
 
    ```text
     ibmcloud login
@@ -39,7 +39,7 @@ Let's understand exactly how Operators work. In the first exercise, you deployed
     Enter a number> 1
    ```
 
-6. Next, set your CF org, space and resource group where the Cloudant service will be created. Resource group is usually named `default` or `Default` -- case-sensitive.
+1. Next, set your CF org, space and resource group where the Cloudant service will be created. Resource group is usually named `default` or `Default` -- case-sensitive.
 
     ```text
     ibmcloud target --cf -g Default
@@ -47,7 +47,7 @@ Let's understand exactly how Operators work. In the first exercise, you deployed
     ibmcloud target --cf -g default
     ```
 
-7. Verify that all fields are set:
+1. Verify that all fields are set:
 
     ```text
     ibmcloud target
@@ -66,13 +66,21 @@ Let's understand exactly how Operators work. In the first exercise, you deployed
 
    If any of these fields are not set, the Operator will fail to create your service!
 
-8. Use the helper script provided by IBM to create a new API token, and register it as a secret in your OpenShift cluster:
+1. Make sure you're logged in to the cluster in this terminal session.
+
+    [Access your cluster using the oc CLI](../getting-started/setup_cli.md#access-the-openShift-web-console).
+
+    Note: You will face this error if you're not logged in
+    
+    `error: You must be logged in to the server (the server has asked for the client to provide credentials)`
+
+1. Use the helper script provided by IBM to create a new API token, and register it as a secret in your OpenShift cluster:
 
     ```text
     curl -sL https://raw.githubusercontent.com/IBM/cloud-operators/master/hack/config-operator.sh | bash
     ```
 
-9. Verify that all the fields in `data` are set for the configmap \(`org`, `region`, `resourceGroup` and `space`\) and secret \(`api-key` and `region`\):
+1. Verify that all the fields in `data` are set for the configmap \(`org`, `region`, `resourceGroup` and `space`\) and secret \(`api-key` and `region`\):
 
     ```text
     oc get configmap/seed-defaults -o yaml -n default
