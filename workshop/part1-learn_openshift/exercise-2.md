@@ -4,21 +4,34 @@ In this exercise, we'll explore the out-of-the-box logging and monitoring capabi
 
 ## Simulate Load on the Application
 
-First, let's simulate some load on our application. Run the following script which will endlessly spam our app with requests:
+Let's simulate some load on our application.
 
-> With Linux/MacOS
->
-> ```bash
-> while sleep 1; do curl -s <your_app_route>/info; done
-> ```
->
-> With Windows
->
-> ```bash
-> while($true){curl <your_app_route>/info}
-> ```
+1. First, retrieve the public route to access your Example Health application:
 
-Note: Retrieve the external URL from the OpenShift console, or from the URL of your Example Health application. Note that there may be an `/index.html` at the end that you need to replace with `/info`. We're hitting the /info endpoint which will trigger some logs from our app. For example:
+    ```
+    oc get routes
+    ```
+    Output looks similar to this:
+    ```
+    NAME         HOST/PORT                                                                                                 PATH      SERVICES     PORT       TERMINATION   WILDCARD
+    patient-ui   patient-ui-example-health.roks07-872b77d77f69503584da5a379a38af9c-0000.eu-de.containers.appdomain.cloud             patient-ui   8080-tcp                 None
+    ```
+
+1. Run the following script which will endlessly spam our app with requests:
+
+    With Linux/MacOS:
+
+    ```bash
+    while sleep 1; do curl -s http://<host>/info; done
+    ```
+    
+    With Windows:
+    
+    ```bash
+    while($true){curl http://<host>/info}
+    ```
+
+We're hitting the `/info` endpoint which will trigger some logs from our app. For example:
 
 [`http://patient-ui-health-example.myopenshift-xxx.us-east.containers.appdomain.cloud/info`](http://patient-ui-health-example.myopenshift-341665-66631af3eb2bd8030c5bb56d415b8851-0001.us-east.containers.appdomain.cloud/jee.html)
 
