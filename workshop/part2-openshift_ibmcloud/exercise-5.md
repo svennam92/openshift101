@@ -66,9 +66,13 @@ Let's understand exactly how Operators work. In the first exercise, you deployed
 
    If any of these fields are not set, the Operator will fail to create your service!
 
-1. Make sure you're login to the cluster in this terminal session.
+1. Make sure you're logged in to the cluster in this terminal session.
 
-    [Access your cluster using the oc CLI](../getting-started/setup-cli.md).
+    [Access your cluster using the oc CLI](../getting-started/setup_cli.md#access-the-openShift-web-console).
+
+    Note: You will face this error if you're not logged in
+    
+    `error: You must be logged in to the server (the server has asked for the client to provide credentials)`
 
 1. Use the helper script provided by IBM to create a new API token, and register it as a secret in your OpenShift cluster:
 

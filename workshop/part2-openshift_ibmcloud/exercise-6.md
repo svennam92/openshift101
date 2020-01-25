@@ -4,7 +4,7 @@ To integrate your monitoring instance with your OpenShift cluster, you must run 
 
 ## Step 1. Access your cluster through the CLI
 
-[Access your cluster using the oc CLI](https://openshift4.gitbook.io/openshiftlab/getting-started/setup_cli#access-your-cluster-using-the-oc-cli).
+[Access your cluster using the oc CLI](../getting-started/setup_cli.md#access-the-openShift-web-console).
 
 ## Step 2. Launch the Sysdig webUI
 
