@@ -10,7 +10,7 @@ Let's understand exactly how Operators work. In the first exercise, you deployed
 
    ![OperatorHub](../assets/operatorhub.png)
 
-2. Find the "IBM Cloud Operator", and hit "Install"
+2. Find the **IBM Cloud Operator**, and hit **Install**
 
    ![Operator Install](../assets/cloudoperatorinstall.png)
 
@@ -25,10 +25,12 @@ Let's understand exactly how Operators work. In the first exercise, you deployed
 5. Next, you'll need to set your IBM Cloud credentials so that the Operator knows how/where to create your Cloudant service. The operator needs to create the service in your own account, rather than the shared IBM lab account.
 
    ```text
-    ibmcloud login --sso
+    ibmcloud login
    ```
+ 
+    {% hint style='tip' %} If you are using a Single-Sign-On authentication with IBMid, use ibmcloud login --sso. {% endhint %}
 
-   Remember: Pick your own account, not IBM.
+   **Remember: Pick your own account, not IBM.**
 
    ```text
     Select an account:
@@ -66,9 +68,9 @@ Let's understand exactly how Operators work. In the first exercise, you deployed
 
 8. Use the helper script provided by IBM to create a new API token, and register it as a secret in your OpenShift cluster:
 
-   ```text
+    ```text
     curl -sL https://raw.githubusercontent.com/IBM/cloud-operators/master/hack/config-operator.sh | bash
-   ```
+    ```
 
 9. Verify that all the fields in `data` are set for the configmap \(`org`, `region`, `resourceGroup` and `space`\) and secret \(`api-key` and `region`\):
 
