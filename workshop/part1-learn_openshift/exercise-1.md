@@ -2,7 +2,9 @@
 
 ## Deploy Example Health into OpenShift
 
-There's many ways to create a new application in OpenShift. If you're already a Kubernetes expert, you can stick with what you know and use YAML deployment files. However, OpenShift has greatly simplified the process of deploying apps into a cluster. Today, we'll demonstrate the "s2i" or "source to image" builder. This builder allows you to go from source code on GitHub to a running deployment.
+There's many ways to create a new application in OpenShift. If you're already a Kubernetes expert, you can stick with what you know and use YAML deployment files. However, OpenShift has greatly simplified the process of deploying apps into a cluster. 
+
+Today, we'll demonstrate the "s2i" or "source to image" builder. This builder allows you to go from source code on GitHub to a running deployment.
 
 1. Create a new project `example-health`:
 
@@ -24,7 +26,7 @@ There's many ways to create a new application in OpenShift. If you're already a 
         kubectl create deployment hello-node --image=gcr.io/hello-minikube-zero-install/hello-node
    ```
 
-2. Next, deploy the application directly from GitHub into your cluster. This uses the OpenShift "s2i" or "source to image" strategy. Essentially, this build strategy combines a standard Node.js runtime \(a base image\) with your source code in GitHub. Our code needs a runtime to actually run -- the base image takes care of this. The base image exists on DockerHub, named `nodejs-10-centos7:latest`.
+1. Next, deploy the application directly from GitHub into your cluster. This uses the OpenShift "s2i" or "source to image" strategy. Essentially, this build strategy combines a standard Node.js runtime \(a base image\) with your source code in GitHub. Our code needs a runtime to actually run -- the base image takes care of this. The base image exists on DockerHub, named `nodejs-10-centos7:latest`.
    * Run the following command to build the Docker image. Note the `~` separator between the base image and source repository. The `--context-dir` flag is used to define the folder where the app exists:
 
      ```text
@@ -63,7 +65,8 @@ There's many ways to create a new application in OpenShift. If you're already a 
      ```
 
    * This command created an ImageStream, Deployment, a Pod, and a Service resource for the `Example-Health` app,
-3. Reading the output, you'll notice that although a deployment and service is created, your application is not yet "exposed" to the outside world. To do so, run the following command:
+
+1. Reading the output, you'll notice that although a deployment and service is created, your application is not yet "exposed" to the outside world. To do so, run the following command:
 
    ```text
     oc expose svc/patient-ui
@@ -75,7 +78,7 @@ There's many ways to create a new application in OpenShift. If you're already a 
     route.route.openshift.io/patient-ui exposed
    ```
 
-4. Run the `oc status` command to make sure everything started up correctly. This might take a couple minutes -- look for the `deployed` status. You can also launch the dashboard and track it there.
+1. Run the `oc status` command to make sure everything started up correctly. This might take a couple minutes -- look for the `deployed` status. You can also launch the dashboard and track it there.
 
    > To find the OpenShift dashboard URL again, run: `ic ks cluster get <cluster_name>`
 
@@ -94,7 +97,14 @@ There's many ways to create a new application in OpenShift. If you're already a 
         deployment #1 deployed 21 minutes ago - 1 pod
    ```
 
-5. Finally, open a browser and access your application with the URL from the resulting output in your terminal.
+1. Start streaming the logs to see the build progress
+    ```
+    oc logs -f bc/patient-ui
+    ```
+
+1. Finally, open a browser and access your application with the URL from the resulting output in your terminal.
+
+    ![Choose a cluster](../assets/patient-ui-web.png)
 
 You've completed the first exercise! Let's recap -- in this exercise, you:
 
