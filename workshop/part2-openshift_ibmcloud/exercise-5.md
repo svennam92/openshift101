@@ -25,10 +25,8 @@ Let's understand exactly how Operators work. In the first exercise, you deployed
 1. Next, you'll need to set your IBM Cloud credentials so that the Operator knows how/where to create your Cloudant service. The operator needs to create the service in your own account, rather than the shared IBM lab account.
 
    ```text
-    ibmcloud login
+    ibmcloud login --sso
    ```
- 
-    {% hint style='tip' %} If you are using a Single-Sign-On authentication with IBMid, use ibmcloud login --sso. {% endhint %}
 
    **Remember: Pick your own account, not IBM.**
 
