@@ -2,61 +2,54 @@
 
 To integrate your monitoring instance with your OpenShift cluster, you must run a script that creates a project and privileged service account for the Sysdig agent.
 
-## Step 1. Access your cluster through the CLI
+## Launch the Sysdig webUI
 
-[Access your cluster using the oc CLI](../getting-started/setup_cli.md#access-the-openShift-web-console).
+1. In the IBM Cloud Console, navigate to the [Observability](https://cloud.ibm.com/observe/monitoring) page and select **Monitoring**
 
-## Step 2. Launch the Sysdig webUI
-
-1. In the IBM Cloud Console, open the **Menu** with the burger icon in the top left corner and select **Observability**. 
-
-    ![](../assets/menu-observability.png) 
-
-2. Select **Monitoring**. 
+    ![](../assets/icp-monitoring.png).
 
     The list of instances that are available on IBM Cloud is displayed.
 
-3. Select your instance. Check with the instructor which instance  you should use for the lab.
+2. Select your instance. Check with the instructor which instance  you should use for the lab.
 
-4. Click **View Sysdig**.
+3. Click **View Sysdig**. The Web UI opens.
 
-The Web UI opens.
-
-## Step 3. Get the access key for your Sysdig instance
+## Get the access key for Sysdig instance
 
 The Sysdig access key is used to open a secure web socket to the Sysdig ingestion server and to authenticate the monitoring agent with the monitoring service.
 
-Comnplete the following steps:
-
-1. In the Sysdig web UI, select the icon ![](../assets/config.png).
-
-2. Select **Settings**.
+1. In the Sysdig web UI, select **Settings** at the bottom left corner.
 
     ![](../assets/settings.png)
 
-3. Select **Agent installation**.
+2. Select **Agent installation**.
 
     ![](../assets/agent.png)
 
-4. Copy the access key that is displayed at the top of the page.
+3. Copy the access key that is displayed at the top of the page.
 
 
-## Step 4. Deploy the Sysdig agent in the cluster
+## Deploy the Sysdig agent in the cluster
 
 Run the script to set up an `ibm-observe` project with a privileged service account and a Kubernetes daemon set to deploy the Sysdig agent on every worker node of your Kubernetes cluster.
 
 The Sysdig agent collects metrics such as the worker node CPU usage, worker node memory usage, HTTP traffic to and from your containers, and data about several infrastructure components.
 
-In the following command, replace `<sysdig_access_key>` and `<sysdig_collector_endpoint>` with the values from the service key that you created earlier. For `<tag>`, you can associate tags with your Sysdig agent, such as `role:service,location:us-south` to help you identify the environment that the metrics come from.
+1. Before running the curl command in step 2, you need to make sure you're logged in the cluster by running `oc login`.
+
+    [Access your cluster using the oc CLI](../getting-started/setup_cli.md#access-the-openShift-web-console).
+
+
+1. In the following command, replace `<sysdig_access_key>` and `<sysdig_collector_endpoint>` with the values from the service key that you created earlier. For `<tag>`, you can associate tags with your Sysdig agent, such as `role:service,location:us-south` to help you identify the environment that the metrics come from.
 
 ```text
-curl -sL https://ibm.biz/install-sysdig-k8s-agent | bash -s -- -a <sysdig_access_key> -c <sysdig_collector_endpoint> -t faststart,<Enter your name> -ac 'sysdig_capture_enabled: false' --openshift
+curl -sL https://ibm.biz/install-sysdig-k8s-agent | sed '435,442d' | bash -s -- -a <sysdig_access_key> -c <sysdig_collector_endpoint> -t faststart,<Enter your name> -ac 'sysdig_capture_enabled: false' --openshift
 ```
 
 For example:
 
 ```text
-curl -sL https://ibm.biz/install-sysdig-k8s-agent | bash -s -- -a <sysdig_access_key> -c <sysdig_collector_endpoint> -t faststart,marisa -ac 'sysdig_capture_enabled: false' --openshift
+curl -sL https://ibm.biz/install-sysdig-k8s-agent | sed '435,442d' | bash -s -- -a <sysdig_access_key> -c <sysdig_collector_endpoint> -t faststart,marisa -ac 'sysdig_capture_enabled: false' --openshift
 ```
 
 Example output:
@@ -83,11 +76,9 @@ Example output:
     daemonset.extensions/sysdig-agent created
 ```
 
-## Step 5. Verify that the Sysdig agent is deployed successfully
+## Verify that the Sysdig agent is deployed successfully
 
 Verify that the `sydig-agent` pods on each node have a **Running** status.
-
-Run the following command:
 
 ```text
 oc get pods -n ibm-observe
