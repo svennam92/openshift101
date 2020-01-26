@@ -28,7 +28,7 @@ Let's understand exactly how Operators work. In the first exercise, you deployed
     ibmcloud login --sso
    ```
 
-   **Remember: Pick your own account, not IBM.**
+   Remember: Pick your own account, not IBM.
 
    ```text
     Select an account:
@@ -64,13 +64,9 @@ Let's understand exactly how Operators work. In the first exercise, you deployed
 
    If any of these fields are not set, the Operator will fail to create your service!
 
-1. Make sure you're logged in to the cluster in this terminal session.
+1. Make sure you're logged in to the cluster in this terminal session. Otherwise you must re-run the command `oc login` with the cluster information:
 
     [Access your cluster using the oc CLI](../getting-started/setup_cli.md#access-the-openShift-web-console).
-
-    Note: You will face this error if you're not logged in
-    
-    `error: You must be logged in to the server (the server has asked for the client to provide credentials)`
 
 1. Use the helper script provided by IBM to create a new API token, and register it as a secret in your OpenShift cluster:
 
@@ -115,7 +111,7 @@ Let's understand exactly how Operators work. In the first exercise, you deployed
 	> metadata:
 	>   name: cloudant-service
 	> spec:
-	>   plan: lite
+	>   plan: standard
 	>   serviceClass: cloudantnosqldb
 	>  ```
 
@@ -156,25 +152,31 @@ Let's understand exactly how Operators work. In the first exercise, you deployed
 
 Now you'll create the Node.js app that will populate your Cloudant DB with patient data. It will also serve data to the front-end application that we deployed in the first exercise.
 
-1. Run the following command to create this application:
+1. Make sure you're in the project `example-health`:
 
-   ```text
+    ```sh
+    oc project example-health
+    ```
+
+2. Run the following command to create this application:
+
+    ```text
     oc new-app --name=patient-db centos/nodejs-10-centos7~https://github.com/svennam92/nodejs-patientdb-cloudant
-   ```
+    ```
 
-2. The app will crash and fail to start repeatedly because the credentials to the Cloudant DB haven't been set yet.
+3. The app will crash and fail to start repeatedly because the credentials to the Cloudant DB haven't been set yet.
 
    ![Crashing](../assets/crashing.png)
 
-3. Let's fix this by setting the environment variable to the `cloudant-binding` secret we created earlier. Navigate to the deployment config for this app:
+4. Let's fix this by setting the environment variable to the `cloudant-binding` secret we created earlier. Navigate to the deployment config for this app:
 
    ![Deployment Config](../assets/deploymentconfig.png)
 
-4. Go to the `Environment` tab, click `Add from Config Map or Secret` and create a new environment variable named `CLOUDANT_URL`. Choose the `cloudant-binding` secret, then choose `url` for the Key. Hit the `Save` button.
+5. Go to the `Environment` tab, click `Add from Config Map or Secret` and create a new environment variable named `CLOUDANT_URL`. Choose the `cloudant-binding` secret, then choose `url` for the Key. Hit the `Save` button.
 
    ![Environment from Secret](../assets/envfromsecret.png)
 
-5. Go back to the `Topology` tab, and the `patient-db` should successfully start shortly.
+6. Go back to the `Topology` tab, and the `patient-db` should successfully start shortly.
 
    ![Apps Running](../assets/runningapps.png)
 
