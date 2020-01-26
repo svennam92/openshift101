@@ -24,20 +24,20 @@ The introductory page of the workshop is broken down into the following sections
 
 ### Getting Started
 * [Create account and get cluster](getting-started/get_started.md)
-* [Optional: Setup CLI Access for the cluster](getting-started/setup_cli.md)
+* [Access the cluster using the command line](getting-started/setup_cli.md)
 
 ### Part 1 - Learning OpenShift
-* [Exercise 1: Deploying an application](part1-learn_openshift/exercise-1.md)
-* [Exercise 2: Logging and monitoring](part1-learn_openshift/exercise-2.md)
-* [Exercise 3: Metrics and dashboards](part1-learn_openshift/exercise-3.md)
-* [Exercise 4: Scaling the application](part1-learn_openshift/exercise-4.md)
+* [1.1. Deploying an application](part1-learn_openshift/exercise-1.md)
+* [1.2. Logging and monitoring](part1-learn_openshift/exercise-2.md)
+* [1.3. Metrics and dashboards](part1-learn_openshift/exercise-3.md)
+* [1.4. Scaling the application](part1-learn_openshift/exercise-4.md)
 
 ### Part 2 - OpenShift and IBM Cloud
-* [Exercise 5: Cloudant DB with IBM Cloud Operator](part2-openshift_ibmcloud/exercise-5.md)
-* [Exercise 6: Configure the Sysdig Agent](part2-openshift_ibmcloud/exercise-6.md)
-* [Exercise 7: Configure the LogDNA Agent](part2-openshift_ibmcloud/exercise-7.md)
-* [Exercise 8: Analyze your logs with LogDNA](part2-openshift_ibmcloud/exercise-8.md)
-* [Exercise 9: Monitor your Cluster with SysDig](part2-openshift_ibmcloud/exercise-9.md)
+* [2.5. Cloudant DB with IBM Cloud Operator](part2-openshift_ibmcloud/exercise-5.md)
+* [2.6. Configure the Sysdig Agent](part2-openshift_ibmcloud/exercise-6.md)
+* [2.7. Configure the LogDNA Agent](part2-openshift_ibmcloud/exercise-7.md)
+* [2.8. Analyze your logs with LogDNA](part2-openshift_ibmcloud/exercise-8.md)
+* [2.9. Monitor your Cluster with SysDig](part2-openshift_ibmcloud/exercise-9.md)
 
 ## Compatibility
 
