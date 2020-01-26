@@ -19,17 +19,9 @@ It's preconfigured with the full IBM Cloud CLI and tons of plug-ins and tools th
     ![](../assets/cloud-shell-login.png)
 
 
-## Access the OpenShift Web Console
+## Connect to the OpenShift cluster
 
-1. To launch the OpenShift web console, navigate to the [IBM Cloud Clusters Dashboard](https://cloud.ibm.com/kubernetes/clusters?platformType=openshift), find your cluster, and click on it.
-
-    ![Clusters Dashboard](../assets/clusters-dashboard.png)
-
-1. Click on `OpenShift web console` on the top right to launch the web console.
-
-    ![Launch the OpenShift web console](../assets/launch-console.png)
-
-1. Once in the OpenShift web console, click on the email/ID in the upper right. Choose the _Copy Login Command_ option.
+1. In the OpenShift web console, click on the email/ID in the upper right. Choose the _Copy Login Command_ option.
 
     ![Copy the login credentials](../assets/copy-login-command.png)
 
@@ -45,7 +37,7 @@ It's preconfigured with the full IBM Cloud CLI and tons of plug-ins and tools th
     ```bash
     oc login https://c100-e.us-south.containers.cloud.ibm.com:30360 --token=NYVkVysxxxxxxxxxxxxxxxxxxxxRQa8tM
 
-    Logged into "https://c100-e.us-south.containers.cloud.ibm.com:30360" as "IAM#stevemar@ca.ibm.com" using the token provided.
+    Logged into "https://c100-e.us-south.containers.cloud.ibm.com:30360" as "IAM#firstname.lasname@ibm.com" using the token provided.
 
     You have access to the following projects and can switch between them with 'oc project <projectname>'
     ```
@@ -60,18 +52,22 @@ Your CLI is now connected to your Red Hat OpenShift cluster running in IBM Cloud
     oc get node
     ```
 
-1. View services, deployments, and pods.
+2. View services, deployments, and pods.
 
     ```bash
     oc get svc,deploy,po --all-namespaces
     ```
 
-1. View projects
+3. View projects
 
     ```bash
     oc get projects
     ```
 
+You've completed the getting started! Let's recap -- in this section, you:
+
+* Got an OpenShift cluster and accessed its Web Console.
+* Connected your local CLI to a running OpenShift cluster on IBM Cloud
 
 ## Install OpenShift CLI tools (Optional)
 
