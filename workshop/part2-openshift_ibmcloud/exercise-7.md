@@ -12,11 +12,9 @@ To forward logs to your LogDNA instance, complete the following steps from the c
 
 ## Launch the LogDNA webUI
 
-You launch the web UI within the context of an IBM Log Analysis with LogDNA instance, from the IBM Cloud UI. 
+1. In the IBM Cloud Console, open the **Menu** with the burger icon in the top left corner and select **Observability**. 
 
-Complete the following steps to launch the web UI:
-
-1. Click the **Menu** icon ![](../assets/admin.png) &gt; **Observability**. 
+    ![](../assets/menu-observability.png) 
 
 2. Select **Logging**. 
 

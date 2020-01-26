@@ -12,13 +12,17 @@ The goals of this workshop are:
 * Deploy a Node.js application to OpenShift
 * Use OpenShift's features to monitor, scale the application
 
-### About this workshop
+## Architecture
 
-The introductory page of the workshop is broken down into the following sections:
+![](./assets/app-architecture.png)
 
-* [Agenda](./#agenda)
-* [Compatibility](./#compatibility)
-* [Credits](./#credits)
+1. A developer generates a starter application with IBM Cloud Developer Tools.
+1. Building the application produces a Docker container image.
+1. The image is pushed to a project in OpenShift cluster.
+1. The application is deployed to a OpenShift cluster.
+1. Users access the application.
+1. A developer connects the application to a Cloudant database with Operator.
+1. A developper monitors the app with LogDNA and Sysdig.
 
 ## Agenda
 
