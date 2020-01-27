@@ -1,5 +1,5 @@
 {
-    "root": "book",
+    "root": "workshop",
     "title": "Bring it all together on OpenShift 4.3 on IBM Cloud",
     "pluginsConfig": {
       "theme-default": {
