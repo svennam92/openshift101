@@ -122,7 +122,7 @@ Let's understand exactly how Operators work. In the first exercise, you deployed
 
 3. Wait a couple minutes for the service to provision. You can check the status by clicking on your service, and looking for **Message: Online**:
 
-   > You can also debug any potential issues here. If you already have a Cloudant "Lite" service, you won't be able to create another. To work around this issue, either delete your existing service or create a "standard" Cloudant instance which is a paid service. Edit the service yaml to use `standard` instead of `lite`.
+   > You can also debug any potential issues here. If you already have a Cloudant "Lite" service, you won't be able to create another. To work around this issue, edit the service yaml to use `standard` instead of `lite`. Note that "Standard Cloudant" is a paid service. Another option is to navigate to your IBM Cloud dashboard and delete your existing instance of the `lite` Cloudant.
 
    ![servicedone](../assets/servicedone.png)
 
