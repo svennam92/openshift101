@@ -11,7 +11,7 @@ Let's simulate some load on our application.
     ```
     oc get routes
     ```
-    Output looks similar to this:
+    Output looks similar to this (_remember not to copy this exact host_):
     ```
     NAME         HOST/PORT                                                                                                 PATH      SERVICES     PORT       TERMINATION   WILDCARD
     patient-ui   patient-ui-example-health.roks07-872b77d77f69503584da5a379a38af9c-0000.eu-de.containers.appdomain.cloud             patient-ui   8080-tcp                 None
