@@ -4,13 +4,13 @@ To integrate your monitoring instance with your OpenShift cluster, you must run 
 
 ## Launch the Sysdig webUI
 
-1. In the IBM Cloud Console, navigate to the [Observability](https://cloud.ibm.com/observe/monitoring) page and select **Monitoring**
+1. In IBM Cloud Console, open the menu with the burger icon in the top left corner and select **Observability**. This will open the [Observability](https://cloud.ibm.com/observe/monitoring). Select **Monitoring**.
 
-    ![](../assets/icp-monitoring.png).
+    ![](../assets/icp-monitoring.png)
 
     The list of instances that are available on IBM Cloud is displayed.
 
-2. Select your instance. Check with the instructor which instance  you should use for the lab.
+2. Select your instance or the one given by the instructor.
 
 3. Click **View Sysdig**. The Web UI opens.
 
@@ -18,21 +18,11 @@ To integrate your monitoring instance with your OpenShift cluster, you must run 
 
 The Sysdig access key is used to open a secure web socket to the Sysdig ingestion server and to authenticate the monitoring agent with the monitoring service.
 
-1. In the IBM Cloud Console, open the **Menu** with the burger icon in the top left corner and select **Observability**. 
-
-    ![](../assets/menu-observability.png) 
-
-2. Select **Monitoring**. 
-
-    The list of instances that are available on IBM Cloud is displayed.
-
-3. Select your instance. Check with the instructor which instance you should use for the lab.
-
-4. Select the three dots and click **View key**.
+1. Select the three dots and click **View key**.
 
     ![](../assets/view-key-sysdig.png)
 
-5. Copy the access key.
+2. Copy the access key.
 
 
 ## Deploy the Sysdig agent in the cluster
@@ -43,24 +33,22 @@ The Sysdig agent collects metrics such as the worker node CPU usage, worker node
 
 1. Before running the curl command in step 2, you need to make sure you're logged in the cluster by running `oc login`.
 
-    [Access your cluster using the oc CLI](../getting-started/setup_cli.md#access-the-openShift-web-console).
+    [Refer to this section: Access your cluster using the oc CLI](../getting-started/setup_cli.md#access-the-openShift-web-console).
 
 
 1. In the following command, replace `<sysdig_access_key>` and `<sysdig_collector_endpoint>` with the values from the service key that you created earlier. For `<tag>`, you can associate tags with your Sysdig agent, such as `role:service,location:us-south` to help you identify the environment that the metrics come from.
 
-```sh
-curl -sL https://ibm.biz/install-sysdig-k8s-agent | sed '435,442d' | bash -s -- -a <sysdig_access_key> -c <sysdig_collector_endpoint> -t faststart,<Enter your name> -ac 'sysdig_capture_enabled: false' --openshift
-```
+    ```sh
+    curl -sL https://ibm.biz/install-sysdig-k8s-agent | sed '435,442d' | bash -s -- -a <sysdig_access_key> -c <sysdig_collector_endpoint> -t faststart,<Enter your name> -ac 'sysdig_capture_enabled: false' --openshift
+    ```
 
-For example:
+    Use the sysdig_collector_endpoint based on where your Sysdig instance is provisioned:
+    * Frankfurt `ingest.eu-de.monitoring.cloud.ibm.com`
+    * London `ingest.eu-gb.monitoring.cloud.ibm.com`
 
-```
-curl -sL https://ibm.biz/install-sysdig-k8s-agent | sed '435,442d' | bash -s -- -a <sysdig_access_key> -c <sysdig_collector_endpoint> -t faststart,marisa -ac 'sysdig_capture_enabled: false' --openshift
-```
+    Example output:
 
-Example output:
-
-```
+    ```
     * Detecting operating system
     * Downloading Sysdig cluster role yaml
     * Downloading Sysdig config map yaml
@@ -80,7 +68,7 @@ Example output:
     configmap/sysdig-agent created
     * Deploying the sysdig agent
     daemonset.extensions/sysdig-agent created
-```
+    ```
 
 ## Verify that the Sysdig agent is deployed successfully
 
@@ -97,5 +85,3 @@ Example output:
     sysdig-agent-qrbcq   1/1       Running   0          1m
     sysdig-agent-rhrgz   1/1       Running   0          1m
 ```
-
-

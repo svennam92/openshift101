@@ -47,29 +47,12 @@ IBM Cloud Monitoring with Sysdig auto-discovers Kubernetes environments and prov
 IBM Cloud Monitoring with Sysdig includes alerts and multi-channel notifications that you can use to reduce the impact on your day-to-day operations and accelerate your reaction and response time to anomalies, downtime, and performance degradation. Notification channels that you can easily configure
 include email, Slack, PagerDuty, webhooks, Opsgenie, and VictorOps.
 
-
-
 In the next steps, you will learn how to use dashboards and metrics to monitor the health of your application.
 
-### Launch the web UI
-
-You launch the Web UI within the context of an Sysdig instance, from the IBM Cloud UI.
-
-Complete the following steps to launch the web UI:
-
-1. In the LogDNA web UI, click the **Views** icon ![](../assets/views.png) &gt; **Observability**.
-
-2. Select **Monitoring**.
-
-   The list of instances that are available is displayed.
-
-3. Select the instance that is allocated for your lab. Then, click **View Sysdig**.
-
-The Web UI opens.
 
 ## View SysDig pre-defined views and dashboards
 
-**Use views and dashboards to monitor your infrastructure, applications, and services. You can use pre-defined dashboards. You can also create custom dashboards through the Web UI or programmatically. You can backup and restore dashboards by using Python scripts.**
+Use views and dashboards to monitor your infrastructure, applications, and services. You can use pre-defined dashboards. You can also create custom dashboards through the Web UI or programmatically. You can backup and restore dashboards by using Python scripts.
 
 The following table lists the different types of pre-defined dashboards:
 
@@ -83,7 +66,11 @@ The following table lists the different types of pre-defined dashboards:
 
 Complete the following steps to view a Sysdig dashboard:
 
-1. After you launch the Sysdig web UI, in the Sysdig Welcome wizard, select **Kubernetes** as the installation method.
+1. Launch the Sysdig web UI.
+
+    ![](../assets/icp-monitoring-launch.png).
+
+1. In the Sysdig Welcome wizard, select **Kubernetes** as the installation method.
 
    After 30 seconds or so, it should show one or more agents connected.
 
