@@ -6,29 +6,26 @@ To configure your Kubernetes cluster to send logs to your IBM Log Analysis with 
 
 To forward logs to your LogDNA instance, complete the following steps from the command line:
 
-## Step 1. Access your cluster through the CLI
 
-[Access your cluster using the oc CLI](../getting-started/setup_cli.md#access-the-openShift-web-console).
+## Step 1. Get the ingestion key
 
-## Step 2. Get the ingestion key
+1. In IBM Cloud Console, open the menu with the burger icon in the top left corner and select **Observability**. This will open the [Observability Dashboard](https://cloud.ibm.com/observe). Select **Logging**. 
 
-1. In the IBM Cloud Console, open the **Menu** with the burger icon in the top left corner and select **Observability**. 
-
-2. Select **Logging**. 
+    ![](../assets/icp-logging.png)
 
     The list of instances that are available on IBM Cloud is displayed.
 
-3. Select your instance. Check with the instructor which instance  you should use for the lab.
+3. Select your instance or the one given by the instructor.
 
 4. Select the three dots and click **View key**.
 
-    ![](../assets/view-key.png)
+    ![](../assets/icp-logging-key.png)
 
 5. Copy the ingestion key.
 
 
 
-## Step 3. Store your LogDNA ingestion key as a Kubernetes secret
+## Step 2. Store your LogDNA ingestion key as a Kubernetes secret
 
 You must create a Kubernetes secret to store your LogDNA ingestion key for your service instance. The LogDNA ingestion key is used to open a secure web socket to the LogDNA ingestion server and to authenticate the logging agent with the IBM Log Analysis with LogDNA service.
 
@@ -48,38 +45,38 @@ You must create a Kubernetes secret to store your LogDNA ingestion key for your 
 
 4. Grant the serviceaccount access to the **Privileged SCC** so the service account has permissions to create priviledged LogDNA pods. Run the following command:
 
-    ```
+    ```sh
     oc adm policy add-scc-to-user privileged system:serviceaccount:ibm-observe:logdna-agent
     ```
 
 5. Add a secret. The secret sets the ingestion key that the LogDNA agent uses to send logs.
 
-    ```
+    ```sh
     oc create secret generic logdna-agent-key --from-literal=logdna-agent-key=INGESTION_KEY -n ibm-observe 
     ```
 
     Where `INGESTION_KEY` is the ingestion key for the LogDNA instance where you plan to forward and collect the cluster logs.
 
 
-## Step 4. Deploy the LogDNA agent in the cluster
+## Step 3. Deploy the LogDNA agent in the cluster
 
 Create a Kubernetes daemon set to deploy the LogDNA agent on every worker node of your Kubernetes cluster. 
 
 The LogDNA agent collects logs with the extension `*.log` and extensionsless files that are stored in the `/var/log` directory of your pod. By default, logs are collected from all namespaces, including `kube-system`, and automatically forwarded to the IBM Log Analysis with LogDNA service.
 
-Run the following command if you are working on a LogDNA instance that is located in US-South:
+Run the following command if you are working on a LogDNA instance that is located in **US-South**:
 
-```
+```sh
 oc create -f https://assets.us-south.logging.cloud.ibm.com/clients/logdna-agent-ds-os.yaml -n ibm-observe
 ```
 
-Run the following command if you are working on a LogDNA instance that is located in Frankfurt:
+Run the following command if you are working on a LogDNA instance that is located in **Frankfurt**:
 
-```
+```sh
 oc create -f https://assets.eu-de.logging.cloud.ibm.com/clients/logdna-agent-ds-os.yaml -n ibm-observe
 ```
 
-## Step 5. Verify that the LogDNA agent is deployed successfully
+## Step 4. Verify that the LogDNA agent is deployed successfully
 
 To verify that the LogDNA agent is deployed successfully, run the following command:
 
@@ -96,42 +93,37 @@ To verify that the LogDNA agent is deployed successfully, run the following comm
     ```
 
 
-The deployment is successful when you see one or more LogDNA pods.
-* **The number of LogDNA pods equals the number of worker nodes in your cluster.**
-* All pods must be in a `Running` state.
-* *Stdout* and *stderr* are automatically collected and forwarded from all containers. Log data includes application logs and worker logs.
-* By default, the LogDNA agent pod that runs on a worker collects logs from all namespaces on that node.
+    The deployment is successful when you see one or more LogDNA pods.
+    * **The number of LogDNA pods equals the number of worker nodes in your cluster.**
+    * All pods must be in a `Running` state.
+    * *Stdout* and *stderr* are automatically collected and forwarded from all containers. Log data includes application logs and worker logs.
+    * By default, the LogDNA agent pod that runs on a worker collects logs from all namespaces on that node.
 
-After the agent is configured, you should start seeing logs from this cluster in the LogDNA web UI. If after a period of time you cannot see logs, check the agent logs.
+    After the agent is configured, you should start seeing logs from this cluster in the LogDNA web UI. If after a period of time you cannot see logs, check the agent logs.
 
-To check the logs that are generated by a LogDNA agent, run the following command:
+3. To check the logs that are generated by a LogDNA agent, run the following command:
 
-```
-oc logs logdna-agent-<ID>
-```
+    ```
+    oc logs logdna-agent-<ID>
+    ```
 
-Where *ID* is the ID for a LogDNA agent pod. 
+    Where *ID* is the ID for a LogDNA agent pod. 
 
-For example, 
-
-```
-oc logs logdna-agent-xxxkz
-```
-
-
-## Step 6. Launch the LogDNA web UI to verify that logs are being forwarded from the LogDNA agent
-
-
-1. In the IBM Cloud Console, open the **Menu** with the burger icon in the top left corner and select **Observability**. 
-
+<<<<<<< HEAD
 2. Select **Logging**. 
+=======
+    For example, 
 
-    The list of instances that are available on IBM Cloud is displayed.
+    ```
+    oc logs logdna-agent-xxxkz
+    ```
+>>>>>>> 95da44291899adcecb6d15659581628ff7f20851
 
-3. Select your instance. Check with the instructor which instance  you should use for the lab.
 
-4. Select **Launch LogDNA**.
+## Step 5. Launch the LogDNA web UI to verify that logs are being forwarded from the LogDNA agent
 
-5. Next, go to the LogDNA web UI. In the **Views** page, click **Everything** to verify that logs from the cluster are available through the UI. 
+1. Select **Launch LogDNA**.
+
+2. In the **Views** page, click **Everything** to verify that logs from the cluster are available through the UI. 
 
 
