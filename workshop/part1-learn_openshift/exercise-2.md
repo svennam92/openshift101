@@ -65,13 +65,13 @@ One of the great things about Kubernetes is the ability to quickly debug your ap
 
    > This command shows you the the project files.
    >
-   > ```text
+   > ```sh
    >  ls
    > ```
    >
    > This command shows you the running processes.
    >
-   > ```text
+   > ```sh
    >  ps aux
    > ```
 

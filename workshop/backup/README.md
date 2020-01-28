@@ -371,7 +371,7 @@ Copy the GitHub Webook URL.
 
 The webhook is in the structure
 
-```text
+```
 https://c100-e.us-east.containers.cloud.ibm.com:31305/apis/build.openshift.io/v1/namespaces/example-health/buildconfigs/patientui/webhooks/<secret>/github
 ```
 

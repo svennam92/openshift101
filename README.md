@@ -21,7 +21,7 @@ If you would like to see the detailed LICENSE click [here](LICENSE).
 - Author: Sai Vennam <svennam@us.ibm.com>, IBM Cloud Offering Manager
 - Maintainers: Developer Advocates from IBM Cloud
 
-```text
+```
 Copyright:: 2019- IBM, Inc
 
 Licensed under the Apache License, Version 2.0 (the "License");

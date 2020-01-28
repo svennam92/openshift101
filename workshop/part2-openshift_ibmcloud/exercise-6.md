@@ -48,19 +48,19 @@ The Sysdig agent collects metrics such as the worker node CPU usage, worker node
 
 1. In the following command, replace `<sysdig_access_key>` and `<sysdig_collector_endpoint>` with the values from the service key that you created earlier. For `<tag>`, you can associate tags with your Sysdig agent, such as `role:service,location:us-south` to help you identify the environment that the metrics come from.
 
-```text
+```sh
 curl -sL https://ibm.biz/install-sysdig-k8s-agent | sed '435,442d' | bash -s -- -a <sysdig_access_key> -c <sysdig_collector_endpoint> -t faststart,<Enter your name> -ac 'sysdig_capture_enabled: false' --openshift
 ```
 
 For example:
 
-```text
+```
 curl -sL https://ibm.biz/install-sysdig-k8s-agent | sed '435,442d' | bash -s -- -a <sysdig_access_key> -c <sysdig_collector_endpoint> -t faststart,marisa -ac 'sysdig_capture_enabled: false' --openshift
 ```
 
 Example output:
 
-```text
+```
     * Detecting operating system
     * Downloading Sysdig cluster role yaml
     * Downloading Sysdig config map yaml
@@ -86,13 +86,13 @@ Example output:
 
 Verify that the `sydig-agent` pods on each node have a **Running** status.
 
-```text
+```sh
 oc get pods -n ibm-observe
 ```
 
 Example output:
 
-```text
+```
     NAME                 READY     STATUS    RESTARTS   AGE
     sysdig-agent-qrbcq   1/1       Running   0          1m
     sysdig-agent-rhrgz   1/1       Running   0          1m
