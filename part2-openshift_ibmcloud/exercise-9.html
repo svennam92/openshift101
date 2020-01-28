@@ -519,59 +519,27 @@ include email, Slack, PagerDuty, webhooks, Opsgenie, and VictorOps.</p>
 <p>You can use the <strong>Connection Table</strong> dashboard to monitor how data flows between your application components.</p>
 <ol>
 <li>From the <em>Explore</em> tab, select <strong>Deployments and Pods.</strong></li>
-<li><p>Select the namespace where you deployed your sample app.</p>
-<p>     <a href="../assets/explore-img-2.png" rel="grouped" title="" target="_self" class="fancybox">
-       <img src="../assets/explore-img-2.png" alt="">
-     </a></p>
-</li>
-<li><p>Select the <em>patientui</em> pod entry.</p>
-<p>     <a href="../assets/explore-img-3.png" rel="grouped" title="" target="_self" class="fancybox">
-       <img src="../assets/explore-img-3.png" alt="">
-     </a></p>
-</li>
+<li>Select the namespace where you deployed your sample app.</li>
+<li>Select the <em>patientui</em> pod entry.</li>
 <li><p>Select <strong>Default Dashboards</strong>.</p>
 <p>     <a href="../assets/explore-img-4.png" rel="grouped" title="" target="_self" class="fancybox">
        <img src="../assets/explore-img-4.png" alt="">
      </a></p>
 </li>
-<li><p>Select <strong>Hosts &amp; Containers</strong>. Then, select <strong>Overview by Host</strong>.</p>
-<p>     <a href="../assets/explore-img-7.png" rel="grouped" title="" target="_self" class="fancybox">
-       <img src="../assets/explore-img-7.png" alt="">
-     </a></p>
-</li>
-<li><p>Select <strong>Hosts &amp; Containers</strong>. Then, select <strong>Overview by Container</strong>.</p>
-<p>     <a href="../assets/explore-img-5.png" rel="grouped" title="" target="_self" class="fancybox">
-       <img src="../assets/explore-img-5.png" alt="">
-     </a></p>
-<p>The <strong>Overview by Container</strong> view opens. Look at the different columns and the data.</p>
-<p>     <a href="../assets/explore-img-6.png" rel="grouped" title="" target="_self" class="fancybox">
-       <img src="../assets/explore-img-6.png" alt="">
-     </a></p>
+<li><p>Check out the two dashboards under <strong>Hosts &amp; Containers</strong>:</p>
+<ul>
+<li><strong>Overview by Host</strong></li>
+<li><strong>Overview by Container</strong>.</li>
+</ul>
 </li>
 </ol>
 <h3 id="explore-the-cluster-and-the-node-capacity">Explore the cluster and the node capacity</h3>
 <ol>
 <li>From the <em>Explore</em> tab, select <strong>Deployments and Pods.</strong></li>
-<li><p>Select the namespace where you deployed your sample app.</p>
-<p>     <a href="../assets/explore-img-2.png" rel="grouped" title="" target="_self" class="fancybox">
-       <img src="../assets/explore-img-2.png" alt="">
-     </a></p>
-</li>
-<li><p>Select the <em>patientui</em> pod entry.</p>
-<p>     <a href="../assets/explore-img-3.png" rel="grouped" title="" target="_self" class="fancybox">
-       <img src="../assets/explore-img-3.png" alt="">
-     </a></p>
-</li>
-<li><p>Select <strong>Default Dashboards</strong>.</p>
-<p>     <a href="../assets/explore-img-4.png" rel="grouped" title="" target="_self" class="fancybox">
-       <img src="../assets/explore-img-4.png" alt="">
-     </a></p>
-</li>
-<li><p>Select <strong>Kubernetes Cluster</strong>. Then, select <strong>Node capacity</strong>.</p>
-<p>     <a href="../assets/explore-img-8.png" rel="grouped" title="" target="_self" class="fancybox">
-       <img src="../assets/explore-img-8.png" alt="">
-     </a></p>
-<p>The view <strong>Kubernetes Cluster and Node Capacity</strong> opens.</p>
+<li>Select the namespace where you deployed your sample app.</li>
+<li>Select the <em>patientui</em> pod entry.</li>
+<li>Select <strong>Default Dashboards</strong>.</li>
+<li><p>Select <strong>Kubernetes &gt; Resource Usage &gt; Kuberentes Cluster and Node Capacity</strong>. </p>
 <p>     <a href="../assets/explore-img-9.png" rel="grouped" title="" target="_self" class="fancybox">
        <img src="../assets/explore-img-9.png" alt="">
      </a></p>
@@ -585,28 +553,23 @@ include email, Slack, PagerDuty, webhooks, Opsgenie, and VictorOps.</p>
 <h3 id="explore-the-network">Explore the Network</h3>
 <ol>
 <li><p>From the <em>DASHBOARDS</em> tab, select <strong>My Dashboards</strong>. Then, select <strong>Network Overview</strong>.</p>
-<p>     <a href="../assets/dashboard-img-1.png" rel="grouped" title="" target="_self" class="fancybox">
-       <img src="../assets/dashboard-img-1.png" alt="">
-     </a></p>
 <p>The following dashboard is displayed. It shows information about all resources that are monitored thorugh the instance.</p>
 <p>     <a href="../assets/dashboard-img-2.png" rel="grouped" title="" target="_self" class="fancybox">
        <img src="../assets/dashboard-img-2.png" alt="">
      </a></p>
 </li>
-<li><p>Change the scope of the dashboard to display information about your openshift cluster. Select <strong>Edit scope</strong></p>
-<p>      <a href="../assets/dashboard-img-3.png" rel="grouped" title="" target="_self" class="fancybox">
-       <img src="../assets/dashboard-img-3.png" alt="">
-     </a></p>
-<p> Change the scope.</p>
+<li><p>Change the scope of the dashboard to display information about your openshift cluster. Select <strong>Edit scope</strong> on the right side and change it:</p>
 <p>      <a href="../assets/dashboard-img-4.png" rel="grouped" title="" target="_self" class="fancybox">
        <img src="../assets/dashboard-img-4.png" alt="">
      </a></p>
-<p> The dashboard shows information about the ibm-observe namespace.</p>
+<p> The dashboard now shows information about the ibm-observe namespace.</p>
 <p>      <a href="../assets/dashboard-img-5.png" rel="grouped" title="" target="_self" class="fancybox">
        <img src="../assets/dashboard-img-5.png" alt="">
      </a></p>
 </li>
 </ol>
+<h2 id="congratulations">Congratulations!</h2>
+<p>That&apos;s it, you&apos;re done with the Red Hat OpenShift 4.3 on IBM Cloud Kubernetes Service workshop. Thanks for joining us!</p>
 
                                 
                                 </section>
@@ -646,7 +609,7 @@ include email, Slack, PagerDuty, webhooks, Opsgenie, and VictorOps.</p>
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Monitor Cluster w/ SysDig","level":"4.5","depth":1,"next":{"title":"IBM Developer","level":"5.1","depth":1,"url":"https://developer.ibm.com","ref":"https://developer.ibm.com","articles":[]},"previous":{"title":"Analyze Logs w/ LogDNA","level":"4.4","depth":1,"path":"part2-openshift_ibmcloud/exercise-8.md","ref":"part2-openshift_ibmcloud/exercise-8.md","articles":[]},"dir":"ltr"},"config":{"plugins":["prism","-highlight","collapsible-chapters","hints","copy-code-button","back-to-top-button","fancybox","web-header","codetabs"],"root":"workshop","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"webheader":{"headerTitle":"Bring it all together on OpenShift 4.3 on IBM Cloud"},"prism":{"css":["prismjs/themes/prism-tomorrow.css"]},"fancybox":{"helpers":{"buttons":{}},"openEffect":"elastic","closeEffect":"elastic"},"web-header":{},"search":{},"collapsible-chapters":{},"codetabs":{},"hints":{"danger":"fa fa-exclamation-circle","info":"fa fa-info-circle","tip":"fa fa-mortar-board","working":"fa fa-wrench"},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"back-to-top-button":{},"copy-code-button":{},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":true}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"Bring it all together on OpenShift 4.3 on IBM Cloud","gitbook":"3.2.3"},"file":{"path":"part2-openshift_ibmcloud/exercise-9.md","mtime":"2020-01-28T22:30:21.259Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-01-28T22:32:09.958Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Monitor Cluster w/ SysDig","level":"4.5","depth":1,"next":{"title":"IBM Developer","level":"5.1","depth":1,"url":"https://developer.ibm.com","ref":"https://developer.ibm.com","articles":[]},"previous":{"title":"Analyze Logs w/ LogDNA","level":"4.4","depth":1,"path":"part2-openshift_ibmcloud/exercise-8.md","ref":"part2-openshift_ibmcloud/exercise-8.md","articles":[]},"dir":"ltr"},"config":{"plugins":["prism","-highlight","collapsible-chapters","hints","copy-code-button","back-to-top-button","fancybox","web-header","codetabs"],"root":"workshop","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"webheader":{"headerTitle":"Bring it all together on OpenShift 4.3 on IBM Cloud"},"prism":{"css":["prismjs/themes/prism-tomorrow.css"]},"fancybox":{"helpers":{"buttons":{}},"openEffect":"elastic","closeEffect":"elastic"},"web-header":{},"search":{},"collapsible-chapters":{},"codetabs":{},"hints":{"danger":"fa fa-exclamation-circle","info":"fa fa-info-circle","tip":"fa fa-mortar-board","working":"fa fa-wrench"},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"back-to-top-button":{},"copy-code-button":{},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":true}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"Bring it all together on OpenShift 4.3 on IBM Cloud","gitbook":"3.2.3"},"file":{"path":"part2-openshift_ibmcloud/exercise-9.md","mtime":"2020-01-28T22:37:29.062Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-01-28T22:39:18.318Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
