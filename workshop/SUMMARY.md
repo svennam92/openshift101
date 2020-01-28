@@ -20,7 +20,6 @@
 * [Monitor Cluster w/ SysDig](part2-openshift_ibmcloud/exercise-9.md)
 
 ## Resources
-* [IBM Developer](https://developer.ibm.com)
 * [Docs: Red Hat OpenShift on IBM Cloud](https://cloud.ibm.com/docs/openshift)
 * [Docs: OpenShift Container Platform 4.3](https://docs.openshift.com/container-platform/4.3/welcome/index.html)
 
