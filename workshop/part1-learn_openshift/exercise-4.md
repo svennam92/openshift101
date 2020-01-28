@@ -10,27 +10,27 @@ Hopefully you have your running script simulating load \(if not go [here](exerci
 
 1. Navigate to **Workloads > Deployment Configs** in the left-hand bar. Then, choose **Actions > Edit Deployment Config**.
 
-  ![Deployment Configs](../assets/ocp43-dc.png)
+    ![Deployment Configs](../assets/ocp43-dc.png)
 
 2. In the YAML editor, scroll to line 62. In the section **template > spec > containers**, add the following resource limits into the empty resources.
 
-  ![Resource Limits](../assets/ocp43-limits-yaml.png)
+    ![Resource Limits](../assets/ocp43-limits-yaml.png)
 
-  ```yaml
-            resources:
-              limits:
-                cpu: 30m
-                memory: 100Mi
-              requests:
-                cpu: 3m
-                memory: 40Mi
-  ```
+    ```yaml
+              resources:
+                limits:
+                  cpu: 30m
+                  memory: 100Mi
+                requests:
+                  cpu: 3m
+                  memory: 40Mi
+    ```
 
 3. **Save** and **Reload** to see the new version.
 
-4. Verify that the replication controler has ben changed by navigating to **Events**
+4. Verify that the replication controler has been changed by navigating to **Events**
 
-  ![Resource Limits](../assets/ocp43-limits-event.png)
+    ![Resource Limits](../assets/ocp-dc-events.png)
 
 ## Enable Autoscaler
 
@@ -40,27 +40,27 @@ By default, the autoscaler allows you to scale based on CPU or Memory. The UI al
 
 1. Navigate to **Workloads > Horizontal Pod Autoscalers**, then hit **Create Horizontal Pod Autoscaler**.
 
-  ![HPA](../assets/ocp43-autoscaler.png)
+    ![HPA](../assets/ocp43-autoscaler.png)
 
-  ```yaml
-  apiVersion: autoscaling/v2beta1
-  kind: HorizontalPodAutoscaler
-  metadata:
-    name: patient-hpa
-    namespace: example-health
-  spec:
-    scaleTargetRef:
-      apiVersion: apps.openshift.io/v1
-      kind: DeploymentConfig
-      name: patient-ui
-    minReplicas: 1
-    maxReplicas: 10
-    metrics:
-      - type: Resource
-        resource:
-          name: cpu
-          targetAverageUtilization: 1
-  ```
+    ```yaml
+    apiVersion: autoscaling/v2beta1
+    kind: HorizontalPodAutoscaler
+    metadata:
+      name: patient-hpa
+      namespace: example-health
+    spec:
+      scaleTargetRef:
+        apiVersion: apps.openshift.io/v1
+        kind: DeploymentConfig
+        name: patient-ui
+      minReplicas: 1
+      maxReplicas: 10
+      metrics:
+        - type: Resource
+          resource:
+            name: cpu
+            targetAverageUtilization: 1
+    ```
 
 2. Hit **Create**.
 
@@ -70,11 +70,11 @@ If you're not running the script from the [previous exercise](exercise-2.md#simu
 
 1. Check by going to the **Overview** page of **Deployment Configs**.
 
-  ![Scaled to 1 pod](../assets/ocp43-dc-pod.png)
+    ![Scaled to 1 pod](../assets/ocp43-dc-pod.png)
 
 2. Start simulating load by hitting the page several times, or running the script. You'll see that it starts to scale up:
 
-  ![Scaled to 4/10 pods](../assets/ocp43-autoscaler-after.png)
+   ![Scaled to 4/10 pods](../assets/ocp43-autoscaler-after.png)
 
 That's it! You now have a highly available and automatically scaled front-end Node.js application. OpenShift is automatically scaling your application pods since the CPU usage of the pods greatly exceeded `1`% of the resource limit, `30` millicores.
 
