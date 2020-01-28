@@ -80,7 +80,7 @@ Today, we'll demonstrate the "s2i" or "source to image" builder. This builder al
 
 4. Make sure everything started up correctly. This might take a couple minutes -- look for the `deployed` status. You can also launch the dashboard and track it there.
 
-   > To find the OpenShift dashboard URL again, run: `ic ks cluster get <cluster_name>`
+   > To find the OpenShift dashboard URL again, run: `ic ks cluster get <cluster_name>` and look for `Public Service Endpoint URL`
 
    ```sh
     oc status
