@@ -1,4 +1,4 @@
-# Exercise 4: Scaling the application
+# Scaling the application
 
 In this exercise, we'll leverage the metrics we've observed in the previous step to automatically scale our UI application in response to load.
 
@@ -8,27 +8,27 @@ Before we can setup autoscaling for our pods, we first need to set resource limi
 
 Hopefully you have your running script simulating load \(if not go [here](exercise-2.md#simulate-load-on-the-application)\), Grafana showed you that your application was consuming anywhere between ".002" to ".02" cores. This translates to 2-20 "millicores". That seems like a good range for our CPU request, but to be safe, let's bump the higher-end up to 30 millicores. In addition, Grafana showed that the app consumes about `25`-`35` MB of RAM. Set the following resource limits for your deployment now.
 
-1. Navigate to **Workloads > Deployment Configs** in the left-hand bar. Then, choose **Actions > Edit Deployment Config**.
+1. Switch to the **Administrator** view and then navigate to **Workloads > Deployment Configs** in the left-hand bar. Choose the `patient-ui` DC, then choose **Actions > Edit Deployment Config**.
 
   ![Deployment Configs](../assets/ocp43-dc.png)
 
-2. In the YAML editor, scroll to line 62. In the section **template > spec > containers**, add the following resource limits into the empty resources.
+2. In the YAML editor, scroll to line 62. In the section **template > spec > containers**, add the following resource limits into the empty resources. Replace the "{}", and ensure the spacing is correct -- YAML uses strict indentation.
 
   ![Resource Limits](../assets/ocp43-limits-yaml.png)
 
   ```yaml
-            resources:
-              limits:
-                cpu: 30m
-                memory: 100Mi
-              requests:
-                cpu: 3m
-                memory: 40Mi
+             resources:
+               limits:
+                 cpu: 30m
+                 memory: 100Mi
+               requests:
+                 cpu: 3m
+                 memory: 40Mi
   ```
 
 3. **Save** and **Reload** to see the new version.
 
-4. Verify that the replication controler has ben changed by navigating to **Events**
+4. Verify that the replication controller has been changed by navigating to **Events**
 
   ![Resource Limits](../assets/ocp43-limits-event.png)
 

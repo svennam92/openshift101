@@ -1,4 +1,4 @@
-# Exercise 7: Configuring a LogDNA agent for an OpenShift Kubernetes cluster
+# Configure the LogDNA agent
 
 The LogDNA agent is responsible for collecting and forwarding logs to your IBM Log Analysis with LogDNA instance. After you provision an instance of IBM Log Analysis with LogDNA, you must configure a LogDNA agent for each log source that you want to monitor.
 

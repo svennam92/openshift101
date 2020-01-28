@@ -1,4 +1,4 @@
-# Exercise 9: Analyze your logs with LogDNA
+# Analyze your logs with LogDNA
 
 IBM Log Analysis with LogDNA is a co-branded service that you can include as part of your IBM Cloud architecture to add log management capabilities. IBM Log Analysis with LogDNA is operated by LogDNA in partnership with IBM.
 
