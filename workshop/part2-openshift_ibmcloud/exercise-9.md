@@ -124,49 +124,22 @@ You can use the **Connection Table** dashboard to monitor how data flows between
 
 1. From the _Explore_ tab, select **Deployments and Pods.**
 2. Select the namespace where you deployed your sample app.
-
-   ![](../assets/explore-img-2.png)
-
 3. Select the _patientui_ pod entry.
-
-   ![](../assets/explore-img-3.png)
-
 4. Select **Default Dashboards**.
 
    ![](../assets/explore-img-4.png)
 
-5. Select **Hosts & Containers**. Then, select **Overview by Host**.
-
-   ![](../assets/explore-img-7.png)
-
-6. Select **Hosts & Containers**. Then, select **Overview by Container**.
-
-   ![](../assets/explore-img-5.png)
-
-   The **Overview by Container** view opens. Look at the different columns and the data.
-
-   ![](../assets/explore-img-6.png)
+5. Check out the two dashboards under **Hosts & Containers**:
+   * **Overview by Host**
+   * **Overview by Container**.
 
 ### Explore the cluster and the node capacity
 
 1. From the _Explore_ tab, select **Deployments and Pods.**
 2. Select the namespace where you deployed your sample app.
-
-   ![](../assets/explore-img-2.png)
-
 3. Select the _patientui_ pod entry.
-
-   ![](../assets/explore-img-3.png)
-
 4. Select **Default Dashboards**.
-
-   ![](../assets/explore-img-4.png)
-
-5. Select **Kubernetes Cluster**. Then, select **Node capacity**.
-
-   ![](../assets/explore-img-8.png)
-
-   The view **Kubernetes Cluster and Node Capacity** opens.
+5. Select **Kubernetes > Resource Usage > Kuberentes Cluster and Node Capacity**. 
 
    ![](../assets/explore-img-9.png)
 
@@ -184,21 +157,18 @@ You can use the **Connection Table** dashboard to monitor how data flows between
 
 1. From the _DASHBOARDS_ tab, select **My Dashboards**. Then, select **Network Overview**.
 
-   ![](../assets/dashboard-img-1.png)
-
    The following dashboard is displayed. It shows information about all resources that are monitored thorugh the instance.
 
    ![](../assets/dashboard-img-2.png)
 
-2. Change the scope of the dashboard to display information about your openshift cluster. Select **Edit scope**
-
-    ![](../assets/dashboard-img-3.png)
-
-    Change the scope.
+2. Change the scope of the dashboard to display information about your openshift cluster. Select **Edit scope** on the right side and change it:
 
     ![](../assets/dashboard-img-4.png)
 
-    The dashboard shows information about the ibm-observe namespace.
+    The dashboard now shows information about the ibm-observe namespace.
 
     ![](../assets/dashboard-img-5.png)
 
+## Congratulations!
+
+That's it, you're done with the Red Hat OpenShift 4.3 on IBM Cloud Kubernetes Service workshop. Thanks for joining us!

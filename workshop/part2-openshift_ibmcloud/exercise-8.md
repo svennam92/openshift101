@@ -84,11 +84,7 @@ Complete the following steps:
 
    ![](../assets/views-img-3.png)
 
-3. Filter out log lines to display only lines that are tagged as debug lines. Enter in the search bar the following query: `level:debug`
-
-   ![](../assets/views-img-4.png)
-
-   Then, click enter. The view will show lines that meet the filtering and search criteria.
+3. Filter out log lines to display only lines that are tagged as debug lines. Enter in the search bar the following query: `level:debug` and click enter. The view will show lines that meet the filter and search criteria.
 
    ![](../assets/views-img-5.png)
 
@@ -98,17 +94,9 @@ Complete the following steps:
 
    ![](../assets/views-img-6.png)
 
-   The following pop up opens:
+   Enter the name of the view. Use the following format: `<Enter your user name> patientUI`. For example, `marisa patientui`
 
-   ![](../assets/views-img-7.png)
-
-   Enter the name of the view. Use the following format: `<Enter your user name> patientUI` For example, `marisa patientui`
-
-   Enter a category. Use the following format: `<Enter your user name>` For example, `marisa` Then click **Add new category**.
-
-   Your configuration should look like the following sample:
-
-   ![](../assets/views-img-10.png)
+   Enter a category. Use the following format: `<Enter your user name>`. For example, `marisa` Then click **Add new category**.
 
    Click **Save view**.
 
@@ -220,32 +208,18 @@ Complete the following steps to create a dashboard to monitor logs from the lab'
 
 1. In the LogDNA web UI, click the **Boards** icon ![Dashboards icon](../assets/boards.png).
 2. Select **NEW BOARD** to create a new dashboard.
-
-   ![](../assets/board-img-1.png)
-
 3. Click **Add graph**.
-
-   ![](../assets/board-img-2.png)
-
-4. Select the field **app**.
-
-   ![](../assets/board-img-3.png)
-
-   Then, select the value **patient-ui**.
+4. Select the field **app**, then select the value **patient-ui**.
 
    ![](../assets/board-img-4.png)
 
    Click **Add graph**.
 
-   ![](../assets/board-img-5.png)
-
 5. Open a view that displays the logs for the patientui app. Click the graph in a peak of data at the time that you want to see logs, and then click **Show logs**.
 
    ![](../assets/board-img-6.png)
 
-   A new page opens with the log entries.
-
-   ![](../assets/board-img-7.png)
+   A new page opens with the relevant log entries.
 
 6. Add subplots to analyze the data by applying additonal filtering criteria.
 
@@ -253,39 +227,19 @@ Complete the following steps to create a dashboard to monitor logs from the lab'
 
    Click **Show subplots**.
 
-   ![](../assets/board-img-9.png)
-
-   Select **Histogram**.
-
-   ![](../assets/board-img-10.png)
-
-   Select **level**.
+   Select **Histogram** and **level**.
 
    ![](../assets/board-img-11.png)
 
-   Click **Add** to configure more subplots. For example, add a histogram for the custom field _patient_ that you configured earlier. \(Note that you might need to wait a bit longer and logout and login into the sample app for the custom field to be available for search after the parsing template is applied. Continue and retry this step later on.\)
-
-   ![](../assets/board-img-12.png)
-
-7. Name the dashboard.
+7. Name the dashboard by hitting "Edit".
 
    Enter `patientui` as the name of the dashboard.
 
-   ![](../assets/board-img-13.png)
-
    Enter a category. Use the following format: `<Enter your user name>` For example, `marisa` Then click **Add new category**.
-
-   ![](../assets/board-img-14.png)
-
-   Your configuration should look like the following sample:
-
-   ![](../assets/board-img-15.png)
 
    Click **Save**.
 
 A new category appears on the left navigation panel.
-
-![](../assets/board-img-16.png)
 
 ### Create a screen to monitor your app
 
@@ -295,30 +249,13 @@ Complete the following steps to create a dashboard to monitor logs from the lab'
 
 1. In the LogDNA web UI, click the **screens** icon ![](../assets/screens.png).
 2. Select **NEW SCREEN**.
-
-   ![](../assets/screen-img-1.png)
-
-3. Add a counter.
-
-   Click **Add Widget**.
-
-   ![](../assets/screen-img-2.png)
-
-   Select **Count**.
-
-   ![](../assets/screen-img-3.png)
+3. Click **Add Widget** and select **Count**.
 
    Click the widget. You will get the configuration fields for this widget.
 
-   ![](../assets/screen-img-4.png)
-
    To configure the _Count_ widget to report on the log lines for the application patientui, you must select the field **app**, and set the value to **patientui**.
 
-   ![](../assets/screen-img-5.png)
-
-   You can also add a label, by entering a value for the _label_ field.
-
-   ![](../assets/screen-img-6.png)
+   You can also add a label, by entering a value for the _label_ field -- for example `App PatientUI`
 
    The widget should look similar to the following one:
 
@@ -328,11 +265,7 @@ Complete the following steps to create a dashboard to monitor logs from the lab'
 
    Click **Add Widget**.
 
-   ![](../assets/screen-img-2.png)
-
    Select **Gauge**.
-
-   ![](../assets/screen-img-8.png)
 
    Click the widget. You will get the configuration fields for this widget.
 
@@ -340,9 +273,7 @@ Complete the following steps to create a dashboard to monitor logs from the lab'
 
    ![](../assets/screen-img-9.png)
 
-   Add a label, by entering a value for the _label_ field. Enter `PatientUI - INFO`. Add also the gauge limits.
-
-   ![](../assets/screen-img-10.png)
+   Add a label, by entering a value for the _label_ field. Enter `PatientUI - INFO`. Also add the gauge limits `0` for Minimum and `5000` for maximum.
 
    The widget should look similar to the following one:
 
@@ -360,13 +291,11 @@ Complete the following steps to create a dashboard to monitor logs from the lab'
 
    Click the widget. You will get the configuration fields for this widget.
 
-   To list the number of records in the last 24 hours for the cluster namespaces, you must set the field **namespace**.
+   To list the number of records in the last 24 hours for the cluster namespaces, set `Group By` to **namespace**.
 
    ![](../assets/screen-img-13.png)
 
    Change the default number of rows from 3 to 10.
-
-   ![](../assets/screen-img-14.png)
 
    The widget should look similar to the following one:
 
@@ -374,5 +303,5 @@ Complete the following steps to create a dashboard to monitor logs from the lab'
 
 6. Save the screen. Select **Save Screen**.
 
-   IMPORTANT: If you do not save the screen, you loose all your widgets.
+   IMPORTANT: If you do not save the screen, you lose all your widgets.
 

@@ -18,9 +18,7 @@ To integrate your monitoring instance with your OpenShift cluster, you must run 
 
 The Sysdig access key is used to open a secure web socket to the Sysdig ingestion server and to authenticate the monitoring agent with the monitoring service.
 
-1. In the IBM Cloud Console, open the **Menu** with the burger icon in the top left corner and select **Observability**. 
-
-    ![](../assets/menu-observability.png) 
+1. In the IBM Cloud Console, open the **Menu** with the burger icon in the top left corner and select **Observability**. You can also navigate there by going to [cloud.ibm.com/observe](https://cloud.ibm.com/observe).
 
 2. Select **Monitoring**. 
 

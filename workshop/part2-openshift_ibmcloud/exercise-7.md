@@ -14,8 +14,6 @@ To forward logs to your LogDNA instance, complete the following steps from the c
 
 1. In the IBM Cloud Console, open the **Menu** with the burger icon in the top left corner and select **Observability**. 
 
-    ![](../assets/menu-observability.png) 
-
 2. Select **Logging**. 
 
     The list of instances that are available on IBM Cloud is displayed.
@@ -125,8 +123,6 @@ oc logs logdna-agent-xxxkz
 
 
 1. In the IBM Cloud Console, open the **Menu** with the burger icon in the top left corner and select **Observability**. 
-
-    ![](../assets/menu-observability.png) 
 
 2. Select **Logging**. 
 
