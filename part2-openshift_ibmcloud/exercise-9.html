@@ -444,23 +444,8 @@
 <p>IBM Cloud Monitoring with Sysdig includes alerts and multi-channel notifications that you can use to reduce the impact on your day-to-day operations and accelerate your reaction and response time to anomalies, downtime, and performance degradation. Notification channels that you can easily configure
 include email, Slack, PagerDuty, webhooks, Opsgenie, and VictorOps.</p>
 <p>In the next steps, you will learn how to use dashboards and metrics to monitor the health of your application.</p>
-<h3 id="launch-the-web-ui">Launch the web UI</h3>
-<p>You launch the Web UI within the context of an Sysdig instance, from the IBM Cloud UI.</p>
-<p>Complete the following steps to launch the web UI:</p>
-<ol>
-<li><p>In the LogDNA web UI, click the <strong>Views</strong> icon      <a href="../assets/views.png" rel="grouped" title="" target="_self" class="fancybox">
-       <img src="../assets/views.png" alt="">
-     </a> &gt; <strong>Observability</strong>.</p>
-</li>
-<li><p>Select <strong>Monitoring</strong>.</p>
-<p>The list of instances that are available is displayed.</p>
-</li>
-<li><p>Select the instance that is allocated for your lab. Then, click <strong>View Sysdig</strong>.</p>
-</li>
-</ol>
-<p>The Web UI opens.</p>
 <h2 id="view-sysdig-pre-defined-views-and-dashboards">View SysDig pre-defined views and dashboards</h2>
-<p><strong>Use views and dashboards to monitor your infrastructure, applications, and services. You can use pre-defined dashboards. You can also create custom dashboards through the Web UI or programmatically. You can backup and restore dashboards by using Python scripts.</strong></p>
+<p>Use views and dashboards to monitor your infrastructure, applications, and services. You can use pre-defined dashboards. You can also create custom dashboards through the Web UI or programmatically. You can backup and restore dashboards by using Python scripts.</p>
 <p>The following table lists the different types of pre-defined dashboards:</p>
 <table>
 <thead>
@@ -494,7 +479,12 @@ include email, Slack, PagerDuty, webhooks, Opsgenie, and VictorOps.</p>
 </table>
 <p>Complete the following steps to view a Sysdig dashboard:</p>
 <ol>
-<li><p>After you launch the Sysdig web UI, in the Sysdig Welcome wizard, select <strong>Kubernetes</strong> as the installation method.</p>
+<li><p>Launch the Sysdig web UI.</p>
+<p>      <a href="../assets/icp-monitoring-launch.png" rel="grouped" title="" target="_self" class="fancybox">
+       <img src="../assets/icp-monitoring-launch.png" alt="">
+     </a>.</p>
+</li>
+<li><p>In the Sysdig Welcome wizard, select <strong>Kubernetes</strong> as the installation method.</p>
 <p>After 30 seconds or so, it should show one or more agents connected.</p>
 <p>Select <strong>GO TO NEXT STEP</strong>.</p>
 <p>Then select <strong>LET&apos;S GET STARTED</strong>.</p>
@@ -656,7 +646,7 @@ include email, Slack, PagerDuty, webhooks, Opsgenie, and VictorOps.</p>
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Monitor Cluster w/ SysDig","level":"4.5","depth":1,"next":{"title":"IBM Developer","level":"5.1","depth":1,"url":"https://developer.ibm.com","ref":"https://developer.ibm.com","articles":[]},"previous":{"title":"Analyze Logs w/ LogDNA","level":"4.4","depth":1,"path":"part2-openshift_ibmcloud/exercise-8.md","ref":"part2-openshift_ibmcloud/exercise-8.md","articles":[]},"dir":"ltr"},"config":{"plugins":["prism","-highlight","collapsible-chapters","hints","copy-code-button","back-to-top-button","fancybox","web-header","codetabs"],"root":"workshop","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"webheader":{"headerTitle":"Bring it all together on OpenShift 4.3 on IBM Cloud"},"prism":{"css":["prismjs/themes/prism-tomorrow.css"]},"fancybox":{"helpers":{"buttons":{}},"openEffect":"elastic","closeEffect":"elastic"},"web-header":{},"search":{},"collapsible-chapters":{},"codetabs":{},"hints":{"danger":"fa fa-exclamation-circle","info":"fa fa-info-circle","tip":"fa fa-mortar-board","working":"fa fa-wrench"},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"back-to-top-button":{},"copy-code-button":{},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":true}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"Bring it all together on OpenShift 4.3 on IBM Cloud","gitbook":"3.2.3"},"file":{"path":"part2-openshift_ibmcloud/exercise-9.md","mtime":"2020-01-28T21:46:28.032Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-01-28T21:48:16.417Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Monitor Cluster w/ SysDig","level":"4.5","depth":1,"next":{"title":"IBM Developer","level":"5.1","depth":1,"url":"https://developer.ibm.com","ref":"https://developer.ibm.com","articles":[]},"previous":{"title":"Analyze Logs w/ LogDNA","level":"4.4","depth":1,"path":"part2-openshift_ibmcloud/exercise-8.md","ref":"part2-openshift_ibmcloud/exercise-8.md","articles":[]},"dir":"ltr"},"config":{"plugins":["prism","-highlight","collapsible-chapters","hints","copy-code-button","back-to-top-button","fancybox","web-header","codetabs"],"root":"workshop","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"webheader":{"headerTitle":"Bring it all together on OpenShift 4.3 on IBM Cloud"},"prism":{"css":["prismjs/themes/prism-tomorrow.css"]},"fancybox":{"helpers":{"buttons":{}},"openEffect":"elastic","closeEffect":"elastic"},"web-header":{},"search":{},"collapsible-chapters":{},"codetabs":{},"hints":{"danger":"fa fa-exclamation-circle","info":"fa fa-info-circle","tip":"fa fa-mortar-board","working":"fa fa-wrench"},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"back-to-top-button":{},"copy-code-button":{},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":true}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"Bring it all together on OpenShift 4.3 on IBM Cloud","gitbook":"3.2.3"},"file":{"path":"part2-openshift_ibmcloud/exercise-9.md","mtime":"2020-01-28T22:30:21.259Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-01-28T22:32:09.958Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>

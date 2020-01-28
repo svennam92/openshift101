@@ -419,29 +419,25 @@
 <p>The LogDNA agent is responsible for collecting and forwarding logs to your IBM Log Analysis with LogDNA instance. After you provision an instance of IBM Log Analysis with LogDNA, you must configure a LogDNA agent for each log source that you want to monitor.</p>
 <p>To configure your Kubernetes cluster to send logs to your IBM Log Analysis with LogDNA instance, you must install a <em>LogDNA-agent</em> pod on each node of your cluster. The LogDNA agent reads log files from the pod where it is installed, and forwards the log data to your LogDNA instance.</p>
 <p>To forward logs to your LogDNA instance, complete the following steps from the command line:</p>
-<h2 id="step-1-access-your-cluster-through-the-cli">Step 1. Access your cluster through the CLI</h2>
-<p><a href="../getting-started/setup_cli.html#access-the-openShift-web-console">Access your cluster using the oc CLI</a>.</p>
-<h2 id="step-2-get-the-ingestion-key">Step 2. Get the ingestion key</h2>
+<h2 id="step-1-get-the-ingestion-key">Step 1. Get the ingestion key</h2>
 <ol>
-<li><p>In the IBM Cloud Console, open the <strong>Menu</strong> with the burger icon in the top left corner and select <strong>Observability</strong>. </p>
-<p>      <a href="../assets/menu-observability.png" rel="grouped" title="" target="_self" class="fancybox">
-       <img src="../assets/menu-observability.png" alt="">
-     </a> </p>
-</li>
-<li><p>Select <strong>Logging</strong>. </p>
+<li><p>In IBM Cloud Console, open the menu with the burger icon in the top left corner and select <strong>Observability</strong>. This will open the <a href="https://cloud.ibm.com/observe/monitoring" target="_blank">Observability</a>. Select <strong>Logging</strong>. </p>
+<p>      <a href="../assets/icp-logging.png" rel="grouped" title="" target="_self" class="fancybox">
+       <img src="../assets/icp-logging.png" alt="">
+     </a>.</p>
 <p> The list of instances that are available on IBM Cloud is displayed.</p>
 </li>
-<li><p>Select your instance. Check with the instructor which instance  you should use for the lab.</p>
+<li><p>Select your instance or the one given by the instructor.</p>
 </li>
 <li><p>Select the three dots and click <strong>View key</strong>.</p>
-<p>      <a href="../assets/view-key.png" rel="grouped" title="" target="_self" class="fancybox">
-       <img src="../assets/view-key.png" alt="">
+<p>      <a href="../assets/icp-logging-key.png" rel="grouped" title="" target="_self" class="fancybox">
+       <img src="../assets/icp-logging-key.png" alt="">
      </a></p>
 </li>
 <li><p>Copy the ingestion key.</p>
 </li>
 </ol>
-<h2 id="step-3-store-your-logdna-ingestion-key-as-a-kubernetes-secret">Step 3. Store your LogDNA ingestion key as a Kubernetes secret</h2>
+<h2 id="step-2-store-your-logdna-ingestion-key-as-a-kubernetes-secret">Step 2. Store your LogDNA ingestion key as a Kubernetes secret</h2>
 <p>You must create a Kubernetes secret to store your LogDNA ingestion key for your service instance. The LogDNA ingestion key is used to open a secure web socket to the LogDNA ingestion server and to authenticate the logging agent with the IBM Log Analysis with LogDNA service.</p>
 <ol>
 <li><p>Create a project. A project is a namespace in a cluster.</p>
@@ -452,21 +448,25 @@
 <pre class="language-"><code> oc create serviceaccount logdna-agent -n ibm-observe
 </code></pre></li>
 <li><p>Grant the serviceaccount access to the <strong>Privileged SCC</strong> so the service account has permissions to create priviledged LogDNA pods. Run the following command:</p>
-<pre class="language-"><code> oc adm policy add-scc-to-user privileged system:serviceaccount:ibm-observe:logdna-agent
-</code></pre></li>
+<pre class="language-"><code class="lang-sh"> oc adm policy add-scc-to-user privileged system:serviceaccount:ibm-observe:logdna-agent
+</code></pre>
+</li>
 <li><p>Add a secret. The secret sets the ingestion key that the LogDNA agent uses to send logs.</p>
-<pre class="language-"><code> oc create secret generic logdna-agent-key --from-literal=logdna-agent-key=INGESTION_KEY -n ibm-observe
-</code></pre><p> Where <code>INGESTION_KEY</code> is the ingestion key for the LogDNA instance where you plan to forward and collect the cluster logs.</p>
+<pre class="language-"><code class="lang-sh"> oc create secret generic logdna-agent-key --from-literal<span class="token operator">=</span>logdna-agent-key<span class="token operator">=</span>INGESTION_KEY -n ibm-observe
+</code></pre>
+<p> Where <code>INGESTION_KEY</code> is the ingestion key for the LogDNA instance where you plan to forward and collect the cluster logs.</p>
 </li>
 </ol>
-<h2 id="step-4-deploy-the-logdna-agent-in-the-cluster">Step 4. Deploy the LogDNA agent in the cluster</h2>
+<h2 id="step-3-deploy-the-logdna-agent-in-the-cluster">Step 3. Deploy the LogDNA agent in the cluster</h2>
 <p>Create a Kubernetes daemon set to deploy the LogDNA agent on every worker node of your Kubernetes cluster. </p>
 <p>The LogDNA agent collects logs with the extension <code>*.log</code> and extensionsless files that are stored in the <code>/var/log</code> directory of your pod. By default, logs are collected from all namespaces, including <code>kube-system</code>, and automatically forwarded to the IBM Log Analysis with LogDNA service.</p>
-<p>Run the following command if you are working on a LogDNA instance that is located in US-South:</p>
-<pre class="language-"><code>oc create -f https://assets.us-south.logging.cloud.ibm.com/clients/logdna-agent-ds-os.yaml -n ibm-observe
-</code></pre><p>Run the following command if you are working on a LogDNA instance that is located in Frankfurt:</p>
-<pre class="language-"><code>oc create -f https://assets.eu-de.logging.cloud.ibm.com/clients/logdna-agent-ds-os.yaml -n ibm-observe
-</code></pre><h2 id="step-5-verify-that-the-logdna-agent-is-deployed-successfully">Step 5. Verify that the LogDNA agent is deployed successfully</h2>
+<p>Run the following command if you are working on a LogDNA instance that is located in <strong>US-South</strong>:</p>
+<pre class="language-"><code class="lang-sh">oc create -f https://assets.us-south.logging.cloud.ibm.com/clients/logdna-agent-ds-os.yaml -n ibm-observe
+</code></pre>
+<p>Run the following command if you are working on a LogDNA instance that is located in <strong>Frankfurt</strong>:</p>
+<pre class="language-"><code class="lang-sh">oc create -f https://assets.eu-de.logging.cloud.ibm.com/clients/logdna-agent-ds-os.yaml -n ibm-observe
+</code></pre>
+<h2 id="step-4-verify-that-the-logdna-agent-is-deployed-successfully">Step 4. Verify that the LogDNA agent is deployed successfully</h2>
 <p>To verify that the LogDNA agent is deployed successfully, run the following command:</p>
 <ol>
 <li><p>Target the project where the LogDNA agent is deployed.</p>
@@ -476,34 +476,26 @@
 <pre class="language-"><code> oc get pods -n ibm-observe
 </code></pre></li>
 </ol>
-<p>The deployment is successful when you see one or more LogDNA pods.</p>
-<ul>
-<li><strong>The number of LogDNA pods equals the number of worker nodes in your cluster.</strong></li>
-<li>All pods must be in a <code>Running</code> state.</li>
-<li><em>Stdout</em> and <em>stderr</em> are automatically collected and forwarded from all containers. Log data includes application logs and worker logs.</li>
-<li>By default, the LogDNA agent pod that runs on a worker collects logs from all namespaces on that node.</li>
-</ul>
-<p>After the agent is configured, you should start seeing logs from this cluster in the LogDNA web UI. If after a period of time you cannot see logs, check the agent logs.</p>
-<p>To check the logs that are generated by a LogDNA agent, run the following command:</p>
-<pre class="language-"><code>oc logs logdna-agent-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>ID</span><span class="token punctuation">&gt;</span></span>
-</code></pre><p>Where <em>ID</em> is the ID for a LogDNA agent pod. </p>
-<p>For example, </p>
-<pre class="language-"><code>oc logs logdna-agent-xxxkz
-</code></pre><h2 id="step-6-launch-the-logdna-web-ui-to-verify-that-logs-are-being-forwarded-from-the-logdna-agent">Step 6. Launch the LogDNA web UI to verify that logs are being forwarded from the LogDNA agent</h2>
+<pre class="language-"><code>The deployment is successful when you see one or more LogDNA pods.
+* **The number of LogDNA pods equals the number of worker nodes in your cluster.**
+* All pods must be in a `Running` state.
+* *Stdout* and *stderr* are automatically collected and forwarded from all containers. Log data includes application logs and worker logs.
+* By default, the LogDNA agent pod that runs on a worker collects logs from all namespaces on that node.
+
+After the agent is configured, you should start seeing logs from this cluster in the LogDNA web UI. If after a period of time you cannot see logs, check the agent logs.
+</code></pre><ol>
+<li><p>To check the logs that are generated by a LogDNA agent, run the following command:</p>
+<pre class="language-"><code> oc logs logdna-agent-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>ID</span><span class="token punctuation">&gt;</span></span>
+</code></pre><p> Where <em>ID</em> is the ID for a LogDNA agent pod. </p>
+<p> For example, </p>
+<pre class="language-"><code> oc logs logdna-agent-xxxkz
+</code></pre></li>
+</ol>
+<h2 id="step-5-launch-the-logdna-web-ui-to-verify-that-logs-are-being-forwarded-from-the-logdna-agent">Step 5. Launch the LogDNA web UI to verify that logs are being forwarded from the LogDNA agent</h2>
 <ol>
-<li><p>In the IBM Cloud Console, open the <strong>Menu</strong> with the burger icon in the top left corner and select <strong>Observability</strong>. </p>
-<p>      <a href="../assets/menu-observability.png" rel="grouped" title="" target="_self" class="fancybox">
-       <img src="../assets/menu-observability.png" alt="">
-     </a> </p>
-</li>
-<li><p>Select <strong>Logging</strong>. </p>
-<p> The list of instances that are available on IBM Cloud is displayed.</p>
-</li>
-<li><p>Select your instance. Check with the instructor which instance  you should use for the lab.</p>
-</li>
 <li><p>Select <strong>Launch LogDNA</strong>.</p>
 </li>
-<li><p>Next, go to the LogDNA web UI. In the <strong>Views</strong> page, click <strong>Everything</strong> to verify that logs from the cluster are available through the UI. </p>
+<li><p>In the <strong>Views</strong> page, click <strong>Everything</strong> to verify that logs from the cluster are available through the UI. </p>
 </li>
 </ol>
 
@@ -549,7 +541,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Configure LogDNA Agent","level":"4.3","depth":1,"next":{"title":"Analyze Logs w/ LogDNA","level":"4.4","depth":1,"path":"part2-openshift_ibmcloud/exercise-8.md","ref":"part2-openshift_ibmcloud/exercise-8.md","articles":[]},"previous":{"title":"Configure Sysdig Agent","level":"4.2","depth":1,"path":"part2-openshift_ibmcloud/exercise-6.md","ref":"part2-openshift_ibmcloud/exercise-6.md","articles":[]},"dir":"ltr"},"config":{"plugins":["prism","-highlight","collapsible-chapters","hints","copy-code-button","back-to-top-button","fancybox","web-header","codetabs"],"root":"workshop","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"webheader":{"headerTitle":"Bring it all together on OpenShift 4.3 on IBM Cloud"},"prism":{"css":["prismjs/themes/prism-tomorrow.css"]},"fancybox":{"helpers":{"buttons":{}},"openEffect":"elastic","closeEffect":"elastic"},"web-header":{},"search":{},"collapsible-chapters":{},"codetabs":{},"hints":{"danger":"fa fa-exclamation-circle","info":"fa fa-info-circle","tip":"fa fa-mortar-board","working":"fa fa-wrench"},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"back-to-top-button":{},"copy-code-button":{},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":true}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"Bring it all together on OpenShift 4.3 on IBM Cloud","gitbook":"3.2.3"},"file":{"path":"part2-openshift_ibmcloud/exercise-7.md","mtime":"2020-01-28T21:46:28.032Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-01-28T21:48:16.417Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Configure LogDNA Agent","level":"4.3","depth":1,"next":{"title":"Analyze Logs w/ LogDNA","level":"4.4","depth":1,"path":"part2-openshift_ibmcloud/exercise-8.md","ref":"part2-openshift_ibmcloud/exercise-8.md","articles":[]},"previous":{"title":"Configure Sysdig Agent","level":"4.2","depth":1,"path":"part2-openshift_ibmcloud/exercise-6.md","ref":"part2-openshift_ibmcloud/exercise-6.md","articles":[]},"dir":"ltr"},"config":{"plugins":["prism","-highlight","collapsible-chapters","hints","copy-code-button","back-to-top-button","fancybox","web-header","codetabs"],"root":"workshop","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"webheader":{"headerTitle":"Bring it all together on OpenShift 4.3 on IBM Cloud"},"prism":{"css":["prismjs/themes/prism-tomorrow.css"]},"fancybox":{"helpers":{"buttons":{}},"openEffect":"elastic","closeEffect":"elastic"},"web-header":{},"search":{},"collapsible-chapters":{},"codetabs":{},"hints":{"danger":"fa fa-exclamation-circle","info":"fa fa-info-circle","tip":"fa fa-mortar-board","working":"fa fa-wrench"},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"back-to-top-button":{},"copy-code-button":{},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":true}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"Bring it all together on OpenShift 4.3 on IBM Cloud","gitbook":"3.2.3"},"file":{"path":"part2-openshift_ibmcloud/exercise-7.md","mtime":"2020-01-28T22:30:21.259Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-01-28T22:32:09.958Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>

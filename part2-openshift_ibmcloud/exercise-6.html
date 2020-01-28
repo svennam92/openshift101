@@ -419,13 +419,13 @@
 <p>To integrate your monitoring instance with your OpenShift cluster, you must run a script that creates a project and privileged service account for the Sysdig agent.</p>
 <h2 id="launch-the-sysdig-webui">Launch the Sysdig webUI</h2>
 <ol>
-<li><p>In the IBM Cloud Console, navigate to the <a href="https://cloud.ibm.com/observe/monitoring" target="_blank">Observability</a> page and select <strong>Monitoring</strong></p>
+<li><p>In IBM Cloud Console, open the menu with the burger icon in the top left corner and select <strong>Observability</strong>. This will open the <a href="https://cloud.ibm.com/observe/monitoring" target="_blank">Observability</a>. Select <strong>Monitoring</strong>.</p>
 <p>      <a href="../assets/icp-monitoring.png" rel="grouped" title="" target="_self" class="fancybox">
        <img src="../assets/icp-monitoring.png" alt="">
-     </a>.</p>
+     </a></p>
 <p> The list of instances that are available on IBM Cloud is displayed.</p>
 </li>
-<li><p>Select your instance. Check with the instructor which instance  you should use for the lab.</p>
+<li><p>Select your instance or the one given by the instructor.</p>
 </li>
 <li><p>Click <strong>View Sysdig</strong>. The Web UI opens.</p>
 </li>
@@ -433,16 +433,6 @@
 <h2 id="get-the-access-key-for-sysdig-instance">Get the access key for Sysdig instance</h2>
 <p>The Sysdig access key is used to open a secure web socket to the Sysdig ingestion server and to authenticate the monitoring agent with the monitoring service.</p>
 <ol>
-<li><p>In the IBM Cloud Console, open the <strong>Menu</strong> with the burger icon in the top left corner and select <strong>Observability</strong>. </p>
-<p>      <a href="../assets/menu-observability.png" rel="grouped" title="" target="_self" class="fancybox">
-       <img src="../assets/menu-observability.png" alt="">
-     </a> </p>
-</li>
-<li><p>Select <strong>Monitoring</strong>. </p>
-<p> The list of instances that are available on IBM Cloud is displayed.</p>
-</li>
-<li><p>Select your instance. Check with the instructor which instance you should use for the lab.</p>
-</li>
 <li><p>Select the three dots and click <strong>View key</strong>.</p>
 <p>      <a href="../assets/view-key-sysdig.png" rel="grouped" title="" target="_self" class="fancybox">
        <img src="../assets/view-key-sysdig.png" alt="">
@@ -456,37 +446,44 @@
 <p>The Sysdig agent collects metrics such as the worker node CPU usage, worker node memory usage, HTTP traffic to and from your containers, and data about several infrastructure components.</p>
 <ol>
 <li><p>Before running the curl command in step 2, you need to make sure you&apos;re logged in the cluster by running <code>oc login</code>.</p>
-<p> <a href="../getting-started/setup_cli.html#access-the-openShift-web-console">Access your cluster using the oc CLI</a>.</p>
+<p> <a href="../getting-started/setup_cli.html#access-the-openShift-web-console">Refer to this section: Access your cluster using the oc CLI</a>.</p>
 </li>
 </ol>
 <ol>
-<li>In the following command, replace <code><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>sysdig_access_key</span><span class="token punctuation">&gt;</span></span></code> and <code><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>sysdig_collector_endpoint</span><span class="token punctuation">&gt;</span></span></code> with the values from the service key that you created earlier. For <code><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>tag</span><span class="token punctuation">&gt;</span></span></code>, you can associate tags with your Sysdig agent, such as <code>role:service,location:us-south</code> to help you identify the environment that the metrics come from.</li>
-</ol>
-<pre class="language-"><code class="lang-sh"><span class="token function">curl</span> -sL https://ibm.biz/install-sysdig-k8s-agent <span class="token operator">|</span> <span class="token function">sed</span> <span class="token string">&apos;435,442d&apos;</span> <span class="token operator">|</span> <span class="token function">bash</span> -s -- -a <span class="token operator">&lt;</span>sysdig_access_key<span class="token operator">&gt;</span> -c <span class="token operator">&lt;</span>sysdig_collector_endpoint<span class="token operator">&gt;</span> -t faststart,<span class="token operator">&lt;</span>Enter your name<span class="token operator">&gt;</span> -ac <span class="token string">&apos;sysdig_capture_enabled: false&apos;</span> --openshift
+<li><p>In the following command, replace <code><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>sysdig_access_key</span><span class="token punctuation">&gt;</span></span></code> and <code><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>sysdig_collector_endpoint</span><span class="token punctuation">&gt;</span></span></code> with the values from the service key that you created earlier. For <code><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>tag</span><span class="token punctuation">&gt;</span></span></code>, you can associate tags with your Sysdig agent, such as <code>role:service,location:us-south</code> to help you identify the environment that the metrics come from.</p>
+<pre class="language-"><code class="lang-sh"> <span class="token function">curl</span> -sL https://ibm.biz/install-sysdig-k8s-agent <span class="token operator">|</span> <span class="token function">sed</span> <span class="token string">&apos;435,442d&apos;</span> <span class="token operator">|</span> <span class="token function">bash</span> -s -- -a <span class="token operator">&lt;</span>sysdig_access_key<span class="token operator">&gt;</span> -c <span class="token operator">&lt;</span>sysdig_collector_endpoint<span class="token operator">&gt;</span> -t faststart,<span class="token operator">&lt;</span>Enter your name<span class="token operator">&gt;</span> -ac <span class="token string">&apos;sysdig_capture_enabled: false&apos;</span> --openshift
 </code></pre>
-<p>For example:</p>
-<pre class="language-"><code>curl -sL https://ibm.biz/install-sysdig-k8s-agent | sed &apos;435,442d&apos; | bash -s -- -a <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>sysdig_access_key</span><span class="token punctuation">&gt;</span></span> -c <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>sysdig_collector_endpoint</span><span class="token punctuation">&gt;</span></span> -t faststart,marisa -ac &apos;sysdig_capture_enabled: false&apos; --openshift
-</code></pre><p>Example output:</p>
-<pre class="language-"><code>    * Detecting operating system
-    * Downloading Sysdig cluster role yaml
-    * Downloading Sysdig config map yaml
-    * Downloading Sysdig daemonset v2 yaml
-    * Creating project: ibm-observe
-    * Creating sysdig-agent serviceaccount in project: ibm-observe
-    * Creating sysdig-agent access policies
-    * Creating sysdig-agent secret using the ACCESS_KEY provided
-    * Retreiving the IKS Cluster ID and Cluster Name
-    * Setting cluster name as <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>cluster_name</span><span class="token punctuation">&gt;</span></span>
-    * Setting ibm.containers-kubernetes.cluster.id 1fbd0c2ab7dd4c9bb1f2c2f7b36f5c47
-    * Updating agent configmap and applying to cluster
-    * Setting tags
-    * Setting collector endpoint
-    * Adding additional configuration to dragent.yaml
-    * Enabling Prometheus
-    configmap/sysdig-agent created
-    * Deploying the sysdig agent
-    daemonset.extensions/sysdig-agent created
-</code></pre><h2 id="verify-that-the-sysdig-agent-is-deployed-successfully">Verify that the Sysdig agent is deployed successfully</h2>
+<p> Use the sysdig_collector_endpoint based on where your Sysdig instance is provisioned:</p>
+<ul>
+<li>Frankfurt <code>ingest.eu-de.monitoring.cloud.ibm.com</code></li>
+<li><p>London <code>ingest.eu-gb.monitoring.cloud.ibm.com</code></p>
+<p>Example output:</p>
+<p>```</p>
+</li>
+<li>Detecting operating system</li>
+<li>Downloading Sysdig cluster role yaml</li>
+<li>Downloading Sysdig config map yaml</li>
+<li>Downloading Sysdig daemonset v2 yaml</li>
+<li>Creating project: ibm-observe</li>
+<li>Creating sysdig-agent serviceaccount in project: ibm-observe</li>
+<li>Creating sysdig-agent access policies</li>
+<li>Creating sysdig-agent secret using the ACCESS_KEY provided</li>
+<li>Retreiving the IKS Cluster ID and Cluster Name</li>
+<li>Setting cluster name as <cluster_name></cluster_name></li>
+<li>Setting ibm.containers-kubernetes.cluster.id 1fbd0c2ab7dd4c9bb1f2c2f7b36f5c47</li>
+<li>Updating agent configmap and applying to cluster</li>
+<li>Setting tags</li>
+<li>Setting collector endpoint</li>
+<li>Adding additional configuration to dragent.yaml</li>
+<li>Enabling Prometheus
+configmap/sysdig-agent created</li>
+<li>Deploying the sysdig agent
+daemonset.extensions/sysdig-agent created
+```</li>
+</ul>
+</li>
+</ol>
+<h2 id="verify-that-the-sysdig-agent-is-deployed-successfully">Verify that the Sysdig agent is deployed successfully</h2>
 <p>Verify that the <code>sydig-agent</code> pods on each node have a <strong>Running</strong> status.</p>
 <pre class="language-"><code class="lang-sh">oc get pods -n ibm-observe
 </code></pre>
@@ -537,7 +534,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Configure Sysdig Agent","level":"4.2","depth":1,"next":{"title":"Configure LogDNA Agent","level":"4.3","depth":1,"path":"part2-openshift_ibmcloud/exercise-7.md","ref":"part2-openshift_ibmcloud/exercise-7.md","articles":[]},"previous":{"title":"Cloudant with OperatorHub","level":"4.1","depth":1,"path":"part2-openshift_ibmcloud/exercise-5.md","ref":"part2-openshift_ibmcloud/exercise-5.md","articles":[]},"dir":"ltr"},"config":{"plugins":["prism","-highlight","collapsible-chapters","hints","copy-code-button","back-to-top-button","fancybox","web-header","codetabs"],"root":"workshop","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"webheader":{"headerTitle":"Bring it all together on OpenShift 4.3 on IBM Cloud"},"prism":{"css":["prismjs/themes/prism-tomorrow.css"]},"fancybox":{"helpers":{"buttons":{}},"openEffect":"elastic","closeEffect":"elastic"},"web-header":{},"search":{},"collapsible-chapters":{},"codetabs":{},"hints":{"danger":"fa fa-exclamation-circle","info":"fa fa-info-circle","tip":"fa fa-mortar-board","working":"fa fa-wrench"},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"back-to-top-button":{},"copy-code-button":{},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":true}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"Bring it all together on OpenShift 4.3 on IBM Cloud","gitbook":"3.2.3"},"file":{"path":"part2-openshift_ibmcloud/exercise-6.md","mtime":"2020-01-28T21:46:28.032Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-01-28T21:48:16.417Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Configure Sysdig Agent","level":"4.2","depth":1,"next":{"title":"Configure LogDNA Agent","level":"4.3","depth":1,"path":"part2-openshift_ibmcloud/exercise-7.md","ref":"part2-openshift_ibmcloud/exercise-7.md","articles":[]},"previous":{"title":"Cloudant with OperatorHub","level":"4.1","depth":1,"path":"part2-openshift_ibmcloud/exercise-5.md","ref":"part2-openshift_ibmcloud/exercise-5.md","articles":[]},"dir":"ltr"},"config":{"plugins":["prism","-highlight","collapsible-chapters","hints","copy-code-button","back-to-top-button","fancybox","web-header","codetabs"],"root":"workshop","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"webheader":{"headerTitle":"Bring it all together on OpenShift 4.3 on IBM Cloud"},"prism":{"css":["prismjs/themes/prism-tomorrow.css"]},"fancybox":{"helpers":{"buttons":{}},"openEffect":"elastic","closeEffect":"elastic"},"web-header":{},"search":{},"collapsible-chapters":{},"codetabs":{},"hints":{"danger":"fa fa-exclamation-circle","info":"fa fa-info-circle","tip":"fa fa-mortar-board","working":"fa fa-wrench"},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"back-to-top-button":{},"copy-code-button":{},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":true}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"Bring it all together on OpenShift 4.3 on IBM Cloud","gitbook":"3.2.3"},"file":{"path":"part2-openshift_ibmcloud/exercise-6.md","mtime":"2020-01-28T22:30:21.259Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-01-28T22:32:09.958Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>

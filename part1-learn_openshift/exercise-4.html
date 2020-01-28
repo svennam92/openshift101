@@ -422,12 +422,12 @@
 <p>Hopefully you have your running script simulating load (if not go <a href="exercise-2.html#simulate-load-on-the-application">here</a>), Grafana showed you that your application was consuming anywhere between &quot;.002&quot; to &quot;.02&quot; cores. This translates to 2-20 &quot;millicores&quot;. That seems like a good range for our CPU request, but to be safe, let&apos;s bump the higher-end up to 30 millicores. In addition, Grafana showed that the app consumes about <code>25</code>-<code>35</code> MB of RAM. Set the following resource limits for your deployment now.</p>
 <ol>
 <li><p>Switch to the <strong>Administrator</strong> view and then navigate to <strong>Workloads &gt; Deployment Configs</strong> in the left-hand bar. Choose the <code>patient-ui</code> DC, then choose <strong>Actions &gt; Edit Deployment Config</strong>.</p>
-<p>     <a href="../assets/ocp43-dc.png" rel="grouped" title="Deployment Configs" target="_self" class="fancybox">
+<p>      <a href="../assets/ocp43-dc.png" rel="grouped" title="Deployment Configs" target="_self" class="fancybox">
        <img src="../assets/ocp43-dc.png" alt="Deployment Configs">
      </a></p>
 </li>
 <li><p>In the YAML editor, scroll to line 62. In the section <strong>template &gt; spec &gt; containers</strong>, add the following resource limits into the empty resources. Replace the &quot;{}&quot;, and ensure the spacing is correct -- YAML uses strict indentation.</p>
-<p>     <a href="../assets/ocp43-limits-yaml.png" rel="grouped" title="Resource Limits" target="_self" class="fancybox">
+<p>      <a href="../assets/ocp43-limits-yaml.png" rel="grouped" title="Resource Limits" target="_self" class="fancybox">
        <img src="../assets/ocp43-limits-yaml.png" alt="Resource Limits">
      </a></p>
 <pre class="language-"><code class="lang-yaml">          <span class="token key atrule">resources</span><span class="token punctuation">:</span>
@@ -442,8 +442,8 @@
 <li><p><strong>Save</strong> and <strong>Reload</strong> to see the new version.</p>
 </li>
 <li><p>Verify that the replication controller has been changed by navigating to <strong>Events</strong></p>
-<p>     <a href="../assets/ocp43-limits-event.png" rel="grouped" title="Resource Limits" target="_self" class="fancybox">
-       <img src="../assets/ocp43-limits-event.png" alt="Resource Limits">
+<p>      <a href="../assets/ocp-dc-events.png" rel="grouped" title="Resource Limits" target="_self" class="fancybox">
+       <img src="../assets/ocp-dc-events.png" alt="Resource Limits">
      </a></p>
 </li>
 </ol>
@@ -452,26 +452,26 @@
 <p>By default, the autoscaler allows you to scale based on CPU or Memory. The UI allows you to do CPU only (for now). Pods are balanced between the minimum and maximum number of pods that you specify. With the autoscaler, pods are automatically created or deleted to ensure that the average CPU usage of the pods is below the CPU request target as defined. In general, you probably want to start scaling up when you get near <code>50</code>-<code>90</code>% of the CPU usage of a pod. In our case, let&apos;s make it <code>1</code>% to test the autoscaler since we are generating minimal load.</p>
 <ol>
 <li><p>Navigate to <strong>Workloads &gt; Horizontal Pod Autoscalers</strong>, then hit <strong>Create Horizontal Pod Autoscaler</strong>.</p>
-<p>     <a href="../assets/ocp43-autoscaler.png" rel="grouped" title="HPA" target="_self" class="fancybox">
+<p>      <a href="../assets/ocp43-autoscaler.png" rel="grouped" title="HPA" target="_self" class="fancybox">
        <img src="../assets/ocp43-autoscaler.png" alt="HPA">
      </a></p>
-<pre class="language-"><code class="lang-yaml"><span class="token key atrule">apiVersion</span><span class="token punctuation">:</span> autoscaling/v2beta1
-<span class="token key atrule">kind</span><span class="token punctuation">:</span> HorizontalPodAutoscaler
-<span class="token key atrule">metadata</span><span class="token punctuation">:</span>
- <span class="token key atrule">name</span><span class="token punctuation">:</span> patient<span class="token punctuation">-</span>hpa
- <span class="token key atrule">namespace</span><span class="token punctuation">:</span> example<span class="token punctuation">-</span>health
-<span class="token key atrule">spec</span><span class="token punctuation">:</span>
- <span class="token key atrule">scaleTargetRef</span><span class="token punctuation">:</span>
-   <span class="token key atrule">apiVersion</span><span class="token punctuation">:</span> apps.openshift.io/v1
-   <span class="token key atrule">kind</span><span class="token punctuation">:</span> DeploymentConfig
-   <span class="token key atrule">name</span><span class="token punctuation">:</span> patient<span class="token punctuation">-</span>ui
- <span class="token key atrule">minReplicas</span><span class="token punctuation">:</span> <span class="token number">1</span>
- <span class="token key atrule">maxReplicas</span><span class="token punctuation">:</span> <span class="token number">10</span>
- <span class="token key atrule">metrics</span><span class="token punctuation">:</span>
-   <span class="token punctuation">-</span> <span class="token key atrule">type</span><span class="token punctuation">:</span> Resource
-     <span class="token key atrule">resource</span><span class="token punctuation">:</span>
-       <span class="token key atrule">name</span><span class="token punctuation">:</span> cpu
-       <span class="token key atrule">targetAverageUtilization</span><span class="token punctuation">:</span> <span class="token number">1</span>
+<pre class="language-"><code class="lang-yaml"> <span class="token key atrule">apiVersion</span><span class="token punctuation">:</span> autoscaling/v2beta1
+ <span class="token key atrule">kind</span><span class="token punctuation">:</span> HorizontalPodAutoscaler
+ <span class="token key atrule">metadata</span><span class="token punctuation">:</span>
+   <span class="token key atrule">name</span><span class="token punctuation">:</span> patient<span class="token punctuation">-</span>hpa
+   <span class="token key atrule">namespace</span><span class="token punctuation">:</span> example<span class="token punctuation">-</span>health
+ <span class="token key atrule">spec</span><span class="token punctuation">:</span>
+   <span class="token key atrule">scaleTargetRef</span><span class="token punctuation">:</span>
+     <span class="token key atrule">apiVersion</span><span class="token punctuation">:</span> apps.openshift.io/v1
+     <span class="token key atrule">kind</span><span class="token punctuation">:</span> DeploymentConfig
+     <span class="token key atrule">name</span><span class="token punctuation">:</span> patient<span class="token punctuation">-</span>ui
+   <span class="token key atrule">minReplicas</span><span class="token punctuation">:</span> <span class="token number">1</span>
+   <span class="token key atrule">maxReplicas</span><span class="token punctuation">:</span> <span class="token number">10</span>
+   <span class="token key atrule">metrics</span><span class="token punctuation">:</span>
+     <span class="token punctuation">-</span> <span class="token key atrule">type</span><span class="token punctuation">:</span> Resource
+       <span class="token key atrule">resource</span><span class="token punctuation">:</span>
+         <span class="token key atrule">name</span><span class="token punctuation">:</span> cpu
+         <span class="token key atrule">targetAverageUtilization</span><span class="token punctuation">:</span> <span class="token number">1</span>
 </code></pre>
 </li>
 <li><p>Hit <strong>Create</strong>.</p>
@@ -481,7 +481,7 @@
 <p>If you&apos;re not running the script from the <a href="exercise-2.html#simulate-load-on-the-application">previous exercise</a>, the number of pods should stay at 1.</p>
 <ol>
 <li><p>Check by going to the <strong>Overview</strong> page of <strong>Deployment Configs</strong>.</p>
-<p>     <a href="../assets/ocp43-dc-pod.png" rel="grouped" title="Scaled to 1 pod" target="_self" class="fancybox">
+<p>      <a href="../assets/ocp43-dc-pod.png" rel="grouped" title="Scaled to 1 pod" target="_self" class="fancybox">
        <img src="../assets/ocp43-dc-pod.png" alt="Scaled to 1 pod">
      </a></p>
 </li>
@@ -538,7 +538,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Scaling the App","level":"3.4","depth":1,"next":{"title":"Cloudant with OperatorHub","level":"4.1","depth":1,"path":"part2-openshift_ibmcloud/exercise-5.md","ref":"part2-openshift_ibmcloud/exercise-5.md","articles":[]},"previous":{"title":"Metrics and Dashboards","level":"3.3","depth":1,"path":"part1-learn_openshift/exercise-3.md","ref":"part1-learn_openshift/exercise-3.md","articles":[]},"dir":"ltr"},"config":{"plugins":["prism","-highlight","collapsible-chapters","hints","copy-code-button","back-to-top-button","fancybox","web-header","codetabs"],"root":"workshop","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"webheader":{"headerTitle":"Bring it all together on OpenShift 4.3 on IBM Cloud"},"prism":{"css":["prismjs/themes/prism-tomorrow.css"]},"fancybox":{"helpers":{"buttons":{}},"openEffect":"elastic","closeEffect":"elastic"},"web-header":{},"search":{},"collapsible-chapters":{},"codetabs":{},"hints":{"danger":"fa fa-exclamation-circle","info":"fa fa-info-circle","tip":"fa fa-mortar-board","working":"fa fa-wrench"},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"back-to-top-button":{},"copy-code-button":{},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":true}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"Bring it all together on OpenShift 4.3 on IBM Cloud","gitbook":"3.2.3"},"file":{"path":"part1-learn_openshift/exercise-4.md","mtime":"2020-01-28T21:46:28.032Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-01-28T21:48:16.417Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Scaling the App","level":"3.4","depth":1,"next":{"title":"Cloudant with OperatorHub","level":"4.1","depth":1,"path":"part2-openshift_ibmcloud/exercise-5.md","ref":"part2-openshift_ibmcloud/exercise-5.md","articles":[]},"previous":{"title":"Metrics and Dashboards","level":"3.3","depth":1,"path":"part1-learn_openshift/exercise-3.md","ref":"part1-learn_openshift/exercise-3.md","articles":[]},"dir":"ltr"},"config":{"plugins":["prism","-highlight","collapsible-chapters","hints","copy-code-button","back-to-top-button","fancybox","web-header","codetabs"],"root":"workshop","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"webheader":{"headerTitle":"Bring it all together on OpenShift 4.3 on IBM Cloud"},"prism":{"css":["prismjs/themes/prism-tomorrow.css"]},"fancybox":{"helpers":{"buttons":{}},"openEffect":"elastic","closeEffect":"elastic"},"web-header":{},"search":{},"collapsible-chapters":{},"codetabs":{},"hints":{"danger":"fa fa-exclamation-circle","info":"fa fa-info-circle","tip":"fa fa-mortar-board","working":"fa fa-wrench"},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"back-to-top-button":{},"copy-code-button":{},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":true}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"Bring it all together on OpenShift 4.3 on IBM Cloud","gitbook":"3.2.3"},"file":{"path":"part1-learn_openshift/exercise-4.md","mtime":"2020-01-28T22:30:21.259Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-01-28T22:32:09.958Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
