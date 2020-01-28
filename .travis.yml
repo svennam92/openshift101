@@ -10,7 +10,7 @@ script:
 
 deploy:
 - provider: pages
-  local-dir: _book
+  local-dir: workshop/_book
   skip-cleanup: true
   github-token: $GITHUB_TOKEN
   keep_history: true
