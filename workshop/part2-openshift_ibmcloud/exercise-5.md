@@ -24,13 +24,13 @@ Let's understand exactly how Operators work. In the first exercise, you deployed
 
 5. Next, you'll need to set your IBM Cloud credentials so that the Operator knows how/where to create your Cloudant service. The operator needs to create the service in your own account, rather than the shared IBM lab account.
 
-   ```text
+   ```sh
     ibmcloud login --sso
    ```
 
    Remember: Pick your own account, not IBM.
 
-   ```text
+   ```
     Select an account:
     1. Sai Vennam's Account (d815248d6ad0cc354df42d43db45ce09) <-> 1909673
     2. IBM (3a4766a7bcab032d4ffc980d360fbf23) <-> 338150
@@ -39,7 +39,7 @@ Let's understand exactly how Operators work. In the first exercise, you deployed
 
 6. Next, set your CF org, space and resource group where the Cloudant service will be created. Resource group is usually named `default` or `Default` -- case-sensitive.
 
-    ```text
+    ```sh
     ibmcloud target --cf -g Default
     or
     ibmcloud target --cf -g default
@@ -47,11 +47,11 @@ Let's understand exactly how Operators work. In the first exercise, you deployed
 
 7. Verify that all fields are set:
 
-    ```text
+    ```sh
     ibmcloud target
     ```
 
-    ```text
+    ```
     API endpoint:      https://cloud.ibm.com   
     Region:            us-south   
     User:              svennam@us.ibm.com   
@@ -70,18 +70,19 @@ Let's understand exactly how Operators work. In the first exercise, you deployed
 
 9. Use the helper script provided by IBM to create a new API token, and register it as a secret in your OpenShift cluster:
 
-    ```text
+    ```sh
     curl -sL https://raw.githubusercontent.com/IBM/cloud-operators/master/hack/config-operator.sh | bash
     ```
 
 10. Verify that all the fields in `data` are set for the configmap \(`org`, `region`, `resourceGroup` and `space`\) and secret \(`api-key` and `region`\):
 
-    ```text
+    ```sh
     oc get configmap/seed-defaults -o yaml -n default
     oc get secret/seed-secret -o yaml -n default
     ```
 
-    ```text
+    Output:
+    ```
     apiVersion: v1
     data:
         org: svennam@us.ibm.com
@@ -160,7 +161,7 @@ Now you'll create the Node.js app that will populate your Cloudant DB with patie
 
 2. Run the following command to create this application:
 
-    ```text
+    ```sh
     oc new-app --name=patient-db centos/nodejs-10-centos7~https://github.com/svennam92/nodejs-patientdb-cloudant
     ```
 

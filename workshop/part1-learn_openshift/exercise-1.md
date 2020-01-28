@@ -8,13 +8,13 @@ Today, we'll demonstrate the "s2i" or "source to image" builder. This builder al
 
 1. Create a new project **example-health**:
 
-   ```text
+   ```sh
     oc new-project example-health
    ```
 
    Output:
 
-   ```text
+   ```
     Now using project "example-health" on server "https://c100-e.containers.cloud.ibm.com:32545".
 
     You can add applications to this project with the 'new-app' command. For example, try:
@@ -29,13 +29,13 @@ Today, we'll demonstrate the "s2i" or "source to image" builder. This builder al
 2. Next, deploy the application directly from GitHub into your cluster. This uses the OpenShift "s2i" or "source to image" strategy. Essentially, this build strategy combines a standard Node.js runtime \(a base image\) with your source code in GitHub. Our code needs a runtime to actually run -- the base image takes care of this. The base image exists on DockerHub, named `nodejs-10-centos7:latest`.
    * Run the following command to build the Docker image. Note the `~` separator between the base image and source repository. The `--context-dir` flag is used to define the folder where the app exists:
 
-     ```text
+     ```sh
        oc new-app --name=patient-ui centos/nodejs-10-centos7~https://github.com/svennam92/node-s2i-openshift --context-dir='site'
      ```
 
      Output:
 
-     ```text
+     ```
        --> Found Docker image 4028fd4 (3 weeks old) from Docker Hub for "centos/nodejs-10-centos7"
 
            Node.js 10 
@@ -68,13 +68,13 @@ Today, we'll demonstrate the "s2i" or "source to image" builder. This builder al
 
 3. Reading the output, you'll notice that although a deployment and service is created, your application is not yet "exposed" to the outside world. To do so, run the following command:
 
-   ```text
+   ```sh
     oc expose svc/patient-ui
    ```
 
    Output:
 
-   ```text
+   ```
     route.route.openshift.io/patient-ui exposed
    ```
 
@@ -82,13 +82,13 @@ Today, we'll demonstrate the "s2i" or "source to image" builder. This builder al
 
    > To find the OpenShift dashboard URL again, run: `ic ks cluster get <cluster_name>`
 
-   ```text
+   ```sh
     oc status
    ```
 
    Output:
 
-   ```text
+   ```
     In project example-health on server https://c100-e.containers.cloud.ibm.com:32545
 
     http://patient-ui-example-health.<your_openshift_cluster>.us-south.stg.containers.appdomain.cloud to pod port 8080-tcp (svc/patient-ui)
@@ -104,22 +104,26 @@ Today, we'll demonstrate the "s2i" or "source to image" builder. This builder al
 
 ## View the Example Health in the OpenShift console
 
-1. In the OpenShift Web console, navigate to **Topology**. You should see the app you just deployed.
+1. In the OpenShift Web console, navigate to **Topology**. Select your project
+
+    ![Topology Deployment Config](../assets/ocp-project.png)
+
+2. You should see the app you just deployed.
 
     ![Topology Deployment Config](../assets/ocp43-topology.png)
 
-2. Select the app. You should see a single deployment config. Click that to see your Pods, Builds, Services and Routes.
+3. Select the app. You should see a single deployment config. Click that to see your Pods, Builds, Services and Routes.
 
     * **Pods**: Your Node.js application containers
     * **Builds**: The auto-generated build that created a Docker image from your Node.js source code, deployed it to the OpenShift container registry, and kicked off your deployment config.
     * **Services**: Tells OpenShift how to access your Pods by grouping them together as a service and defining the port to listen to
     * **Routes**: Exposes your services to the outside world using the LoadBalancer provided by the IBM Cloud network
 
-3. Click on **View Logs** next to your completed Build. This shows you the process that OpenShift took to install the dependencies for your Node.js application and build/push a Docker image.
+4. Click on **View Logs** next to your completed Build. This shows you the process that OpenShift took to install the dependencies for your Node.js application and build/push a Docker image.
 
     ![Build Logs](../assets/ocp43-build-logs.png)
 
-4. Click on the url under **Routes** to open your application with the URL.
+5. Click on the url under **Routes** to open your application with the URL.
 
     ![](../assets/patient-ui-web.png)
 
