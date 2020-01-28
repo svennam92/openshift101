@@ -415,7 +415,7 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h1 id="exercise-1-deploying-an-application">Exercise 1: Deploying an application</h1>
+                                <h1 id="deploying-an-application">Deploying an application</h1>
 <h2 id="deploy-example-health-into-openshift">Deploy Example Health into OpenShift</h2>
 <p>There&apos;s many ways to create a new application in OpenShift. If you&apos;re already a Kubernetes expert, you can stick with what you know and use YAML deployment files. However, OpenShift has greatly simplified the process of deploying apps into a cluster. </p>
 <p>Today, we&apos;ll demonstrate the &quot;s2i&quot; or &quot;source to image&quot; builder. This builder allows you to go from source code on GitHub to a running deployment.</p>
@@ -497,7 +497,7 @@
 </ol>
 <h2 id="view-the-example-health-in-the-openshift-console">View the Example Health in the OpenShift console</h2>
 <ol>
-<li><p>In the OpenShift Web console, navigate to <strong>Topology</strong>. Select your project</p>
+<li><p>In the OpenShift Web console, switch from <strong>Administrator</strong> to <strong>Developer</strong> view and navigate to <strong>Topology</strong>. Select your project</p>
 <p>      <a href="../assets/ocp-project.png" rel="grouped" title="Topology Deployment Config" target="_self" class="fancybox">
        <img src="../assets/ocp-project.png" alt="Topology Deployment Config">
      </a></p>
@@ -507,7 +507,7 @@
        <img src="../assets/ocp43-topology.png" alt="Topology Deployment Config">
      </a></p>
 </li>
-<li><p>Select the app. You should see a single deployment config. Click that to see your Pods, Builds, Services and Routes.</p>
+<li><p>Select the app. You should see a single deployment config where you can see your Pods, Builds, Services and Routes.</p>
 <ul>
 <li><strong>Pods</strong>: Your Node.js application containers</li>
 <li><strong>Builds</strong>: The auto-generated build that created a Docker image from your Node.js source code, deployed it to the OpenShift container registry, and kicked off your deployment config.</li>
@@ -520,7 +520,7 @@
        <img src="../assets/ocp43-build-logs.png" alt="Build Logs">
      </a></p>
 </li>
-<li><p>Click on the url under <strong>Routes</strong> to open your application with the URL.</p>
+<li><p>Click back to the <strong>Topology</strong> and select your app again. Click on the url under <strong>Routes</strong> to open your application with the URL.</p>
 <p>      <a href="../assets/patient-ui-web.png" rel="grouped" title="" target="_self" class="fancybox">
        <img src="../assets/patient-ui-web.png" alt="">
      </a></p>
@@ -583,7 +583,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Deploying an App","level":"3.1","depth":1,"next":{"title":"Logging and Monitoring","level":"3.2","depth":1,"path":"part1-learn_openshift/exercise-2.md","ref":"part1-learn_openshift/exercise-2.md","articles":[]},"previous":{"title":"Configure Shell Access","level":"2.2","depth":1,"path":"getting-started/setup_cli.md","ref":"getting-started/setup_cli.md","articles":[]},"dir":"ltr"},"config":{"plugins":["prism","-highlight","collapsible-chapters","hints","copy-code-button","back-to-top-button","fancybox","web-header","codetabs"],"root":"workshop","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"webheader":{"headerTitle":"Bring it all together on OpenShift 4.3 on IBM Cloud"},"prism":{"css":["prismjs/themes/prism-tomorrow.css"]},"fancybox":{"helpers":{"buttons":{}},"openEffect":"elastic","closeEffect":"elastic"},"web-header":{},"search":{},"collapsible-chapters":{},"codetabs":{},"hints":{"danger":"fa fa-exclamation-circle","info":"fa fa-info-circle","tip":"fa fa-mortar-board","working":"fa fa-wrench"},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"back-to-top-button":{},"copy-code-button":{},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":true}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"Bring it all together on OpenShift 4.3 on IBM Cloud","gitbook":"3.2.3"},"file":{"path":"part1-learn_openshift/exercise-1.md","mtime":"2020-01-28T13:26:41.733Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-01-28T13:28:41.112Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Deploying an App","level":"3.1","depth":1,"next":{"title":"Logging and Monitoring","level":"3.2","depth":1,"path":"part1-learn_openshift/exercise-2.md","ref":"part1-learn_openshift/exercise-2.md","articles":[]},"previous":{"title":"Configure Shell Access","level":"2.2","depth":1,"path":"getting-started/setup_cli.md","ref":"getting-started/setup_cli.md","articles":[]},"dir":"ltr"},"config":{"plugins":["prism","-highlight","collapsible-chapters","hints","copy-code-button","back-to-top-button","fancybox","web-header","codetabs"],"root":"workshop","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"webheader":{"headerTitle":"Bring it all together on OpenShift 4.3 on IBM Cloud"},"prism":{"css":["prismjs/themes/prism-tomorrow.css"]},"fancybox":{"helpers":{"buttons":{}},"openEffect":"elastic","closeEffect":"elastic"},"web-header":{},"search":{},"collapsible-chapters":{},"codetabs":{},"hints":{"danger":"fa fa-exclamation-circle","info":"fa fa-info-circle","tip":"fa fa-mortar-board","working":"fa fa-wrench"},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"back-to-top-button":{},"copy-code-button":{},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":true}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"Bring it all together on OpenShift 4.3 on IBM Cloud","gitbook":"3.2.3"},"file":{"path":"part1-learn_openshift/exercise-1.md","mtime":"2020-01-28T21:28:10.406Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-01-28T21:29:51.129Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
