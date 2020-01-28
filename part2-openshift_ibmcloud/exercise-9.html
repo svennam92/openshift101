@@ -1,0 +1,735 @@
+
+<!DOCTYPE HTML>
+<html lang="" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>Monitor Cluster w/ SysDig · Bring it all together on OpenShift 4.3 on IBM Cloud</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        
+        
+        
+    
+    <link rel="stylesheet" href="../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-prism/prism-tomorrow.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-collapsible-chapters/collapsible-chapters.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-hints/plugin-hints.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-back-to-top-button/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-fancybox/jquery.fancybox.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-fancybox/jquery.fancybox-buttons.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-web-header/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-codetabs/codetabs.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-search/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    
+    <link rel="prev" href="exercise-8.html" />
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../">
+            
+                <a href="../">
+            
+                    
+                        <b>1.1.</b>
+                    
+                    Introduction
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+        
+        <li class="header">Getting Started</li>
+        
+        
+    
+        <li class="chapter " data-level="2.1" data-path="../getting-started/get_started.html">
+            
+                <a href="../getting-started/get_started.html">
+            
+                    
+                        <b>2.1.</b>
+                    
+                    Create Account and Get Cluster
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.2" data-path="../getting-started/setup_cli.html">
+            
+                <a href="../getting-started/setup_cli.html">
+            
+                    
+                        <b>2.2.</b>
+                    
+                    Configure Shell Access
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+        
+        <li class="header">Learning OpenShift 4.3</li>
+        
+        
+    
+        <li class="chapter " data-level="3.1" data-path="../part1-learn_openshift/exercise-1.html">
+            
+                <a href="../part1-learn_openshift/exercise-1.html">
+            
+                    
+                        <b>3.1.</b>
+                    
+                    Deploying an App
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="3.2" data-path="../part1-learn_openshift/exercise-2.html">
+            
+                <a href="../part1-learn_openshift/exercise-2.html">
+            
+                    
+                        <b>3.2.</b>
+                    
+                    Logging and Monitoring
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="3.3" data-path="../part1-learn_openshift/exercise-3.html">
+            
+                <a href="../part1-learn_openshift/exercise-3.html">
+            
+                    
+                        <b>3.3.</b>
+                    
+                    Metrics and Dashboards
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="3.4" data-path="../part1-learn_openshift/exercise-4.html">
+            
+                <a href="../part1-learn_openshift/exercise-4.html">
+            
+                    
+                        <b>3.4.</b>
+                    
+                    Scaling the App
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+        
+        <li class="header">OpenShift 4.3 and IBM Cloud</li>
+        
+        
+    
+        <li class="chapter " data-level="4.1" data-path="exercise-5.html">
+            
+                <a href="exercise-5.html">
+            
+                    
+                        <b>4.1.</b>
+                    
+                    Cloudant with OperatorHub
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="4.2" data-path="exercise-6.html">
+            
+                <a href="exercise-6.html">
+            
+                    
+                        <b>4.2.</b>
+                    
+                    Configure Sysdig Agent
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="4.3" data-path="exercise-7.html">
+            
+                <a href="exercise-7.html">
+            
+                    
+                        <b>4.3.</b>
+                    
+                    Configure LogDNA Agent
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="4.4" data-path="exercise-8.html">
+            
+                <a href="exercise-8.html">
+            
+                    
+                        <b>4.4.</b>
+                    
+                    Analyze Logs w/ LogDNA
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="4.5" data-path="exercise-9.html">
+            
+                <a href="exercise-9.html">
+            
+                    
+                        <b>4.5.</b>
+                    
+                    Monitor Cluster w/ SysDig
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+        
+        <li class="header">Resources</li>
+        
+        
+    
+        <li class="chapter " data-level="5.1" >
+            
+                <a target="_blank" href="https://developer.ibm.com">
+            
+                    
+                        <b>5.1.</b>
+                    
+                    IBM Developer
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="5.2" >
+            
+                <a target="_blank" href="https://cloud.ibm.com/docs/openshift">
+            
+                    
+                        <b>5.2.</b>
+                    
+                    Docs: Red Hat OpenShift on IBM Cloud
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="5.3" >
+            
+                <a target="_blank" href="https://docs.openshift.com/container-platform/4.3/welcome/index.html">
+            
+                    
+                        <b>5.3.</b>
+                    
+                    Docs: OpenShift Container Platform 4.3
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            Published with GitBook
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href=".." >Monitor Cluster w/ SysDig</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h1 id="exercise-10-monitor-your-cluster-with-sysdig">Exercise 10: Monitor your Cluster with SysDig</h1>
+<p>IBM Cloud Monitoring with Sysdig is a co-branded cloud-native, and container- intelligence management system that you can include as part of your IBM Cloud architecture. Use it to gain operational visibility into the performance and health of your applications, services, and platforms. It offers administrators, DevOps teams, and developers full stack telemetry with advanced features to monitor and troubleshoot performance issues, define alerts, and design custom dashboards. IBM Cloud Monitoring with Sysdig is operated by Sysdig in partnership with IBM.</p>
+<p>The following diagram shows the components overview for the IBM Cloud Monitoring with Sysdig service that is running on IBM Cloud:</p>
+<p>     <a href="../assets/monitoring_ov.png" rel="grouped" title="" target="_self" class="fancybox">
+       <img src="../assets/monitoring_ov.png" alt="">
+     </a></p>
+<p>When you monitor an application, you should consider:</p>
+<ul>
+<li><p>Monitoring the health of the application</p>
+<p>The health signals coming from hardware and software components</p>
+<p>Utilization, Saturations and Errors (USE): resource usage and capacity limits, CPU, memory, disk I/O, network against host or container limits</p>
+</li>
+<li><p>Monitoring the golden signals that focus on perceived service quality</p>
+<p>Latency of HTTP calls, both average and worst case ones</p>
+<p>Traffic, that is, rate of requests per second</p>
+<p>Errors and their frequency</p>
+</li>
+</ul>
+<h2 id="features">Features</h2>
+<p><strong>Accelerate the diagnosis and resolution of performance incidents.</strong></p>
+<p>IBM Cloud Monitoring with Sysdig offers deep visibility into your infrastructure and applications with the ability to troubleshoot from service level all the way down to the system level. Pre-defined dashboards and alerts simplify identification of potential threats or problems. By using IBM Cloud Monitoring with Sysdig, developers and DevOps teams monitor and troubleshoot performance issues in real-time, identify the source of errors, and eliminate problems.</p>
+<p><strong>Control the cost of your monitoring infrastructure.</strong></p>
+<p>IBM Cloud Monitoring with Sysdig includes functionality that helps you to control the cost of your monitoring infrastructure in IBM Cloud. You can configure the metric sources for which you want to monitor performance. You can enable a pre-defined alert to warn you of usage changes that will impact your billing.</p>
+<p><strong>Explore and visualize easily your entire environment.</strong></p>
+<p>IBM Cloud Monitoring with Sysdig makes it easier to visually explore your environment. Dynamic topology maps provide a view of dependencies between services. Multi- dimensional queries across high churn, high cardinality, high frequency metrics accelerate troubleshooting. Customizable dashboards allow you to visualize what matters most.</p>
+<p><strong>Get critical Kubernetes and container insights for dynamic microservice monitoring.</strong></p>
+<p>IBM Cloud Monitoring with Sysdig auto-discovers Kubernetes environments and provides out-of-the-box dashboards and alerts for clusters, nodes, namespaces, services, deployments, pods, and more. A single agent per node dynamically discovers all microservices and auto-collects metrics and events from various sources including Kubernetes, hosts, networks, containers, processes, applications, and custom metrics like Prometheus, JMX, and StatsD.</p>
+<p><strong>Mitigate the impact of abnormal situations with proactive notifications.</strong></p>
+<p>IBM Cloud Monitoring with Sysdig includes alerts and multi-channel notifications that you can use to reduce the impact on your day-to-day operations and accelerate your reaction and response time to anomalies, downtime, and performance degradation. Notification channels that you can easily configure
+include email, Slack, PagerDuty, webhooks, Opsgenie, and VictorOps.</p>
+<p>In the next steps, you will learn how to use dashboards and metrics to monitor the health of your application.</p>
+<h3 id="launch-the-web-ui">Launch the web UI</h3>
+<p>You launch the Web UI within the context of an Sysdig instance, from the IBM Cloud UI.</p>
+<p>Complete the following steps to launch the web UI:</p>
+<ol>
+<li><p>In the LogDNA web UI, click the <strong>Views</strong> icon      <a href="../assets/views.png" rel="grouped" title="" target="_self" class="fancybox">
+       <img src="../assets/views.png" alt="">
+     </a> &gt; <strong>Observability</strong>.</p>
+</li>
+<li><p>Select <strong>Monitoring</strong>.</p>
+<p>The list of instances that are available is displayed.</p>
+</li>
+<li><p>Select the instance that is allocated for your lab. Then, click <strong>View Sysdig</strong>.</p>
+</li>
+</ol>
+<p>The Web UI opens.</p>
+<h2 id="view-sysdig-pre-defined-views-and-dashboards">View SysDig pre-defined views and dashboards</h2>
+<p><strong>Use views and dashboards to monitor your infrastructure, applications, and services. You can use pre-defined dashboards. You can also create custom dashboards through the Web UI or programmatically. You can backup and restore dashboards by using Python scripts.</strong></p>
+<p>The following table lists the different types of pre-defined dashboards:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">Type</th>
+<th style="text-align:left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">Applications</td>
+<td style="text-align:left">Dashboards that you can use to monitor your applications and infrastructure components.</td>
+</tr>
+<tr>
+<td style="text-align:left">Host and containers</td>
+<td style="text-align:left">Dashboards that you can use to monitor resource utilization and system activity on your hosts and in your containers.</td>
+</tr>
+<tr>
+<td style="text-align:left">Network</td>
+<td style="text-align:left">Dashboards that you can use to monitor your network connections and activity.</td>
+</tr>
+<tr>
+<td style="text-align:left">Service</td>
+<td style="text-align:left">Dashboards that you can use to monitor the performance of your services, even if those services are deployed in orchestrated containers.</td>
+</tr>
+<tr>
+<td style="text-align:left">Topology</td>
+<td style="text-align:left">Dashboards that you can use to monitor the logical dependencies of your application tiers and overlay metrics.</td>
+</tr>
+</tbody>
+</table>
+<p>Complete the following steps to view a Sysdig dashboard:</p>
+<ol>
+<li><p>After you launch the Sysdig web UI, in the Sysdig Welcome wizard, select <strong>Kubernetes</strong> as the installation method.</p>
+<p>After 30 seconds or so, it should show one or more agents connected.</p>
+<p>Select <strong>GO TO NEXT STEP</strong>.</p>
+<p>Then select <strong>LET&apos;S GET STARTED</strong>.</p>
+</li>
+<li><p>Navigate the Sysdig console to get metrics on your Kubernetes cluster, nodes, deployments, pods, containers. Explore the following views:</p>
+</li>
+<li><p>View raw metrics for all workloads running on the cluster.</p>
+<p>Under the <em>Explore</em> section,</p>
+<p>     <a href="../assets/explore.png" rel="grouped" title="" target="_self" class="fancybox">
+       <img src="../assets/explore.png" alt="">
+     </a></p>
+<p>Select <strong>Containerized Apps</strong> to view raw metrics for all workloads running on the cluster.</p>
+</li>
+<li><p>Get a global view of the cluster HTTP load.</p>
+<p>Under Dashboard,</p>
+<p>     <a href="../assets/dashboards.png" rel="grouped" title="" target="_self" class="fancybox">
+       <img src="../assets/dashboards.png" alt="">
+     </a></p>
+<p>Select <strong>My Dashboards</strong>. Then select <strong>HTTP Overview</strong> to get a global view of the cluster HTTP load.</p>
+</li>
+<li><p>Check how nodes are currently performing.</p>
+<p>Under Dashboard, select <strong>My Dashboards</strong>. Then select <strong>Overview by Host</strong> to understand how nodes are currently performing.</p>
+</li>
+<li><p>Check information about the sample app <em>patientui</em>.</p>
+<p>Under <em>Explore</em>, select <strong>Cluster and Nodes</strong>. Expand the section <strong>Entire Infrastructure</strong>. Look for the partientui pod entry.</p>
+<p>     <a href="../assets/explore-img-1.png" rel="grouped" title="" target="_self" class="fancybox">
+       <img src="../assets/explore-img-1.png" alt="">
+     </a></p>
+</li>
+</ol>
+<h3 id="explore-the-normal-traffic-flow-of-the-application">Explore the normal traffic flow of the application</h3>
+<p>You can use the <strong>Connection Table</strong> dashboard to monitor how data flows between your application components.</p>
+<ol>
+<li>From the <em>Explore</em> tab, select <strong>Deployments and Pods.</strong></li>
+<li><p>Select the namespace where you deployed your sample app.</p>
+<p>     <a href="../assets/explore-img-2.png" rel="grouped" title="" target="_self" class="fancybox">
+       <img src="../assets/explore-img-2.png" alt="">
+     </a></p>
+</li>
+<li><p>Select the <em>patientui</em> pod entry.</p>
+<p>     <a href="../assets/explore-img-3.png" rel="grouped" title="" target="_self" class="fancybox">
+       <img src="../assets/explore-img-3.png" alt="">
+     </a></p>
+</li>
+<li><p>Select <strong>Default Dashboards</strong>.</p>
+<p>     <a href="../assets/explore-img-4.png" rel="grouped" title="" target="_self" class="fancybox">
+       <img src="../assets/explore-img-4.png" alt="">
+     </a></p>
+</li>
+<li><p>Select <strong>Hosts &amp; Containers</strong>. Then, select <strong>Overview by Host</strong>.</p>
+<p>     <a href="../assets/explore-img-7.png" rel="grouped" title="" target="_self" class="fancybox">
+       <img src="../assets/explore-img-7.png" alt="">
+     </a></p>
+</li>
+<li><p>Select <strong>Hosts &amp; Containers</strong>. Then, select <strong>Overview by Container</strong>.</p>
+<p>     <a href="../assets/explore-img-5.png" rel="grouped" title="" target="_self" class="fancybox">
+       <img src="../assets/explore-img-5.png" alt="">
+     </a></p>
+<p>The <strong>Overview by Container</strong> view opens. Look at the different columns and the data.</p>
+<p>     <a href="../assets/explore-img-6.png" rel="grouped" title="" target="_self" class="fancybox">
+       <img src="../assets/explore-img-6.png" alt="">
+     </a></p>
+</li>
+</ol>
+<h3 id="explore-the-cluster-and-the-node-capacity">Explore the cluster and the node capacity</h3>
+<ol>
+<li>From the <em>Explore</em> tab, select <strong>Deployments and Pods.</strong></li>
+<li><p>Select the namespace where you deployed your sample app.</p>
+<p>     <a href="../assets/explore-img-2.png" rel="grouped" title="" target="_self" class="fancybox">
+       <img src="../assets/explore-img-2.png" alt="">
+     </a></p>
+</li>
+<li><p>Select the <em>patientui</em> pod entry.</p>
+<p>     <a href="../assets/explore-img-3.png" rel="grouped" title="" target="_self" class="fancybox">
+       <img src="../assets/explore-img-3.png" alt="">
+     </a></p>
+</li>
+<li><p>Select <strong>Default Dashboards</strong>.</p>
+<p>     <a href="../assets/explore-img-4.png" rel="grouped" title="" target="_self" class="fancybox">
+       <img src="../assets/explore-img-4.png" alt="">
+     </a></p>
+</li>
+<li><p>Select <strong>Kubernetes Cluster</strong>. Then, select <strong>Node capacity</strong>.</p>
+<p>     <a href="../assets/explore-img-8.png" rel="grouped" title="" target="_self" class="fancybox">
+       <img src="../assets/explore-img-8.png" alt="">
+     </a></p>
+<p>The view <strong>Kubernetes Cluster and Node Capacity</strong> opens.</p>
+<p>     <a href="../assets/explore-img-9.png" rel="grouped" title="" target="_self" class="fancybox">
+       <img src="../assets/explore-img-9.png" alt="">
+     </a></p>
+<p>Check the <strong>Total CPU Capacity</strong>. This is the CPU capacity that has been reserved for the node including system daemons.</p>
+<p>Check the <strong>Total Allocatable CPU</strong>. This is the CPU which is available for pods excluding system daemons.</p>
+<p>Check the <strong>Total Pod CPU limit</strong>. It should be less than the allocatable CPU of the node or cluster.</p>
+<p>Check the <strong>Total Pod CPU Requested</strong>. It is the amount of CPU that will be guaranteed for pods on the node or cluster.</p>
+<p>Check the <strong>Total Pod CPU Usage</strong>. It is the total amount of CPU that is used by all Pods on the node or cluster.</p>
+</li>
+</ol>
+<h3 id="explore-the-network">Explore the Network</h3>
+<ol>
+<li><p>From the <em>DASHBOARDS</em> tab, select <strong>My Dashboards</strong>. Then, select <strong>Network Overview</strong>.</p>
+<p>     <a href="../assets/dashboard-img-1.png" rel="grouped" title="" target="_self" class="fancybox">
+       <img src="../assets/dashboard-img-1.png" alt="">
+     </a></p>
+<p>The following dashboard is displayed. It shows information about all resources that are monitored thorugh the instance.</p>
+<p>     <a href="../assets/dashboard-img-2.png" rel="grouped" title="" target="_self" class="fancybox">
+       <img src="../assets/dashboard-img-2.png" alt="">
+     </a></p>
+</li>
+<li><p>Change the scope of the dashboard to display information about your openshift cluster. Select <strong>Edit scope</strong></p>
+<p>      <a href="../assets/dashboard-img-3.png" rel="grouped" title="" target="_self" class="fancybox">
+       <img src="../assets/dashboard-img-3.png" alt="">
+     </a></p>
+<p> Change the scope.</p>
+<p>      <a href="../assets/dashboard-img-4.png" rel="grouped" title="" target="_self" class="fancybox">
+       <img src="../assets/dashboard-img-4.png" alt="">
+     </a></p>
+<p> The dashboard shows information about the ibm-observe namespace.</p>
+<p>      <a href="../assets/dashboard-img-5.png" rel="grouped" title="" target="_self" class="fancybox">
+       <img src="../assets/dashboard-img-5.png" alt="">
+     </a></p>
+</li>
+</ol>
+
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="exercise-8.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page: Analyze Logs w/ LogDNA">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"Monitor Cluster w/ SysDig","level":"4.5","depth":1,"next":{"title":"IBM Developer","level":"5.1","depth":1,"url":"https://developer.ibm.com","ref":"https://developer.ibm.com","articles":[]},"previous":{"title":"Analyze Logs w/ LogDNA","level":"4.4","depth":1,"path":"part2-openshift_ibmcloud/exercise-8.md","ref":"part2-openshift_ibmcloud/exercise-8.md","articles":[]},"dir":"ltr"},"config":{"plugins":["prism","-highlight","collapsible-chapters","hints","copy-code-button","back-to-top-button","fancybox","web-header","codetabs"],"root":"workshop","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"webheader":{"headerTitle":"Bring it all together on OpenShift 4.3 on IBM Cloud"},"prism":{"css":["prismjs/themes/prism-tomorrow.css"]},"fancybox":{"helpers":{"buttons":{}},"openEffect":"elastic","closeEffect":"elastic"},"web-header":{},"search":{},"collapsible-chapters":{},"codetabs":{},"hints":{"danger":"fa fa-exclamation-circle","info":"fa fa-info-circle","tip":"fa fa-mortar-board","working":"fa fa-wrench"},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"back-to-top-button":{},"copy-code-button":{},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":true}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"Bring it all together on OpenShift 4.3 on IBM Cloud","gitbook":"3.2.3"},"file":{"path":"part2-openshift_ibmcloud/exercise-9.md","mtime":"2020-01-28T12:33:49.251Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-01-28T12:35:36.909Z"},"basePath":"..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="../gitbook/gitbook.js"></script>
+    <script src="../gitbook/theme.js"></script>
+    
+        
+        <script src="../gitbook/gitbook-plugin-collapsible-chapters/collapsible-chapters.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-copy-code-button/toggle.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-back-to-top-button/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-fancybox/jquery.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-fancybox/jquery.mousewheel.pack.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-fancybox/jquery.fancybox.pack.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-fancybox/jquery.fancybox-buttons.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-fancybox/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-web-header/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-codetabs/codetabs.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+
