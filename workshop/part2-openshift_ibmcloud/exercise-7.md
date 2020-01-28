@@ -10,7 +10,7 @@ To forward logs to your LogDNA instance, complete the following steps from the c
 
 [Access your cluster using the oc CLI](../getting-started/setup_cli.md#access-the-openShift-web-console).
 
-## Launch the LogDNA webUI
+## Step 2. Get the ingestion key
 
 1. In the IBM Cloud Console, open the **Menu** with the burger icon in the top left corner and select **Observability**. 
 
@@ -22,20 +22,15 @@ To forward logs to your LogDNA instance, complete the following steps from the c
 
 3. Select your instance. Check with the instructor which instance  you should use for the lab.
 
-4. Click **View LogDNA**.
+4. Select the three dots and click **View key**.
 
-The Web UI opens.
+    ![](../assets/view-key.png)
 
-## Step 3. Get the ingestion key for your LogDNA instance
+5. Copy the ingestion key.
 
-1. In the LogDNA web UI, select the **Settings** icon ![](../assets/admin.png). Then select **Organization**.
-2. Select **API keys**.
 
-    ![](../assets/views-img-18.png)
 
-3. Copy the ingestion key.
-
-## Step 4. Store your LogDNA ingestion key as a Kubernetes secret
+## Step 3. Store your LogDNA ingestion key as a Kubernetes secret
 
 You must create a Kubernetes secret to store your LogDNA ingestion key for your service instance. The LogDNA ingestion key is used to open a secure web socket to the LogDNA ingestion server and to authenticate the logging agent with the IBM Log Analysis with LogDNA service.
 
@@ -68,7 +63,7 @@ You must create a Kubernetes secret to store your LogDNA ingestion key for your 
     Where `INGESTION_KEY` is the ingestion key for the LogDNA instance where you plan to forward and collect the cluster logs.
 
 
-## Step 5. Deploy the LogDNA agent in the cluster
+## Step 4. Deploy the LogDNA agent in the cluster
 
 Create a Kubernetes daemon set to deploy the LogDNA agent on every worker node of your Kubernetes cluster. 
 
@@ -86,7 +81,7 @@ Run the following command if you are working on a LogDNA instance that is locate
 oc create -f https://assets.eu-de.logging.cloud.ibm.com/clients/logdna-agent-ds-os.yaml -n ibm-observe
 ```
 
-## Step 6. Verify that the LogDNA agent is deployed successfully
+## Step 5. Verify that the LogDNA agent is deployed successfully
 
 To verify that the LogDNA agent is deployed successfully, run the following command:
 
@@ -126,8 +121,21 @@ oc logs logdna-agent-xxxkz
 ```
 
 
-## Step 7. Launch the LogDNA webUI to verify that logs are being forwarded from the LogDNA agent
+## Step 6. Launch the LogDNA web UI to verify that logs are being forwarded from the LogDNA agent
 
-Next, go to the LogDNA web UI. In the **Views** page, click **Everything** to verify that logs from the cluster are available through the UI. 
+
+1. In the IBM Cloud Console, open the **Menu** with the burger icon in the top left corner and select **Observability**. 
+
+    ![](../assets/menu-observability.png) 
+
+2. Select **Logging**. 
+
+    The list of instances that are available on IBM Cloud is displayed.
+
+3. Select your instance. Check with the instructor which instance  you should use for the lab.
+
+4. Select **Launch LogDNA**.
+
+5. Next, go to the LogDNA web UI. In the **Views** page, click **Everything** to verify that logs from the cluster are available through the UI. 
 
 

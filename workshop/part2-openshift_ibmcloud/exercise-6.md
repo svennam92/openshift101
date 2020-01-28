@@ -18,15 +18,21 @@ To integrate your monitoring instance with your OpenShift cluster, you must run 
 
 The Sysdig access key is used to open a secure web socket to the Sysdig ingestion server and to authenticate the monitoring agent with the monitoring service.
 
-1. In the Sysdig web UI, select **Settings** at the bottom left corner.
+1. In the IBM Cloud Console, open the **Menu** with the burger icon in the top left corner and select **Observability**. 
 
-    ![](../assets/settings.png)
+    ![](../assets/menu-observability.png) 
 
-2. Select **Agent installation**.
+2. Select **Monitoring**. 
 
-    ![](../assets/agent.png)
+    The list of instances that are available on IBM Cloud is displayed.
 
-3. Copy the access key that is displayed at the top of the page.
+3. Select your instance. Check with the instructor which instance you should use for the lab.
+
+4. Select the three dots and click **View key**.
+
+    ![](../assets/view-key-sysdig.png)
+
+5. Copy the access key.
 
 
 ## Deploy the Sysdig agent in the cluster
