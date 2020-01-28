@@ -6,18 +6,18 @@
 * [Create Account and Get Cluster](getting-started/get_started.md)
 * [Configure Shell Access](getting-started/setup_cli.md)
 
-## Part 1 - Learning OpenShift
-* [1.1. Deploying an App](part1-learn_openshift/exercise-1.md)
-* [1.2. Logging and Monitoring](part1-learn_openshift/exercise-2.md)
-* [1.3. Metrics and Dashboards](part1-learn_openshift/exercise-3.md)
-* [1.4. Scaling the App](part1-learn_openshift/exercise-4.md)
+## Learning OpenShift 4.3
+* [Deploying an App](part1-learn_openshift/exercise-1.md)
+* [Logging and Monitoring](part1-learn_openshift/exercise-2.md)
+* [Metrics and Dashboards](part1-learn_openshift/exercise-3.md)
+* [Scaling the App](part1-learn_openshift/exercise-4.md)
 
-## Part 2 - OpenShift and IBM Cloud
-* [2.1. Cloudant with OperatorHub](part2-openshift_ibmcloud/exercise-5.md)
-* [2.2. Configure Sysdig Agent](part2-openshift_ibmcloud/exercise-6.md)
-* [2.3. Configure LogDNA Agent](part2-openshift_ibmcloud/exercise-7.md)
-* [2.4. Analyze Logs w/ LogDNA](part2-openshift_ibmcloud/exercise-8.md)
-* [2.5. Monitor Cluster w/ SysDig](part2-openshift_ibmcloud/exercise-9.md)
+## OpenShift 4.3 and IBM Cloud
+* [Cloudant with OperatorHub](part2-openshift_ibmcloud/exercise-5.md)
+* [Configure Sysdig Agent](part2-openshift_ibmcloud/exercise-6.md)
+* [Configure LogDNA Agent](part2-openshift_ibmcloud/exercise-7.md)
+* [Analyze Logs w/ LogDNA](part2-openshift_ibmcloud/exercise-8.md)
+* [Monitor Cluster w/ SysDig](part2-openshift_ibmcloud/exercise-9.md)
 
 ## Resources
 * [IBM Developer](https://developer.ibm.com)
