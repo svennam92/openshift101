@@ -1,4 +1,4 @@
-# Exercise 1: Deploying an application
+# Deploying an application
 
 ## Deploy Example Health into OpenShift
 
@@ -104,7 +104,7 @@ Today, we'll demonstrate the "s2i" or "source to image" builder. This builder al
 
 ## View the Example Health in the OpenShift console
 
-1. In the OpenShift Web console, navigate to **Topology**. Select your project
+1. In the OpenShift Web console, switch from **Administrator** to **Developer** view and navigate to **Topology**. Select your project
 
     ![Topology Deployment Config](../assets/ocp-project.png)
 
@@ -112,7 +112,7 @@ Today, we'll demonstrate the "s2i" or "source to image" builder. This builder al
 
     ![Topology Deployment Config](../assets/ocp43-topology.png)
 
-3. Select the app. You should see a single deployment config. Click that to see your Pods, Builds, Services and Routes.
+3. Select the app. You should see a single deployment config where you can see your Pods, Builds, Services and Routes.
 
     * **Pods**: Your Node.js application containers
     * **Builds**: The auto-generated build that created a Docker image from your Node.js source code, deployed it to the OpenShift container registry, and kicked off your deployment config.
@@ -123,7 +123,7 @@ Today, we'll demonstrate the "s2i" or "source to image" builder. This builder al
 
     ![Build Logs](../assets/ocp43-build-logs.png)
 
-5. Click on the url under **Routes** to open your application with the URL.
+5. Click back to the **Topology** and select your app again. Click on the url under **Routes** to open your application with the URL.
 
     ![](../assets/patient-ui-web.png)
 

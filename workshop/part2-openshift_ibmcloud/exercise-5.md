@@ -1,4 +1,4 @@
-# Exercise 6: Cloudant DB with IBM Cloud Operator
+# Cloudant DB with IBM Cloud Operator
 
 Currently, the Example Health `patient-ui` app is using a dummy in-memory patient. In this exercise, you'll create a Cloudant service in IBM Cloud and populate it with patient data. Cloudant is a NoSQL database-as-a-service, based on CouchDB.
 
@@ -112,7 +112,7 @@ Let's understand exactly how Operators work. In the first exercise, you deployed
 	> metadata:
 	>   name: cloudant-service
 	> spec:
-	>   plan: standard
+	>   plan: lite
 	>   serviceClass: cloudantnosqldb
 	>  ```
 
@@ -122,7 +122,7 @@ Let's understand exactly how Operators work. In the first exercise, you deployed
 
 3. Wait a couple minutes for the service to provision. You can check the status by clicking on your service, and looking for **Message: Online**:
 
-   You can also debug any potential issues here. If you already have a Cloudant "Lite" service, you won't be able to create another.
+   > You can also debug any potential issues here. If you already have a Cloudant "Lite" service, you won't be able to create another. To work around this issue, edit the service yaml to use `standard` instead of `lite`. Note that "Standard Cloudant" is a paid service. Another option is to navigate to your IBM Cloud dashboard and delete your existing instance of the `lite` Cloudant.
 
    ![servicedone](../assets/servicedone.png)
 
@@ -169,7 +169,7 @@ Now you'll create the Node.js app that will populate your Cloudant DB with patie
 
    ![Crashing](../assets/crashing.png)
 
-4. Let's fix this by setting the environment variable to the **cloudant-binding** secret we created earlier. Navigate to the deployment config for this app:
+4. Let's fix this by setting the environment variable to the **cloudant-binding** secret we created earlier. Navigate to the deployment config for the `patient-db` app by clicking the app, and then selecting the name next to **DC**:
 
    ![Deployment Config](../assets/deploymentconfig.png)
 
@@ -197,9 +197,9 @@ The `patient-ui` application has a configuration option for the backend database
 
    ![inputurl](../assets/inputurl.png)
 
-Your application is now backed by the mock patient data in the Cloudant DB! You can log-in using any user-id/password in the Cloudant DB, for example "opall:opall".
+Your application is now backed by the mock patient data in the Cloudant DB! You can log-in using any user-id/password in the Cloudant DB, for example "**opall:opall**".
 
-1. To find the complete set of users, navigate to your services in IBM Cloud [Resource List](https://cloud.ibm.com/resources). Click **cloudant-service**.
+1. In a real-world application, these passwords should **not** be stored as plain-text. To review the patients (and alternate logins) in the Cloudant DB, navigate to your services in IBM Cloud [Resource List](https://cloud.ibm.com/resources). Click **cloudant-service**.
 
    ![cloudantdb](../assets/cloudantdb.png)
 

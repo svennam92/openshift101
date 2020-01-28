@@ -1,4 +1,4 @@
-# Exercise 2: Logging and monitoring
+# Logging and monitoring
 
 In this exercise, we'll explore the out-of-the-box logging and monitoring capabilities that are offered in OpenShift.
 
@@ -38,8 +38,6 @@ We're hitting the `/info` endpoint which will trigger some logs from our app. Fo
 ## OpenShift Logging
 
 Since we only created one pod, seeing our logs will be straight forward. Ensure that you're in the **Developer** view.
-
-![developer view](../assets/developer.png)
 
 Then, navigate to **Topology**. You should see a single deployment config. Click that to see your Pods, Builds, Services and Routes.
 
