@@ -109,15 +109,11 @@ To verify that the LogDNA agent is deployed successfully, run the following comm
 
     Where *ID* is the ID for a LogDNA agent pod. 
 
-<<<<<<< HEAD
-2. Select **Logging**. 
-=======
     For example, 
 
     ```
     oc logs logdna-agent-xxxkz
     ```
->>>>>>> 95da44291899adcecb6d15659581628ff7f20851
 
 
 ## Step 5. Launch the LogDNA web UI to verify that logs are being forwarded from the LogDNA agent
