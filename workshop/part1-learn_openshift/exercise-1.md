@@ -1,118 +1,46 @@
-# Deploying an application
+# Exercise 1: Deploying an application
 
-## Deploy Example Health into OpenShift
+In this exercise, you'll deploy a simple Node.js Express application - "Example Health". Example Health is a simple UI for a patient health records system. We'll use this example to demonstrate key OpenShift features throughout this workshop. You can find the sample application GitHub repository here: [https://github.com/svennam92/node-s2i](https://github.com/svennam92/node-s2i)
 
-There's many ways to create a new application in OpenShift. If you're already a Kubernetes expert, you can stick with what you know and use YAML deployment files. However, OpenShift has greatly simplified the process of deploying apps into a cluster. 
+## Deploy Example Health
 
-Today, we'll demonstrate the "s2i" or "source to image" builder. This builder allows you to go from source code on GitHub to a running deployment.
+1. Launch the `OpenShift web console`.
 
-1. Create a new project **example-health**:
+    ![](../assets/ocp-console.png)
 
-   ```sh
-    oc new-project example-health
-   ```
+2. **Create** a project, you can title it whatever you like, we suggest "example-health."
 
-   Output:
+    ![](../assets/ocp-create-project.png)
 
-   ```
-    Now using project "example-health" on server "https://c100-e.containers.cloud.ibm.com:32545".
+3. Make sure your project is selected. You should see a view that looks like this:
 
-    You can add applications to this project with the 'new-app' command. For example, try:
+    ![](../assets/ocp-project-view.png)
 
-        oc new-app django-psql-example
+4. Click **From Git**.
 
-    to build a new example application in Python. Or use kubectl to deploy a simple Kubernetes application:
+5. Enter the repository `https://github.com/svennam92/node-s2i` in the Git Repo URL field.
 
-        kubectl create deployment hello-node --image=gcr.io/hello-minikube-zero-install/hello-node
-   ```
+    ![](../assets/ocp-configure-git.png)
 
-2. Next, deploy the application directly from GitHub into your cluster. This uses the OpenShift "s2i" or "source to image" strategy. Essentially, this build strategy combines a standard Node.js runtime \(a base image\) with your source code in GitHub. Our code needs a runtime to actually run -- the base image takes care of this. The base image exists on DockerHub, named `nodejs-10-centos7:latest`.
-   * Run the following command to build the Docker image. Note the `~` separator between the base image and source repository. The `--context-dir` flag is used to define the folder where the app exists:
+6. Note that the builder image automatically detected the language Node.js.
 
-     ```sh
-       oc new-app --name=patient-ui centos/nodejs-10-centos7~https://github.com/svennam92/node-s2i-openshift --context-dir='site'
-     ```
+    ![](../assets/ocp-build-image.png)
 
-     Output:
+7. Name your application such as `patient-ui`. Keep the default options and click **Create** at the bottom of the window to build and deploy the application.
 
-     ```
-       --> Found Docker image 4028fd4 (3 weeks old) from Docker Hub for "centos/nodejs-10-centos7"
+    ![](../assets/ocp-app-name.png)
 
-           Node.js 10 
-           ---------- 
-           Node.js 10 available as container is a base platform for building and running various Node.js 10 applications and frameworks. Node.js is a platform built on Chrome's JavaScript runtime for easily building fast, scalable network applications. Node.js uses an event-driven, non-blocking I/O model that makes it lightweight and efficient, perfect for data-intensive real-time applications that run across distributed devices.
+    Your application is being deployed.
 
-           Tags: builder, nodejs, nodejs10
+## View the Example Health
 
-           * An image stream tag will be created as "nodejs-10-centos7:latest" that will track the source image
-           * A source build using source code from https://github.com/IBM/node-s2i-openshift will be created
-           * The resulting image will be pushed to image stream tag "patient-ui:latest"
-           * Every time "nodejs-10-centos7:latest" changes a new build will be triggered
-           * This image will be deployed in deployment config "patient-ui"
-           * Port 8080/tcp will be load balanced by service "patient-ui"
-           * Other containers can access this service through the hostname "patient-ui"
+1. You should see the app you just deployed.
 
-       --> Creating resources ...
-           imagestream.image.openshift.io "patient-ui" created
-           buildconfig.build.openshift.io "patient-ui" created
-           deploymentconfig.apps.openshift.io "patient-ui" created
-           service "patient-ui" created
-       --> Success
-           Build scheduled, use 'oc logs -f bc/patient-ui' to track its progress.
-           Application is not exposed. You can expose services to the outside world by executing one or more of the commands below:
-           'oc expose svc/patient-ui' 
-           Run 'oc status' to view your app.
-     ```
+    ![](../assets/ocp43-topology.png)
 
-   * This command created an ImageStream, Deployment, a Pod, and a Service resource for the `Example-Health` app,
+2. Select the app. You should see a single Deployment where you can see your Pods, Builds, Services and Routes.
 
-3. Reading the output, you'll notice that although a deployment and service is created, your application is not yet "exposed" to the outside world. To do so, run the following command:
-
-   ```sh
-    oc expose svc/patient-ui
-   ```
-
-   Output:
-
-   ```
-    route.route.openshift.io/patient-ui exposed
-   ```
-
-4. Make sure everything started up correctly. This might take a couple minutes -- look for the `deployed` status. You can also launch the dashboard and track it there.
-
-   > To find the OpenShift dashboard URL again, run: `ic ks cluster get <cluster_name>` and look for `Public Service Endpoint URL`
-
-   ```sh
-    oc status
-   ```
-
-   Output:
-
-   ```
-    In project example-health on server https://c100-e.containers.cloud.ibm.com:32545
-
-    http://patient-ui-example-health.<your_openshift_cluster>.us-south.stg.containers.appdomain.cloud to pod port 8080-tcp (svc/patient-ui)
-    dc/patient-ui deploys istag/patient-ui:latest <-
-        bc/patient-ui source builds https://github.com/ibm/patient-ui on istag/nodejs-10-centos7:latest 
-        deployment #1 deployed 21 minutes ago - 1 pod
-   ```
-
-5. Start streaming the logs to see the build progress
-    ```
-    oc logs -f bc/patient-ui
-    ```
-
-## View the Example Health in the OpenShift console
-
-1. In the OpenShift Web console, switch from **Administrator** to **Developer** view and navigate to **Topology**. Select your project
-
-    ![Topology Deployment Config](../assets/ocp-project.png)
-
-2. You should see the app you just deployed.
-
-    ![Topology Deployment Config](../assets/ocp43-topology.png)
-
-3. Select the app. You should see a single deployment config where you can see your Pods, Builds, Services and Routes.
+    ![](../assets/ocp43-topology-details.png)
 
     * **Pods**: Your Node.js application containers
     * **Builds**: The auto-generated build that created a Docker image from your Node.js source code, deployed it to the OpenShift container registry, and kicked off your deployment config.
@@ -127,6 +55,10 @@ Today, we'll demonstrate the "s2i" or "source to image" builder. This builder al
 
     ![](../assets/patient-ui-web.png)
 
+    You can enter any strings for username and password, for instance `test:test` because the app is running in demo mode.
+
+Congrats! You've deployed a `Node.js` app to OpenShift Container Platform.
+
 You've completed the first exercise! Let's recap -- in this exercise, you:
 
 * Deployed the "Example Health" Node.js application directly from GitHub into your cluster 
@@ -138,4 +70,3 @@ You've completed the first exercise! Let's recap -- in this exercise, you:
 ## What's Next?
 
 Let's dive into some Day 1 OpenShift Operations tasks, starting with Monitoring and Logging
-
