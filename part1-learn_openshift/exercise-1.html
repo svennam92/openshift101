@@ -400,99 +400,55 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h1 id="deploying-an-application">Deploying an application</h1>
-<h2 id="deploy-example-health-into-openshift">Deploy Example Health into OpenShift</h2>
-<p>There&apos;s many ways to create a new application in OpenShift. If you&apos;re already a Kubernetes expert, you can stick with what you know and use YAML deployment files. However, OpenShift has greatly simplified the process of deploying apps into a cluster. </p>
-<p>Today, we&apos;ll demonstrate the &quot;s2i&quot; or &quot;source to image&quot; builder. This builder allows you to go from source code on GitHub to a running deployment.</p>
+                                <h1 id="exercise-1-deploying-an-application">Exercise 1: Deploying an application</h1>
+<p>In this exercise, you&apos;ll deploy a simple Node.js Express application - &quot;Example Health&quot;. Example Health is a simple UI for a patient health records system. We&apos;ll use this example to demonstrate key OpenShift features throughout this workshop. You can find the sample application GitHub repository here: <a href="https://github.com/svennam92/node-s2i" target="_blank">https://github.com/svennam92/node-s2i</a></p>
+<h2 id="deploy-example-health">Deploy Example Health</h2>
 <ol>
-<li><p>Create a new project <strong>example-health</strong>:</p>
-<pre class="language-"><code class="lang-sh"> oc new-project example-health
-</code></pre>
-<p>Output:</p>
-<pre class="language-"><code> Now using project &quot;example-health&quot; on server &quot;https://c100-e.containers.cloud.ibm.com:32545&quot;.
-
- You can add applications to this project with the &apos;new-app&apos; command. For example, try:
-
-     oc new-app django-psql-example
-
- to build a new example application in Python. Or use kubectl to deploy a simple Kubernetes application:
-
-     kubectl create deployment hello-node --image=gcr.io/hello-minikube-zero-install/hello-node
-</code></pre></li>
-<li><p>Next, deploy the application directly from GitHub into your cluster. This uses the OpenShift &quot;s2i&quot; or &quot;source to image&quot; strategy. Essentially, this build strategy combines a standard Node.js runtime (a base image) with your source code in GitHub. Our code needs a runtime to actually run -- the base image takes care of this. The base image exists on DockerHub, named <code>nodejs-10-centos7:latest</code>.</p>
-<ul>
-<li><p>Run the following command to build the Docker image. Note the <code>~</code> separator between the base image and source repository. The <code>--context-dir</code> flag is used to define the folder where the app exists:</p>
-<pre class="language-"><code class="lang-sh">  oc new-app --name<span class="token operator">=</span>patient-ui centos/nodejs-10-centos7~https://github.com/svennam92/node-s2i-openshift --context-dir<span class="token operator">=</span><span class="token string">&apos;site&apos;</span>
-</code></pre>
-<p>Output:</p>
-<pre class="language-"><code>  --&gt; Found Docker image 4028fd4 (3 weeks old) from Docker Hub for &quot;centos/nodejs-10-centos7&quot;
-
-      Node.js 10 
-      ---------- 
-      Node.js 10 available as container is a base platform for building and running various Node.js 10 applications and frameworks. Node.js is a platform built on Chrome&apos;s JavaScript runtime for easily building fast, scalable network applications. Node.js uses an event-driven, non-blocking I/O model that makes it lightweight and efficient, perfect for data-intensive real-time applications that run across distributed devices.
-
-      Tags: builder, nodejs, nodejs10
-
-      * An image stream tag will be created as &quot;nodejs-10-centos7:latest&quot; that will track the source image
-      * A source build using source code from https://github.com/IBM/node-s2i-openshift will be created
-      * The resulting image will be pushed to image stream tag &quot;patient-ui:latest&quot;
-      * Every time &quot;nodejs-10-centos7:latest&quot; changes a new build will be triggered
-      * This image will be deployed in deployment config &quot;patient-ui&quot;
-      * Port 8080/tcp will be load balanced by service &quot;patient-ui&quot;
-      * Other containers can access this service through the hostname &quot;patient-ui&quot;
-
-  --&gt; Creating resources ...
-      imagestream.image.openshift.io &quot;patient-ui&quot; created
-      buildconfig.build.openshift.io &quot;patient-ui&quot; created
-      deploymentconfig.apps.openshift.io &quot;patient-ui&quot; created
-      service &quot;patient-ui&quot; created
-  --&gt; Success
-      Build scheduled, use &apos;oc logs -f bc/patient-ui&apos; to track its progress.
-      Application is not exposed. You can expose services to the outside world by executing one or more of the commands below:
-      &apos;oc expose svc/patient-ui&apos; 
-      Run &apos;oc status&apos; to view your app.
-</code></pre></li>
-<li><p>This command created an ImageStream, Deployment, a Pod, and a Service resource for the <code>Example-Health</code> app,</p>
+<li><p>Launch the <code>OpenShift web console</code>.</p>
+<p>      <a href="../assets/ocp-console.png" rel="grouped" title="" target="_self" class="fancybox">
+       <img src="../assets/ocp-console.png" alt="">
+     </a></p>
 </li>
-</ul>
+<li><p><strong>Create</strong> a project, you can title it whatever you like, we suggest &quot;example-health.&quot;</p>
+<p>      <a href="../assets/ocp-create-project.png" rel="grouped" title="" target="_self" class="fancybox">
+       <img src="../assets/ocp-create-project.png" alt="">
+     </a></p>
 </li>
-<li><p>Reading the output, you&apos;ll notice that although a deployment and service is created, your application is not yet &quot;exposed&quot; to the outside world. To do so, run the following command:</p>
-<pre class="language-"><code class="lang-sh"> oc expose svc/patient-ui
-</code></pre>
-<p>Output:</p>
-<pre class="language-"><code> route.route.openshift.io/patient-ui exposed
-</code></pre></li>
-<li><p>Make sure everything started up correctly. This might take a couple minutes -- look for the <code>deployed</code> status. You can also launch the dashboard and track it there.</p>
-<blockquote>
-<p>To find the OpenShift dashboard URL again, run: <code>ic ks cluster get <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>cluster_name</span><span class="token punctuation">&gt;</span></span></code> and look for <code>Public Service Endpoint URL</code></p>
-</blockquote>
-<pre class="language-"><code class="lang-sh"> oc status
-</code></pre>
-<p>Output:</p>
-<pre class="language-"><code> In project example-health on server https://c100-e.containers.cloud.ibm.com:32545
-
- http://patient-ui-example-health.<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>your_openshift_cluster</span><span class="token punctuation">&gt;</span></span>.us-south.stg.containers.appdomain.cloud to pod port 8080-tcp (svc/patient-ui)
- dc/patient-ui deploys istag/patient-ui:latest &lt;-
-     bc/patient-ui source builds https://github.com/ibm/patient-ui on istag/nodejs-10-centos7:latest 
-     deployment #1 deployed 21 minutes ago - 1 pod
-</code></pre></li>
-<li><p>Start streaming the logs to see the build progress</p>
-<pre class="language-"><code> oc logs -f bc/patient-ui
-</code></pre></li>
+<li><p>Make sure your project is selected. You should see a view that looks like this:</p>
+<p>      <a href="../assets/ocp-project-view.png" rel="grouped" title="" target="_self" class="fancybox">
+       <img src="../assets/ocp-project-view.png" alt="">
+     </a></p>
+</li>
+<li><p>Click <strong>From Git</strong>.</p>
+</li>
+<li><p>Enter the repository <code>https://github.com/svennam92/node-s2i</code> in the Git Repo URL field.</p>
+<p>      <a href="../assets/ocp-configure-git.png" rel="grouped" title="" target="_self" class="fancybox">
+       <img src="../assets/ocp-configure-git.png" alt="">
+     </a></p>
+</li>
+<li><p>Note that the builder image automatically detected the language Node.js.</p>
+<p>      <a href="../assets/ocp-build-image.png" rel="grouped" title="" target="_self" class="fancybox">
+       <img src="../assets/ocp-build-image.png" alt="">
+     </a></p>
+</li>
+<li><p>Name your application such as <code>patient-ui</code>. Keep the default options and click <strong>Create</strong> at the bottom of the window to build and deploy the application.</p>
+<p>      <a href="../assets/ocp-app-name.png" rel="grouped" title="" target="_self" class="fancybox">
+       <img src="../assets/ocp-app-name.png" alt="">
+     </a></p>
+<p> Your application is being deployed.</p>
+</li>
 </ol>
-<h2 id="view-the-example-health-in-the-openshift-console">View the Example Health in the OpenShift console</h2>
+<h2 id="view-the-example-health">View the Example Health</h2>
 <ol>
-<li><p>In the OpenShift Web console, switch from <strong>Administrator</strong> to <strong>Developer</strong> view and navigate to <strong>Topology</strong>. Select your project</p>
-<p>      <a href="../assets/ocp-project.png" rel="grouped" title="Topology Deployment Config" target="_self" class="fancybox">
-       <img src="../assets/ocp-project.png" alt="Topology Deployment Config">
-     </a></p>
-</li>
 <li><p>You should see the app you just deployed.</p>
-<p>      <a href="../assets/ocp43-topology.png" rel="grouped" title="Topology Deployment Config" target="_self" class="fancybox">
-       <img src="../assets/ocp43-topology.png" alt="Topology Deployment Config">
+<p>      <a href="../assets/ocp43-topology.png" rel="grouped" title="" target="_self" class="fancybox">
+       <img src="../assets/ocp43-topology.png" alt="">
      </a></p>
 </li>
-<li><p>Select the app. You should see a single deployment config where you can see your Pods, Builds, Services and Routes.</p>
+<li><p>Select the app. You should see a single Deployment where you can see your Pods, Builds, Services and Routes.</p>
+<p>      <a href="../assets/ocp43-topology-details.png" rel="grouped" title="" target="_self" class="fancybox">
+       <img src="../assets/ocp43-topology-details.png" alt="">
+     </a></p>
 <ul>
 <li><strong>Pods</strong>: Your Node.js application containers</li>
 <li><strong>Builds</strong>: The auto-generated build that created a Docker image from your Node.js source code, deployed it to the OpenShift container registry, and kicked off your deployment config.</li>
@@ -509,8 +465,10 @@
 <p>      <a href="../assets/patient-ui-web.png" rel="grouped" title="" target="_self" class="fancybox">
        <img src="../assets/patient-ui-web.png" alt="">
      </a></p>
+<p> You can enter any strings for username and password, for instance <code>test:test</code> because the app is running in demo mode.</p>
 </li>
 </ol>
+<p>Congrats! You&apos;ve deployed a <code>Node.js</code> app to OpenShift Container Platform.</p>
 <p>You&apos;ve completed the first exercise! Let&apos;s recap -- in this exercise, you:</p>
 <ul>
 <li>Deployed the &quot;Example Health&quot; Node.js application directly from GitHub into your cluster <ul>
@@ -568,7 +526,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Deploying an App","level":"3.1","depth":1,"next":{"title":"Logging and Monitoring","level":"3.2","depth":1,"path":"part1-learn_openshift/exercise-2.md","ref":"part1-learn_openshift/exercise-2.md","articles":[]},"previous":{"title":"Configure Shell Access","level":"2.2","depth":1,"path":"getting-started/setup_cli.md","ref":"getting-started/setup_cli.md","articles":[]},"dir":"ltr"},"config":{"plugins":["prism","-highlight","collapsible-chapters","hints","copy-code-button","back-to-top-button","fancybox","web-header","codetabs"],"root":"workshop","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"webheader":{"headerTitle":"Bring it all together on OpenShift 4.3 on IBM Cloud"},"prism":{"css":["prismjs/themes/prism-tomorrow.css"]},"fancybox":{"helpers":{"buttons":{}},"openEffect":"elastic","closeEffect":"elastic"},"web-header":{},"search":{},"collapsible-chapters":{},"codetabs":{},"hints":{"danger":"fa fa-exclamation-circle","info":"fa fa-info-circle","tip":"fa fa-mortar-board","working":"fa fa-wrench"},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"back-to-top-button":{},"copy-code-button":{},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":true}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"Bring it all together on OpenShift 4.3 on IBM Cloud","gitbook":"3.2.3"},"file":{"path":"part1-learn_openshift/exercise-1.md","mtime":"2020-01-29T07:55:45.288Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-01-29T07:57:34.861Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Deploying an App","level":"3.1","depth":1,"next":{"title":"Logging and Monitoring","level":"3.2","depth":1,"path":"part1-learn_openshift/exercise-2.md","ref":"part1-learn_openshift/exercise-2.md","articles":[]},"previous":{"title":"Configure Shell Access","level":"2.2","depth":1,"path":"getting-started/setup_cli.md","ref":"getting-started/setup_cli.md","articles":[]},"dir":"ltr"},"config":{"plugins":["prism","-highlight","collapsible-chapters","hints","copy-code-button","back-to-top-button","fancybox","web-header","codetabs"],"root":"workshop","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"webheader":{"headerTitle":"Bring it all together on OpenShift 4.3 on IBM Cloud"},"prism":{"css":["prismjs/themes/prism-tomorrow.css"]},"fancybox":{"helpers":{"buttons":{}},"openEffect":"elastic","closeEffect":"elastic"},"web-header":{},"search":{},"collapsible-chapters":{},"codetabs":{},"hints":{"danger":"fa fa-exclamation-circle","info":"fa fa-info-circle","tip":"fa fa-mortar-board","working":"fa fa-wrench"},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"back-to-top-button":{},"copy-code-button":{},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":true}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"Bring it all together on OpenShift 4.3 on IBM Cloud","gitbook":"3.2.3"},"file":{"path":"part1-learn_openshift/exercise-1.md","mtime":"2020-02-12T19:36:45.720Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-02-12T19:38:32.192Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
