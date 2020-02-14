@@ -180,11 +180,13 @@ Complete the following steps to create a dashboard to monitor logs from the lab'
 1. In the LogDNA web UI, click the **Boards** icon ![Dashboards icon](../assets/boards.png).
 2. Select **NEW BOARD** to create a new dashboard.
 3. Click **Add graph**.
-4. Select the field **app**, then select the value **patient-ui**.
+4. Select the field **host**, then select the value that matches your pod name.
 
-   ![](../assets/board-img-4.png)
+   ![](../assets/board-img-4.png =250x)
 
    Click **Add graph**.
+
+   ![](../assets/board-img-5.png)
 
 5. Open a view that displays the logs for the patientui app. Click the graph in a peak of data at the time that you want to see logs, and then click **Show logs**.
 
