@@ -1,43 +1,8 @@
 # Analyze your logs with LogDNA
 
-IBM Log Analysis with LogDNA is a co-branded service that you can include as part of your IBM Cloud architecture to add log management capabilities. IBM Log Analysis with LogDNA is operated by LogDNA in partnership with IBM.
+IBM Log Analysis with LogDNA is a co-branded service that you can include as part of your IBM Cloud architecture to add log management capabilities. IBM Log Analysis with LogDNA is operated by LogDNA in partnership with IBM. [Learn more](https://cloud.ibm.com/docs/Log-Analysis-with-LogDNA?topic=LogDNA-getting-started).
 
 You can use IBM Log Analysis with LogDNA to manage system and application logs in IBM Cloud.
-
-IBM Log Analysis with LogDNA offers administrators, DevOps teams, and developers advanced features to filter, search, and tail log data, define alerts, and design custom views to monitor application and system logs.
-
-The following figure shows the high level view for the IBM Log Analysis with LogDNA service that is running on IBM Cloud:
-
-![Components overview of IBM Log Analysis with LogDNA](../assets/logging_ov.png)
-
-## Features
-
-**Troubleshoot logs in real time to diagnose issues and identify problems.**
-
-By using the *live streaming tail* feature, developers and DevOps teams can diagnose issues, analyze stack traces and exceptions, identify the source of errors, and monitor different log sources through a single view. 
-
-**Issue alerts to be notified of important actions.**
- 
-To act promptly on application and services events that you identify as critical or warning, DevOps teams can configure alert notification integrations to the following systems: email, Slack, webHook, and PagerDuty.
-
-**Export logs to a local file for analysis or to an archive service to meet auditing requirements.**
-
-Export specific log lines to a local copy or archive logs from IBM Log Analysis with LogDNA to IBM Cloud Object Storage.
-Log lines are exported in JSON line format. Logs are archived in JSON format and preserve the metadata that is associated with each line. 
-
-**Control logging infrastructure costs by customizing what logs to manage through LogDNA.**
-
-Control the cost of your logging infrastructure in the IBM Cloud by configuring the log sources for which you want to collect and manage logs. 
-
-## IAM roles
-
-In LogDNA, you can grant any of the following service roles to users:
-
-* `Manager` role: This role grants permissions to a user to perform all admin tasks. As a manager, a user can manage resources: configure/manage/delete views, alerts, dashboards, screens, keys, and exclusion rules; export data; search, filter, and view all data; and configure archiving.
-* `Standard member` role: This role grants permissions to a user to perform some admin tasks. As a standard member, a user can configure/manage/delete views, alerts, dashboards and screens, export data, and search, filter, and view all data.
-* `Reader` role: This role grants permissions to a user to customize the UI, and view data only. As a reader, a user can perform read-only actions such as monitor data through views, dashboards, and screens.
-
-Your user has been granted manager permissions in the LogDNA instance that you are using in this lab so that you can complete all of the sections in the exercise.
 
 > **IMPORTANT: Use Chrome to complete this exercise.**
 
@@ -76,17 +41,23 @@ Complete the following steps to modify the format of a log line:
 
 Complete the following steps:
 
-1. In the LogDNA web UI, select **ALL Apps** in the search area.
+1. In the LogDNA web UI, filter out the logs for the sample app that you have delpoyed in the cluster in previous steps.
 
-   ![](../assets/views-img-2.png)
+   From the Openshift console, go to the developer view. Select the project where you have deployed the sample app, and get the pod name. For example: `patient-ui-8658f89574-rgjw8` 
 
-2. Select the app **patientui** which is the sample app that you have deployed in your cluster in the lab.
+   ![](../assets/views-img1.png)
 
-   ![](../assets/views-img-3.png)
+2. Enter in the search bar the following query.
 
-3. Filter out log lines to display only lines that are tagged as debug lines. Enter in the search bar the following query: `level:debug` and click enter. The view will show lines that meet the filter and search criteria.
+   ![](../assets/views-img2.png)
 
-   ![](../assets/views-img-5.png)
+   Click enter.
+
+3. Filter out log lines to display only lines that are tagged as debug lines. 
+
+   Add in the search bar the following query: `level:debug` and click enter. The view will show lines that meet the filter and search criteria.
+
+   ![](../assets/views-img3.png)
 
 4. Save the custom view.
 
