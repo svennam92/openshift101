@@ -47,7 +47,7 @@ Complete the following steps:
 
    ![](../assets/views-img1.png)
 
-2. Enter in the search bar the following query.
+2. Enter in the search bar the following query: `host:{podName}` where {podName} is the name of your pod. For example: `host:patient-ui-8658f89574-rgjw8`
 
    ![](../assets/views-img2.png)
 
@@ -55,7 +55,7 @@ Complete the following steps:
 
 3. Filter out log lines to display only lines that are tagged as debug lines. 
 
-   Add in the search bar the following query: `level:debug` and click enter. The view will show lines that meet the filter and search criteria.
+   Add in the search bar the following query: `level:debug` and click enter. The view will show lines that meet the filter and search criteria. For example: `host:patient-ui-8658f89574-rgjw8 level:debug` 
 
    ![](../assets/views-img3.png)
 
