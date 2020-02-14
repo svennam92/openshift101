@@ -6,7 +6,13 @@ In this exercise, we'll explore the out-of-the-box logging and monitoring capabi
 
 Let's simulate some load on our application.
 
-1. First, retrieve the public route to access your Example Health application:
+1. First, make sure you're connected to the project where you deployed your app.
+
+    ```sh
+    oc project example-health
+    ```
+
+1. Retrieve the public route to access your Example Health application:
 
     ```
     oc get routes
@@ -17,7 +23,7 @@ Let's simulate some load on our application.
     patient-ui   patient-ui-example-health.roks07-872b77d77f69503584da5a379a38af9c-0000.eu-de.containers.appdomain.cloud             patient-ui   8080-tcp                 None
     ```
 
-2. Run the following script which will endlessly spam our app with requests:
+1. Run the following script which will endlessly spam our app with requests:
 
     With Linux/MacOS:
 

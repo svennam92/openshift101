@@ -34,7 +34,7 @@ OR
 
 6. You can also see your cluster in the list of OpenShift clusters [IBM Cloud Clusters Dashboard](https://cloud.ibm.com/kubernetes/clusters?platformType=openshift)
 
-    ![Clusters Dashboard](../assets/clusters-dashboard.png)
+    ![Clusters Dashboard](../assets/cluster-dashboard.png)
 
 7. Have a look at the cluster overview!
 
