@@ -88,7 +88,7 @@
     <link rel="next" href="exercise-9.html" />
     
     
-    <link rel="prev" href="exercise-7.html" />
+    <link rel="prev" href="exercise-7.md" />
     
 
     </head>
@@ -258,9 +258,9 @@
             
         </li>
     
-        <li class="chapter " data-level="4.2" data-path="exercise-6.html">
+        <li class="chapter " data-level="4.2" data-path="exercise-6.md">
             
-                <a href="exercise-6.html">
+                <span>
             
                     
                         <b>4.2.</b>
@@ -273,9 +273,9 @@
             
         </li>
     
-        <li class="chapter " data-level="4.3" data-path="exercise-7.html">
+        <li class="chapter " data-level="4.3" data-path="exercise-7.md">
             
-                <a href="exercise-7.html">
+                <span>
             
                     
                         <b>4.3.</b>
@@ -401,31 +401,8 @@
                                 <section class="normal markdown-section">
                                 
                                 <h1 id="analyze-your-logs-with-logdna">Analyze your logs with LogDNA</h1>
-<p>IBM Log Analysis with LogDNA is a co-branded service that you can include as part of your IBM Cloud architecture to add log management capabilities. IBM Log Analysis with LogDNA is operated by LogDNA in partnership with IBM.</p>
+<p>IBM Log Analysis with LogDNA is a co-branded service that you can include as part of your IBM Cloud architecture to add log management capabilities. IBM Log Analysis with LogDNA is operated by LogDNA in partnership with IBM. <a href="https://cloud.ibm.com/docs/Log-Analysis-with-LogDNA?topic=LogDNA-getting-started" target="_blank">Learn more</a>.</p>
 <p>You can use IBM Log Analysis with LogDNA to manage system and application logs in IBM Cloud.</p>
-<p>IBM Log Analysis with LogDNA offers administrators, DevOps teams, and developers advanced features to filter, search, and tail log data, define alerts, and design custom views to monitor application and system logs.</p>
-<p>The following figure shows the high level view for the IBM Log Analysis with LogDNA service that is running on IBM Cloud:</p>
-<p>     <a href="../assets/logging_ov.png" rel="grouped" title="Components overview of IBM Log Analysis with LogDNA" target="_self" class="fancybox">
-       <img src="../assets/logging_ov.png" alt="Components overview of IBM Log Analysis with LogDNA">
-     </a></p>
-<h2 id="features">Features</h2>
-<p><strong>Troubleshoot logs in real time to diagnose issues and identify problems.</strong></p>
-<p>By using the <em>live streaming tail</em> feature, developers and DevOps teams can diagnose issues, analyze stack traces and exceptions, identify the source of errors, and monitor different log sources through a single view. </p>
-<p><strong>Issue alerts to be notified of important actions.</strong></p>
-<p>To act promptly on application and services events that you identify as critical or warning, DevOps teams can configure alert notification integrations to the following systems: email, Slack, webHook, and PagerDuty.</p>
-<p><strong>Export logs to a local file for analysis or to an archive service to meet auditing requirements.</strong></p>
-<p>Export specific log lines to a local copy or archive logs from IBM Log Analysis with LogDNA to IBM Cloud Object Storage.
-Log lines are exported in JSON line format. Logs are archived in JSON format and preserve the metadata that is associated with each line. </p>
-<p><strong>Control logging infrastructure costs by customizing what logs to manage through LogDNA.</strong></p>
-<p>Control the cost of your logging infrastructure in the IBM Cloud by configuring the log sources for which you want to collect and manage logs. </p>
-<h2 id="iam-roles">IAM roles</h2>
-<p>In LogDNA, you can grant any of the following service roles to users:</p>
-<ul>
-<li><code>Manager</code> role: This role grants permissions to a user to perform all admin tasks. As a manager, a user can manage resources: configure/manage/delete views, alerts, dashboards, screens, keys, and exclusion rules; export data; search, filter, and view all data; and configure archiving.</li>
-<li><code>Standard member</code> role: This role grants permissions to a user to perform some admin tasks. As a standard member, a user can configure/manage/delete views, alerts, dashboards and screens, export data, and search, filter, and view all data.</li>
-<li><code>Reader</code> role: This role grants permissions to a user to customize the UI, and view data only. As a reader, a user can perform read-only actions such as monitor data through views, dashboards, and screens.</li>
-</ul>
-<p>Your user has been granted manager permissions in the LogDNA instance that you are using in this lab so that you can complete all of the sections in the exercise.</p>
 <blockquote>
 <p><strong>IMPORTANT: Use Chrome to complete this exercise.</strong></p>
 </blockquote>
@@ -468,19 +445,22 @@ Log lines are exported in JSON line format. Logs are archived in JSON format and
 </blockquote>
 <p>Complete the following steps:</p>
 <ol>
-<li><p>In the LogDNA web UI, select <strong>ALL Apps</strong> in the search area.</p>
-<p>     <a href="../assets/views-img-2.png" rel="grouped" title="" target="_self" class="fancybox">
-       <img src="../assets/views-img-2.png" alt="">
+<li><p>In the LogDNA web UI, filter out the logs for the sample app that you have delpoyed in the cluster in previous steps.</p>
+<p>From the Openshift console, go to the developer view. Select the project where you have deployed the sample app, and get the pod name. For example: <code>patient-ui-8658f89574-rgjw8</code> </p>
+<p>     <a href="../assets/views-img1.png" rel="grouped" title="" target="_self" class="fancybox">
+       <img src="../assets/views-img1.png" alt="">
      </a></p>
 </li>
-<li><p>Select the app <strong>patientui</strong> which is the sample app that you have deployed in your cluster in the lab.</p>
-<p>     <a href="../assets/views-img-3.png" rel="grouped" title="" target="_self" class="fancybox">
-       <img src="../assets/views-img-3.png" alt="">
+<li><p>Enter in the search bar the following query.</p>
+<p>     <a href="../assets/views-img2.png" rel="grouped" title="" target="_self" class="fancybox">
+       <img src="../assets/views-img2.png" alt="">
      </a></p>
+<p>Click enter.</p>
 </li>
-<li><p>Filter out log lines to display only lines that are tagged as debug lines. Enter in the search bar the following query: <code>level:debug</code> and click enter. The view will show lines that meet the filter and search criteria.</p>
-<p>     <a href="../assets/views-img-5.png" rel="grouped" title="" target="_self" class="fancybox">
-       <img src="../assets/views-img-5.png" alt="">
+<li><p>Filter out log lines to display only lines that are tagged as debug lines. </p>
+<p>Add in the search bar the following query: <code>level:debug</code> and click enter. The view will show lines that meet the filter and search criteria.</p>
+<p>     <a href="../assets/views-img3.png" rel="grouped" title="" target="_self" class="fancybox">
+       <img src="../assets/views-img3.png" alt="">
      </a></p>
 </li>
 <li><p>Save the custom view.</p>
@@ -701,7 +681,7 @@ Log lines are exported in JSON line format. Logs are archived in JSON format and
 
             
                 
-                <a href="exercise-7.html" class="navigation navigation-prev " aria-label="Previous page: Configure LogDNA Agent">
+                <a href="exercise-7.md" class="navigation navigation-prev " aria-label="Previous page: Configure LogDNA Agent">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
@@ -717,7 +697,7 @@ Log lines are exported in JSON line format. Logs are archived in JSON format and
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Analyze Logs w/ LogDNA","level":"4.4","depth":1,"next":{"title":"Monitor Cluster w/ SysDig","level":"4.5","depth":1,"path":"part2-openshift_ibmcloud/exercise-9.md","ref":"part2-openshift_ibmcloud/exercise-9.md","articles":[]},"previous":{"title":"Configure LogDNA Agent","level":"4.3","depth":1,"path":"part2-openshift_ibmcloud/exercise-7.md","ref":"part2-openshift_ibmcloud/exercise-7.md","articles":[]},"dir":"ltr"},"config":{"plugins":["prism","-highlight","collapsible-chapters","hints","copy-code-button","back-to-top-button","fancybox","web-header","codetabs"],"root":"workshop","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"webheader":{"headerTitle":"Bring it all together on OpenShift 4.3 on IBM Cloud"},"prism":{"css":["prismjs/themes/prism-tomorrow.css"]},"fancybox":{"helpers":{"buttons":{}},"openEffect":"elastic","closeEffect":"elastic"},"web-header":{},"search":{},"collapsible-chapters":{},"codetabs":{},"hints":{"danger":"fa fa-exclamation-circle","info":"fa fa-info-circle","tip":"fa fa-mortar-board","working":"fa fa-wrench"},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"back-to-top-button":{},"copy-code-button":{},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":true}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"Bring it all together on OpenShift 4.3 on IBM Cloud","gitbook":"3.2.3"},"file":{"path":"part2-openshift_ibmcloud/exercise-8.md","mtime":"2020-02-13T09:40:46.340Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-02-13T09:42:41.352Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Analyze Logs w/ LogDNA","level":"4.4","depth":1,"next":{"title":"Monitor Cluster w/ SysDig","level":"4.5","depth":1,"path":"part2-openshift_ibmcloud/exercise-9.md","ref":"part2-openshift_ibmcloud/exercise-9.md","articles":[]},"previous":{"title":"Configure LogDNA Agent","level":"4.3","depth":1,"path":"part2-openshift_ibmcloud/exercise-7.md","ref":"part2-openshift_ibmcloud/exercise-7.md","articles":[]},"dir":"ltr"},"config":{"plugins":["prism","-highlight","collapsible-chapters","hints","copy-code-button","back-to-top-button","fancybox","web-header","codetabs"],"root":"workshop","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"webheader":{"headerTitle":"Bring it all together on OpenShift 4.3 on IBM Cloud"},"prism":{"css":["prismjs/themes/prism-tomorrow.css"]},"fancybox":{"helpers":{"buttons":{}},"openEffect":"elastic","closeEffect":"elastic"},"web-header":{},"search":{},"collapsible-chapters":{},"codetabs":{},"hints":{"danger":"fa fa-exclamation-circle","info":"fa fa-info-circle","tip":"fa fa-mortar-board","working":"fa fa-wrench"},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"back-to-top-button":{},"copy-code-button":{},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":true}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"Bring it all together on OpenShift 4.3 on IBM Cloud","gitbook":"3.2.3"},"file":{"path":"part2-openshift_ibmcloud/exercise-8.md","mtime":"2020-02-14T12:06:30.792Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-02-14T12:08:28.141Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
