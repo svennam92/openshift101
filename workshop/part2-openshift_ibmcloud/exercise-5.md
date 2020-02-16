@@ -14,7 +14,7 @@ Let's understand exactly how Operators work. In the first exercise, you deployed
 
    ![Operator Install](../assets/cloudoperatorinstall.png)
 
-3. Keep the default options and hit `Subscribe`:
+3. Keep the default options and hit **Subscribe**:
 
    ![Operator Subscribe](../assets/operatorsubscribe.png)
 

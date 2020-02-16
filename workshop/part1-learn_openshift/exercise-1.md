@@ -8,27 +8,35 @@ In this exercise, you'll deploy a simple Node.js Express application - "Example 
 
     ![](../assets/ocp-console.png)
 
-2. **Create** a project, you can title it whatever you like, we suggest "example-health."
+2. Select the **Projects** view to display all the projects.
+
+    ![](../assets/ocp-projects.png)
+
+2. Create a new project by selecting **Create Project**. Call the project "example-health".
 
     ![](../assets/ocp-create-project.png)
 
-3. Make sure your project is selected. You should see a view that looks like this:
+4. You should see a view that looks like this.
+
+    ![](../assets/ocp-admin-project.png)
+
+5. Switch from the Administrator to the **Developer** view. Make sure your project is selected.
 
     ![](../assets/ocp-project-view.png)
 
-4. Click **From Git**.
+6. Let's deploy the application by selecting **From Git**.
 
-5. Enter the repository `https://github.com/svennam92/node-s2i` in the Git Repo URL field.
+7. Enter the repository `https://github.com/svennam92/node-s2i` in the Git Repo URL field.
 
     ![](../assets/ocp-configure-git.png)
 
-6. Note that the builder image automatically detected the language Node.js.
+8. Note that the builder image automatically detected the language Node.js.
 
     ![](../assets/ocp-build-image.png)
 
-7. Name your application such as `patient-ui`. Keep the default options and click **Create** at the bottom of the window to build and deploy the application.
+9. Name your application such as `patient-ui`. Keep the default options and click **Create** at the bottom of the window to build and deploy the application.
 
-    ![](../assets/ocp-app-name.png)
+    ![](../assets/ocp-app-name-short.png)
 
     Your application is being deployed.
 
@@ -36,11 +44,11 @@ In this exercise, you'll deploy a simple Node.js Express application - "Example 
 
 1. You should see the app you just deployed.
 
-    ![](../assets/ocp43-topology.png)
+    ![](../assets/ocp-topology-app.png)
 
 2. Select the app. You should see a single Deployment where you can see your Pods, Builds, Services and Routes.
 
-    ![](../assets/ocp43-topology-details.png)
+    ![](../assets/ocp-topo-app-details.png)
 
     * **Pods**: Your Node.js application containers
     * **Builds**: The auto-generated build that created a Docker image from your Node.js source code, deployed it to the OpenShift container registry, and kicked off your deployment config.
@@ -50,6 +58,12 @@ In this exercise, you'll deploy a simple Node.js Express application - "Example 
 4. Click on **View Logs** next to your completed Build. This shows you the process that OpenShift took to install the dependencies for your Node.js application and build/push a Docker image.
 
     ![Build Logs](../assets/ocp43-build-logs.png)
+
+    You should see that looks like this:
+    ```
+    Successfully pushed image-registry.openshift-image-registry.svc:5000/example-health/patient-ui@sha256:f9385e010144f36353a74d16b6af10a028c12d005ab4fc0b1437137f6bd9e20a
+    Push successful
+    ```
 
 5. Click back to the **Topology** and select your app again. Click on the url under **Routes** to open your application with the URL.
 
