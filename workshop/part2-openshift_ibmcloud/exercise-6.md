@@ -182,7 +182,7 @@ Complete the following steps to create a dashboard to monitor logs from the lab'
 3. Click **Add graph**.
 4. Select the field **host**, then select the value that matches your pod name.
 
-   ![](../assets/board-img-4.png =250x)
+   ![](../assets/board-img-4.png)
 
    Click **Add graph**.
 
