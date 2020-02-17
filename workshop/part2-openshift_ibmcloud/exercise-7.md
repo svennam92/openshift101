@@ -1,161 +1,230 @@
-# Monitor your Cluster with SysDig
+# Exercise 7: Configuring a LogDNA agent for an OpenShift Kubernetes cluster
 
-IBM Cloud Monitoring with Sysdig is a co-branded cloud-native, and container- intelligence management system that you can include as part of your IBM Cloud architecture. Use it to gain operational visibility into the performance and health of your applications, services, and platforms. It offers administrators, DevOps teams, and developers full stack telemetry with advanced features to monitor and troubleshoot performance issues, define alerts, and design custom dashboards. IBM Cloud Monitoring with Sysdig is operated by Sysdig in partnership with IBM.
+The LogDNA agent is responsible for collecting and forwarding logs to your IBM Log Analysis with LogDNA instance. After you provision an instance of IBM Log Analysis with LogDNA, you must configure a LogDNA agent for each log source that you want to monitor.
 
-The following diagram shows the components overview for the IBM Cloud Monitoring with Sysdig service that is running on IBM Cloud:
+To configure your Kubernetes cluster to send logs to your IBM Log Analysis with LogDNA instance, you must install a *LogDNA-agent* pod on each node of your cluster. The LogDNA agent reads log files from the pod where it is installed, and forwards the log data to your LogDNA instance.
 
-![](../assets/monitoring_ov.png)
+To forward logs to your LogDNA instance, complete the following steps from the command line:
 
+## Step 1. Access your cluster through the CLI
 
-When you monitor an application, you should consider:
+[Access your cluster using the oc CLI](../getting-started/setup_cli#access-your-cluster-using-the-oc-cli). 
 
-* Monitoring the health of the application
+## Launch the LogDNA webUI
 
-  The health signals coming from hardware and software components
+You launch the web UI within the context of an IBM Log Analysis with LogDNA instance, from the IBM Cloud UI. 
 
-  Utilization, Saturations and Errors \(USE\): resource usage and capacity limits, CPU, memory, disk I/O, network against host or container limits
+Complete the following steps to launch the web UI:
 
-* Monitoring the golden signals that focus on perceived service quality
+1. Click the **Menu** icon ![](../assets/admin.png) &gt; **Observability**. 
 
-  Latency of HTTP calls, both average and worst case ones
+2. Select **Logging**. 
 
-  Traffic, that is, rate of requests per second
+    The list of instances that are available on IBM Cloud is displayed.
 
-  Errors and their frequency
-  
+3. Select your instance. Check with the instructor which instance  you should use for the lab.
 
-## Features
+4. Click **View LogDNA**.
 
-**Accelerate the diagnosis and resolution of performance incidents.**
+The Web UI opens.
 
-IBM Cloud Monitoring with Sysdig offers deep visibility into your infrastructure and applications with the ability to troubleshoot from service level all the way down to the system level. Pre-defined dashboards and alerts simplify identification of potential threats or problems. By using IBM Cloud Monitoring with Sysdig, developers and DevOps teams monitor and troubleshoot performance issues in real-time, identify the source of errors, and eliminate problems.
+## Step 3. Get the ingestion key for your LogDNA instance
 
-**Control the cost of your monitoring infrastructure.**
+1. In the LogDNA web UI, select the **Settings** icon ![](../assets/admin.png). Then select **Organization**.
+2. Select **API keys**.
 
-IBM Cloud Monitoring with Sysdig includes functionality that helps you to control the cost of your monitoring infrastructure in IBM Cloud. You can configure the metric sources for which you want to monitor performance. You can enable a pre-defined alert to warn you of usage changes that will impact your billing.
+    ![](../assets/views-img-18.png)
 
-**Explore and visualize easily your entire environment.**
+3. Copy the ingestion key.
 
-IBM Cloud Monitoring with Sysdig makes it easier to visually explore your environment. Dynamic topology maps provide a view of dependencies between services. Multi- dimensional queries across high churn, high cardinality, high frequency metrics accelerate troubleshooting. Customizable dashboards allow you to visualize what matters most.
+## Step 4. Store your LogDNA ingestion key as a Kubernetes secret
 
-**Get critical Kubernetes and container insights for dynamic microservice monitoring.**
+You must create a Kubernetes secret to store your LogDNA ingestion key for your service instance. The LogDNA ingestion key is used to open a secure web socket to the LogDNA ingestion server and to authenticate the logging agent with the IBM Log Analysis with LogDNA service.
 
-IBM Cloud Monitoring with Sysdig auto-discovers Kubernetes environments and provides out-of-the-box dashboards and alerts for clusters, nodes, namespaces, services, deployments, pods, and more. A single agent per node dynamically discovers all microservices and auto-collects metrics and events from various sources including Kubernetes, hosts, networks, containers, processes, applications, and custom metrics like Prometheus, JMX, and StatsD.
+1. Create a project. A project is a namespace in a cluster.
 
-**Mitigate the impact of abnormal situations with proactive notifications.**
+    ```
+    oc adm new-project --node-selector='' ibm-observe
+    ```
 
-IBM Cloud Monitoring with Sysdig includes alerts and multi-channel notifications that you can use to reduce the impact on your day-to-day operations and accelerate your reaction and response time to anomalies, downtime, and performance degradation. Notification channels that you can easily configure
-include email, Slack, PagerDuty, webhooks, Opsgenie, and VictorOps.
+    Set `--node-selector=''` to disable the default project-wide node selector in your namespace and avoid pod recreates on the nodes that got unselected by the merged node selector.
+
+2. Create the service account **logdna-agent** in the cluster namespace **ibm-observe**. A service account is in Openshift what a service ID is in IBM Cloud. Run the following command:
+
+    ```
+    oc create serviceaccount logdna-agent -n ibm-observe
+    ```
+
+4. Grant the serviceaccount access to the **Privileged SCC** so the service account has permissions to create priviledged LogDNA pods. Run the following command:
+
+    ```
+    oc adm policy add-scc-to-user privileged system:serviceaccount:ibm-observe:logdna-agent
+    ```
+
+5. Add a secret. The secret sets the ingestion key that the LogDNA agent uses to send logs.
+
+    ```
+    oc create secret generic logdna-agent-key --from-literal=logdna-agent-key=INGESTION_KEY -n ibm-observe 
+    ```
+
+    Where `INGESTION_KEY` is the ingestion key for the LogDNA instance where you plan to forward and collect the cluster logs.
+
+
+## Step 5. Deploy the LogDNA agent in the cluster
+
+Create a Kubernetes daemon set to deploy the LogDNA agent on every worker node of your Kubernetes cluster. 
+
+The LogDNA agent collects logs with the extension `*.log` and extensionsless files that are stored in the `/var/log` directory of your pod. By default, logs are collected from all namespaces, including `kube-system`, and automatically forwarded to the IBM Log Analysis with LogDNA service.
+
+Run the following command if you are working on a LogDNA instance that is located in US-South:
+
+```
+oc create -f https://assets.us-south.logging.cloud.ibm.com/clients/logdna-agent-ds-os.yaml -n ibm-observe
+```
+
+```
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: logdna-agent
+  labels:
+    app: logdna-agent
+spec:
+  selector:
+    matchLabels:
+      app: logdna-agent
+  template:
+    metadata:
+      labels:
+        app: logdna-agent
+    spec:
+      containers:
+      - name: logdna-agent
+        image: logdna/logdna-agent:latest
+        imagePullPolicy: Always
+        env:
+        - name: LOGDNA_AGENT_KEY
+          valueFrom:
+            secretKeyRef:
+              name: logdna-agent-key
+              key: logdna-agent-key
+        - name: LDAPIHOST
+          value: api.us-south.logging.cloud.ibm.com
+        - name: LDLOGHOST
+          value: logs.us-south.logging.cloud.ibm.com
+        - name: LOGDNA_PLATFORM
+          value: k8s
+        - name: USEJOURNALD
+          value: files
+        # - name: LOGDNA_TAGS
+        #   value: production,cluster1,othertags
+        resources:
+          requests:
+            cpu: 20m
+          limits:
+            memory: 500Mi
+        securityContext:
+          privileged: true
+        volumeMounts:
+        - name: varlog
+          mountPath: /var/log
+        - name: vardata
+          mountPath: /var/data
+        - name: kubeletlogs
+          mountPath: /var/data/kubeletlogs
+        - name: varlibdockercontainers
+          mountPath: /var/lib/docker/containers
+          readOnly: true
+        - name: mnt
+          mountPath: /mnt
+          readOnly: true
+        - name: docker
+          mountPath: /var/run/docker.sock
+        - name: osrelease
+          mountPath: /etc/os-release
+        - name: logdnahostname
+          mountPath: /etc/logdna-hostname
+      serviceAccount: logdna-agent
+      serviceAccountName: logdna-agent
+      volumes:
+      - name: varlog
+        hostPath:
+          path: /var/log
+      - name: vardata
+        hostPath:
+          path: /var/data
+      - name: kubeletlogs
+        hostPath:
+          path: /var/data/kubeletlogs
+      - name: varlibdockercontainers
+        hostPath:
+          path: /var/lib/docker/containers
+      - name: mnt
+        hostPath:
+          path: /mnt
+      - name: docker
+        hostPath:
+          path: /var/run/docker.sock
+      - name: osrelease
+        hostPath:
+          path: /etc/os-release
+      - name: logdnahostname
+        hostPath:
+          path: /etc/hostname
+  updateStrategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 100%
+```
+
+Run the following command if you are working on a LogDNA instance that is located in Frankfurt:
+
+```
+oc create -f https://assets.eu-de.logging.cloud.ibm.com/clients/logdna-agent-ds-os.yaml -n ibm-observe
+```
+
+## Step 6. Verify that the LogDNA agent is deployed successfully
+
+To verify that the LogDNA agent is deployed successfully, run the following command:
+
+1. Target the project where the LogDNA agent is deployed.
+
+    ```
+    oc project ibm-observe
+    ```
+
+2. Verify that the `logdna-agent` pods on each node are in a **Running** status.
+
+    ```
+    oc get pods -n ibm-observe
+    ```
+
+
+The deployment is successful when you see one or more LogDNA pods.
+* **The number of LogDNA pods equals the number of worker nodes in your cluster.**
+* All pods must be in a `Running` state.
+* *Stdout* and *stderr* are automatically collected and forwarded from all containers. Log data includes application logs and worker logs.
+* By default, the LogDNA agent pod that runs on a worker collects logs from all namespaces on that node.
+
+After the agent is configured, you should start seeing logs from this cluster in the LogDNA web UI. If after a period of time you cannot see logs, check the agent logs.
+
+To check the logs that are generated by a LogDNA agent, run the following command:
+
+```
+oc logs logdna-agent-<ID>
+```
+
+Where *ID* is the ID for a LogDNA agent pod. 
+
+For example, 
+
+```
+oc logs logdna-agent-xxxkz
+```
+
+
+## Step 7. Launch the LogDNA webUI to verify that logs are being forwarded from the LogDNA agent
+
+Next, go to the LogDNA web UI. In the **Views** page, click **Everything** to verify that logs from the cluster are available through the UI. 
 
-In the next steps, you will learn how to use dashboards and metrics to monitor the health of your application.
 
-
-## View SysDig pre-defined views and dashboards
-
-Use views and dashboards to monitor your infrastructure, applications, and services. You can use pre-defined dashboards. You can also create custom dashboards through the Web UI or programmatically. You can backup and restore dashboards by using Python scripts.
-
-The following table lists the different types of pre-defined dashboards:
-
-| Type | Description | 
-| :--- | :--- |
-| Applications | Dashboards that you can use to monitor your applications and infrastructure components. |
-| Host and containers | Dashboards that you can use to monitor resource utilization and system activity on your hosts and in your containers. |
-| Network | Dashboards that you can use to monitor your network connections and activity. | 
-| Service | Dashboards that you can use to monitor the performance of your services, even if those services are deployed in orchestrated containers. | 
-| Topology | Dashboards that you can use to monitor the logical dependencies of your application tiers and overlay metrics. | 
-
-Complete the following steps to view a Sysdig dashboard:
-
-1. Launch the Sysdig web UI.
-
-    ![](../assets/icp-monitoring-launch.png).
-
-1. In the Sysdig Welcome wizard, select **Kubernetes** as the installation method.
-
-   After 30 seconds or so, it should show one or more agents connected.
-
-   Select **GO TO NEXT STEP**.
-
-   Then select **LET'S GET STARTED**.
-
-2. Navigate the Sysdig console to get metrics on your Kubernetes cluster, nodes, deployments, pods, containers. Explore the following views:
-3. View raw metrics for all workloads running on the cluster.
-
-   Under the _Explore_ section,
-
-   ![](../assets/explore.png)
-
-   Select **Containerized Apps** to view raw metrics for all workloads running on the cluster.
-
-4. Get a global view of the cluster HTTP load.
-
-   Under Dashboard,
-
-   ![](../assets/dashboards.png)
-
-   Select **My Dashboards**. Then select **HTTP Overview** to get a global view of the cluster HTTP load.
-
-5. Check how nodes are currently performing.
-
-   Under Dashboard, select **My Dashboards**. Then select **Overview by Host** to understand how nodes are currently performing.
-
-6. Check information about the sample app _patientui_.
-
-   Under _Explore_, select **Cluster and Nodes**. Expand the section **Entire Infrastructure**. Look for the partientui pod entry.
-
-   ![](../assets/explore-img-1.png)
-
-### Explore the normal traffic flow of the application
-
-You can use the **Connection Table** dashboard to monitor how data flows between your application components.
-
-1. From the _Explore_ tab, select **Deployments and Pods.**
-2. Select the namespace where you deployed your sample app.
-3. Select the _patientui_ pod entry.
-4. Select **Default Dashboards**.
-
-   ![](../assets/explore-img-4.png)
-
-5. Check out the two dashboards under **Hosts & Containers**:
-   * **Overview by Host**
-   * **Overview by Container**.
-
-### Explore the cluster and the node capacity
-
-1. From the _Explore_ tab, select **Deployments and Pods.**
-2. Select the namespace where you deployed your sample app.
-3. Select the _patientui_ pod entry.
-4. Select **Default Dashboards**.
-5. Select **Kubernetes > Resource Usage > Kuberentes Cluster and Node Capacity**. 
-
-   ![](../assets/explore-img-9.png)
-
-   Check the **Total CPU Capacity**. This is the CPU capacity that has been reserved for the node including system daemons.
-
-   Check the **Total Allocatable CPU**. This is the CPU which is available for pods excluding system daemons.
-
-   Check the **Total Pod CPU limit**. It should be less than the allocatable CPU of the node or cluster.
-
-   Check the **Total Pod CPU Requested**. It is the amount of CPU that will be guaranteed for pods on the node or cluster.
-
-   Check the **Total Pod CPU Usage**. It is the total amount of CPU that is used by all Pods on the node or cluster.
-
-### Explore the Network
-
-1. From the _DASHBOARDS_ tab, select **My Dashboards**. Then, select **Network Overview**.
-
-   The following dashboard is displayed. It shows information about all resources that are monitored thorugh the instance.
-
-   ![](../assets/dashboard-img-2.png)
-
-2. Change the scope of the dashboard to display information about your openshift cluster. Select **Edit scope** on the right side and change it:
-
-    ![](../assets/dashboard-img-4.png)
-
-    The dashboard now shows information about the ibm-observe namespace.
-
-    ![](../assets/dashboard-img-5.png)
-
-## Congratulations!
-
-That's it, you're done with the Red Hat OpenShift 4.3 on IBM Cloud Kubernetes Service workshop. Thanks for joining us!
