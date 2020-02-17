@@ -43,17 +43,19 @@ We're hitting the `/info` endpoint which will trigger some logs from our app. Fo
 
 ## OpenShift Logging
 
-Since we only created one pod, seeing our logs will be straight forward. Ensure that you're in the **Developer** view.
+Since we only created one pod, seeing our logs will be straight forward.
 
-Then, navigate to **Topology**. You should see a single deployment config. Click that to see your Pods, Builds, Services and Routes.
+1. Ensure that you're in the **Developer** view.
 
-![Topology Deployment Config](../assets/ocp43-topology.png)
+2. Then, navigate to **Topology**. You should see a single deployment config. Click that to see your Pods, Builds, Services and Routes.
 
-1. Navigate to your Pod by clicking on your Deployment Config, then clicking the name of the Pod under **Pods**.
+    ![Topology Deployment Config](../assets/ocp-topology-app.png)
+
+3. Navigate to your Pod by clicking on your Deployment Config, then clicking the name of the Pod under **Pods**.
 
     ![Navigate to Pod](../assets/ocp43-pod-arrow.png)
    
-2. Click on **View Logs** next to your Pods to see streaming logs from your running application. If you're still generating traffic, you should see log messages for every request being made.
+4. Click on **View Logs** next to your Pods to see streaming logs from your running application. If you're still generating traffic, you should see log messages for every request being made.
 
     ![Pod Logs](../assets/ocp43-pod-logs.png)
 

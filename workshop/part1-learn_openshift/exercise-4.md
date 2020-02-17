@@ -8,13 +8,13 @@ Before we can setup autoscaling for our pods, we first need to set resource limi
 
 Hopefully you have your running script simulating load \(if not go [here](exercise-2.md#simulate-load-on-the-application)\), Grafana showed you that your application was consuming anywhere between ".002" to ".02" cores. This translates to 2-20 "millicores". That seems like a good range for our CPU request, but to be safe, let's bump the higher-end up to 30 millicores. In addition, Grafana showed that the app consumes about `25`-`35` MB of RAM. Set the following resource limits for your deployment now.
 
-1. Switch to the **Administrator** view and then navigate to **Workloads > Deployment Configs** in the left-hand bar. Choose the `patient-ui` DC, then choose **Actions > Edit Deployment Config**.
+1. Switch to the **Administrator** view and then navigate to **Workloads > Deployments** in the left-hand bar. Choose the `patient-ui` DC, then choose **Actions > Edit Deployment**.
 
-    ![Deployment Configs](../assets/ocp43-dc.png)
+    ![](../assets/ocp-deployments.png)
 
-2. In the YAML editor, scroll to line 62. In the section **template > spec > containers**, add the following resource limits into the empty resources. Replace the "{}", and ensure the spacing is correct -- YAML uses strict indentation.
+2. In the YAML editor, scroll to line 44. In the section **template > spec > containers**, add the following resource limits into the empty resources. Replace the "{}", and ensure the spacing is correct -- YAML uses strict indentation.
 
-    ![Resource Limits](../assets/ocp43-limits-yaml.png)
+    ![](../assets/ocp-limits-yaml.png)
 
   ```yaml
              resources:
@@ -40,7 +40,7 @@ By default, the autoscaler allows you to scale based on CPU or Memory. The UI al
 
 1. Navigate to **Workloads > Horizontal Pod Autoscalers**, then hit **Create Horizontal Pod Autoscaler**.
 
-    ![HPA](../assets/ocp43-autoscaler.png)
+    ![HPA](../assets/ocp-hpa.png)
 
     ```yaml
     apiVersion: autoscaling/v2beta1
@@ -50,8 +50,8 @@ By default, the autoscaler allows you to scale based on CPU or Memory. The UI al
       namespace: example-health
     spec:
       scaleTargetRef:
-        apiVersion: apps.openshift.io/v1
-        kind: DeploymentConfig
+        apiVersion: apps/v1
+        kind: Deployment
         name: patient-ui
       minReplicas: 1
       maxReplicas: 10
@@ -68,13 +68,13 @@ By default, the autoscaler allows you to scale based on CPU or Memory. The UI al
 
 If you're not running the script from the [previous exercise](exercise-2.md#simulate-load-on-the-application), the number of pods should stay at 1.
 
-1. Check by going to the **Overview** page of **Deployment Configs**.
+1. Check by going to the **Overview** page of **Deployments**.
 
-    ![Scaled to 1 pod](../assets/ocp43-dc-pod.png)
+    ![Scaled to 1 pod](../assets/ocp-hpa-before.png)
 
 2. Start simulating load by hitting the page several times, or running the script. You'll see that it starts to scale up:
 
-   ![Scaled to 4/10 pods](../assets/ocp43-autoscaler-after.png)
+   ![Scaled to 4/10 pods](../assets/ocp-hpa-after.png)
 
 That's it! You now have a highly available and automatically scaled front-end Node.js application. OpenShift is automatically scaling your application pods since the CPU usage of the pods greatly exceeded `1`% of the resource limit, `30` millicores.
 
@@ -82,5 +82,5 @@ That's it! You now have a highly available and automatically scaled front-end No
 
 If you're interested in setting up the CLI, [follow the steps here](../getting-started/setup_cli.md). Then, run the following command in your CLI `oc get hpa` to get information about your horizontal pod autoscaler. Remember to switch to your project first with `oc project <project-name>`.
 
-You could have created the autoscaler with the command `oc autoscale dc/patient-ui --min 1 --max 10 --cpu-percent=1`.
+You could have created the autoscaler with the command `oc autoscale deployment/patient-ui --min 1 --max 10 --cpu-percent=1`.
 
