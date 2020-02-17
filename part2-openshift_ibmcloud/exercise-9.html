@@ -256,9 +256,9 @@
             
         </li>
     
-        <li class="chapter " data-level="4.2" data-path="exercise-6.md">
+        <li class="chapter " data-level="4.2" data-path="exercise-6.html">
             
-                <span>
+                <a href="exercise-6.html">
             
                     
                         <b>4.2.</b>
@@ -271,9 +271,9 @@
             
         </li>
     
-        <li class="chapter " data-level="4.3" data-path="exercise-7.md">
+        <li class="chapter " data-level="4.3" data-path="exercise-7.html">
             
-                <span>
+                <a href="exercise-7.html">
             
                     
                         <b>4.3.</b>
@@ -399,35 +399,7 @@
                                 <section class="normal markdown-section">
                                 
                                 <h1 id="monitor-your-cluster-with-sysdig">Monitor your Cluster with SysDig</h1>
-<p>IBM Cloud Monitoring with Sysdig is a co-branded cloud-native, and container- intelligence management system that you can include as part of your IBM Cloud architecture. Use it to gain operational visibility into the performance and health of your applications, services, and platforms. It offers administrators, DevOps teams, and developers full stack telemetry with advanced features to monitor and troubleshoot performance issues, define alerts, and design custom dashboards. IBM Cloud Monitoring with Sysdig is operated by Sysdig in partnership with IBM.</p>
-<p>The following diagram shows the components overview for the IBM Cloud Monitoring with Sysdig service that is running on IBM Cloud:</p>
-<p>     <a href="../assets/monitoring_ov.png" rel="grouped" title="" target="_self" class="fancybox">
-       <img src="../assets/monitoring_ov.png" alt="">
-     </a></p>
-<p>When you monitor an application, you should consider:</p>
-<ul>
-<li><p>Monitoring the health of the application</p>
-<p>The health signals coming from hardware and software components</p>
-<p>Utilization, Saturations and Errors (USE): resource usage and capacity limits, CPU, memory, disk I/O, network against host or container limits</p>
-</li>
-<li><p>Monitoring the golden signals that focus on perceived service quality</p>
-<p>Latency of HTTP calls, both average and worst case ones</p>
-<p>Traffic, that is, rate of requests per second</p>
-<p>Errors and their frequency</p>
-</li>
-</ul>
-<h2 id="features">Features</h2>
-<p><strong>Accelerate the diagnosis and resolution of performance incidents.</strong></p>
-<p>IBM Cloud Monitoring with Sysdig offers deep visibility into your infrastructure and applications with the ability to troubleshoot from service level all the way down to the system level. Pre-defined dashboards and alerts simplify identification of potential threats or problems. By using IBM Cloud Monitoring with Sysdig, developers and DevOps teams monitor and troubleshoot performance issues in real-time, identify the source of errors, and eliminate problems.</p>
-<p><strong>Control the cost of your monitoring infrastructure.</strong></p>
-<p>IBM Cloud Monitoring with Sysdig includes functionality that helps you to control the cost of your monitoring infrastructure in IBM Cloud. You can configure the metric sources for which you want to monitor performance. You can enable a pre-defined alert to warn you of usage changes that will impact your billing.</p>
-<p><strong>Explore and visualize easily your entire environment.</strong></p>
-<p>IBM Cloud Monitoring with Sysdig makes it easier to visually explore your environment. Dynamic topology maps provide a view of dependencies between services. Multi- dimensional queries across high churn, high cardinality, high frequency metrics accelerate troubleshooting. Customizable dashboards allow you to visualize what matters most.</p>
-<p><strong>Get critical Kubernetes and container insights for dynamic microservice monitoring.</strong></p>
-<p>IBM Cloud Monitoring with Sysdig auto-discovers Kubernetes environments and provides out-of-the-box dashboards and alerts for clusters, nodes, namespaces, services, deployments, pods, and more. A single agent per node dynamically discovers all microservices and auto-collects metrics and events from various sources including Kubernetes, hosts, networks, containers, processes, applications, and custom metrics like Prometheus, JMX, and StatsD.</p>
-<p><strong>Mitigate the impact of abnormal situations with proactive notifications.</strong></p>
-<p>IBM Cloud Monitoring with Sysdig includes alerts and multi-channel notifications that you can use to reduce the impact on your day-to-day operations and accelerate your reaction and response time to anomalies, downtime, and performance degradation. Notification channels that you can easily configure
-include email, Slack, PagerDuty, webhooks, Opsgenie, and VictorOps.</p>
+<p>IBM Cloud Monitoring with Sysdig is a co-branded cloud-native, and container- intelligence management system that you can include as part of your IBM Cloud architecture. Use it to gain operational visibility into the performance and health of your applications, services, and platforms. It offers administrators, DevOps teams, and developers full stack telemetry with advanced features to monitor and troubleshoot performance issues, define alerts, and design custom dashboards. IBM Cloud Monitoring with Sysdig is operated by Sysdig in partnership with IBM. <a href="https://cloud.ibm.com/docs/Monitoring-with-Sysdig?topic=Sysdig-getting-started" target="_blank">Learn more</a>.</p>
 <p>In the next steps, you will learn how to use dashboards and metrics to monitor the health of your application.</p>
 <h2 id="view-sysdig-pre-defined-views-and-dashboards">View SysDig pre-defined views and dashboards</h2>
 <p>Use views and dashboards to monitor your infrastructure, applications, and services. You can use pre-defined dashboards. You can also create custom dashboards through the Web UI or programmatically. You can backup and restore dashboards by using Python scripts.</p>
@@ -594,7 +566,7 @@ include email, Slack, PagerDuty, webhooks, Opsgenie, and VictorOps.</p>
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Monitor Cluster w/ SysDig","level":"4.5","depth":1,"next":{"title":"Docs: Red Hat OpenShift on IBM Cloud","level":"5.1","depth":1,"url":"https://cloud.ibm.com/docs/openshift","ref":"https://cloud.ibm.com/docs/openshift","articles":[]},"previous":{"title":"Analyze Logs w/ LogDNA","level":"4.4","depth":1,"path":"part2-openshift_ibmcloud/exercise-8.md","ref":"part2-openshift_ibmcloud/exercise-8.md","articles":[]},"dir":"ltr"},"config":{"plugins":["prism","-highlight","collapsible-chapters","hints","copy-code-button","back-to-top-button","fancybox","web-header","codetabs"],"root":"workshop","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"webheader":{"headerTitle":"Bring it all together on OpenShift 4.3 on IBM Cloud"},"prism":{"css":["prismjs/themes/prism-tomorrow.css"]},"fancybox":{"helpers":{"buttons":{}},"openEffect":"elastic","closeEffect":"elastic"},"web-header":{},"search":{},"collapsible-chapters":{},"codetabs":{},"hints":{"danger":"fa fa-exclamation-circle","info":"fa fa-info-circle","tip":"fa fa-mortar-board","working":"fa fa-wrench"},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"back-to-top-button":{},"copy-code-button":{},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":true}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"Bring it all together on OpenShift 4.3 on IBM Cloud","gitbook":"3.2.3"},"file":{"path":"part2-openshift_ibmcloud/exercise-9.md","mtime":"2020-02-16T20:58:41.015Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-02-16T21:00:35.908Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Monitor Cluster w/ SysDig","level":"4.5","depth":1,"next":{"title":"Docs: Red Hat OpenShift on IBM Cloud","level":"5.1","depth":1,"url":"https://cloud.ibm.com/docs/openshift","ref":"https://cloud.ibm.com/docs/openshift","articles":[]},"previous":{"title":"Analyze Logs w/ LogDNA","level":"4.4","depth":1,"path":"part2-openshift_ibmcloud/exercise-8.md","ref":"part2-openshift_ibmcloud/exercise-8.md","articles":[]},"dir":"ltr"},"config":{"plugins":["prism","-highlight","collapsible-chapters","hints","copy-code-button","back-to-top-button","fancybox","web-header","codetabs"],"root":"workshop","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"webheader":{"headerTitle":"Bring it all together on OpenShift 4.3 on IBM Cloud"},"prism":{"css":["prismjs/themes/prism-tomorrow.css"]},"fancybox":{"helpers":{"buttons":{}},"openEffect":"elastic","closeEffect":"elastic"},"web-header":{},"search":{},"collapsible-chapters":{},"codetabs":{},"hints":{"danger":"fa fa-exclamation-circle","info":"fa fa-info-circle","tip":"fa fa-mortar-board","working":"fa fa-wrench"},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"back-to-top-button":{},"copy-code-button":{},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":true}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"Bring it all together on OpenShift 4.3 on IBM Cloud","gitbook":"3.2.3"},"file":{"path":"part2-openshift_ibmcloud/exercise-9.md","mtime":"2020-02-17T17:03:37.896Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-02-17T17:05:30.574Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
