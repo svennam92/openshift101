@@ -4,22 +4,35 @@ IBM Log Analysis with LogDNA is a co-branded service that you can include as par
 
 You can use IBM Log Analysis with LogDNA to manage system and application logs in IBM Cloud.
 
-> **IMPORTANT: Use Chrome to complete this exercise.**
+{% hint style='info' %} IMPORTANT: Use Chrome to complete this exercise. {% endhint %}
+
+## Launch the LogDNA webUI
+
+You launch the web UI within the context of an IBM Log Analysis with LogDNA instance, from the IBM Cloud UI. 
+
+1. Select your instance.
+
+1. Click **View LogDNA**.
+
+   ![](../assets/logdna-launch-ui.png)
+
+The Web UI opens.
+
 
 ## Create a custom view
 
-> **In LogDNA, you can configure custom views to monitor a subset of data. You can also attach an alert to a view to be notified of the presence or absence of log lines.**
+In LogDNA, you can configure custom views to monitor a subset of data. You can also attach an alert to a view to be notified of the presence or absence of log lines.
 
 When you launch the LogDNA web UI, log entries are displayed with a predefined format. You can modify in the **User Preferences** section how the information in each log line is displayed. You can also filter logs and modify search settings, then bookmark the result as a _view_. You can attach and detach one or more alerts to a view. You can define a custom format for how your lines are shown in the view. You can expand a log line and see the data parsed.
 
-#### View events with the default format
+## View events with the default format
 
 1. In the LogDNA web UI, click the **Views** icon ![](../assets/views.png).
 2. Select **Everything** to see all the events.
 
 ![](../assets/views-img-1.png)
 
-#### Customize your default view
+## Customize your default view
 
 > In the **USER PREFERENCES** section, you can modify the order of the data fields that are displayed per line.
 
@@ -35,7 +48,7 @@ Complete the following steps to modify the format of a log line:
     ![](../assets/views-img-19.png)
 
 
-#### Create a custom view to monitor logs from the sample app
+## Create a custom view to monitor logs from the sample app
 
 > You can select the events that are displayed through a view by applying a search query in the search bar, selecting values in the search area, or a combination of both. You can save that view for reuse later.
 
@@ -75,7 +88,7 @@ A new category appears on the left navigation panel.
 
 ![](../assets/views-img-11.png)
 
-#### Generate application log data
+### Generate application log data
 
 Generate logs:
 
@@ -88,7 +101,7 @@ Generate logs:
 
     ![](../assets/views-img-21.png)
 
-#### Analyze a log line
+## Analyze a log line
 
 At any time, you can view each log line in context.
 
@@ -139,7 +152,7 @@ Complete the following steps:
 
 When you are finished, close the line.
 
-#### View a subset of the events by applying a timeframe
+## View a subset of the events by applying a timeframe
 
 In a view, you can search events that are displayed through a view for a specific timeframe.
 
@@ -169,9 +182,9 @@ Complete the following steps to jump to a specific time:
 
 You might get the error message: `Your request is taking longer than expected, try refreshing your browser in a bit as we try to catch up. Retry.` You might get this error when the timeframe that you have specified does not have any events available to show. Change the time query, and retry.
 
-### Create a dashboard
+## Create a dashboard
 
-**You can create a dashboard to monitor your app graphically through interactive graphs.**
+You can create a dashboard to monitor your app graphically through interactive graphs.
 
 For example, you can use graphs to analyze patterns and trends over a period of time.
 
@@ -214,9 +227,9 @@ Complete the following steps to create a dashboard to monitor logs from the lab'
 
 A new category appears on the left navigation panel.
 
-### Create a screen to monitor your app
+## Create a screen to monitor your app
 
-**You can create a screen to monitor your app graphically through metrics \(counters\), operational KPIs \(gauges\), tables, and time-shifted graphs \(graphs that you can use to analyze patterns and trends for comparison analysis\).**
+You can create a screen to monitor your app graphically through metrics \(counters\), operational KPIs \(gauges\), tables, and time-shifted graphs \(graphs that you can use to analyze patterns and trends for comparison analysis\).
 
 Complete the following steps to create a dashboard to monitor logs from the lab's sample app:
 
@@ -278,3 +291,6 @@ Complete the following steps to create a dashboard to monitor logs from the lab'
 
    IMPORTANT: If you do not save the screen, you lose all your widgets.
 
+{% hint style='tip' %}
+Find more about IBM Log Analysis with LogDNA in the [IBM Cloud documentation](https://cloud.ibm.com/docs/services/Log-Analysis-with-LogDNA/index.html#getting-started).
+{% endhint %}
