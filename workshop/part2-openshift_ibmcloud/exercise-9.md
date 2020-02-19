@@ -58,17 +58,17 @@ The following table lists the different types of pre-defined dashboards:
 
    ![](../assets/sysdig-explore-node.png)
 
-4. Under **Dashboard**, select **My Dashboards**. Then select **HTTP Overview** to get a global view of the cluster HTTP load.
+4. Under **Dashboard**, select **Default Dashboards** &gt; **Applications**. Then select **HTTP** to get a global view of the cluster HTTP load.
 
-5. Under Dashboard, select **My Dashboards**. Then select **Overview by Host** to understand how nodes are currently performing.
+5. Under Dashboard, select **Default Dashboards** &gt; **Hosts & Containers**. Then select **Overview by Host** to understand how nodes are currently performing.
 
 
 ## Explore the normal traffic flow of the application
 
 You can use the **Connection Table** dashboard to monitor how data flows between your application components.
 
-1. From the **Explore** tab, select **Deployments and Pods.**
-2. Select the namespace where you deployed your sample app.
+1. From the **Explore** tab, select **Deployments**.
+2. Select your cluster (e.g. roks081). Then, select the namespace where you deployed your sample app.
 3. Select the _patientui_ pod entry.
 4. Select **Default Dashboards**.
 
@@ -80,11 +80,11 @@ You can use the **Connection Table** dashboard to monitor how data flows between
 
 ## Explore the cluster and the node capacity
 
-1. From the **Explore** tab, select **Deployments and Pods.**
-2. Select the namespace where you deployed your sample app.
+1. From the **Explore** tab, select **Deployments**.
+2. Select your cluster (e.g. roks081). Then, select the namespace where you deployed your sample app.
 3. Select the _patientui_ pod entry.
 4. Select **Default Dashboards**.
-5. Select **Kubernetes > Resource Usage > Kuberentes Cluster and Node Capacity**. 
+5. Select **Kubernetes > Kuberentes Cluster and Node Capacity**. 
 
    ![](../assets/explore-img-9.png)
 
@@ -100,7 +100,7 @@ You can use the **Connection Table** dashboard to monitor how data flows between
 
 ## Explore the Network
 
-1. From the **DASHBOARDS** tab, select **My Dashboards**. Then, select **Network Overview**.
+1. From the **DASHBOARDS** tab, select **Default Dashboards**. Then, select **Network > Overview**.
 
    The following dashboard is displayed. It shows information about all resources that are monitored thorugh the instance.
 
