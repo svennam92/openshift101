@@ -1,4 +1,4 @@
-# Exercise 7: Configure the Sysdig Agent
+# Configure the Sysdig Agent
 
 To integrate your monitoring instance with your OpenShift cluster, you must run a script that creates a project and privileged service account for the Sysdig agent.
 

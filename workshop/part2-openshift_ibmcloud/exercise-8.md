@@ -34,9 +34,7 @@ When you launch the LogDNA web UI, log entries are displayed with a predefined f
 
 ## Customize your default view
 
-> In the **USER PREFERENCES** section, you can modify the order of the data fields that are displayed per line.
-
-Complete the following steps to modify the format of a log line:
+In the **USER PREFERENCES** section, you can modify the order of the data fields that are displayed per line.
 
 1. Select the **Configuration** icon ![](../assets/admin.png).
 2. Select **USER PREFERENCES**. A new window opens.
@@ -48,11 +46,9 @@ Complete the following steps to modify the format of a log line:
     ![](../assets/views-img-19.png)
 
 
-## Create a custom view to monitor logs from the sample app
+## Create a custom view to monitor logs
 
-> You can select the events that are displayed through a view by applying a search query in the search bar, selecting values in the search area, or a combination of both. You can save that view for reuse later.
-
-Complete the following steps:
+You can select the events that are displayed through a view by applying a search query in the search bar, selecting values in the search area, or a combination of both. You can save that view for reuse later.
 
 1. In the LogDNA web UI, filter out the logs for the sample app that you have delpoyed in the cluster in previous steps.
 

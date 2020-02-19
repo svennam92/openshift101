@@ -1,4 +1,4 @@
-# Exercise 1: Deploying an application
+# Deploying an application
 
 In this exercise, you'll deploy a simple Node.js Express application - "Example Health". Example Health is a simple UI for a patient health records system. We'll use this example to demonstrate key OpenShift features throughout this workshop. You can find the sample application GitHub repository here: [https://github.com/svennam92/node-s2i-openshift](https://github.com/svennam92/node-s2i-openshift)
 
@@ -8,31 +8,31 @@ In this exercise, you'll deploy a simple Node.js Express application - "Example 
 
     ![](../assets/ocp-console.png)
 
-2. Select the **Projects** view to display all the projects.
+1. Select the **Projects** view to display all the projects.
 
     ![](../assets/ocp-projects.png)
 
-2. Create a new project by selecting **Create Project**. Call the project "example-health".
+1. Create a new project by selecting **Create Project**. Call the project "example-health".
 
     ![](../assets/ocp-create-project.png)
 
-4. You should see a view that looks like this.
+1. You should see a view that looks like this.
 
     ![](../assets/ocp-admin-project.png)
 
-5. Switch from the Administrator to the **Developer** view. Make sure your project is selected.
+1. Switch from the Administrator to the **Developer** view. Make sure your project is selected.
 
     ![](../assets/ocp-project-view.png)
 
-6. Let's deploy the application by selecting **From Git**.
+1. Let's deploy the application by selecting **From Git**.
 
-7. Enter the repository `https://github.com/svennam92/node-s2i-openshift` in the Git Repo URL field.
+1. Enter the repository `https://github.com/svennam92/node-s2i-openshift` in the Git Repo URL field.
 
     ![](../assets/ocp-configure-git.png)
 
     Note that the builder image automatically detected the language Node.js.
 
-9. Name your application such as `patient-ui`. Keep the default options and click **Create** at the bottom of the window to build and deploy the application.
+1. Name your application such as `patient-ui`. Keep the default options and click **Create** at the bottom of the window to build and deploy the application.
 
     ![](../assets/ocp-app-name-short.png)
 
@@ -44,7 +44,7 @@ In this exercise, you'll deploy a simple Node.js Express application - "Example 
 
     ![](../assets/ocp-topology-app.png)
 
-2. Select the app. You should see a single Deployment where you can see your Pods, Builds, Services and Routes.
+1. Select the app. You should see a single Deployment where you can see your Pods, Builds, Services and Routes.
 
     ![](../assets/ocp-topo-app-details.png)
 
@@ -53,7 +53,7 @@ In this exercise, you'll deploy a simple Node.js Express application - "Example 
     * **Services**: Tells OpenShift how to access your Pods by grouping them together as a service and defining the port to listen to
     * **Routes**: Exposes your services to the outside world using the LoadBalancer provided by the IBM Cloud network
 
-4. Click on **View Logs** next to your completed Build. This shows you the process that OpenShift took to install the dependencies for your Node.js application and build/push a Docker image.
+1. Click on **View Logs** next to your completed Build. This shows you the process that OpenShift took to install the dependencies for your Node.js application and build/push a Docker image.
 
     ![Build Logs](../assets/ocp43-build-logs.png)
 
@@ -63,7 +63,7 @@ In this exercise, you'll deploy a simple Node.js Express application - "Example 
     Push successful
     ```
 
-5. Click back to the **Topology** and select your app again. Click on the url under **Routes** to open your application with the URL.
+1. Click back to the **Topology** and select your app again. Click on the url under **Routes** to open your application with the URL.
 
     ![](../assets/patient-ui-web.png)
 
