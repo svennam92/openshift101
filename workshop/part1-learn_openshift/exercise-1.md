@@ -30,9 +30,7 @@ In this exercise, you'll deploy a simple Node.js Express application - "Example 
 
     ![](../assets/ocp-configure-git.png)
 
-8. Note that the builder image automatically detected the language Node.js.
-
-    ![](../assets/ocp-build-image.png)
+    Note that the builder image automatically detected the language Node.js.
 
 9. Name your application such as `patient-ui`. Keep the default options and click **Create** at the bottom of the window to build and deploy the application.
 
