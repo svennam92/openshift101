@@ -403,15 +403,24 @@
                                 <h1 id="analyze-your-logs-with-logdna">Analyze your logs with LogDNA</h1>
 <p>IBM Log Analysis with LogDNA is a co-branded service that you can include as part of your IBM Cloud architecture to add log management capabilities. IBM Log Analysis with LogDNA is operated by LogDNA in partnership with IBM. <a href="https://cloud.ibm.com/docs/Log-Analysis-with-LogDNA?topic=LogDNA-getting-started" target="_blank">Learn more</a>.</p>
 <p>You can use IBM Log Analysis with LogDNA to manage system and application logs in IBM Cloud.</p>
-<blockquote>
-<p><strong>IMPORTANT: Use Chrome to complete this exercise.</strong></p>
-</blockquote>
+<p><div class="alert alert-info hints-alert"><div class="hints-icon"><i class="fa fa-info-circle"></i></div><div class="hints-container"><p> IMPORTANT: Use Chrome to complete this exercise. </p>
+</div></div></p>
+<h2 id="launch-the-logdna-webui">Launch the LogDNA webUI</h2>
+<p>You launch the web UI within the context of an IBM Log Analysis with LogDNA instance, from the IBM Cloud UI. </p>
+<ol>
+<li><p>Select your instance.</p>
+</li>
+<li><p>Click <strong>View LogDNA</strong>.</p>
+<p>     <a href="../assets/logdna-launch-ui.png" rel="grouped" title="" target="_self" class="fancybox">
+       <img src="../assets/logdna-launch-ui.png" alt="">
+     </a></p>
+</li>
+</ol>
+<p>The Web UI opens.</p>
 <h2 id="create-a-custom-view">Create a custom view</h2>
-<blockquote>
-<p><strong>In LogDNA, you can configure custom views to monitor a subset of data. You can also attach an alert to a view to be notified of the presence or absence of log lines.</strong></p>
-</blockquote>
+<p>In LogDNA, you can configure custom views to monitor a subset of data. You can also attach an alert to a view to be notified of the presence or absence of log lines.</p>
 <p>When you launch the LogDNA web UI, log entries are displayed with a predefined format. You can modify in the <strong>User Preferences</strong> section how the information in each log line is displayed. You can also filter logs and modify search settings, then bookmark the result as a <em>view</em>. You can attach and detach one or more alerts to a view. You can define a custom format for how your lines are shown in the view. You can expand a log line and see the data parsed.</p>
-<h4 id="view-events-with-the-default-format">View events with the default format</h4>
+<h2 id="view-events-with-the-default-format">View events with the default format</h2>
 <ol>
 <li>In the LogDNA web UI, click the <strong>Views</strong> icon      <a href="../assets/views.png" rel="grouped" title="" target="_self" class="fancybox">
        <img src="../assets/views.png" alt="">
@@ -421,7 +430,7 @@
 <p>     <a href="../assets/views-img-1.png" rel="grouped" title="" target="_self" class="fancybox">
        <img src="../assets/views-img-1.png" alt="">
      </a></p>
-<h4 id="customize-your-default-view">Customize your default view</h4>
+<h2 id="customize-your-default-view">Customize your default view</h2>
 <blockquote>
 <p>In the <strong>USER PREFERENCES</strong> section, you can modify the order of the data fields that are displayed per line.</p>
 </blockquote>
@@ -439,7 +448,7 @@
      </a></p>
 </li>
 </ol>
-<h4 id="create-a-custom-view-to-monitor-logs-from-the-sample-app">Create a custom view to monitor logs from the sample app</h4>
+<h2 id="create-a-custom-view-to-monitor-logs-from-the-sample-app">Create a custom view to monitor logs from the sample app</h2>
 <blockquote>
 <p>You can select the events that are displayed through a view by applying a search query in the search bar, selecting values in the search area, or a combination of both. You can save that view for reuse later.</p>
 </blockquote>
@@ -477,7 +486,7 @@
 <p>     <a href="../assets/views-img-11.png" rel="grouped" title="" target="_self" class="fancybox">
        <img src="../assets/views-img-11.png" alt="">
      </a></p>
-<h4 id="generate-application-log-data">Generate application log data</h4>
+<h3 id="generate-application-log-data">Generate application log data</h3>
 <p>Generate logs:</p>
 <ol>
 <li>Run <code>oc status</code>.</li>
@@ -492,7 +501,7 @@
      </a></p>
 </li>
 </ol>
-<h4 id="analyze-a-log-line">Analyze a log line</h4>
+<h2 id="analyze-a-log-line">Analyze a log line</h2>
 <p>At any time, you can view each log line in context.</p>
 <p>Complete the following steps:</p>
 <ol>
@@ -533,7 +542,7 @@
 </li>
 </ol>
 <p>When you are finished, close the line.</p>
-<h4 id="view-a-subset-of-the-events-by-applying-a-timeframe">View a subset of the events by applying a timeframe</h4>
+<h2 id="view-a-subset-of-the-events-by-applying-a-timeframe">View a subset of the events by applying a timeframe</h2>
 <p>In a view, you can search events that are displayed through a view for a specific timeframe.</p>
 <p>You can apply a timestamp by specifying an absolute time, a relative time, or a time range.</p>
 <p>Complete the following steps to jump to a specific time: </p>
@@ -560,8 +569,8 @@
 </li>
 </ol>
 <p>You might get the error message: <code>Your request is taking longer than expected, try refreshing your browser in a bit as we try to catch up. Retry.</code> You might get this error when the timeframe that you have specified does not have any events available to show. Change the time query, and retry.</p>
-<h3 id="create-a-dashboard">Create a dashboard</h3>
-<p><strong>You can create a dashboard to monitor your app graphically through interactive graphs.</strong></p>
+<h2 id="create-a-dashboard">Create a dashboard</h2>
+<p>You can create a dashboard to monitor your app graphically through interactive graphs.</p>
 <p>For example, you can use graphs to analyze patterns and trends over a period of time.</p>
 <p>Complete the following steps to create a dashboard to monitor logs from the lab&apos;s sample app:</p>
 <ol>
@@ -602,8 +611,8 @@
 </li>
 </ol>
 <p>A new category appears on the left navigation panel.</p>
-<h3 id="create-a-screen-to-monitor-your-app">Create a screen to monitor your app</h3>
-<p><strong>You can create a screen to monitor your app graphically through metrics (counters), operational KPIs (gauges), tables, and time-shifted graphs (graphs that you can use to analyze patterns and trends for comparison analysis).</strong></p>
+<h2 id="create-a-screen-to-monitor-your-app">Create a screen to monitor your app</h2>
+<p>You can create a screen to monitor your app graphically through metrics (counters), operational KPIs (gauges), tables, and time-shifted graphs (graphs that you can use to analyze patterns and trends for comparison analysis).</p>
 <p>Complete the following steps to create a dashboard to monitor logs from the lab&apos;s sample app:</p>
 <ol>
 <li>In the LogDNA web UI, click the <strong>screens</strong> icon      <a href="../assets/screens.png" rel="grouped" title="" target="_self" class="fancybox">
@@ -657,6 +666,8 @@
 <p>IMPORTANT: If you do not save the screen, you lose all your widgets.</p>
 </li>
 </ol>
+<p><div class="alert alert-success hints-alert"><div class="hints-icon"><i class="fa fa-mortar-board"></i></div><div class="hints-container"><p>Find more about IBM Log Analysis with LogDNA in the <a href="https://cloud.ibm.com/docs/services/Log-Analysis-with-LogDNA/index.html#getting-started" target="_blank">IBM Cloud documentation</a>.</p>
+</div></div></p>
 
                                 
                                 </section>
@@ -700,7 +711,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Analyze Logs w/ LogDNA","level":"4.4","depth":1,"next":{"title":"Monitor Cluster w/ SysDig","level":"4.5","depth":1,"path":"part2-openshift_ibmcloud/exercise-9.md","ref":"part2-openshift_ibmcloud/exercise-9.md","articles":[]},"previous":{"title":"Configure LogDNA Agent","level":"4.3","depth":1,"path":"part2-openshift_ibmcloud/exercise-7.md","ref":"part2-openshift_ibmcloud/exercise-7.md","articles":[]},"dir":"ltr"},"config":{"plugins":["prism","-highlight","collapsible-chapters","hints","copy-code-button","back-to-top-button","fancybox","web-header","codetabs"],"root":"workshop","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"webheader":{"headerTitle":"Bring it all together on OpenShift 4.3 on IBM Cloud"},"prism":{"css":["prismjs/themes/prism-tomorrow.css"]},"fancybox":{"helpers":{"buttons":{}},"openEffect":"elastic","closeEffect":"elastic"},"web-header":{},"search":{},"collapsible-chapters":{},"codetabs":{},"hints":{"danger":"fa fa-exclamation-circle","info":"fa fa-info-circle","tip":"fa fa-mortar-board","working":"fa fa-wrench"},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"back-to-top-button":{},"copy-code-button":{},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":true}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"Bring it all together on OpenShift 4.3 on IBM Cloud","gitbook":"3.2.3"},"file":{"path":"part2-openshift_ibmcloud/exercise-8.md","mtime":"2020-02-19T13:23:27.484Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-02-19T13:24:14.974Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Analyze Logs w/ LogDNA","level":"4.4","depth":1,"next":{"title":"Monitor Cluster w/ SysDig","level":"4.5","depth":1,"path":"part2-openshift_ibmcloud/exercise-9.md","ref":"part2-openshift_ibmcloud/exercise-9.md","articles":[]},"previous":{"title":"Configure LogDNA Agent","level":"4.3","depth":1,"path":"part2-openshift_ibmcloud/exercise-7.md","ref":"part2-openshift_ibmcloud/exercise-7.md","articles":[]},"dir":"ltr"},"config":{"plugins":["prism","-highlight","collapsible-chapters","hints","copy-code-button","back-to-top-button","fancybox","web-header","codetabs"],"root":"workshop","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"webheader":{"headerTitle":"Bring it all together on OpenShift 4.3 on IBM Cloud"},"prism":{"css":["prismjs/themes/prism-tomorrow.css"]},"fancybox":{"helpers":{"buttons":{}},"openEffect":"elastic","closeEffect":"elastic"},"web-header":{},"search":{},"collapsible-chapters":{},"codetabs":{},"hints":{"danger":"fa fa-exclamation-circle","info":"fa fa-info-circle","tip":"fa fa-mortar-board","working":"fa fa-wrench"},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"back-to-top-button":{},"copy-code-button":{},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":true}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"Bring it all together on OpenShift 4.3 on IBM Cloud","gitbook":"3.2.3"},"file":{"path":"part2-openshift_ibmcloud/exercise-8.md","mtime":"2020-02-19T15:50:45.357Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-02-19T15:51:37.590Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
