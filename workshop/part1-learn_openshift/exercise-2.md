@@ -45,17 +45,13 @@ We're hitting the `/info` endpoint which will trigger some logs from our app. Fo
 
 Since we only created one pod, seeing our logs will be straight forward.
 
-1. Ensure that you're in the **Developer** view.
+1. Ensure that you're in the **Developer** view. Then, navigate to **Topology**.
 
-2. Then, navigate to **Topology**. You should see a single deployment config. Click that to see your Pods, Builds, Services and Routes.
+2. Navigate to your Pod by selecting your app, then clicking the name of the Pod under **Pods**.
 
-    ![Topology Deployment Config](../assets/ocp-topology-app.png)
-
-3. Navigate to your Pod by clicking on your Deployment Config, then clicking the name of the Pod under **Pods**.
-
-    ![Navigate to Pod](../assets/ocp43-pod-arrow.png)
+    ![Navigate to Pod](../assets/ocp-topo-pod.png)
    
-4. Click on **View Logs** next to your Pods to see streaming logs from your running application. If you're still generating traffic, you should see log messages for every request being made.
+3. Click on **View Logs** next to your Pods to see streaming logs from your running application. If you're still generating traffic, you should see log messages for every request being made.
 
     ![Pod Logs](../assets/ocp43-pod-logs.png)
 
@@ -63,25 +59,21 @@ Since we only created one pod, seeing our logs will be straight forward.
 
 One of the great things about Kubernetes is the ability to quickly debug your application pods with SSH terminals. This is great for development, but generally is not recommended in production environments. OpenShift makes it even easier by allowing you to launch a terminal directly in the dashboard.
 
-1. Navigate to your Pod by clicking on your Deployment Config, then clicking the name of the Pod under **Pods**.
+1. Navigate to your Pod by selecting your app, then clicking the name of the Pod under **Pods**.
 
-   ![Navigate to Pod](../assets/ocp43-pod-arrow.png)
+   ![Navigate to Pod](../assets/ocp-topo-pod.png)
 
-2. Switch to the `Terminal` tab, and run the following commands.
-
-   > This command shows you the the project files.
-   >
-   > ```sh
-   >  ls
-   > ```
-   >
-   > This command shows you the running processes.
-   >
-   > ```sh
-   >  ps aux
-   > ```
+2. Switch to the **Terminal** tab
 
    ![Terminal](../assets/ocp43-terminal.png)
+
+3. Run the following Shell commands:
+
+    | Command | Description |
+    | --- | --- |
+    | ls | List the project files |
+    | ps aux | List the running processes |
+    | cat /etc/redhat-release | Show the underlying OS |
 
 ## OpenShift Monitoring
 
