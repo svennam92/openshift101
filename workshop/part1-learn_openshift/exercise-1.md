@@ -1,6 +1,6 @@
 # Exercise 1: Deploying an application
 
-In this exercise, you'll deploy a simple Node.js Express application - "Example Health". Example Health is a simple UI for a patient health records system. We'll use this example to demonstrate key OpenShift features throughout this workshop. You can find the sample application GitHub repository here: [https://github.com/svennam92/node-s2i](https://github.com/svennam92/node-s2i)
+In this exercise, you'll deploy a simple Node.js Express application - "Example Health". Example Health is a simple UI for a patient health records system. We'll use this example to demonstrate key OpenShift features throughout this workshop. You can find the sample application GitHub repository here: [https://github.com/svennam92/node-s2i-openshift](https://github.com/svennam92/node-s2i-openshift)
 
 ## Deploy Example Health
 
@@ -26,7 +26,7 @@ In this exercise, you'll deploy a simple Node.js Express application - "Example 
 
 6. Let's deploy the application by selecting **From Git**.
 
-7. Enter the repository `https://github.com/svennam92/node-s2i` in the Git Repo URL field.
+7. Enter the repository `https://github.com/svennam92/node-s2i-openshift` in the Git Repo URL field.
 
     ![](../assets/ocp-configure-git.png)
 
