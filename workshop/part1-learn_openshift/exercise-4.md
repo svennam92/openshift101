@@ -12,7 +12,7 @@ Hopefully you have your running script simulating load \(if not go [here](exerci
 
     ![](../assets/ocp-deployments.png)
 
-2. In the YAML editor, scroll to line 44. In the section **template > spec > containers**, add the following resource limits into the empty resources. Replace the "{}", and ensure the spacing is correct -- YAML uses strict indentation.
+2. In the YAML editor, go to line 44. In the section **template > spec > containers**, add the following resource limits into the empty resources. Replace the `resources {}`, and ensure the spacing is correct -- YAML uses strict indentation.
 
     ![](../assets/ocp-limits-yaml.png)
 
