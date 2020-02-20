@@ -38,5 +38,3 @@ OpenShift provides a web interface to Prometheus, which enables you to run Prome
 1. The Metrics page is accessible by clicking **Monitoring → Metrics**.
 
     ![Metrics, Alerts and Dashboards](../assets/ocp43-monitoring-prometheus.png)
-
-    ![Prometheus](../assets/prometheus-time-series.png)

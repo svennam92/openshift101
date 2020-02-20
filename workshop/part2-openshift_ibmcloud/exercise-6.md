@@ -2,7 +2,7 @@
 
 To integrate your monitoring instance with your OpenShift cluster, you must run a script that creates a project and privileged service account for the Sysdig agent.
 
-{% hint style='info' %} If you've been invited to a lab account where an instance of Sysdig has already been provisioned and configured, you can skip all the installation below. Retrieve your Sysdig instance by looking at the cluster name in the tags attached to the instance. {% endhint %}
+{% hint style='info' %} If you've been invited to a lab account where an instance of Sysdig has already been provisioned and configured, skip the create and deploy steps and go to verify the agent at the bottom. Retrieve your Sysdig instance by looking at the cluster name in the tags attached to the instance. {% endhint %}
 
 ## Create a Sysdig service instance
 
