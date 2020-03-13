@@ -28,7 +28,7 @@ Hopefully you have your running script simulating load \(if not go [here](exerci
 
 3. **Save** and **Reload** to see the new version.
 
-4. Verify that the replication controller has been changed by navigating to **Events**
+4. Verify that the replica set has been changed by navigating to **Events**
 
     ![Resource Limits](../assets/ocp-dc-events.png)
 
